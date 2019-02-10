@@ -2,14 +2,17 @@
   <div id="blog-post">
     <div id="header">
       <div class="layer img">
-        <img src="../assets/header.jpg">
+        <img :src="post.thumbnailURL" v-if="post && post.thumbnailURL">
+        <img src="../assets/header.jpg" v-else>
       </div>
       <div class="layer data">
         <div class="container">
-          <p id="tags">#Golang #Docker</p>
-          <h1>초경량 Golang Docker 이미지 만들기</h1>
-          <p>Scratch 이미지를 이용해 Docker 이미지를 778MB에서 1MB로 경량화 시키는 방법!</p>
-          <p>2018. 09. 10. ・ 251명 읽음</p>
+          <p id="tags">
+            <span v-for="tag in post.tagList" v-bind:key="tag.name">#{{ tag.name }}</span>
+          </p>
+          <h1>{{ post.title }}</h1>
+          <p>{{ post.description }}</p>
+          <p>{{ post.createdAt | moment('YYYY. MM. DD.') }} ・ {{ post.readCount }}명 읽음</p>
         </div>
       </div>
     </div>
@@ -17,9 +20,7 @@
     <div class="container" id="contents" v-if="!post">
       <list-loader></list-loader>
     </div>
-    <div class="container" id="contents" v-else>
-      <!-- Content here -->
-    </div>
+    <div class="container" id="contents" v-else v-html="$options.filters.marked(post.body)"></div>
 
     <div class="container" id="footer">
       <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath"></VueDisqus>
@@ -32,7 +33,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 a { color: #03A9F4; }
 
 #header {
@@ -87,9 +88,11 @@ a { color: #03A9F4; }
     margin: 40px auto;
   }
 
-  pre code {
+  pre {
     padding: 20px;
     font-size: 14px;
+    overflow-y: scroll;
+    background-color: #F5F5F5;
   }
 
   blockquote {
@@ -114,15 +117,26 @@ a { color: #03A9F4; }
   p {
     margin: 0;
   }
+
+  #disqus_thread {
+    margin-bottom: 40px;
+  }
 }
 </style>
 
 <script>
+import { query } from '@/lynlab-api';
+
 export default {
   data() {
     return {
       post: null,
     };
+  },
+  mounted() {
+    query(`post(id: ${this.$route.params.id}) {
+      thumbnailURL title description readCount createdAt tagList { name } body
+    }`).then((data) => { this.post = data.post; });
   },
 };
 </script>
