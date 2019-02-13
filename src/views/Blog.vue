@@ -14,8 +14,8 @@
       </div>
 
       <div class="paginator" v-if="pageInfo">
-        <button :disabled="!pageInfo.hasBefore" v-on:click="fetchPosts(null, posts[0].id)">이전 페이지</button>
-        <button :disabled="!pageInfo.hasNext" v-on:click="fetchPosts(posts[posts.length - 1].id)">다음 페이지</button>
+        <router-link :to="`?after=${posts[0].id}`"><button :disabled="!pageInfo.hasBefore">이전 페이지</button></router-link>
+        <router-link :to="`?before=${posts[posts.length - 1].id}`"><button :disabled="!pageInfo.hasNext">다음 페이지</button></router-link>
       </div>
     </div>
   </div>
@@ -81,6 +81,11 @@ export default {
       pageInfo: null,
     };
   },
+  watch: {
+    '$route.query': function watchQuery(to) {
+      this.fetchPosts(to.before, to.after);
+    },
+  },
   methods: {
     fetchPosts(before, after) {
       let pageArgs;
@@ -104,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchPosts();
+    this.fetchPosts(this.$route.query.before, this.$route.query.after);
   },
 };
 </script>
