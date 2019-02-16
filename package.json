@@ -13,9 +13,11 @@
     "vue": "^2.5.21",
     "vue-content-loader": "^0.2.1",
     "vue-disqus": "^3.0.5",
+    "vue-localstorage": "^0.6.2",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
-    "vue-simple-addthis-share": "^0.1.0"
+    "vue-simple-addthis-share": "^0.1.0",
+    "vue-simplemde": "^0.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",

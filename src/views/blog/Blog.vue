@@ -82,17 +82,17 @@ export default {
     };
   },
   watch: {
-    '$route.query': function watchQuery(to) {
-      this.fetchPosts(to.before, to.after);
+    '$route.query': function watchQuery() {
+      this.fetchPosts();
     },
   },
   methods: {
-    fetchPosts(before, after) {
+    fetchPosts() {
       let pageArgs;
-      if (before != null) {
-        pageArgs = `{ count: 10, before: ${before} }`;
-      } else if (after) {
-        pageArgs = `{ count: 10, after: ${after} }`;
+      if (this.$route.query.before != null) {
+        pageArgs = `{ count: 10, before: ${this.$route.query.before} }`;
+      } else if (this.$route.query.after) {
+        pageArgs = `{ count: 10, after: ${this.$route.query.after} }`;
       } else {
         pageArgs = '{ count: 10 }';
       }
@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchPosts(this.$route.query.before, this.$route.query.after);
+    this.fetchPosts();
   },
 };
 </script>

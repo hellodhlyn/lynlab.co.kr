@@ -3,7 +3,7 @@
     <div id="header">
       <div class="layer img">
         <img :src="post.thumbnailURL" v-if="post && post.thumbnailURL">
-        <img src="../assets/header.jpg" v-else>
+        <img src="../../assets/header.jpg" v-else>
       </div>
       <div class="layer data">
         <div class="container">
