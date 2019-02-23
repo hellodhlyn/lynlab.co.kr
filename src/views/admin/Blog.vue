@@ -74,7 +74,7 @@ export default {
   },
   created() {
     if (!this.$localStorage.get('auth.access_token')) {
-      this.$router.push('https://auth.lynlab.co.kr/web/signin?callback_url=https://lynlab.co.kr/callbacks/auth');
+      this.$router.push({ name: 'redirects-auth' });
     }
   },
   mounted() {

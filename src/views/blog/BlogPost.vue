@@ -20,7 +20,7 @@
     <div class="container" id="contents" v-if="!post">
       <list-loader></list-loader>
     </div>
-    <div class="container" id="contents" v-else v-html="$options.filters.marked(post.body)"></div>
+    <div class="container markdown-body" id="contents" v-else v-html="$options.filters.marked(post.body)"></div>
 
     <div class="container" id="footer">
       <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath"></VueDisqus>
@@ -34,92 +34,67 @@
 </template>
 
 <style lang="scss">
-a { color: #03A9F4; }
-
-#header {
-  height: 600px;
-  width: 100%;
-  color: #fafafa;
-
-  .layer {
+#blog-post {
+  #header {
+    height: 600px;
     width: 100%;
-    position: absolute;
-  }
+    color: #fafafa;
 
-  .img {
-    img {
-      height: 600px;
+    .layer {
       width: 100%;
-      filter: brightness(30%);
-      object-fit: cover;
+      position: absolute;
+    }
+
+    .img {
+      img {
+        height: 600px;
+        width: 100%;
+        filter: brightness(30%);
+        object-fit: cover;
+      }
+    }
+
+    .data {
+      height: 480px;
+      padding-top: 120px;
+
+      h1 {
+        font-size: 300%;
+        font-weight: 300;
+        margin: 0;
+      }
+
+      p {
+        font-size: 18px;
+        &#tags { margin: 36px 0 0 0; }
+      }
     }
   }
 
-  .data {
-    height: 480px;
-    padding-top: 120px;
+  #contents {
+    padding: 40px 0;
+    margin: 0 auto;
+    width: 800px;
+  }
 
-    h1 {
-      font-size: 300%;
-      font-weight: 300;
-      margin: 0;
+  #footer {
+    padding: 40px 0;
+    text-align: center;
+
+    hr {
+      margin: 20px 0;
+      border: 0;
+      border-bottom: 1px solid;
+      color: #e0e0e0;
     }
 
     p {
-      font-size: 18px;
-      &#tags { margin: 36px 0 0 0; }
+      margin: 0;
     }
-  }
-}
 
-#contents {
-  padding: 40px 0;
-  margin: 0 auto;
-  width: 800px;
-
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 2.0;
-  word-break: break-all;
-
-  img {
-    display: block;
-    max-width: 600px;
-    margin: 40px auto;
-  }
-
-  pre {
-    padding: 20px;
-    font-size: 14px;
-    overflow-y: scroll;
-    background-color: #F5F5F5;
-  }
-
-  blockquote {
-    margin: 0;
-    padding: 10px 20px;
-    background-color: #F5F5F5;
-    border-left: #E0E0E0 solid 10px;
-  }
-}
-
-#footer {
-  padding: 40px 0;
-  text-align: center;
-
-  hr {
-    margin: 20px 0;
-    border: 0;
-    border-bottom: 1px solid;
-    color: #e0e0e0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  #disqus_thread {
-    margin-bottom: 40px;
+    #disqus_thread {
+      margin-bottom: 40px;
+    }
   }
 }
 </style>

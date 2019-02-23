@@ -5,7 +5,7 @@
         <ul>
           <li class="primary">LYNLAB</li>
           <li><router-link :to="{ name: 'blog' }">BLOG</router-link></li>
-          <li>RESUME</li>
+          <li><router-link :to="{ name: 'snippet', params: { title: 'resume' } }">RESUME</router-link></li>
         </ul>
         <ul class="right">
           <li class="icon"><a target="_blank" href="https://twitter.com/HelloDHLyn"><ion-icon name="logo-twitter"></ion-icon></a></li>
@@ -76,6 +76,42 @@ body {
   .container {
     margin: 0 auto;
     max-width: 800px;
+  }
+
+  .markdown-body {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 2.0;
+    word-break: break-all;
+
+    h1, h2, h3, h4, h5, h6 { margin-bottom: 0; }
+
+    a { color: #03A9F4; }
+
+    img {
+      display: block;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+
+    pre {
+      padding: 20px;
+      font-size: 14px;
+      overflow-y: scroll;
+      background-color: #F5F5F5;
+    }
+
+    p code, ul code, ol code {
+      background: #EEEEEE;
+      padding: 0 4px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 10px 20px;
+      background-color: #F5F5F5;
+      border-left: #E0E0E0 solid 10px;
+    }
   }
 }
 </style>
