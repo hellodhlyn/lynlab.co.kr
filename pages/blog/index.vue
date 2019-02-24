@@ -1,21 +1,37 @@
 <template>
   <div id="blog">
     <div class="container">
-      <div class="post" v-for="post in posts" v-bind:key="post.id">
-        <p class="thumbnail" v-if="post.thumbnailURL"><img :src="post.thumbnailURL"></p>
-        <p class="tags">
-          <span v-for="tag in post.tagList" v-bind:key="tag.name">#{{ tag.name }}</span>
+      <div v-for="post in posts" :key="post.id" class="post">
+        <p v-if="post.thumbnailURL" class="thumbnail">
+          <img :src="post.thumbnailURL">
         </p>
-        <h1><router-link :to="{ name: 'blog-post', params: { id: post.id } }">
-          {{ post.title }}
-        </router-link></h1>
-        <p class="meta"><ion-icon name="time"></ion-icon> {{ post.createdAt | moment('YYYY. MM. DD.') }} ・ <ion-icon name="people"></ion-icon> {{ post.readCount }}</p>
-        <p class="description">{{ post.description }}</p>
+        <p class="tags">
+          <span v-for="tag in post.tagList" :key="tag.name">#{{ tag.name }}</span>
+        </p>
+        <h1>
+          <router-link :to="{ name: 'blog-id', params: { id: post.id } }">
+            {{ post.title }}
+          </router-link>
+        </h1>
+        <p class="meta">
+          <ion-icon name="time" /> {{ post.createdAt | moment('YYYY. MM. DD.') }} ・ <ion-icon name="people" /> {{ post.readCount }}
+        </p>
+        <p class="description">
+          {{ post.description }}
+        </p>
       </div>
 
-      <div class="paginator" v-if="pageInfo">
-        <router-link :to="`?after=${posts[0].id}`"><button :disabled="!pageInfo.hasBefore">이전 페이지</button></router-link>
-        <router-link :to="`?before=${posts[posts.length - 1].id}`"><button :disabled="!pageInfo.hasNext">다음 페이지</button></router-link>
+      <div v-if="pageInfo" class="paginator">
+        <router-link :to="`?after=${posts[0].id}`">
+          <button :disabled="!pageInfo.hasBefore">
+            이전 페이지
+          </button>
+        </router-link>
+        <router-link :to="`?before=${posts[posts.length - 1].id}`">
+          <button :disabled="!pageInfo.hasNext">
+            다음 페이지
+          </button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -72,7 +88,7 @@
 </style>
 
 <script>
-import { query } from '@/lynlab-api';
+import { query } from '../../components/lynlab-api';
 
 export default {
   data() {
@@ -85,6 +101,9 @@ export default {
     '$route.query': function watchQuery() {
       this.fetchPosts();
     },
+  },
+  mounted() {
+    this.fetchPosts();
   },
   methods: {
     fetchPosts() {
@@ -107,9 +126,6 @@ export default {
         window.scrollTo(0, 0);
       });
     },
-  },
-  mounted() {
-    this.fetchPosts();
   },
 };
 </script>

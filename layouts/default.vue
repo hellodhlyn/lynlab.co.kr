@@ -3,19 +3,35 @@
     <div id="navbar">
       <div>
         <ul>
-          <li class="primary">LYNLAB</li>
-          <li><router-link :to="{ name: 'blog' }">BLOG</router-link></li>
-          <li><router-link :to="{ name: 'snippet', params: { title: 'resume' } }">RESUME</router-link></li>
+          <li class="primary">
+            LYNLAB
+          </li>
+          <li>
+            <router-link to="/blog">
+              BLOG
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'snippet-title', params: { title: 'resume' } }">
+              RESUME
+            </router-link>
+          </li>
         </ul>
         <ul class="right">
-          <li class="icon"><a target="_blank" href="https://twitter.com/HelloDHLyn"><ion-icon name="logo-twitter"></ion-icon></a></li>
-          <li class="icon"><a target="_blank" href="https://github.com/HelloDHLyn"><ion-icon name="logo-github"></ion-icon></a></li>
-          <li class="icon"><a target="_blank" href="https://www.linkedin.com/in/hoerin-do-13b065105/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+          <li class="icon">
+            <a target="_blank" href="https://twitter.com/HelloDHLyn"><ion-icon name="logo-twitter" /></a>
+          </li>
+          <li class="icon">
+            <a target="_blank" href="https://github.com/HelloDHLyn"><ion-icon name="logo-github" /></a>
+          </li>
+          <li class="icon">
+            <a target="_blank" href="https://www.linkedin.com/in/hoerin-do-13b065105/"><ion-icon name="logo-linkedin" /></a>
+          </li>
         </ul>
       </div>
     </div>
 
-    <router-view/>
+    <nuxt />
   </div>
 </template>
 

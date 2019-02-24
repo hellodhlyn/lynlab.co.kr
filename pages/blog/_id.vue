@@ -2,13 +2,13 @@
   <div id="blog-post">
     <div id="header">
       <div class="layer img">
-        <img :src="post.thumbnailURL" v-if="post && post.thumbnailURL">
-        <img src="../../assets/header.jpg" v-else>
+        <img v-if="post && post.thumbnailURL" :src="post.thumbnailURL">
+        <img v-else src="/images/header.jpg">
       </div>
       <div class="layer data">
-        <div class="container">
+        <div v-if="post" class="container">
           <p id="tags">
-            <span v-for="tag in post.tagList" v-bind:key="tag.name">#{{ tag.name }}</span>
+            <span v-for="tag in post.tagList" :key="tag.name">#{{ tag.name }}</span>
           </p>
           <h1>{{ post.title }}</h1>
           <p>{{ post.description }}</p>
@@ -17,19 +17,17 @@
       </div>
     </div>
 
-    <div class="container" id="contents" v-if="!post">
-      <list-loader></list-loader>
-    </div>
-    <div class="container markdown-body" id="contents" v-else v-html="$options.filters.marked(post.body)"></div>
+    <!-- eslint-disable-next-line vue/no-v-html -->
+    <div id="contents" class="container markdown-body" v-html="$options.filters.marked(post.body)" />
 
-    <div class="container" id="footer">
-      <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath"></VueDisqus>
+    <div id="footer" class="container">
+      <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath" />
 
       <img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
       <p>이 저작물은 <a href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
     </div>
 
-    <AddThis publicId="ra-5a8713a8c30b87b5"/>
+    <AddThis public-id="ra-5a8713a8c30b87b5" />
   </div>
 </template>
 
@@ -100,18 +98,15 @@
 </style>
 
 <script>
-import { query } from '@/lynlab-api';
+import { query } from '../../components/lynlab-api';
 
 export default {
-  data() {
-    return {
-      post: null,
-    };
-  },
-  mounted() {
-    query(`post(id: ${this.$route.params.id}) {
+  async asyncData({ params }) {
+    const data = await query(`post(id: ${params.id}) {
       thumbnailURL title description readCount createdAt tagList { name } body
-    }`).then((data) => { this.post = data.post; });
+    }`);
+
+    return { post: data.post };
   },
 };
 </script>
