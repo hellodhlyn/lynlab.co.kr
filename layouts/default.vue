@@ -7,14 +7,14 @@
             LYNLAB
           </li>
           <li>
-            <router-link to="/blog">
+            <nuxt-link to="/blog">
               BLOG
-            </router-link>
+            </nuxt-link>
           </li>
           <li>
-            <router-link :to="{ name: 'snippet-title', params: { title: 'resume' } }">
+            <nuxt-link :to="{ name: 'snippet-title', params: { title: 'resume' } }">
               RESUME
-            </router-link>
+            </nuxt-link>
           </li>
         </ul>
         <ul class="right">

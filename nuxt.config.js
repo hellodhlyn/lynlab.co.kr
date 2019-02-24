@@ -43,7 +43,12 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-universal-storage',
   ],
+
+  storage: {
+    localStorage: true,
+  },
 
   /*
   ** Build configuration

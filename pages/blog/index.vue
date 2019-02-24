@@ -9,9 +9,9 @@
           <span v-for="tag in post.tagList" :key="tag.name">#{{ tag.name }}</span>
         </p>
         <h1>
-          <router-link :to="{ name: 'blog-id', params: { id: post.id } }">
+          <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">
             {{ post.title }}
-          </router-link>
+          </nuxt-link>
         </h1>
         <p class="meta">
           <ion-icon name="time" /> {{ post.createdAt | moment('YYYY. MM. DD.') }} ・ <ion-icon name="people" /> {{ post.readCount }}
@@ -22,16 +22,16 @@
       </div>
 
       <div v-if="pageInfo" class="paginator">
-        <router-link :to="`?after=${posts[0].id}`">
+        <nuxt-link :to="`?after=${posts[0].id}`">
           <button :disabled="!pageInfo.hasBefore">
             이전 페이지
           </button>
-        </router-link>
-        <router-link :to="`?before=${posts[posts.length - 1].id}`">
+        </nuxt-link>
+        <nuxt-link :to="`?before=${posts[posts.length - 1].id}`">
           <button :disabled="!pageInfo.hasNext">
             다음 페이지
           </button>
-        </router-link>
+        </nuxt-link>
       </div>
     </div>
   </div>

@@ -2837,6 +2837,11 @@ dot-prop@^4.1.0, dot-prop@^4.1.1:
   dependencies:
     is-obj "^1.0.0"
 
+dotprop@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/dotprop/-/dotprop-1.0.2.tgz#0559e898156f3dddb6be62794e5d6ef30eceb705"
+  integrity sha1-BVnomBVvPd22vmJ5Tl1u8w7OtwU=
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -5394,6 +5399,14 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+
+nuxt-universal-storage@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/nuxt-universal-storage/-/nuxt-universal-storage-0.2.0.tgz#4bade729be2cae67bde44ccd08ae47b0a1277b4a"
+  integrity sha512-2edKysdbbZ8afoVK+nJ+Ivl/LWcUK2I6UKsuuOlGQmPP83ss3MS0RXzEg3AXg35HUOv60q4+UlJSN709diBGUw==
+  dependencies:
+    cookie "^0.3.1"
+    dotprop "^1.0.2"
 
 nuxt@^2.4.0:
   version "2.4.3"
@@ -8132,11 +8145,6 @@ vue-loader@^15.6.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-localstorage@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/vue-localstorage/-/vue-localstorage-0.6.2.tgz#7f84c99f4ce0b6be23b16c1fab194d4d67182456"
-  integrity sha512-29YQVVkIdoS6BZBCJAyu9d0OR0eKSm5gk5OjsLssV1+NM4zJnf9cxhN1AVeXkUHJLqOonECweuaR8PZ2x307dw==
 
 vue-meta@^1.5.8:
   version "1.5.8"
