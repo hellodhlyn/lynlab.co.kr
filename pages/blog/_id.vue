@@ -101,12 +101,28 @@
 import { query } from '../../components/lynlab-api';
 
 export default {
-  async asyncData({ params }) {
+  async asyncData({ params, error }) {
     const data = await query(`post(id: ${params.id}) {
       thumbnailURL title description readCount createdAt tagList { name } body
     }`);
 
-    return { post: data.post };
+    if (data.post) {
+      return { post: data.post };
+    }
+    error({ statusCode: 404, message: 'Post not found' });
+    return null;
+  },
+  head() {
+    return {
+      title: `${this.post.title} | LYnLab`,
+      meta: [
+        { property: 'og:site_name', content: 'LYnLab' },
+        { property: 'og:title', content: `${this.post.title} | LYnLab` },
+        { property: 'og:description', content: this.post.description },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:url', content: `https://lynlab.co.kr${this.$route.fullPath}` },
+      ],
+    };
   },
 };
 </script>

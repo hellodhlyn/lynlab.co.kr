@@ -1,5 +1,9 @@
 const pkg = require('./package');
 
+const axios = require('axios');
+const https = require('https');
+
+
 module.exports = {
   mode: 'universal',
 
@@ -44,10 +48,38 @@ module.exports = {
   */
   modules: [
     'nuxt-universal-storage',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap',
   ],
 
   storage: {
     localStorage: true,
+  },
+
+  googleAnalytics: {
+    id: 'UA-51514713-1',
+  },
+
+  sitemap: {
+    generate: true,
+    exclude: [
+      '/admin',
+      '/admin/**',
+      '/redirects/**',
+      '/snippet/**',
+    ],
+    routes(callback) {
+      const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+      axios.post(`https://apis.lynlab.co.kr/graphql`, 'query{postList(page:{count:999999}){items{id updatedAt}}}', { httpsAgent })
+        .then(res => callback(null, res.data.data.postList.items.map(post => {
+          return {
+            url: `/blog/${post.id}`,
+            changeFreq: 'weekly',
+            lastmodISO: post.updatedAt,
+          };
+        })))
+        .catch(e => callback(e));
+    }
   },
 
   /*

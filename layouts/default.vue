@@ -106,6 +106,7 @@ body {
 
     img {
       display: block;
+      max-height: 50vh;
       max-width: 600px;
       margin: 40px auto;
     }
