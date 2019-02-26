@@ -1,14 +1,16 @@
-# lynlab-web
+[![](https://img.shields.io/circleci/project/github/lynlab/lynlab-web.svg?style=for-the-badge&logo=circleci&maxAge=3600)](https://circleci.com/gh/lynlab/lynlab-web)
 
-> My awesome Nuxt.js project
+# LYnLab Web
 
-## Build Setup
+> Nuxt.js application for my personal blog
+
+## Development
 
 ``` bash
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at 127.0.0.1:8080
 $ yarn run dev
 
 # build for production and launch server
@@ -18,5 +20,3 @@ $ yarn start
 # generate static project
 $ yarn run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
