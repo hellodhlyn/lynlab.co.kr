@@ -80,10 +80,6 @@
 .paginator {
   margin: 20px 0;
   text-align: center;
-
-  button {
-    margin: 0 4px;
-  }
 }
 </style>
 
@@ -111,7 +107,7 @@ export default {
       if (this.$route.query.before != null) {
         pageArgs = `{ count: 10, before: ${this.$route.query.before} }`;
       } else if (this.$route.query.after) {
-        pageArgs = `{ count: 10, after: ${this.$route.query.after} }`;
+        pageArgs = `{ count: 10, after: ${this.$route.query.after}, sortDirection: ASC }`;
       } else {
         pageArgs = '{ count: 10 }';
       }
@@ -122,6 +118,13 @@ export default {
       }`).then((data) => {
         this.posts = data.postList.items;
         this.pageInfo = data.postList.pageInfo;
+        if (this.$route.query.after) {
+          this.posts.reverse();
+          this.pageInfo = {
+            hasBefore: this.pageInfo.hasNext,
+            hasNext: this.pageInfo.hasBefore,
+          };
+        }
 
         window.scrollTo(0, 0);
       });

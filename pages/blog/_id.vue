@@ -27,7 +27,7 @@
       <p>이 저작물은 <a href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
     </div>
 
-    <AddThis public-id="ra-5a8713a8c30b87b5" />
+    <!-- <AddThis public-id="ra-5a8713a8c30b87b5" /> -->
   </div>
 </template>
 

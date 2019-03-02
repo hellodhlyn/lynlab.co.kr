@@ -50,6 +50,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #212121;
 
+  button {
+    background-color: #eeeeee;
+    border: none;
+    padding: 12px 16px;
+    display: inline-block;
+    cursor: default;
+
+    &:not(:disabled):hover { background-color: #e0e0e0; }
+  }
+
   #navbar {
     height: 80px;
     padding: 0 30px;
@@ -86,7 +96,6 @@ body {
         &:hover { text-decoration: underline; }
       }
     }
-
   }
 
   .container {
