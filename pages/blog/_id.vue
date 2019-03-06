@@ -70,8 +70,7 @@
   }
 
   #contents {
-    padding: 40px 0;
-    margin: 0 auto;
+    margin: 40px auto;
     width: 800px;
   }
 
@@ -86,12 +85,28 @@
       color: #e0e0e0;
     }
 
-    p {
-      margin: 0;
-    }
+    p { margin: 0; }
+
+    a { color: #03A9F4; }
 
     #disqus_thread {
       margin-bottom: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #blog-post {
+    #header {
+      height: 400px;
+
+      .img { img { height: 400px; } }
+      .data {
+        padding-top: 10px;
+
+        h1 { font-size: 200%; }
+        p { font-size: 16px; }
+      }
     }
   }
 }

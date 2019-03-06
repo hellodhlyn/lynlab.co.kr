@@ -40,8 +40,6 @@
 <style lang="scss" scoped>
 .post {
   padding: 20px 0;
-  &:first-child { padding-top: 40px; }
-
   border-bottom: #eeeeee solid 1px;
 
   h1 {
@@ -80,6 +78,12 @@
 .paginator {
   margin: 20px 0;
   text-align: center;
+}
+
+@media only screen and (min-width: 481px) {
+  .post:first-child {
+    padding-top: 40px;
+  }
 }
 </style>
 

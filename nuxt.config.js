@@ -1,7 +1,7 @@
-const pkg = require('./package');
 
 const axios = require('axios');
 const https = require('https');
+const pkg = require('./package');
 
 
 module.exports = {
@@ -72,16 +72,14 @@ module.exports = {
     ],
     routes(callback) {
       const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-      axios.post(`https://apis.lynlab.co.kr/graphql`, 'query{postList(page:{count:999999}){items{id updatedAt}}}', { httpsAgent })
-        .then(res => callback(null, res.data.data.postList.items.map(post => {
-          return {
-            url: `/blog/${post.id}`,
-            changeFreq: 'weekly',
-            lastmodISO: post.updatedAt,
-          };
-        })))
+      axios.post('https://apis.lynlab.co.kr/graphql', 'query{postList(page:{count:999999}){items{id updatedAt}}}', { httpsAgent })
+        .then(res => callback(null, res.data.data.postList.items.map(post => ({
+          url: `/blog/${post.id}`,
+          changeFreq: 'weekly',
+          lastmodISO: post.updatedAt,
+        }))))
         .catch(e => callback(e));
-    }
+    },
   },
 
   /*
