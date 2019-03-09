@@ -20,9 +20,11 @@
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div id="contents" class="container markdown-body" v-html="$options.filters.marked(post.body)" />
 
-    <div id="footer" class="container">
+    <div id="comments" class="container">
       <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath" />
+    </div>
 
+    <div id="footer" class="container">
       <img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
       <p>이 저작물은 <a href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
     </div>
@@ -74,6 +76,10 @@
     width: 800px;
   }
 
+  #comments {
+    padding: 40px 0;
+  }
+
   #footer {
     padding: 40px 0;
     text-align: center;
@@ -87,11 +93,7 @@
 
     p { margin: 0; }
 
-    a { color: #03A9F4; }
-
-    #disqus_thread {
-      margin-bottom: 40px;
-    }
+    a { color: #212121; }
   }
 }
 

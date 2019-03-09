@@ -14,7 +14,7 @@
           </nuxt-link>
         </h1>
         <p class="meta">
-          <ion-icon name="time" /> {{ post.createdAt | moment('YYYY. MM. DD.') }} ・ <ion-icon name="people" /> {{ post.readCount }}
+          <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount" />
         </p>
         <p class="description">
           {{ post.description }}

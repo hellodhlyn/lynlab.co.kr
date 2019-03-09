@@ -48,24 +48,27 @@ body {
 #app {
   font-family: 'Noto Sans KR', sans-serif;
   width: 100%;
+  padding-bottom: 5vh;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #212121;
 
   button {
-    background-color: #eeeeee;
+    background-color: #212121;
+    color: #ffffff;
     border: none;
     padding: 12px 16px;
     display: inline-block;
     cursor: default;
 
-    &:not(:disabled):hover { background-color: #e0e0e0; }
+    &:disabled { background-color: #e0e0e0; }
+    &:not(:disabled):hover { background-color: #424242; }
   }
 
   #navbar {
     height: 80px;
-    width: 100%;
+    width: calc(100% - 60px);
     padding: 0 30px;
     background: #212121;
     color: #ffffff;
@@ -120,7 +123,14 @@ body {
     line-height: 2.0;
     word-break: break-word;
 
-    h1, h2, h3, h4, h5, h6 { margin-bottom: 0; }
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      border-bottom: #eeeeee solid 1px;
+    }
 
     a { color: #03A9F4; }
 
@@ -158,6 +168,7 @@ body {
     padding-top: 60px;
 
     #navbar {
+      width: 100%;
       position: fixed;
       top: 0;
       height: 60px;
@@ -171,21 +182,24 @@ body {
         }
 
         &.title {
-          li:not(#menu-btn) {
-            float: none;
+          li#menu-btn {
+            margin-left: 5px;
+            margin-right: 5px;
+            padding-top: 12px;
           }
+          li:not(#menu-btn) { float: none; }
         }
 
         &.left {
           li {
             float: none;
-            margin-left: 50px;
+            margin-left: 40px;
           }
         }
 
         &.right {
           right: 0;
-          li:first-child { margin-left: 50px; }
+          li:first-child { margin-left: 40px; }
         }
 
         li {
@@ -201,7 +215,7 @@ body {
     }
 
     .markdown-body {
-      font-size: 16px;
+      font-size: 14px;
 
       img { max-width: 100%; }
     }
