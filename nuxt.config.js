@@ -44,6 +44,7 @@ module.exports = {
   */
   plugins: [
     '~/plugins/plugins',
+    { src: '~/plugins/simplemde', ssr: false },
   ],
 
   /*
