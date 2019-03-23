@@ -1,5 +1,5 @@
 <template>
-  <div id="admin" class="container">
+  <div v-if="authenticated" id="admin" class="container">
     <div id="blog">
       <h1>블로그 포스트 관리</h1>
       <div class="actions buttons">
@@ -118,6 +118,7 @@ import { query } from '../../components/lynlab-api';
 export default {
   data() {
     return {
+      authenticated: false,
       posts: [],
       postPageInfo: null,
       snippets: [],
@@ -125,8 +126,17 @@ export default {
     };
   },
   created() {
-    if (!this.$storage.getLocalStorage('auth.access_token')) {
+    const accessToken = this.$storage.getLocalStorage('auth.access_token');
+    if (!accessToken) {
       this.$router.push({ name: 'redirects-auth' });
+    } else {
+      query('me { isAdmin }', accessToken).then((data) => {
+        if (data.me.isAdmin) {
+          this.authenticated = true;
+        } else {
+          this.$router.push({ name: 'redirects-auth' });
+        }
+      }).catch(() => this.$router.push({ name: 'redirects-auth' }));
     }
   },
   mounted() {
@@ -147,7 +157,7 @@ export default {
       query(`postList(page: ${pageArgs}) { 
         items { id title createdAt isPublic }
         pageInfo { hasBefore hasNext }
-      }`).then((data) => {
+      }`, this.$storage.getLocalStorage('auth.access_token')).then((data) => {
         this.posts = data.postList.items;
         this.postPageInfo = data.postList.pageInfo;
       });
@@ -165,7 +175,7 @@ export default {
       query(`snippetList(page: ${pageArgs}) { 
         items { id title createdAt isPublic }
         pageInfo { hasBefore hasNext }
-      }`).then((data) => {
+      }`, this.$storage.getLocalStorage('auth.access_token')).then((data) => {
         this.snippets = data.snippetList.items;
         this.snippetPageInfo = data.snippetList.pageInfo;
       });

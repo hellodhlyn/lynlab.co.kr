@@ -7,8 +7,15 @@ const instance = axios.create({
   }),
 });
 
-function query(queryString) {
-  return instance.post('https://apis.lynlab.co.kr/graphql', `query{${queryString}}`)
+function query(queryString, accessToken) {
+  const configs = {};
+  if (accessToken) {
+    configs.headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+  }
+
+  return instance.post('https://apis.lynlab.co.kr/graphql', `query{${queryString}}`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw Error('Query error');

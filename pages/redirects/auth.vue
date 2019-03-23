@@ -9,7 +9,7 @@
 export default {
   created() {
     if (!this.$route.query.access_token) {
-      window.location = 'https://auth.lynlab.co.kr/web/signin?redirect_url=lynlab.co.kr/redirects/auth';
+      window.location = 'https://auth.lynlab.co.kr/web/signin?redirect_url=https://lynlab.co.kr/redirects/auth';
     } else {
       this.$storage.setLocalStorage('auth.access_token', this.$route.query.access_token);
       this.$storage.setLocalStorage('auth.refresh_token', this.$route.query.refresh_token);

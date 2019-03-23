@@ -1,5 +1,5 @@
 <template>
-  <div id="admin-snippet" class="container">
+  <div v-if="authenticated" id="admin-snippet" class="container">
     <div class="editor">
       <h4>제목</h4>
       <textarea v-model="snippet.title" rows="1" />
@@ -38,11 +38,23 @@ import { query, mutation } from '../../components/lynlab-api';
 
 export default {
   data() {
-    return { snippet: {} };
+    return {
+      authenticated: false,
+      snippet: {},
+    };
   },
   created() {
-    if (!this.$storage.getLocalStorage('auth.access_token')) {
+    const accessToken = this.$storage.getLocalStorage('auth.access_token');
+    if (!accessToken) {
       this.$router.push({ name: 'redirects-auth' });
+    } else {
+      query('me { isAdmin }', accessToken).then((data) => {
+        if (data.me.isAdmin) {
+          this.authenticated = true;
+        } else {
+          this.$router.push({ name: 'redirects-auth' });
+        }
+      }).catch(() => this.$router.push({ name: 'redirects-auth' }));
     }
   },
   mounted() {
