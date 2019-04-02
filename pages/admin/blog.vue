@@ -1,5 +1,5 @@
 <template>
-  <div v-if="authenticated" id="admin-blog" class="container">
+  <authenticated id="admin-blog" class="container">
     <div class="editor">
       <h4>제목</h4>
       <textarea v-model="post.title" rows="1" />
@@ -18,7 +18,7 @@
         작성
       </button>
     </div>
-  </div>
+  </authenticated>
 </template>
 
 <style lang="scss" scoped>
@@ -38,29 +38,19 @@
 </style>
 
 <script>
+import Vue from 'vue';
+import VueSimplemde from 'vue-simplemde';
 import 'simplemde/dist/simplemde.min.css';
+
 import { query, mutation } from '../../components/lynlab-api';
+
+Vue.use(VueSimplemde);
 
 export default {
   data() {
     return {
-      authenticated: false,
       post: {},
     };
-  },
-  created() {
-    const accessToken = this.$storage.getLocalStorage('auth.access_token');
-    if (!accessToken) {
-      this.$router.push({ name: 'redirects-auth' });
-    } else {
-      query('me { isAdmin }', accessToken).then((data) => {
-        if (data.me.isAdmin) {
-          this.authenticated = true;
-        } else {
-          this.$router.push({ name: 'redirects-auth' });
-        }
-      }).catch(() => this.$router.push({ name: 'redirects-auth' }));
-    }
   },
   mounted() {
     const { id } = this.$route.query;

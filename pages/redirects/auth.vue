@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <p>Redirecting...</p>
   </div>
 </template>
