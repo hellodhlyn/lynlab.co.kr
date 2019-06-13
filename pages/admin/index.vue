@@ -142,7 +142,7 @@ export default {
       query(`postList(page: ${pageArgs}) { 
         items { id title createdAt isPublic }
         pageInfo { hasBefore hasNext }
-      }`, this.$storage.getLocalStorage('auth.access_token')).then((data) => {
+      }`, this.$storage.getLocalStorage('auth.accessToken')).then((data) => {
         this.posts = data.postList.items;
         this.postPageInfo = data.postList.pageInfo;
       });
@@ -160,7 +160,7 @@ export default {
       query(`snippetList(page: ${pageArgs}) { 
         items { id title createdAt isPublic }
         pageInfo { hasBefore hasNext }
-      }`, this.$storage.getLocalStorage('auth.access_token')).then((data) => {
+      }`, this.$storage.getLocalStorage('auth.accessToken')).then((data) => {
         this.snippets = data.snippetList.items;
         this.snippetPageInfo = data.snippetList.pageInfo;
       });

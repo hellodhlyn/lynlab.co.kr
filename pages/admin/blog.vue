@@ -55,7 +55,8 @@ export default {
   mounted() {
     const { id } = this.$route.query;
     if (id) {
-      query(`post(id: ${id}) { thumbnailURL title description tagList { name } body isPublic }`, this.$storage.getLocalStorage('auth.access_token'))
+      const token = this.$storage.getLocalStorage('auth.accessToken');
+      query(`post(id: ${id}) { thumbnailURL title description tagList { name } body isPublic }`, token)
         .then((data) => { this.post = data.post; });
     }
   },
@@ -78,7 +79,7 @@ export default {
         mutateStr = `updatePost(id: ${id}, input: ${input}) { id }`;
       }
 
-      const token = this.$storage.getLocalStorage('auth.access_token');
+      const token = this.$storage.getLocalStorage('auth.accessToken');
       mutation(mutateStr, token)
         .then(() => this.$router.push({ name: 'admin' }));
     },

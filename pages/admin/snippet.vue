@@ -71,7 +71,7 @@ export default {
         }) { id }`;
       }
 
-      const token = this.$storage.getLocalStorage('auth.access_token');
+      const token = this.$storage.getLocalStorage('auth.accessToken');
       mutation(mutateStr, token)
         .then(() => this.$router.push({ name: 'admin' }));
     },

@@ -16,3 +16,8 @@ Vue.use(VueDisqus);
 Vue.use(VueMoment);
 
 Vue.filter('marked', input => marked(input));
+
+Vue.config.ignoredElements = [
+  'ion-icon',
+  'ion-item',
+];
