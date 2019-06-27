@@ -44,6 +44,7 @@ module.exports = {
   */
   plugins: [
     '~/plugins/plugins',
+    '~/plugins/simplemde.client.js',
   ],
 
   /*

@@ -34,13 +34,7 @@
 </style>
 
 <script>
-import Vue from 'vue';
-import VueSimplemde from 'vue-simplemde';
-import 'simplemde/dist/simplemde.min.css';
-
 import { query, mutation } from '../../components/lynlab-api';
-
-Vue.use(VueSimplemde);
 
 export default {
   data() {
