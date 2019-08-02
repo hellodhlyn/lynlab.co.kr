@@ -46,17 +46,16 @@ export default {
 
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&subset=korean');
-
 body {
   margin: 0;
+  box-sizing: border-box;
 }
 
 #app {
   font-family: 'Noto Sans KR', sans-serif;
   width: 100%;
   padding-bottom: 5vh;
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #212121;
@@ -74,6 +73,7 @@ body {
   }
 
   #navbar {
+    position: relative;
     height: 80px;
     width: calc(100% - 60px);
     padding: 0 30px;
@@ -98,9 +98,8 @@ body {
         font-size: 18px;
         line-height: 40px;
         letter-spacing: 1.5px;
-        font-weight: 400;
 
-        &.primary { font-weight: 700; }
+        &.primary { font-weight: 900; }
         &.icon { font-size: 24px; }
 
         &#menu-btn {
@@ -122,30 +121,30 @@ body {
   .container {
     margin: 0 auto;
     max-width: 800px;
+    &.wide { max-width: 1200px; }
   }
 
   .markdown-body {
     font-size: 18px;
-    font-weight: 400;
     line-height: 2.0;
     word-break: break-word;
 
     h1, h2, h3, h4, h5, h6 {
-      font-weight: 400;
+      font-weight: 900;
       margin-bottom: 0;
     }
 
-    h2 {
-      border-bottom: #eeeeee solid 1px;
-    }
-
+    h2 { border-bottom: #eeeeee solid 1px; }
+    h3 { margin-top: 40px; }
+    ul { padding-left: 20px; }
     a { color: #03A9F4; }
 
     img {
       display: block;
       max-height: 50vh;
-      max-width: 600px;
+      max-width: 800px;
       margin: 40px auto;
+      object-fit: contain;
     }
 
     pre {

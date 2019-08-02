@@ -92,8 +92,6 @@
 
 <style lang="scss" scoped>
 #admin {
-  font-weight: 400;
-
   table {
     width: 100%;
     border-collapse: collapse;

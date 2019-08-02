@@ -25,7 +25,6 @@
 .editor {
   textarea {
     font-family: inherit;
-    font-weight: 400;
     width: 100%;
     font-size: 16px;
   }

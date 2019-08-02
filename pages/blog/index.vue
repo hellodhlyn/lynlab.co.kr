@@ -1,24 +1,21 @@
 <template>
   <div id="blog">
-    <div class="container">
+    <div class="posts wide container">
       <div v-for="post in posts" :key="post.id" class="post">
-        <p v-if="post.thumbnailURL" class="thumbnail">
-          <img :src="post.thumbnailURL">
-        </p>
-        <p class="tags">
-          <span v-for="tag in post.tagList" :key="tag.name">#{{ tag.name }}</span>
-        </p>
-        <h1>
-          <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">
-            {{ post.title }}
-          </nuxt-link>
-        </h1>
-        <p class="meta">
-          <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount.toString()" />
-        </p>
-        <p class="description">
-          {{ post.description }}
-        </p>
+        <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">
+          <div>
+            <h1>{{ post.title }}</h1>
+            <p v-if="post.thumbnailURL" class="thumbnail">
+              <img :src="post.thumbnailURL">
+            </p>
+            <p class="description">
+              {{ post.description }}
+            </p>
+            <p class="tags">
+              <span v-for="tag in post.tagList" :key="tag.name">#{{ tag }}&nbsp;&nbsp;</span>
+            </p>
+          </div>
+        </nuxt-link>
       </div>
 
       <div v-if="pageInfo" class="paginator">
@@ -38,51 +35,64 @@
 </template>
 
 <style lang="scss" scoped>
+.posts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
 .post {
-  padding: 20px 0;
+  width: 100%;
+  padding: 20px;
   border-bottom: #eeeeee solid 1px;
 
   h1 {
     margin: 0;
     font-size: 200%;
+    font-weight: 900;
+
+    &:hover { text-decoration: underline; }
   }
 
   p {
-    font-weight: 400;
-
     &.tags {
       margin: 0;
       color: #757575;
     }
     &.thumbnail img {
-      max-height: 320px;
+      height: 240px;
       width: 100%;
       object-fit: cover;
     }
     &.description {
+      font-size: 18px;
       line-height: 2.0;
-    }
-    &.meta {
-      margin-top: 10px;
-      color: #9e9e9e;
+      color: #424242;
     }
   }
 
   a {
     color: inherit;
     text-decoration: none;
-    &:hover { text-decoration: underline; }
   }
 }
 
 .paginator {
+  width: 100%;
   margin: 20px 0;
   text-align: center;
 }
 
-@media only screen and (min-width: 481px) {
-  .post:first-child {
-    padding-top: 40px;
+@media only screen and (max-width: 480px) {
+  .post {
+    padding: 20px 0;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .post {
+    max-width: 560px;
   }
 }
 </style>
@@ -117,7 +127,7 @@ export default {
       }
 
       query(`postList(page: ${pageArgs}) { 
-        items { id thumbnailURL title description readCount createdAt tagList { name } }
+        items { id thumbnailURL title description tagList { name } }
         pageInfo { hasBefore hasNext }
       }`).then((data) => {
         this.posts = data.postList.items;

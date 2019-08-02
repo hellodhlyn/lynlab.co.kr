@@ -59,13 +59,13 @@
       padding-top: 120px;
 
       h1 {
-        font-size: 300%;
-        font-weight: 300;
+        font-size: 250%;
         margin: 0;
       }
 
       p {
         font-size: 18px;
+        line-height: 2.0;
         &#tags { margin: 36px 0 0 0; }
       }
     }

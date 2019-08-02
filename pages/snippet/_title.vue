@@ -24,7 +24,6 @@
 
   h1 {
     font-size: 300%;
-    font-weight: 300;
     margin: 0;
   }
 }
