@@ -7,11 +7,13 @@ import marked from 'marked';
 
 import IconText from '../components/icon-text.vue';
 import AuthenticatedVue from '../components/authenticated.vue';
+import Navbar from '../components/navbar.vue';
 
 
 Vue.component('AddThis', AddThis);
 Vue.component('icon-text', IconText);
 Vue.component('authenticated', AuthenticatedVue);
+Vue.component('navbar', Navbar);
 Vue.use(VueDisqus);
 Vue.use(VueMoment);
 
