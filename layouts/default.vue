@@ -10,6 +10,7 @@
       <ul :class="navbarOpened ? ['left', 'mobile-visible'] : ['left']">
         <li><nuxt-link to="/blog">BLOG</nuxt-link></li>
         <li><nuxt-link :to="{ name: 'snippet-title', params: { title: 'resume' } }">RESUME</nuxt-link></li>
+        <li v-if="isAdmin()"><nuxt-link :to="{ name: 'admin' }">ADMIN</nuxt-link></li>
       </ul>
       <ul :class="navbarOpened ? ['right', 'mobile-visible'] : ['right']">
         <li class="icon"><a target="_blank" href="https://twitter.com/HelloDHLyn"><ion-icon name="logo-twitter" /></a></li>
@@ -32,6 +33,12 @@ export default {
   watch: {
     $route() {
       this.navbarOpened = false;
+    },
+  },
+  methods: {
+    isAdmin() {
+      return this.$storage.getLocalStorage('auth.accessToken')
+        && parseInt(this.$storage.getLocalStorage('auth.expireAt'), 10) > (new Date()).getTime();
     },
   },
 };
