@@ -1,6 +1,6 @@
 <template>
   <div id="blog">
-    <div class="posts wide container">
+    <div class="posts container">
       <div v-for="post in posts" :key="post.id" class="post">
         <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">
           <div>
@@ -35,13 +35,6 @@
 </template>
 
 <style lang="scss" scoped>
-.posts {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: stretch;
-}
-
 .post {
   width: 100%;
   padding: 20px;
@@ -87,12 +80,6 @@
 @media only screen and (max-width: 480px) {
   .post {
     padding: 20px 0;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .post {
-    max-width: 560px;
   }
 }
 </style>

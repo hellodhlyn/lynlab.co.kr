@@ -10,13 +10,13 @@
     </ul>
     <ul :class="navbarOpened ? ['left', 'mobile-visible'] : ['left']">
       <li>
-        <nuxt-link to="/blog">
-          BLOG
+        <nuxt-link :to="{ name: 'index' }">
+          ABOUT
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="{ name: 'snippet-title', params: { title: 'resume' } }">
-          RESUME
+        <nuxt-link :to="{ name: 'blog' }">
+          BLOG
         </nuxt-link>
       </li>
       <li v-if="isAdmin()">

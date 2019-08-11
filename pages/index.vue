@@ -62,127 +62,126 @@ export default {
   background-attachment: fixed;
   color: #ffffff;
   overflow-y: scroll;
-}
 
-#header {
-  margin: 15vh 0 25vh 0;
-}
-
-#footer {
-  margin-top: 100px;
-
-}
-
-#content {
-  padding: 80px;
-
-  h1 {
-    margin: 0;
-    font-size: 500%;
-    font-weight: 900;
+  #header {
+    margin: 15vh 0 25vh 0;
   }
 
-  h2 {
-    font-size: 200%;
-    font-weight: 100;
+  #footer {
+    margin-top: 100px;
   }
 
-  h3 {
-    margin-top: 120px;
-    margin-bottom: 20px;
-    font-size: 250%;
-    font-weight: 900;
-  }
+  #content {
+    padding: 80px;
 
-  h4 {
-    margin-top: 40px;
-    margin-bottom: 0;
-    font-size: 150%;
-    font-weight: 900;
-  }
-
-  p {
-    margin: 15px 0;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.8;
-  }
-
-  a {
-    color: #ffffff !important;
-  }
-
-  strong {
-    font-weight: 900;
-  }
-
-  .actions {
-    margin: 40px 0;
-    display: flex;
-    width: 100%;
-
-    a { text-decoration: none; }
-
-    .action {
-      width: 80px;
-      height: 45px;
-      line-height: 45px;
-      margin: 0 5px;
-      padding-left: 30px;
-      padding-right: 30px;
-      border-radius: 45px;
-      background: #ffffff;
-      text-align: center;
-      color: #212121;
-      font-weight: 900;
-
-      &:hover { background-color: #eeeeee; }
-    }
-  }
-
-  .icon {
-    margin-right: 5px;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    display: inline-block;
-    vertical-align: middle;
-
-    img {
+    h1 {
       margin: 0;
-      padding: 10px;
-      width: 30px;
-      height: 30px;
+      font-size: 500%;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: 200%;
+      font-weight: 100;
+    }
+
+    h3 {
+      margin-top: 120px;
+      margin-bottom: 20px;
+      font-size: 250%;
+      font-weight: 900;
+    }
+
+    h4 {
+      margin-top: 40px;
+      margin-bottom: 0;
+      font-size: 150%;
+      font-weight: 900;
     }
 
     p {
-      margin: 0;
-      padding: 0;
-      width: 50px;
-      height: 50px;
-      font-size: 12px;
-      line-height: 50px;
-      text-align: center;
+      margin: 15px 0;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    a {
+      color: #ffffff !important;
+    }
+
+    strong {
       font-weight: 900;
     }
 
-    background-color: #212121;
-    &.aws { background-color: #232f3e; }
-    &.django { background-color: #092e20; }
-    &.gcp { background-color: #4285f4; }
-    &.github { background-color: #181717; }
-    &.gmail { background-color: #d14836; }
-    &.go { background-color: #76e1fe; }
-    &.graphql { background-color: #e10098; }
-    &.instagram { background-color: #e4405f; }
-    &.kubernetes { background-color: #326ce5; }
-    &.nodejs { background-color: #339933; }
-    &.nuxtjs { background-color: #00c58e; }
-    &.python { background-color: #3776ab; }
-    &.ruby { background-color: #cc342d; }
-    &.twitter { background-color: #1da1f2; }
+    .actions {
+      margin: 40px 0;
+      display: flex;
+      width: 100%;
 
-    &:hover { filter: brightness(0.9); }
+      a { text-decoration: none; }
+
+      .action {
+        width: 80px;
+        height: 45px;
+        line-height: 45px;
+        margin: 0 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 45px;
+        background: #ffffff;
+        text-align: center;
+        color: #212121;
+        font-weight: 900;
+
+        &:hover { background-color: #eeeeee; }
+      }
+    }
+
+    .icon {
+      margin-right: 5px;
+      height: 50px;
+      width: 50px;
+      border-radius: 25px;
+      display: inline-block;
+      vertical-align: middle;
+
+      img {
+        margin: 0;
+        padding: 10px;
+        width: 30px;
+        height: 30px;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+        width: 50px;
+        height: 50px;
+        font-size: 12px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: 900;
+      }
+
+      background-color: #212121;
+      &.aws { background-color: #232f3e; }
+      &.django { background-color: #092e20; }
+      &.gcp { background-color: #4285f4; }
+      &.github { background-color: #181717; }
+      &.gmail { background-color: #d14836; }
+      &.go { background-color: #76e1fe; }
+      &.graphql { background-color: #e10098; }
+      &.instagram { background-color: #e4405f; }
+      &.kubernetes { background-color: #326ce5; }
+      &.nodejs { background-color: #339933; }
+      &.nuxtjs { background-color: #00c58e; }
+      &.python { background-color: #3776ab; }
+      &.ruby { background-color: #cc342d; }
+      &.twitter { background-color: #1da1f2; }
+
+      &:hover { filter: brightness(0.9); }
+    }
   }
 }
 </style>
