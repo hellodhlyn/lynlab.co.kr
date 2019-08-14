@@ -9,16 +9,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      navbarOpened: false,
-    };
-  },
-  watch: {
-    $route() {
-      this.navbarOpened = false;
-    },
-  },
   methods: {
     showNavbar() {
       return this.$route.path !== '/';
@@ -41,10 +31,10 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #212121;
+  color: #292f38;
 
   button {
-    background-color: #212121;
+    background-color: #292f38;
     color: #ffffff;
     border: none;
     padding: 12px 16px;
@@ -62,19 +52,20 @@ body {
   }
 
   .markdown-body {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 2.0;
     word-break: break-word;
 
     h1, h2, h3, h4, h5, h6 {
-      font-weight: 900;
+      font-weight: 700;
       margin-bottom: 0;
     }
 
     h2 { border-bottom: #eeeeee solid 1px; }
-    h3 { margin-top: 40px; }
+    h2, h3 { margin-top: 40px; }
     ul { padding-left: 20px; }
     a { color: #03A9F4; }
+    strong { font-weight: 700; }
 
     img {
       display: block;
@@ -101,6 +92,15 @@ body {
       padding: 10px 20px;
       background-color: #F5F5F5;
       border-left: #E0E0E0 solid 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #app {
+    .markdown-body {
+      font-size: 16px;
+      img { max-width: 100%; }
     }
   }
 }

@@ -73,7 +73,7 @@
 
   #contents {
     margin: 40px auto;
-    width: 800px;
+    max-width: 800px;
   }
 
   #comments {
@@ -81,6 +81,7 @@
   }
 
   #footer {
+    font-size: 12px;
     padding: 40px 0;
     text-align: center;
 
@@ -92,7 +93,6 @@
     }
 
     p { margin: 0; }
-
     a { color: #212121; }
   }
 }
@@ -104,12 +104,17 @@
 
       .img { img { height: 400px; } }
       .data {
-        padding-top: 10px;
+        width: calc(100% - 40px);
+        padding: 100px 20px 0 20px;
 
         h1 { font-size: 200%; }
         p { font-size: 16px; }
       }
     }
+
+    #contents { padding: 0 20px; }
+    #comments { padding: 40px 20px; }
+    #footer { padding: 40px 20px; }
   }
 }
 </style>

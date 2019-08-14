@@ -10,13 +10,13 @@
     </ul>
     <ul :class="navbarOpened ? ['left', 'mobile-visible'] : ['left']">
       <li>
-        <nuxt-link :to="{ name: 'index' }">
-          ABOUT
+        <nuxt-link :to="{ name: 'blog' }">
+          BLOG
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="{ name: 'blog' }">
-          BLOG
+        <nuxt-link :to="{ name: 'index' }">
+          ABOUT
         </nuxt-link>
       </li>
       <li v-if="isAdmin()">
@@ -41,6 +41,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      navbarOpened: false,
+    };
+  },
+  watch: {
+    $route() {
+      this.navbarOpened = false;
+    },
+  },
   methods: {
     isAdmin() {
       return this.$storage.getLocalStorage('auth.accessToken')
@@ -75,11 +85,11 @@ export default {
       float: left;
       height: 40px;
       padding: 20px 10px;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 40px;
       letter-spacing: 1.5px;
 
-      &.primary { font-weight: 900; }
+      &.primary { font-weight: 700; }
       &.icon { font-size: 24px; }
 
       &#menu-btn {
@@ -134,10 +144,7 @@ export default {
         li:first-child { margin-left: 40px; }
       }
 
-      li {
-        padding: 10px 10px;
-        font-size: 16px;
-      }
+      li { padding: 10px; }
     }
   }
 

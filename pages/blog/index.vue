@@ -5,6 +5,9 @@
         <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">
           <div>
             <h1>{{ post.title }}</h1>
+            <p class="meta">
+              <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount.toString()" />
+            </p>
             <p v-if="post.thumbnailURL" class="thumbnail">
               <img :src="post.thumbnailURL">
             </p>
@@ -35,6 +38,7 @@
 </template>
 
 <style lang="scss" scoped>
+.posts { padding: 20px 0; }
 .post {
   width: 100%;
   padding: 20px;
@@ -43,7 +47,7 @@
   h1 {
     margin: 0;
     font-size: 200%;
-    font-weight: 900;
+    font-weight: 700;
 
     &:hover { text-decoration: underline; }
   }
@@ -61,7 +65,10 @@
     &.description {
       font-size: 18px;
       line-height: 2.0;
-      color: #424242;
+    }
+    &.meta {
+      margin-top: 10px;
+      color: #9e9e9e;
     }
   }
 
@@ -78,9 +85,8 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .post {
-    padding: 20px 0;
-  }
+  .posts { padding: 80px 20px; }
+  .post { padding: 20px 0; }
 }
 </style>
 
@@ -114,7 +120,7 @@ export default {
       }
 
       query(`postList(page: ${pageArgs}) { 
-        items { id thumbnailURL title description tagList { name } }
+        items { id thumbnailURL title description readCount createdAt tagList { name } }
         pageInfo { hasBefore hasNext }
       }`).then((data) => {
         this.posts = data.postList.items;
