@@ -1,0 +1,52 @@
+module.exports = [
+  {
+    name: '업비트',
+    url: 'upbit.com',
+    thumbnail: 'https://static.upbit.com/upbit-pc/seo/upbit_facebook.png',
+    description: '가장 신뢰받는 글로벌 표준 암호화폐 거래소. 백엔드 개발 및 AWS 인프라 구축, 운영을 담당하고 있습니다.',
+    skills: ['ruby', 'golang', 'python', 'aws', 'kubernetes'],
+  },
+  {
+    name: '카카오스탁',
+    url: 'stock.kakao.com',
+    thumbnail: 'https://stock.kakao.com/og_logo.png',
+    description: '증권 정보 서비스. 백엔드 개발 및 운영을 담당하였습니다.',
+    skills: ['java', 'groovy', 'kafka'],
+  },
+  {
+    name: 'LYnLab',
+    url: 'lynlab.co.kr',
+    github: 'lynlab/lynlab-web',
+    thumbnail: 'https://storage.lynlab.co.kr/20191103-thumbnail-ly01.png',
+    description: '여러분이 보고 계신 지금 이 사이트. 블로그, 위키, 스니펫 등의 서비스를 제공합니다.',
+    skills: ['typescript', 'javascript', 'nodejs', 'nuxtjs', 'graphql'],
+  },
+  {
+    name: 'Luppiter',
+    url: 'console.luppiter.dev',
+    github: 'lynlab/luppiter',
+    description: '파일 스토리지, CDN, 서버리스 컴퓨팅 등 기능을 제공하는 PaaS. AWS의 트래픽 비용이 개인 프로젝트에 사용하기에는 부담스럽다는 생각에 비슷한 기능을 직접 구현하였습니다.',
+    skills: ['typescript', 'aws'],
+  },
+  {
+    name: 'PoolC',
+    url: 'poolc.org',
+    github: 'poolc/nagase',
+    thumbnail: 'https://storage.lynlab.co.kr/201812310001.png',
+    description: '연세대학교 공과대학 프로그래밍 동아리 PoolC 홈페이지. API 서버 개발 및 AWS 인프라 구축, 운영을 담당하고 있습니다.',
+    skills: ['golang', 'aws', 'graphql'],
+  },
+  {
+    name: 'Open in Notion app (Firefox Addon)',
+    github: 'hellodhlyn/notion-app-redirector',
+    thumbnail: 'https://addons.cdn.mozilla.net/user-media/addon_icons/2594/2594426-64.png?modified=728772b7',
+    description: 'Open notion documents with your desktop application directly 🚀',
+    skills: ['javascript', 'firefox'],
+  },
+  {
+    name: '도우샘',
+    url: 'doughsam.com',
+    description: '연세대학교 마일리지 수강신청 제도를 위한 과목별 마일리지 분석, 시간표 작성 및 강의평가 서비스입니다. 메인 개발 및 프로젝트 매니징을 담당하였습니다. (현재 서비스 종료)',
+    skills: ['django', 'python'],
+  },
+];
