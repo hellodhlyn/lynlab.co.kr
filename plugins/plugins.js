@@ -17,7 +17,7 @@ Vue.component('navbar', Navbar);
 Vue.use(VueDisqus);
 Vue.use(VueMoment);
 
-Vue.filter('marked', input => marked(input));
+Vue.filter('marked', (input) => marked(input));
 
 Vue.config.ignoredElements = [
   'ion-icon',

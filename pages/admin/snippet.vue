@@ -4,7 +4,7 @@
       <h4>제목</h4>
       <textarea v-model="snippet.title" rows="1" />
       <h4>본문</h4>
-      <markdown-editor v-model="snippet.body" rows="20" :configs="{ spellChecker: false }" />
+      <vue-simplemder v-model="snippet.body" rows="20" :configs="{ spellChecker: false }" />
       <input id="checkbox-is-public" v-model="snippet.isPublic" type="checkbox">
       <label for="checkbox-is-public">공개 여부</label>
     </div>

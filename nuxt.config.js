@@ -52,9 +52,9 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    'nuxt-universal-storage',
     '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap',
+    '@nuxtjs/universal-storage',
   ],
 
   storage: {
