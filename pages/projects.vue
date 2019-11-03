@@ -1,5 +1,5 @@
 <template>
-  <div id="projects" class="py-16">
+  <div id="projects" class="py-8 bg-gray-100">
     <div class="container mx-auto px-4">
       <p class="pb-4 text-4xl">
         Projects
@@ -32,6 +32,9 @@ import projects from '../assets/data/projects';
 export default {
   asyncData() {
     return { projects };
+  },
+  head() {
+    return { title: 'Projects | LYnLab' };
   },
 };
 </script>

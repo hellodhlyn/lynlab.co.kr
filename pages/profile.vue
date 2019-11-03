@@ -1,6 +1,6 @@
 <template>
-  <div id="profile" class="py-8">
-    <div id="profile-exp" class="py-8 text-gray-900">
+  <div id="profile" class="py-8 bg-gray-100">
+    <div id="profile-exp" class="pb-8 text-gray-900">
       <div class="container mx-auto px-4">
         <p class="pb-4 text-4xl">
           Profile
@@ -51,6 +51,9 @@ import experiences from '../assets/data/experiences';
 export default {
   asyncData() {
     return { articles, experiences };
+  },
+  head() {
+    return { title: 'Resume | LYnLab' };
   },
 };
 </script>

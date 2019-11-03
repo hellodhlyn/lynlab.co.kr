@@ -11,7 +11,7 @@
     </div>
     <div :class="navbarOpened ? ['flex', 'flex-col'] : ['hidden', 'md:flex']">
       <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'blog' }">Blog</nuxt-link>
-      <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'profile' }">Profile</nuxt-link>
+      <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'profile' }">Resume</nuxt-link>
       <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'projects' }">Projects</nuxt-link>
     </div>
     <div class="flex-grow" />

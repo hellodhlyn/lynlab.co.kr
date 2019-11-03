@@ -1,123 +1,36 @@
 <template>
   <div id="blog-post">
-    <div id="header">
-      <div class="layer img">
-        <img v-if="post && post.thumbnailURL" :src="post.thumbnailURL">
-        <img v-else src="/images/header.jpg">
-      </div>
-      <div class="layer data">
-        <div v-if="post" class="container">
-          <p id="tags">
-            <span v-for="tag in post.tagList" :key="tag.name">#{{ tag.name }}</span>
-          </p>
-          <h1>{{ post.title }}</h1>
-          <p>{{ post.description }}</p>
-          <p>{{ post.createdAt | moment('YYYY. MM. DD.') }} ・ {{ post.readCount }}명 읽음</p>
-        </div>
+    <div class="h-screen-35 md:h-screen-half w-full mx-auto bg-center bg-cover shadow-lg" :style="`background-image: url('${(post && post.thumbnailURL) || '/images/header.jpg'}')`" />
+
+    <div class="container max-w-4xl px-2 lg:px-0 -mt-20 mx-auto leading-relaxed">
+      <div class="p-4 md:p-8 bg-white border border-gray-200">
+        <p class="text-xs text-gray-700">
+          <span v-for="tag in post.tagList" :key="tag.name" class="mr-1">#{{ tag }}</span>
+        </p>
+        <p class="text-xl md:text-2xl font-bold">{{ post.title }}</p>
+        <p class="text-normal md:text-2xl text-gray-700">{{ post.description }}</p>
+        <p class="mb-4 text-sm text-gray-700">
+          <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount.toString()" />
+        </p>
       </div>
     </div>
 
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div id="contents" class="container markdown-body" v-html="$options.filters.marked(post.body)" />
+    <div class="container max-w-4xl mx-auto p-4 md:p-8">
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div class="markdown-body" v-html="$options.filters.marked(post.body)" />
+    </div>
 
-    <div id="comments" class="container">
+    <div class="container max-w-4xl mx-auto px-4 py-8 text-center text-xs">
+      <img class="mx-auto" alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
+      <p class="py-2">이 저작물은 <a class="text-blue-600 hover:underline" href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
+      <p>© {{ 1900 + new Date().getYear() }} Do Hoerin, LYnLab</p>
+    </div>
+
+    <div class="container max-w-4xl mx-auto mb-16 px-4 py-4 border border-gray-300 rounded">
       <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath" />
     </div>
-
-    <div id="footer" class="container">
-      <img alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
-      <p>이 저작물은 <a href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
-    </div>
-
-    <!-- <AddThis public-id="ra-5a8713a8c30b87b5" /> -->
   </div>
 </template>
-
-<style lang="scss">
-#blog-post {
-  #header {
-    height: 600px;
-    width: 100%;
-    color: #fafafa;
-
-    .layer {
-      width: 100%;
-      position: absolute;
-    }
-
-    .img {
-      img {
-        height: 600px;
-        width: 100%;
-        filter: brightness(30%);
-        object-fit: cover;
-      }
-    }
-
-    .data {
-      height: 480px;
-      padding-top: 120px;
-
-      h1 {
-        font-size: 250%;
-        margin: 0;
-      }
-
-      p {
-        font-size: 18px;
-        line-height: 2.0;
-        &#tags { margin: 36px 0 0 0; }
-      }
-    }
-  }
-
-  #contents {
-    margin: 40px auto;
-    max-width: 800px;
-  }
-
-  #comments {
-    padding: 40px 0;
-  }
-
-  #footer {
-    font-size: 12px;
-    padding: 40px 0;
-    text-align: center;
-
-    hr {
-      margin: 20px 0;
-      border: 0;
-      border-bottom: 1px solid;
-      color: #e0e0e0;
-    }
-
-    p { margin: 0; }
-    a { color: #212121; }
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  #blog-post {
-    #header {
-      height: 400px;
-
-      .img { img { height: 400px; } }
-      .data {
-        width: calc(100% - 40px);
-        padding: 100px 20px 0 20px;
-
-        h1 { font-size: 200%; }
-        p { font-size: 16px; }
-      }
-    }
-
-    #contents { padding: 0 20px; }
-    #comments { padding: 40px 20px; }
-    #footer { padding: 40px 20px; }
-  }
-}
-</style>
 
 <script>
 import { query } from '../../components/lynlab-api';
@@ -142,6 +55,7 @@ export default {
         { property: 'og:title', content: `${this.post.title} | LYnLab` },
         { property: 'og:description', content: this.post.description },
         { property: 'og:type', content: 'article' },
+        { property: 'og:image', content: this.post.thumbnailURL },
         { property: 'og:url', content: `https://lynlab.co.kr${this.$route.fullPath}` },
       ],
     };
