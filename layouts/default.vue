@@ -3,7 +3,7 @@
 <template>
   <div id="app">
     <navbar v-if="showNavbar()" />
-    <nuxt />
+    <nuxt class="bg-gray-100 text-gray-900" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   methods: {
     showNavbar() {
-      return false;
+      return this.$route.path !== '/';
     },
   },
 };

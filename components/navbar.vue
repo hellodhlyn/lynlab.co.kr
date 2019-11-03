@@ -1,41 +1,26 @@
 <template>
-  <div id="navbar">
-    <ul class="title">
-      <li id="menu-btn" @click="navbarOpened = !navbarOpened;">
-        <ion-icon name="menu" />
-      </li>
-      <li class="primary">
+  <div id="navbar" class="flex flex-col md:flex-row px-6 bg-gray-900 text-gray-100 tracking-wider align-middle">
+    <div class="flex flex-row font-bold py-4 md:py-6">
+      <nuxt-link class="px-1 md:px-2" :to="{ name: 'index' }">
         LYNLAB
-      </li>
-    </ul>
-    <ul :class="navbarOpened ? ['left', 'mobile-visible'] : ['left']">
-      <li>
-        <nuxt-link :to="{ name: 'blog' }">
-          BLOG
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link :to="{ name: 'index' }">
-          ABOUT
-        </nuxt-link>
-      </li>
-      <li v-if="isAdmin()">
-        <nuxt-link :to="{ name: 'admin' }">
-          ADMIN
-        </nuxt-link>
-      </li>
-    </ul>
-    <ul :class="navbarOpened ? ['right', 'mobile-visible'] : ['right']">
-      <li class="icon">
-        <a target="_blank" href="https://twitter.com/HelloDHLyn"><ion-icon name="logo-twitter" /></a>
-      </li>
-      <li class="icon">
-        <a target="_blank" href="https://github.com/HelloDHLyn"><ion-icon name="logo-github" /></a>
-      </li>
-      <li class="icon">
-        <a target="_blank" href="https://www.linkedin.com/in/hoerin-do-13b065105/"><ion-icon name="logo-linkedin" /></a>
-      </li>
-    </ul>
+      </nuxt-link>
+      <div class="flex-grow md:hidden" />
+      <div class="text-xl md:hidden cursor-pointer" @click="navbarOpened = !navbarOpened">
+        <ion-icon name="menu" />
+      </div>
+    </div>
+    <div :class="navbarOpened ? ['flex', 'flex-col'] : ['hidden', 'md:flex']">
+      <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'blog' }">Blog</nuxt-link>
+      <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'profile' }">Profile</nuxt-link>
+      <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'projects' }">Projects</nuxt-link>
+    </div>
+    <div class="flex-grow" />
+    <div :class="navbarOpened ? ['flex'] : ['hidden', 'md:flex']">
+      <a class="px-1 py-3 md:py-5 mr-1 text-xl" alt="github" target="_blank" href="https://github.com/hellodhlyn"><ion-icon name="logo-github" /></a>
+      <a class="px-1 py-3 md:py-5 mr-1 text-xl" target="_blank" href="https://twitter.com/hellodhlyn"><ion-icon name="logo-twitter" /></a>
+      <a class="px-1 py-3 md:py-5 mr-1 text-xl" target="_blank" href="https://instagram.com/hellodhlyn"><ion-icon name="logo-instagram" /></a>
+      <a class="px-1 py-3 md:py-5 text-xl" href="mailto:hellodhlyn@gmail.com"><ion-icon name="mail" /></a>
+    </div>
   </div>
 </template>
 
@@ -59,111 +44,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped lang="scss">
-#navbar {
-  position: relative;
-  height: 80px;
-  width: calc(100% - 60px);
-  padding: 0 30px;
-  background: #212121;
-  color: #ffffff;
-  z-index: 100;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    &.right {
-      float: right;
-      right: 30px;
-    }
-
-    li {
-      float: left;
-      height: 40px;
-      padding: 20px 10px;
-      font-size: 16px;
-      line-height: 40px;
-      letter-spacing: 1.5px;
-
-      &.primary { font-weight: 700; }
-      &.icon { font-size: 24px; }
-
-      &#menu-btn {
-        margin: 0 10px;
-        font-size: 20px;
-      }
-    }
-
-    a {
-      height: 40px;
-      color: inherit;
-      text-decoration: none;
-
-      &:hover { text-decoration: underline; }
-    }
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  #navbar {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    height: 60px;
-    padding: 0;
-
-    ul {
-      &.left, &.right {
-        width: 100%;
-        &.mobile-visible { background: #212121; }
-        &:not(.mobile-visible) { display: none; }
-      }
-
-      &.title {
-        li#menu-btn {
-          margin-left: 5px;
-          margin-right: 5px;
-          padding-top: 12px;
-        }
-        li:not(#menu-btn) { float: none; }
-      }
-
-      &.left {
-        li {
-          float: none;
-          margin-left: 40px;
-        }
-      }
-
-      &.right {
-        right: 0;
-        li:first-child { margin-left: 40px; }
-      }
-
-      li { padding: 10px; }
-    }
-  }
-
-  .container {
-    padding: 0 15px;
-    max-width: calc(100% - 30px);
-  }
-
-  .markdown-body {
-    font-size: 14px;
-    img { max-width: 100%; }
-  }
-}
-
-@media only screen and (min-width: 481px) {
-  #navbar {
-    ul {
-      li#menu-btn { display: none; }
-    }
-  }
-}
-</style>
