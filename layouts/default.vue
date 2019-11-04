@@ -3,7 +3,7 @@
 <template>
   <div id="app">
     <navbar v-if="showNavbar()" />
-    <nuxt />
+    <nuxt class="text-gray-900" />
   </div>
 </template>
 
@@ -19,89 +19,77 @@ export default {
 
 
 <style lang="scss">
-body {
-  margin: 0;
-  box-sizing: border-box;
-}
-
 #app {
   font-family: 'Noto Sans KR', sans-serif;
-  width: 100%;
-  padding-bottom: 5vh;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #292f38;
+}
 
-  button {
-    background-color: #292f38;
-    color: #ffffff;
-    border: none;
-    padding: 12px 16px;
-    display: inline-block;
-    cursor: default;
+.markdown-body {
+  font-size: 17px;
+  line-height: 2.0;
+  word-break: break-word;
 
-    &:disabled { background-color: #e0e0e0; }
-    &:not(:disabled):hover { background-color: #424242; }
+  strong { font-weight: 500; }
+
+  h1, h2, h3, h4, h5, h6 { font-weight: 500; }
+  h1 {
+    font-size: 200%;
+    padding-top: 40px;
+  }
+  h2 {
+    font-size: 160%;
+    padding: 20px 0 10px 0;
+  }
+  h3 {
+    font-size: 120%;
+    padding-bottom: 10px;
   }
 
-  .container {
-    margin: 0 auto;
-    max-width: 800px;
-    &.wide { max-width: 1200px; }
+  p {padding-bottom: 20px; }
+
+  img {
+    display: block;
+    max-height: 50vh;
+    max-width: 700px;
+    margin: 20px auto;
   }
 
-  .markdown-body {
-    font-size: 17px;
-    line-height: 2.0;
-    word-break: break-word;
+  ul, ol {
+    padding: 10px 0;
+    list-style-type: disc;
+    list-style-position: inside;
+    ul, ol { padding: 10px; }
+  }
+  li li {
+    margin-left: 20px;
+  }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      margin-bottom: 0;
-    }
+  blockquote {
+    margin: 10px 0;
+    background-color: #edf2f7; // gray-200
+    border-left: #cbd5e0 solid 10px; // gray-400
+    p { padding: 20px; }
+  }
 
-    h2 { border-bottom: #eeeeee solid 1px; }
-    h2, h3 { margin-top: 40px; }
-    ul { padding-left: 20px; }
-    a { color: #03A9F4; }
-    strong { font-weight: 700; }
+  pre {
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: #edf2f7; // gray-200
+    font-size: 14px;
+    overflow-y: auto;
+  }
 
-    img {
-      display: block;
-      max-height: 50vh;
-      max-width: 800px;
-      margin: 40px auto;
-      object-fit: contain;
-    }
-
-    pre {
-      padding: 20px;
-      font-size: 14px;
-      overflow-y: scroll;
-      background-color: #F5F5F5;
-    }
-
-    p code, ul code, ol code {
-      background: #EEEEEE;
-      padding: 0 4px;
-    }
-
-    blockquote {
-      margin: 0;
-      padding: 10px 20px;
-      background-color: #F5F5F5;
-      border-left: #E0E0E0 solid 10px;
-    }
+  p code, ul code, ol code {
+    background-color: #edf2f7;
+    padding: 0 4px;
   }
 }
 
-@media only screen and (max-width: 480px) {
-  #app {
-    .markdown-body {
-      font-size: 16px;
-      img { max-width: 100%; }
-    }
+@media only screen and (max-width: 768px) {
+  .markdown-body {
+    font-size: 15px;
+    img { max-width: 100%; }
   }
 }
 </style>

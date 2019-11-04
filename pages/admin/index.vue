@@ -1,5 +1,5 @@
 <template>
-  <authenticated id="admin" class="container">
+  <authenticated id="admin" class="container mx-auto py-8">
     <div id="blog">
       <h1>블로그 포스트 관리</h1>
       <div class="actions buttons">

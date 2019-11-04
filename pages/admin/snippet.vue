@@ -1,5 +1,5 @@
 <template>
-  <authenticated id="admin-snippet" class="container">
+  <authenticated id="admin-snippet" class="container mx-auto py-8">
     <div class="editor">
       <h4>제목</h4>
       <textarea v-model="snippet.title" rows="1" />

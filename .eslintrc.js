@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     'max-len': 'off',
     'import/no-extraneous-dependencies': 0,
+    'vue/singleline-html-element-content-newline': 'off',
   },
 }
