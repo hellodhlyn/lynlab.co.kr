@@ -13,6 +13,7 @@
       <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'blog' }">Blog</nuxt-link>
       <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'profile' }">Resume</nuxt-link>
       <nuxt-link class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'projects' }">Projects</nuxt-link>
+      <nuxt-link v-if="isAdmin()" class="px-1 md:px-2 py-3 md:py-6" :to="{ name: 'admin' }">Admin</nuxt-link>
     </div>
     <div class="flex-grow" />
     <div :class="navbarOpened ? ['flex'] : ['hidden', 'md:flex']">
