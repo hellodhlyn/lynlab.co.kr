@@ -1,19 +1,20 @@
 import Vue from 'vue';
 
+import VueAsyncComputed from 'vue-async-computed';
 import AddThis from 'vue-simple-addthis-share';
 import VueDisqus from 'vue-disqus';
 import VueMoment from 'vue-moment';
 import marked from 'marked';
 
+import Authenticated from '../components/authenticated.vue';
 import IconText from '../components/icon-text.vue';
-import AuthenticatedVue from '../components/authenticated.vue';
 import Navbar from '../components/navbar.vue';
-
 
 Vue.component('AddThis', AddThis);
 Vue.component('icon-text', IconText);
-Vue.component('authenticated', AuthenticatedVue);
+Vue.component('authenticated', Authenticated);
 Vue.component('navbar', Navbar);
+Vue.use(VueAsyncComputed);
 Vue.use(VueDisqus);
 Vue.use(VueMoment);
 
