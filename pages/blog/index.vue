@@ -1,6 +1,7 @@
 <template>
   <div id="blog" class="bg-white">
-    <div class="mx-auto container px-4 sm:px-8 py-4 leading-relaxed">
+    <div class="mx-auto container px-4 sm:px-8 py-8 leading-relaxed">
+      <p class="text-4xl">Posts</p>
       <div v-for="post in posts" :key="post.id" class="flex flex-col-reverse md:flex-row py-6 border-b">
         <div :class="post.thumbnailURL ? ['w-full', 'md:w-2/3'] : 'w-full'">
           <p class="text-xs text-gray-700">

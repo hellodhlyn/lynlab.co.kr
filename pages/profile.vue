@@ -1,7 +1,7 @@
 <template>
   <div id="profile" class="py-8 bg-gray-100">
     <div id="profile-exp" class="pb-8 text-gray-900">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-4 md:px-8">
         <p class="pb-4 text-4xl">
           Profile
         </p>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div id="profile-articles" class="py-8 text-gray-100 bg-gray-900">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-4 md:px-8">
         <p class="pb-4 text-4xl">
           Articles
         </p>

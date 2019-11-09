@@ -1,6 +1,6 @@
 <template>
   <div id="projects" class="py-8 bg-gray-100">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 md:px-8">
       <p class="pb-4 text-4xl">
         Projects
       </p>
