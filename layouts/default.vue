@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/singleline-html-element-content-newline -->
 
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col h-screen">
     <navbar v-if="showNavbar()" />
-    <nuxt class="text-gray-900" />
+    <nuxt class="flex-grow text-gray-900" />
   </div>
 </template>
 
