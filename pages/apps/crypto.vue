@@ -1,13 +1,13 @@
 <template>
   <div id="apps-crypto" class="flex justify-center items-center align-center bg-gray-100">
-    <div class="max-w-lg m-4 md:m-8 p-4 md:p-8 bg-white border border-lg border-gray-200 rounded">
+    <div class="max-w-lg m-4 md:m-8 p-4 md:p-8 bg-white border border-lg border-gray-300 rounded">
       <p class="pb-2 font-bold text-2xl">암호화폐 계산기</p>
       <p><a class="text-blue-600 hover:underline" target="_blank" href="https://upbit.com">업비트</a>의 현재 시세를 이용하여 암호화폐간 금액을 변환합니다.</p>
 
       <div class="py-4">
         <div class="flex py-4">
           <div class="h-10 w-2/3 md:w-3/4 mr-2">
-            <input v-model="input.price" :class="`h-full w-full px-2 bg-gray-100 focus:bg-white border rounded ${priceIsNaN ? 'border-red-500' : 'border-gray-100 focus:border-gray-300'}`" type="text" autofocus>
+            <input v-model="input.price" :class="`h-full w-full px-2 bg-gray-100 focus:bg-white border rounded ${priceIsNaN ? 'border-red-300' : 'border-gray-100 focus:border-gray-300'}`" type="text" autofocus>
           </div>
           <div class="w-1/3 md:w-1/4 relative">
             <select v-model="input.currencyFrom" class="appearance-none px-2 h-10 w-full bg-gray-100 rounded">
@@ -26,8 +26,9 @@
         <div class="flex py-4">
           <div class="relative h-10 w-2/3 md:w-3/4 mr-2">
             <input :value="convertedPrice" class="h-full w-full px-2 bg-gray-100 focus:bg-white border border-gray-100 focus:border-gray-300 rounded" disabled>
-            <div v-if="loading" class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <ion-icon id="loading-icon" name="sync" />
+            <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <ion-icon v-if="error.server" class="text-red-700" name="warning" />
+              <ion-icon v-else-if="loading" id="loading-icon" name="sync" />
             </div>
           </div>
           <div class="w-1/3 md:w-1/4 relative">
@@ -61,11 +62,8 @@ export default {
     return {
       currencies: [],
       loading: true,
-      input: {
-        price: '1.0',
-        currencyFrom: null,
-        currencyTo: null,
-      },
+      input: { price: '1.0', currencyFrom: null, currencyTo: null },
+      error: { server: false },
     };
   },
   computed: {
@@ -84,8 +82,14 @@ export default {
       }
 
       this.loading = true;
-      const res = await axios.get(`${endpoint}/v1/crypto/converted_price?price=${price}&currencyFrom=${currencyFrom}&currencyTo=${currencyTo}`);
-      this.loading = false;
+      let res;
+      try {
+        res = await axios.get(`${endpoint}/v1/crypto/converted_price?price=${price}&currencyFrom=${currencyFrom}&currencyTo=${currencyTo}`);
+      } catch {
+        this.error.server = true;
+      } finally {
+        this.loading = false;
+      }
 
       const parts = res.data.convertedPrice.split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -104,6 +108,8 @@ export default {
         this.input.currencyFrom = base ? base.id : this.currencies[0].id;
         const fiat = this.currencies.find((c) => c.id === 'KRW');
         this.input.currencyTo = fiat ? fiat.id : this.currencies[0].id;
+      }).catch(() => {
+        this.error.server = true;
       });
     },
     validatePriceIsNumber() {
