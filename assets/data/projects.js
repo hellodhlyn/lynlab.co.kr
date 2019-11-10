@@ -3,7 +3,7 @@ module.exports = [
     name: '업비트',
     url: 'upbit.com',
     thumbnail: 'https://static.upbit.com/upbit-pc/seo/upbit_facebook.png',
-    description: '가장 신뢰받는 글로벌 표준 암호화폐 거래소. 백엔드 개발 및 AWS 인프라 구축, 운영을 담당하고 있습니다.',
+    description: '가장 신뢰받는 글로벌 표준 암호화폐 거래소. AWS 인프라 구축을 진행하였으며, 현재는 백엔드 개발 및 운영을 담당하고 있습니다.',
     skills: ['ruby', 'golang', 'python', 'aws', 'kubernetes'],
   },
   {
