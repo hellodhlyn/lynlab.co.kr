@@ -1,18 +1,10 @@
 <template>
-  <ion-item>
-    <ion-icon :name="icon" />
-    <span>{{ text }}</span>
-  </ion-item>
+  <span>
+    <ion-icon v-if="position === 'left'" class="inline-block align-middle" :name="icon" />
+    <span class="inline-block">{{ text }}</span>
+    <ion-icon v-if="position === 'right'" class="inline-block align-middle" :name="icon" />
+  </span>
 </template>
-
-<style lang="scss" scoped>
-ion-item {
-  ion-icon, span {
-    display: inline-block;
-    vertical-align: middle;
-  }
-}
-</style>
 
 <script>
 export default {
@@ -25,6 +17,10 @@ export default {
     text: {
       type: String,
       default: '',
+    },
+    position: {
+      type: String,
+      default: 'left',
     },
   },
 };
