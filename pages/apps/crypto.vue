@@ -7,7 +7,7 @@
       <div class="py-4">
         <div class="flex py-4">
           <div class="h-10 w-2/3 md:w-3/4 mr-2">
-            <input v-model="input.price" class="h-full w-full px-2 bg-gray-100 focus:bg-white border border-gray-100 focus:border-gray-300 rounded" type="text" autofocus>
+            <input v-model="input.price" :class="`h-full w-full px-2 bg-gray-100 focus:bg-white border rounded ${priceIsNaN ? 'border-red-500' : 'border-gray-100 focus:border-gray-300'}`" type="text" autofocus>
           </div>
           <div class="w-1/3 md:w-1/4 relative">
             <select v-model="input.currencyFrom" class="appearance-none px-2 h-10 w-full bg-gray-100 rounded">
@@ -25,7 +25,7 @@
 
         <div class="flex py-4">
           <div class="relative h-10 w-2/3 md:w-3/4 mr-2">
-            <input v-model="convertedPrice" class="h-full w-full px-2 bg-gray-100 focus:bg-white border border-gray-100 focus:border-gray-300 rounded" disabled>
+            <input :value="convertedPrice" class="h-full w-full px-2 bg-gray-100 focus:bg-white border border-gray-100 focus:border-gray-300 rounded" disabled>
             <div v-if="loading" class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <ion-icon id="loading-icon" name="sync" />
             </div>
@@ -50,7 +50,6 @@
 
 <script>
 import axios from 'axios';
-import numeral from 'numeral';
 
 const endpoint = 'https://elysia.lynlab.co.kr';
 
@@ -63,17 +62,22 @@ export default {
       currencies: [],
       loading: true,
       input: {
-        price: 1.0,
+        price: '1.0',
         currencyFrom: null,
         currencyTo: null,
       },
     };
   },
+  computed: {
+    priceIsNaN() {
+      return !this.validatePriceIsNumber();
+    },
+  },
   asyncComputed: {
     async convertedPrice() {
       const { price, currencyFrom, currencyTo } = this.input;
-      if (!currencyFrom || !currencyTo || !price) {
-        return null;
+      if (!currencyFrom || !currencyTo || !price || !this.validatePriceIsNumber()) {
+        return '';
       }
       if (currencyFrom === currencyTo) {
         return price;
@@ -82,7 +86,10 @@ export default {
       this.loading = true;
       const res = await axios.get(`${endpoint}/v1/crypto/converted_price?price=${price}&currencyFrom=${currencyFrom}&currencyTo=${currencyTo}`);
       this.loading = false;
-      return numeral(res.data.convertedPrice).format('0,000.00000000').replace('.00000000', '');
+
+      const parts = res.data.convertedPrice.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join('.').replace('.00000000', '');
     },
   },
   created() {
@@ -98,6 +105,9 @@ export default {
         const fiat = this.currencies.find((c) => c.id === 'KRW');
         this.input.currencyTo = fiat ? fiat.id : this.currencies[0].id;
       });
+    },
+    validatePriceIsNumber() {
+      return /^\d+(\.\d*)?$/.test(this.input.price);
     },
   },
 };
