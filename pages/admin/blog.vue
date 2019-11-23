@@ -1,40 +1,25 @@
 <template>
-  <authenticated id="admin-blog" class="container mx-auto py-8">
-    <div class="editor">
-      <h4>제목</h4>
-      <textarea v-model="post.title" rows="1" />
-      <h4>요약</h4>
-      <textarea v-model="post.description" rows="3" />
-      <h4>썸네일</h4>
-      <textarea v-model="post.thumbnailURL" rows="1" />
-      <h4>본문</h4>
+  <authenticated id="admin-blog" class="container mx-auto px-4 md:px-8 py-8">
+    <div>
+      <p class="text-2xl">제목</p>
+      <textarea v-model="post.title" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="1" />
+      <p class="text-2xl">요약</p>
+      <textarea v-model="post.description" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="3" />
+      <p class="text-2xl">썸네일</p>
+      <textarea v-model="post.thumbnailURL" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="1" />
+      <p class="text-2xl">본문</p>
       <vue-simplemde v-model="post.body" rows="20" :configs="{ spellChecker: false }" />
       <input id="checkbox-is-public" v-model="post.isPublic" type="checkbox">
       <label for="checkbox-is-public">공개 여부</label>
     </div>
 
-    <div class="actions">
-      <button @click="submit()">
+    <div class="text-center">
+      <button class="px-4 py-2 my-2 rounded bg-gray-900 hover:bg-gray-700 text-white" @click="submit()">
         작성
       </button>
     </div>
   </authenticated>
 </template>
-
-<style lang="scss" scoped>
-.editor {
-  textarea {
-    font-family: inherit;
-    width: 100%;
-    font-size: 16px;
-  }
-}
-
-.actions {
-  padding: 10px 0;
-  text-align: center;
-}
-</style>
 
 <script>
 import { query, mutation } from '../../components/lynlab-api';

@@ -1,5 +1,5 @@
 <template>
-  <div id="snippet" class="container mx-auto">
+  <div id="snippet" class="container mx-auto px-4 md:px-8">
     <div class="px-4 py-16 text-center">
       <p class="text-4xl">{{ snippet.title }}</p>
       <p class="text-gray-700">

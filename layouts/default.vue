@@ -48,6 +48,11 @@ export default {
 
   p {padding-bottom: 20px; }
 
+  a {
+    color: #228be6; // blue-600
+    &:hover { text-decoration: underline; }
+  }
+
   img {
     display: block;
     max-height: 50vh;
@@ -67,22 +72,38 @@ export default {
 
   blockquote {
     margin: 10px 0;
-    background-color: #edf2f7; // gray-200
-    border-left: #cbd5e0 solid 10px; // gray-400
+    background-color: #f1f3f5; // gray-100
+    border-left: #dee2e6 solid 10px; // gray-300
     p { padding: 20px; }
   }
 
   pre {
     padding: 20px;
     margin-bottom: 10px;
-    background-color: #edf2f7; // gray-200
+    background-color: #f1f3f5; // gray-100
     font-size: 14px;
     overflow-y: auto;
   }
 
   p code, ul code, ol code {
-    background-color: #edf2f7;
+    background-color: #f1f3f5; // gray-100
     padding: 0 4px;
+  }
+
+  table {
+    width: 100%;
+    margin: 10px 0;
+
+    & th {
+      border-bottom: #dee2e6 solid 2px; // gray-300
+    }
+    & td {
+      padding: 4px 10px;
+      border-bottom: #dee2e6 solid 1px; // gray-300
+    }
+    & tr:hover {
+      background-color: #f1f3f5; // gray-100
+    }
   }
 }
 
