@@ -1,5 +1,3 @@
-[![](https://img.shields.io/circleci/project/github/lynlab/lynlab-web.svg?style=for-the-badge&logo=circleci&maxAge=3600)](https://circleci.com/gh/lynlab/lynlab-web)
-
 # LYnLab Web
 
 > Nuxt.js application for my personal blog
