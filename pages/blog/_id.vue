@@ -4,13 +4,14 @@
 
     <div class="container max-w-4xl px-2 lg:px-0 -mt-20 mx-auto leading-relaxed">
       <div class="p-4 md:p-8 bg-white border border-gray-200">
-        <p class="text-xs text-gray-700">
-          <span v-for="tag in post.tagList" :key="tag.name" class="mr-1">#{{ tag }}</span>
-        </p>
-        <p class="text-xl md:text-2xl font-bold">{{ post.title }}</p>
-        <p class="text-normal md:text-2xl text-gray-700">{{ post.description }}</p>
-        <p class="mb-4 text-sm text-gray-700">
-          <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount.toString()" />
+        <div class="mb-4">
+          <p class="text-xl md:text-2xl font-bold">{{ post.title }}</p>
+          <p class="text-normal md:text-2xl text-gray-700">{{ post.description }}</p>
+        </div>
+        <p class="text-sm text-gray-700">
+          <icon-text class="mr-2" icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" />
+          <icon-text class="mr-2" icon="people" :text="post.readCount.toString()" />
+          <icon-text v-if="post.tagList.length > 0" icon="pricetag" :text="post.tagList.map((t) => `#${t.name}`).join(' ')" />
         </p>
       </div>
     </div>

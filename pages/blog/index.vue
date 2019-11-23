@@ -2,18 +2,17 @@
   <div id="blog" class="bg-white">
     <div class="mx-auto container px-4 sm:px-8 py-8 leading-relaxed">
       <p class="text-4xl">Posts</p>
-      <div v-for="post in posts" :key="post.id" class="flex flex-col-reverse md:flex-row py-6 border-b">
+      <div v-for="post in posts" :key="post.id" class="flex flex-col-reverse md:flex-row py-6">
         <div :class="post.thumbnailURL ? ['w-full', 'md:w-2/3'] : 'w-full'">
-          <p class="text-xs text-gray-700">
-            <span v-for="tag in post.tagList" :key="tag.name" class="mr-1">#{{ tag }}</span>
-          </p>
-          <p class="text-xl md:text-2xl font-bold hover:underline">
+          <p class="text-xl md:text-3xl font-medium hover:underline">
             <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">{{ post.title }}</nuxt-link>
           </p>
-          <p class="mb-4 text-sm text-gray-700">
-            <icon-text icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" /> ・ <icon-text icon="people" :text="post.readCount.toString()" />
+          <p class="py-2 text-gray-700">
+            <icon-text class="mr-2" icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" />
+            <icon-text class="mr-2" icon="people" :text="post.readCount.toString()" />
+            <icon-text v-if="post.tagList.length > 0" icon="pricetag" :text="post.tagList.map((t) => `#${t.name}`).join(' ')" />
           </p>
-          <p>{{ post.description }}</p>
+          <p class="mt-4">{{ post.description }}</p>
         </div>
         <img v-if="post.thumbnailURL" class="h-40 xl:h-56 mx-0 md:mx-4 w-full md:w-1/3 object-cover" :src="post.thumbnailURL">
       </div>

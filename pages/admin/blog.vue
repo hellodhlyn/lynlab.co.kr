@@ -7,6 +7,8 @@
       <textarea v-model="post.description" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="3" />
       <p class="text-2xl">썸네일</p>
       <textarea v-model="post.thumbnailURL" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="1" />
+      <p class="text-2xl">태그 <span class="text-sm">반점으로 구분</span></p>
+      <textarea v-model="post.tagNameListCSV" class="w-full p-2 mt-2 mb-8 rounded border border-gray-300" rows="1" />
       <p class="text-2xl">본문</p>
       <vue-simplemde v-model="post.body" rows="20" :configs="{ spellChecker: false }" />
       <input id="checkbox-is-public" v-model="post.isPublic" type="checkbox">
@@ -35,7 +37,10 @@ export default {
     if (id) {
       const token = this.$storage.getLocalStorage('auth.accessToken');
       query(`post(id: ${id}) { thumbnailURL title description tagList { name } body isPublic }`, token)
-        .then((data) => { this.post = data.post; });
+        .then((data) => {
+          this.post = data.post;
+          this.post.tagNameListCSV = this.post.tagList && this.post.tagList.map((t) => t.name).join(',');
+        });
     }
   },
   methods: {
@@ -45,7 +50,7 @@ export default {
         description: "${this.post.description}"
         body: """${this.post.body}"""
         thumbnailURL: "${this.post.thumbnailURL}"
-        tagNameList: []
+        tagNameList: [${this.post.tagNameListCSV.split(',').map((t) => `"${t}"`).join(', ')}]
         isPublic: ${this.post.isPublic === true}
       }`;
 
