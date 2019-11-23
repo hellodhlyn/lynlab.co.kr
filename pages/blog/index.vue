@@ -7,14 +7,18 @@
           <p class="text-xl md:text-3xl font-medium hover:underline">
             <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">{{ post.title }}</nuxt-link>
           </p>
-          <p class="py-2 text-gray-700">
-            <icon-text class="mr-2" icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" />
-            <icon-text class="mr-2" icon="people" :text="post.readCount.toString()" />
-            <icon-text v-if="post.tagList.length > 0" icon="pricetag" :text="post.tagList.map((t) => `#${t.name}`).join(' ')" />
-          </p>
-          <p class="mt-4">{{ post.description }}</p>
+          <div class="flex flex-col md:flex-row py-2 text-sm md:text-base text-gray-600">
+            <div>
+              <icon-text class="mr-2" icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" />
+              <icon-text class="mr-2" icon="people" :text="post.readCount.toString()" />
+            </div>
+            <div>
+              <icon-text v-if="post.tagList.length > 0" icon="pricetag" :text="post.tagList.map((t) => `#${t.name}`).join(' ')" />
+            </div>
+          </div>
+          <p class="md:mt-4">{{ post.description }}</p>
         </div>
-        <img v-if="post.thumbnailURL" class="h-40 xl:h-56 mx-0 md:mx-4 w-full md:w-1/3 object-cover" :src="post.thumbnailURL">
+        <img v-if="post.thumbnailURL" class="h-40 xl:h-56 mx-0 md:mx-4 mb-4 md:mb-0 w-full md:w-1/3 object-cover" :src="post.thumbnailURL">
       </div>
     </div>
 
