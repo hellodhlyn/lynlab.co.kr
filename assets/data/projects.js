@@ -7,9 +7,9 @@ module.exports = [
     skills: ['ruby', 'golang', 'python', 'aws', 'kubernetes'],
   },
   {
-    name: '카카오스탁',
+    name: '증권플러스 (구. 카카오스탁)',
     url: 'stock.kakao.com',
-    thumbnail: 'https://stock.kakao.com/og_logo.png',
+    thumbnail: 'https://stockplus.com/og_logo.png',
     description: '증권 정보 서비스. 백엔드 개발 및 운영을 담당하였습니다.',
     skills: ['java', 'groovy', 'kafka'],
   },

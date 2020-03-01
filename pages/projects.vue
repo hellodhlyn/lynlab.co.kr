@@ -1,9 +1,10 @@
 <template>
-  <div id="projects" class="py-8 bg-gray-100">
+  <div id="projects" class="bg-gray-000">
+    <div class="mx-auto container px-4 sm:px-8 pt-8">
+      <p class="text-4xl font-bold pb-8">Projects</p>
+    </div>
+
     <div class="container mx-auto px-4 md:px-8">
-      <p class="pb-4 text-4xl">
-        Projects
-      </p>
       <div v-for="project in projects" :key="project.name" class="flex flex-col md:flex-row w-full my-6 bg-white shadow-lg">
         <img class="h-56 md:h-auto w-full md:w-56 border max-w-4xl object-cover rounded-t md:rounded-tr-none md:rounded-l" :src="project.thumbnail || '/images/header.jpg'">
         <div class="w-full md:w-3/4 flex-grow border-l border-b border-r md:border-l-0 md:border-t rounded-b md:rounded-bl-none md:rounded-r p-4">

@@ -1,34 +1,44 @@
 <template>
-  <div id="blog" class="bg-white">
-    <div class="mx-auto container px-4 sm:px-8 py-8 leading-relaxed">
-      <p class="text-4xl">Posts</p>
-      <div v-for="post in posts" :key="post.id" class="flex flex-col-reverse md:flex-row py-6">
-        <div :class="post.thumbnailURL ? ['w-full', 'md:w-2/3'] : 'w-full'">
-          <p class="text-xl md:text-3xl font-medium hover:underline">
-            <nuxt-link :to="{ name: 'blog-id', params: { id: post.id } }">{{ post.title }}</nuxt-link>
-          </p>
-          <div class="flex flex-col md:flex-row py-2 text-sm md:text-base text-gray-600">
-            <div>
-              <icon-text class="mr-2" icon="time" :text="post.createdAt | moment('YYYY. MM. DD.')" />
-              <icon-text class="mr-2" icon="people" :text="post.readCount.toString()" />
-            </div>
-            <div>
-              <icon-text v-if="post.tagList.length > 0" icon="pricetag" :text="post.tagList.map((t) => `#${t.name}`).join(' ')" />
-            </div>
+  <div id="blog" class="bg-gray-000">
+    <div class="mx-auto container px-4 sm:px-8 pt-8">
+      <p class="text-4xl font-bold pb-8">Blog</p>
+    </div>
+
+    <div class="mx-auto container px-4 sm:px-8">
+      <div v-if="posts.length === 0" class="flex flex-wrap justify-center">
+        <div v-for="idx in [1, 2]" :key="idx" class="w-full md:w-1/2 mb-4">
+          <div class="md:m-2 rounded-lg shadow-lg bg-white p-6">
+            <vcl-facebook />
           </div>
-          <p class="md:mt-4">{{ post.description }}</p>
         </div>
-        <img v-if="post.thumbnailURL" class="h-40 xl:h-56 mx-0 md:mx-4 mb-4 md:mb-0 w-full md:w-1/3 object-cover" :src="post.thumbnailURL">
+      </div>
+
+      <div v-else class="flex flex-wrap justify-center">
+        <div v-for="post in posts" :key="post.id" class="w-full md:w-1/2 mb-4">
+          <div class="md:m-2 rounded-lg shadow-lg bg-white hover:bg-gray-000">
+            <a :href="`/blog/${post.id}`">
+              <img v-if="post.thumbnail_url" class="h-40 md:h-64 w-full object-cover rounded-t-lg" :src="post.thumbnail_url">
+              <div class="px-4 py-4 md:py-6">
+                <p class="text-xl md:text-2xl font-bold text-gray-800">{{ post.title }}</p>
+                <p class="text-sm md:text-base pb-4 text-gray-700">
+                  <icon-text v-if="post.tags.length > 0" icon="pricetag" :text="post.tags.map((t) => `#${t.name}`).join(' ')" />
+                </p>
+
+                <p class="text-base md:text-lg text-gray-700">{{ post.description }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div v-if="pageInfo" class="text-center my-8">
-      <nuxt-link v-if="pageInfo.hasBefore" :to="`?after=${posts[0].id}`">
+    <div v-if="posts.length > 0" class="text-center my-8">
+      <nuxt-link v-if="page > 1" :to="`?page=${page - 1}`">
         <button class="bg-gray-400 px-4 py-2 rounded font-bold">이전 페이지</button>
       </nuxt-link>
       <button v-else class="bg-gray-400 px-4 py-2 rounded font-bold opacity-50" disabled>이전 페이지</button>
 
-      <nuxt-link v-if="pageInfo.hasNext" :to="`?before=${posts[posts.length - 1].id}`">
+      <nuxt-link v-if="!noMore" :to="`?page=${page + 1}`">
         <button class="bg-gray-400 px-4 py-2 rounded font-bold">다음 페이지</button>
       </nuxt-link>
       <button v-else class="bg-gray-400 px-4 py-2 rounded font-bold opacity-50" disabled>다음 페이지</button>
@@ -37,13 +47,17 @@
 </template>
 
 <script>
+import { VclFacebook } from 'vue-content-loading';
 import { query } from '../../components/lynlab-api';
 
 export default {
+  components: { VclFacebook },
   data() {
     return {
-      posts: null,
-      pageInfo: null,
+      posts: [],
+      noMore: false,
+      page: 1,
+      perPage: 16,
     };
   },
   head() {
@@ -52,6 +66,7 @@ export default {
   watch: {
     '$route.query': function watchQuery() {
       this.fetchPosts();
+      this.noMore = false;
     },
   },
   mounted() {
@@ -59,29 +74,20 @@ export default {
   },
   methods: {
     fetchPosts() {
-      let pageArgs;
-      if (this.$route.query.before != null) {
-        pageArgs = `{ count: 15, before: ${this.$route.query.before} }`;
-      } else if (this.$route.query.after) {
-        pageArgs = `{ count: 15, after: ${this.$route.query.after}, sortDirection: ASC }`;
-      } else {
-        pageArgs = '{ count: 15 }';
-      }
+      this.page = parseInt(this.$route.query.page || 1, 10);
 
-      query(`postList(page: ${pageArgs}) { 
-        items { id thumbnailURL title description readCount createdAt tagList { name } }
-        pageInfo { hasBefore hasNext }
+      query(`posts(sort: "id:desc", limit: ${this.perPage}, start: ${(this.page - 1) * this.perPage}) {
+        id thumbnail_url title description created_at tags{ name }
       }`).then((data) => {
-        this.posts = data.postList.items;
-        this.pageInfo = data.postList.pageInfo;
-        if (this.$route.query.after) {
-          this.posts.reverse();
-          this.pageInfo = {
-            hasBefore: this.pageInfo.hasNext,
-            hasNext: this.pageInfo.hasBefore,
-          };
+        if (data.posts.length === 0) {
+          this.noMore = true;
+          return;
         }
 
+        if (data.posts.length < this.perPage) {
+          this.noMore = true;
+        }
+        this.posts = data.posts;
         window.scrollTo(0, 0);
       });
     },

@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/singleline-html-element-content-newline -->
 
 <template>
-  <div id="app" class="flex flex-col h-screen">
+  <div id="app" class="flex flex-col h-screen text-gray-700">
     <navbar v-if="showNavbar()" />
-    <nuxt class="flex-grow text-gray-900" />
+    <nuxt class="flex-grow" />
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
     padding-bottom: 10px;
   }
 
-  p {padding-bottom: 20px; }
+  p { margin-bottom: 20px; }
 
   a {
     color: #228be6; // blue-600
@@ -61,17 +61,18 @@ export default {
   }
 
   ul, ol {
-    padding: 10px 0;
+    margin-bottom: 20px;
+    margin-left: 10px;
     list-style-type: disc;
     list-style-position: inside;
     ul, ol { padding: 10px; }
   }
   li li {
-    margin-left: 20px;
+    margin-left: 10px;
   }
 
   blockquote {
-    margin: 10px 0;
+    margin-bottom: 20px;
     background-color: #f1f3f5; // gray-100
     border-left: #dee2e6 solid 10px; // gray-300
     p { padding: 20px; }

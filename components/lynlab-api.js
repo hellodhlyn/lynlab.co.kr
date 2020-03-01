@@ -15,7 +15,7 @@ function query(queryString, accessToken) {
     };
   }
 
-  return instance.post('https://apis.lynlab.co.kr/graphql', `query{${queryString}}`, configs)
+  return instance.get(`https://cms.lynlab.co.kr/graphql?query=query{${queryString}}`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw new Error('Query error');
@@ -32,7 +32,7 @@ function mutation(queryString, accessToken) {
     };
   }
 
-  return instance.post('https://apis.lynlab.co.kr/graphql', `mutation{${queryString}}`, configs)
+  return instance.post('https://cms.lynlab.co.kr/graphql', `mutation{${queryString}}`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw new Error('Mutation error');

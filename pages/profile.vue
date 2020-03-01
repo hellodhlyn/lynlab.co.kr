@@ -1,20 +1,21 @@
 <template>
-  <div id="profile" class="py-8 bg-gray-100">
-    <div id="profile-exp" class="pb-8 text-gray-900">
-      <div class="container mx-auto px-4 md:px-8">
-        <p class="pb-4 text-4xl">
-          Profile
-        </p>
+  <div id="profile" class="bg-gray-000">
+    <div class="mx-auto container px-4 sm:px-8 pt-8">
+      <p class="text-4xl font-bold pb-8">Resume</p>
+    </div>
+
+    <div id="profile-exp">
+      <div class="container mx-auto px-4 sm:px-8">
         <div v-for="exp in experiences" :key="exp.title" class="pb-8 leading-loose">
-          <p class="text-2xl">
+          <p class="text-xl md:text-3xl text-gray-800 font-medium">
             {{ exp.title }}
           </p>
           <div v-for="item in exp.items" :key="item.title">
-            <p class="font-medium">
+            <p class="text-base md:text-lg font-medium text-gray-800">
               {{ item.title }}
-              <span class="text-sm text-gray-700 font-normal">{{ item.description }}</span>
+              <span class="text-sm md:text-base font-normal">{{ item.description }}</span>
             </p>
-            <ul class="list-disc list-inside mb-4 md:pl-4 text-sm md:text-base">
+            <ul class="list-disc list-inside mb-4 md:pl-4 text-base md:text-lg">
               <li v-for="detail in item.details" :key="detail">
                 {{ detail }}
               </li>
@@ -23,6 +24,7 @@
         </div>
       </div>
     </div>
+
     <div id="profile-articles" class="py-8 text-gray-100 bg-gray-900">
       <div class="container mx-auto px-4 md:px-8">
         <p class="pb-4 text-4xl">
