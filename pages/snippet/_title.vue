@@ -1,36 +1,47 @@
 <template>
   <div id="snippet" class="container mx-auto px-4 md:px-8">
     <div class="px-4 py-16 text-center">
-      <p class="text-4xl">{{ snippet.title }}</p>
+      <p class="text-4xl">{{ $route.params.title }}</p>
       <p class="text-gray-700">
-        <icon-text icon="time" :text="snippet.updatedAt | moment('LLL')" />
+        <icon-text v-if="snippet" icon="time" :text="snippet.updated_at | moment('LLL')" />
       </p>
     </div>
 
-    <div v-if="redirected" class="p-4 bg-gray-200">
+    <div v-if="$route.query.redirect === 'true'" class="p-4 my-4 bg-gray-200">
       <icon-text icon="information-circle-outline" text="LYnWiki 서비스가 종료되었습니다. 이 페이지는 기존의 문서의 가장 마지막 버전을 아카이빙한 것입니다." />
     </div>
 
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="markdown-body" v-html="$options.filters.marked(snippet.body)" />
+    <div v-if="snippet" class="markdown-body" v-html="$options.filters.marked(snippet.body)" />
+    <div v-else-if="loaded">
+      <p>{{ $route.params.title }} 문서를 찾을 수 없습니다.</p>
+    </div>
+    <div v-else class="max-w-md"><vcl-facebook /></div>
   </div>
 </template>
 
 <script>
+import { VclFacebook } from 'vue-content-loading';
+
 import { query } from '../../components/lynlab-api';
 
 export default {
-  async asyncData(ctx) {
-    const data = await query(`snippet(title: "${ctx.params.title}") { title body updatedAt }`);
-
-    if (data.snippet) {
-      return {
-        snippet: data.snippet,
-        redirected: ctx.query.redirect === 'true',
-      };
+  components: { VclFacebook },
+  data() {
+    return { snippet: null, loaded: false };
+  },
+  async created() {
+    let data;
+    try {
+      data = await query(`snippets(where: {title: "${this.$route.params.title}"}) { title body updated_at }`);
+    } finally {
+      this.loaded = true;
     }
-    ctx.error({ statusCode: 404, message: 'Snippet not found' });
-    return null;
+
+    if (data && data.snippets.length > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      this.snippet = data.snippets[0];
+    }
   },
 };
 </script>

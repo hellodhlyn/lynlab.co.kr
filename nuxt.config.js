@@ -1,6 +1,4 @@
-
 const axios = require('axios');
-const https = require('https');
 const pkg = require('./package');
 
 
@@ -64,18 +62,15 @@ module.exports = {
 
   sitemap: {
     exclude: [
-      '/admin',
-      '/admin/**',
       '/redirects/**',
       '/snippet/**',
     ],
     routes(callback) {
-      const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-      axios.post('https://apis.lynlab.co.kr/graphql', 'query{postList(page:{count:999999}){items{id updatedAt}}}', { httpsAgent })
-        .then((res) => callback(null, res.data.data.postList.items.map((post) => ({
+      axios.get('https://cms.lynlab.co.kr/graphql?query=query{posts(limit:9999){id updated_at}}')
+        .then((res) => callback(null, res.data.data.posts.map((post) => ({
           url: `/blog/${post.id}`,
-          changeFreq: 'weekly',
-          lastmodISO: post.updatedAt,
+          changefreq: 'weekly',
+          lastmod: post.updated_at,
         }))))
         .catch((e) => callback(e));
     },
