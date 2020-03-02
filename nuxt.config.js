@@ -58,10 +58,6 @@ module.exports = {
     '@nuxtjs/universal-storage',
   ],
 
-  storage: {
-    localStorage: true,
-  },
-
   googleAnalytics: {
     id: 'UA-51514713-1',
   },

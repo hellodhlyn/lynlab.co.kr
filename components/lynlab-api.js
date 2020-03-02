@@ -7,38 +7,14 @@ const instance = axios.create({
   }),
 });
 
-function query(queryString, accessToken) {
-  const configs = {};
-  if (accessToken) {
-    configs.headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-  }
-
-  return instance.get(`https://cms.lynlab.co.kr/graphql?query=query{${queryString}}`, configs)
-    .then((res) => {
-      if (res.data.errors) {
-        throw new Error('Query error');
-      }
-      return res.data.data;
-    });
+function query(queryString) {
+  return instance.get(`https://cms.lynlab.co.kr/graphql?query=query{${queryString}}`).then((res) => {
+    if (res.data.errors) {
+      throw new Error('Query error');
+    }
+    return res.data.data;
+  });
 }
 
-function mutation(queryString, accessToken) {
-  const configs = {};
-  if (accessToken) {
-    configs.headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-  }
-
-  return instance.post('https://cms.lynlab.co.kr/graphql', `mutation{${queryString}}`, configs)
-    .then((res) => {
-      if (res.data.errors) {
-        throw new Error('Mutation error');
-      }
-      return res.data.data;
-    });
-}
-
-export { query, mutation };
+// eslint-disable-next-line import/prefer-default-export
+export { query };

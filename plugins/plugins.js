@@ -6,13 +6,11 @@ import VueDisqus from 'vue-disqus';
 import VueMoment from 'vue-moment';
 import marked from 'marked';
 
-import Authenticated from '../components/authenticated.vue';
 import IconText from '../components/icon-text.vue';
 import Navbar from '../components/navbar.vue';
 
 Vue.component('AddThis', AddThis);
 Vue.component('icon-text', IconText);
-Vue.component('authenticated', Authenticated);
 Vue.component('navbar', Navbar);
 Vue.use(VueAsyncComputed);
 Vue.use(VueDisqus);

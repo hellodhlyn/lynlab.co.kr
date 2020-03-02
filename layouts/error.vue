@@ -5,7 +5,7 @@
       <p>{{ message }}</p>
 
       <nuxt-link :to="{ name: 'blog' }">
-        <button>Back to home</button>
+        <button class="px-8 py-2 m-4 bg-gray-800 hover:bg-gray-900 text-gray-000">Back to home</button>
       </nuxt-link>
     </div>
   </div>
