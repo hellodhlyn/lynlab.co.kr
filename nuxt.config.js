@@ -22,6 +22,7 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700&subset=korean' },
       { rel: 'stylesheet', href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' },
+      { rel: 'alternate', type: 'application/rss+xml', href: 'https://lynlab.co.kr/blog/feed' },
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js' },
@@ -81,20 +82,22 @@ module.exports = {
 
   feed: [
     {
-      path: '/feed.xml',
+      path: '/blog/feed',
       async create(feed) {
         // eslint-disable-next-line no-param-reassign
         feed.options = {
           title: 'LYnLab Blog',
-          link: 'https://lynlab.co.kr/feed.xml',
-          description: 'Stories about programming and software development.',
+          link: 'https://lynlab.co.kr/blog',
+          description: 'Stories about programming and software development',
+          favicon: 'https://lynlab.co.kr/favicon.ico',
         };
 
-        const res = await axios.get('https://cms.lynlab.co.kr/graphql?query=query{posts(limit:9999){id title description body created_at}}');
+        const res = await axios.get('https://cms.lynlab.co.kr/graphql?query=query{posts(limit:9999){id title description thumbnail_url body created_at}}');
         res.data.data.posts
           .sort((a, b) => b.id - a.id)
+          // eslint-disable-next-line array-callback-return
           .map((post) => {
-            feed.addItem({
+            const item = {
               title: post.title,
               id: `https://lynlab.co.kr/blog/${post.id}`,
               link: `https://lynlab.co.kr/blog/${post.id}`,
@@ -102,7 +105,10 @@ module.exports = {
               content: marked(post.body),
               author: { name: 'Do Hoerin', email: 'lyn@lynlab.co.kr', link: 'https://lynlab.co.kr' },
               date: new Date(post.created_at),
-            });
+              image: post.thumbnail_url || null,
+            };
+
+            feed.addItem(item);
           });
 
         ['programming', 'software', 'development', 'IT'].forEach((it) => feed.addCategory(it));

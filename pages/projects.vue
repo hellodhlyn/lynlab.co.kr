@@ -1,7 +1,7 @@
 <template>
   <div id="projects" class="bg-gray-000">
     <div class="mx-auto container px-4 sm:px-8 pt-8">
-      <p class="text-4xl font-bold pb-8">Projects</p>
+      <p class="text-4xl text-gray-800 font-bold pb-8">Projects</p>
     </div>
 
     <div class="container mx-auto px-4 md:px-8">

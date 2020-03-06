@@ -1,7 +1,7 @@
 <template>
   <div id="profile" class="bg-gray-000">
     <div class="mx-auto container px-4 sm:px-8 pt-8">
-      <p class="text-4xl font-bold pb-8">Resume</p>
+      <p class="text-4xl text-gray-800 font-bold pb-8">Resume</p>
     </div>
 
     <div id="profile-exp">

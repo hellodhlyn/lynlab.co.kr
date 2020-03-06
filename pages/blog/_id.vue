@@ -51,12 +51,18 @@ export default {
     return {
       title: `${this.post.title} | LYnLab`,
       meta: [
+        { property: 'title', content: `${this.post.title} | LYnLab` },
+        { property: 'description', content: this.post.description },
+        { property: 'canonical', content: `https://lynlab.co.kr${this.$route.fullPath}` },
         { property: 'og:site_name', content: 'LYnLab' },
         { property: 'og:title', content: `${this.post.title} | LYnLab` },
         { property: 'og:description', content: this.post.description },
         { property: 'og:type', content: 'article' },
         { property: 'og:image', content: this.post.thumbnail_url },
         { property: 'og:url', content: `https://lynlab.co.kr${this.$route.fullPath}` },
+        { property: 'twitter:card', content: 'summary_large_image' },
+        { property: 'twitter:site', content: '@hellodhlyn' },
+        { property: 'twitter:creator', content: '@hellodhlyn' },
       ],
     };
   },

@@ -1,7 +1,12 @@
 <template>
   <div id="blog" class="bg-gray-000">
     <div class="mx-auto container px-4 sm:px-8 pt-8">
-      <p class="text-4xl font-bold pb-8">Blog</p>
+      <p class="text-4xl text-gray-800 font-bold pb-8">
+        Blog
+        <a rel="alternate" type="application/rss+xml" href="/blog/feed" target="_blank">
+          <span class="px-1 text-sm font-medium bg-orange-700 hover:bg-orange-800 text-gray-100 rounded cursor-pointer"><icon-text icon="logo-rss" text="RSS" /></span>
+        </a>
+      </p>
     </div>
 
     <div class="mx-auto container px-4 sm:px-8">
