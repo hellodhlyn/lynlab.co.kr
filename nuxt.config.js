@@ -1,4 +1,6 @@
 const axios = require('axios');
+const marked = require('marked');
+
 const pkg = require('./package');
 
 
@@ -51,6 +53,7 @@ module.exports = {
   */
   buildModules: [
     '@nuxtjs/google-analytics',
+    '@nuxtjs/feed',
     '@nuxtjs/sitemap',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/universal-storage',
@@ -75,6 +78,39 @@ module.exports = {
         .catch((e) => callback(e));
     },
   },
+
+  feed: [
+    {
+      path: '/feed.xml',
+      async create(feed) {
+        // eslint-disable-next-line no-param-reassign
+        feed.options = {
+          title: 'LYnLab Blog',
+          link: 'https://lynlab.co.kr/feed.xml',
+          description: 'Stories about programming and software development.',
+        };
+
+        const res = await axios.get('https://cms.lynlab.co.kr/graphql?query=query{posts(limit:9999){id title description body created_at}}');
+        res.data.data.posts
+          .sort((a, b) => b.id - a.id)
+          .map((post) => {
+            feed.addItem({
+              title: post.title,
+              id: `https://lynlab.co.kr/blog/${post.id}`,
+              link: `https://lynlab.co.kr/blog/${post.id}`,
+              description: post.description,
+              content: marked(post.body),
+              author: { name: 'Do Hoerin', email: 'lyn@lynlab.co.kr', link: 'https://lynlab.co.kr' },
+              date: new Date(post.created_at),
+            });
+          });
+
+        ['programming', 'software', 'development', 'IT'].forEach((it) => feed.addCategory(it));
+      },
+      cacheTime: 10 * 60 * 1000,
+      type: 'rss2',
+    },
+  ],
 
   /*
   ** Build configuration
