@@ -11,7 +11,7 @@
 
     <div class="mx-auto container px-4 sm:px-8">
       <div v-if="posts.length === 0" class="flex flex-wrap justify-center">
-        <div v-for="idx in [1, 2]" :key="idx" class="w-full md:w-1/2 mb-4">
+        <div v-for="idx in [1, 2, 3]" :key="idx" class="w-full md:w-1/2 xl:w-1/3 mb-4">
           <div class="md:m-2 rounded-lg shadow-lg bg-white p-6">
             <vcl-facebook />
           </div>
@@ -19,17 +19,15 @@
       </div>
 
       <div v-else class="flex flex-wrap justify-center">
-        <div v-for="post in posts" :key="post.id" class="w-full md:w-1/2 mb-4">
-          <div class="md:m-2 rounded-lg shadow-lg bg-white hover:bg-gray-000">
+        <div v-for="post in posts" :key="post.id" class="w-full md:w-1/2 xl:w-1/3 mb-4">
+          <div class="md:m-2 rounded shadow-lg bg-white hover:bg-gray-000">
             <a :href="`/blog/${post.id}`">
-              <img v-if="post.thumbnail_url" class="h-40 md:h-64 w-full object-cover rounded-t-lg" :src="post.thumbnail_url">
-              <div class="px-4 py-4 md:py-6">
+              <img class="h-56 w-full object-cover rounded-t" :src="post.thumbnail_url || '/images/header.jpg'">
+              <div class="h-56 md:h-64 p-4 overflow-y-hidden">
+                <p class="text-sm">{{ post.tags.map((t) => `#${t.name}`).join(' ') }}</p>
                 <p class="text-xl md:text-2xl font-bold text-gray-800">{{ post.title }}</p>
-                <p class="text-sm md:text-base pb-4 text-gray-700">
-                  <icon-text v-if="post.tags.length > 0" icon="pricetag" :text="post.tags.map((t) => `#${t.name}`).join(' ')" />
-                </p>
 
-                <p class="text-base md:text-lg text-gray-700">{{ post.description }}</p>
+                <p class="py-2 md:py-4">{{ post.description }}</p>
               </div>
             </a>
           </div>
@@ -62,7 +60,7 @@ export default {
       posts: [],
       noMore: false,
       page: 1,
-      perPage: 16,
+      perPage: 18,
     };
   },
   head() {
