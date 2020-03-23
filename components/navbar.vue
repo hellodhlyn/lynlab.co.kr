@@ -12,6 +12,7 @@
       </div>
       <div :class="navbarOpened ? ['flex', 'flex-col'] : ['hidden', 'md:flex']">
         <nuxt-link class="px-1 md:px-2 py-3 md:py-6 hover:text-gray-500" :to="{ name: 'blog' }">Blog</nuxt-link>
+        <nuxt-link class="px-1 md:px-2 py-3 md:py-6 hover:text-gray-500" :to="{ name: 'wiki' }">Wiki</nuxt-link>
         <nuxt-link class="px-1 md:px-2 py-3 md:py-6 hover:text-gray-500" :to="{ name: 'profile' }">Resume</nuxt-link>
         <nuxt-link class="px-1 md:px-2 py-3 md:py-6 hover:text-gray-500" :to="{ name: 'projects' }">Projects</nuxt-link>
         <div class="relative px-1 md:px-2 py-3 md:py-6 hover:text-gray-500 cursor-pointer" @click="subnavOpened.apps = !subnavOpened.apps">

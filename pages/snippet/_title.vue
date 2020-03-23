@@ -23,7 +23,7 @@
 <script>
 import { VclFacebook } from 'vue-content-loading';
 
-import { query } from '../../components/lynlab-api';
+import { queryCms } from '../../components/lynlab-api';
 
 export default {
   components: { VclFacebook },
@@ -33,7 +33,7 @@ export default {
   async created() {
     let data;
     try {
-      data = await query(`snippets(where: {title: "${this.$route.params.title}"}) { title body updated_at }`);
+      data = await queryCms(`snippets(where: {title: "${this.$route.params.title}"}) { title body updated_at }`);
     } finally {
       this.loaded = true;
     }

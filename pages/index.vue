@@ -25,19 +25,16 @@
     <div class="absolute w-full z-20 md:tracking-widest">
       <div class="flex py-8 justify-center text-gray-300">
         <p class="mr-4 hover:underline">
-          <nuxt-link :to="{name: 'blog'}">
-            BLOG
-          </nuxt-link>
+          <nuxt-link :to="{name: 'blog'}">BLOG</nuxt-link>
         </p>
         <p class="mr-4 hover:underline">
-          <nuxt-link :to="{name: 'profile'}">
-            PROFILE
-          </nuxt-link>
+          <nuxt-link :to="{name: 'wiki'}">WIKI</nuxt-link>
+        </p>
+        <p class="mr-4 hover:underline">
+          <nuxt-link :to="{name: 'profile'}">PROFILE</nuxt-link>
         </p>
         <p class="hover:underline">
-          <nuxt-link :to="{name: 'projects'}">
-            PROJECTS
-          </nuxt-link>
+          <nuxt-link :to="{name: 'projects'}">PROJECTS</nuxt-link>
         </p>
       </div>
     </div>

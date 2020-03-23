@@ -51,7 +51,7 @@
 
 <script>
 import { VclFacebook } from 'vue-content-loading';
-import { query } from '../../components/lynlab-api';
+import { queryCms } from '../../components/lynlab-api';
 
 export default {
   components: { VclFacebook },
@@ -79,7 +79,7 @@ export default {
     fetchPosts() {
       this.page = parseInt(this.$route.query.page || 1, 10);
 
-      query(`posts(sort: "id:desc", limit: ${this.perPage}, start: ${(this.page - 1) * this.perPage}) {
+      queryCms(`posts(sort: "id:desc", limit: ${this.perPage}, start: ${(this.page - 1) * this.perPage}) {
         id thumbnail_url title description created_at tags{ name }
       }`).then((data) => {
         if (data.posts.length === 0) {

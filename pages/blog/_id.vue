@@ -64,14 +64,14 @@
 </template>
 
 <script>
-import { query } from '../../components/lynlab-api';
+import { queryCms } from '../../components/lynlab-api';
 
 export default {
   data() {
     return { relatedPosts: [] };
   },
   async asyncData({ params, error }) {
-    const data = await query(`post(id: ${params.id}) {
+    const data = await queryCms(`post(id: ${params.id}) {
       id thumbnail_url title description created_at body
       tags { id name }
       series { name posts { id title thumbnail_url } }
@@ -115,7 +115,7 @@ export default {
         posts = this.post.series.posts.filter((p) => p.id !== this.post.id);
       }
       if (posts.length < maxRelatedPost && this.post.tags.length > 0) {
-        const data = await query(`posts(sort: "id:desc", where: {
+        const data = await queryCms(`posts(sort: "id:desc", where: {
           tags_in: [${this.post.tags.map((p) => p.id).join(', ')}],
           id_nin: [${[...posts.map((p) => p.id), this.post.id].join(', ')}]
         }) { id title thumbnail_url }`);
