@@ -33,7 +33,22 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#000000' },
+
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'wiki-modify-title-all',
+        path: '/wiki/modify/:title*',
+        component: resolve(__dirname, 'pages/wiki/modify/_title.vue'),
+      });
+      routes.push({
+        name: 'wiki-title-all',
+        path: '/wiki/:title*',
+        component: resolve(__dirname, 'pages/wiki/_title.vue'),
+      });
+    },
+  },
 
   /*
   ** Global CSS
@@ -46,7 +61,6 @@ module.exports = {
   */
   plugins: [
     '~/plugins/plugins',
-    '~/plugins/simplemde.client.js',
   ],
 
   /*
@@ -58,7 +72,17 @@ module.exports = {
     '@nuxtjs/sitemap',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/universal-storage',
+    'nuxt-basic-auth-module',
   ],
+
+  basic: {
+    name: process.env.BASIC_AUTH_USERNAME,
+    pass: process.env.BASIC_AUTH_PASSWORD,
+    enabled: true,
+    match(route) {
+      return route.path.startsWith('/wiki/modify');
+    },
+  },
 
   googleAnalytics: {
     id: 'UA-51514713-1',

@@ -9,8 +9,7 @@ function queryCms(queryString) {
   });
 }
 
-function queryWiki(queryString) {
-  const data = `query { ${queryString} }`;
+function requestWiki(data) {
   const options = { headers: { 'Content-Type': 'application/graphql; charset=utf-8' } };
   return axios.post('https://wiki.lynlab.co.kr/graphql', data, options).then((res) => {
     if (res.data.errors) {
@@ -20,4 +19,12 @@ function queryWiki(queryString) {
   });
 }
 
-export { queryCms, queryWiki };
+function queryWiki(queryString) {
+  return requestWiki(`query { ${queryString} }`);
+}
+
+function mutateWiki(mutationString) {
+  return requestWiki(`mutation { ${mutationString} }`);
+}
+
+export { queryCms, queryWiki, mutateWiki };

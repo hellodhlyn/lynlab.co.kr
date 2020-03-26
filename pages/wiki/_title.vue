@@ -16,7 +16,7 @@
         <div class="border-b border-gray-300 py-1" />
 
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div class="markdown-body py-8" v-html="$options.filters.marked(document.lastRevision.body)" />
+        <div class="markdown-body" v-html="$options.filters.marked(document.lastRevision.body)" />
       </div>
       <div v-else>
         <div class="border-b border-gray-300 py-1" />
