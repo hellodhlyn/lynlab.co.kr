@@ -10,6 +10,9 @@
           <button type="submit" class="px-8 py-2 bg-blue-500 hover:bg-blue-600 text-gray-000 font-bold rounded">
             <icon-text icon="search" text="검색" />
           </button>
+          <button type="button" class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-gray-000 font-bold rounded" @click="onRandom()">
+            <icon-text icon="shuffle" text="무작위" />
+          </button>
         </p>
       </form>
     </div>
@@ -17,6 +20,8 @@
 </template>
 
 <script>
+import { queryWiki } from '../../components/lynlab-api';
+
 export default {
   data() {
     return { title: '' };
@@ -26,6 +31,10 @@ export default {
       if (this.title) {
         this.$router.push({ name: 'wiki-title', params: { title: this.title } });
       }
+    },
+    async onRandom() {
+      const { randomDocument } = await queryWiki('randomDocument { title }');
+      this.$router.push({ name: 'wiki-title', params: { title: randomDocument.title } });
     },
   },
   head() {

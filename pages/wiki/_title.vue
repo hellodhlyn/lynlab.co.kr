@@ -4,7 +4,8 @@
       <div class="flex-grow w-3/4">
         <input v-model="searchTitle" type="search" placeholder="다른 문서 찾기...">
       </div>
-      <button class="hover:underline">검색</button>
+      <button class="mr-2 hover:underline">검색</button>
+      <button type="button" class="hover:underline" @click="onRandom()">무작위</button>
     </form>
 
     <div class="container max-w-4xl mx-auto p-4 md:p-8">
@@ -79,6 +80,10 @@ export default {
       if (this.searchTitle) {
         this.$router.push({ name: 'wiki-title', params: { title: this.searchTitle } });
       }
+    },
+    async onRandom() {
+      const { randomDocument } = await queryWiki('randomDocument { title }');
+      this.$router.push({ name: 'wiki-title', params: { title: randomDocument.title } });
     },
   },
 };

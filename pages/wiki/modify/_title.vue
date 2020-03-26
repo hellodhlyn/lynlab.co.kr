@@ -61,6 +61,8 @@ export default {
         body: """${this.editorBody}"""
         changelog: ${this.editorChangelog ? `"""${this.editorChangelog}"""` : null}
       }) { createdAt }`);
+
+      this.$router.push({ name: 'wiki-title', params: { title: this.title } });
     },
   },
 };
