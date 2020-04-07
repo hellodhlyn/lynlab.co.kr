@@ -31,10 +31,7 @@
           <nuxt-link :to="{name: 'wiki'}">WIKI</nuxt-link>
         </p>
         <p class="mr-4 hover:underline">
-          <nuxt-link :to="{name: 'profile'}">PROFILE</nuxt-link>
-        </p>
-        <p class="hover:underline">
-          <nuxt-link :to="{name: 'projects'}">PROJECTS</nuxt-link>
+          <nuxt-link :to="{name: 'resume'}">RESUME</nuxt-link>
         </p>
       </div>
     </div>

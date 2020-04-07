@@ -1,0 +1,148 @@
+[
+  {
+    "subject": "Experience",
+    "items": [
+      {
+        "title": "백엔드 프로그래머",
+        "subtitle": "두나무 (2016 ~)",
+        "projects": [
+          {
+            "title": "업비트",
+            "thumbnail": "https://static.upbit.com/upbit-pc/seo/upbit_facebook.png",
+            "url": "https://upbit.com",
+            "description": "주요 백엔드 서비스 개발 및 운영을 담당하고 있습니다. 또한 클라우드 인프라, CI/CD 등 개발 프로세스 구축을 담당하였습니다.",
+            "skills": ["golang", "ruby", "nodejs", "kubernetes", "aws"]
+          },
+          {
+            "title": "증권플러스 (구. 카카오스탁)",
+            "thumbnail": "https://stockplus.com/og_logo.png",
+            "url": "https://stockplus.com",
+            "description": "증권 정보 시세, 지표 및 퀀트 시스템 백엔드 API 개발 및 운영하였습니다.",
+            "skills": ["spring", "groovy", "kafka"]
+          },
+          {
+            "title": "다음 금융",
+            "thumbnail": "https://storage.lynlab.co.kr/daum-finance.jpg",
+            "url": "https://finance.daum.net",
+            "description": "증권 정보 시세 API 개발 및 운영하였습니다.",
+            "skills": ["spring", "java", "kafka"]
+          }
+        ]
+      },
+      {
+        "title": "SW마에스트로 과정",
+        "subtitle": "6기 연수생 (2015)",
+        "description": "SW마에스트로 과정에 연수생으로 참여하였습니다."
+      },
+      {
+        "title": "안드로이드 1인 개발",
+        "subtitle": "(2010 ~ 2018)",
+        "description": "안드로이드 애플리케이션 1인 개발 및 서비스를 운영하였습니다.",
+        "projects": [
+          {
+            "title": "결함 찾기",
+            "thumbnail": "https://storage.lynlab.co.kr/checkmyandroid.png",
+            "description": "스마트폰 하드웨어의 불량을 점검하고 서비스 센터와 연계해주는 서비스입니다. 전셰게 24만 다운로드를 기록하였습니다. (현재 서비스 종료)",
+            "skills": ["java", "android"]
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "subject": "Education",
+    "items": [
+      {
+        "title": "연세대학교",
+        "subtitle": "공과대학 컴퓨터과학과 (2014 ~)",
+        "description": "공과대학 프로그래밍 동아리 PoolC 회원 및 회장(2015)으로 활동하며 기술 세미나 및 스터디를 주최하고, 넥슨/라인 게임동아리 지원 사업에 지속적으로 게임을 출품하였습니다.",
+        "projects": [
+          {
+            "title": "PoolC",
+            "thumbnail": "https://storage.lynlab.co.kr/201812310001.png",
+            "url": "https://poolc.org",
+            "github": "poolc/nagase",
+            "description": "홈페이지 기획, 백엔드 개발 및 인프라 운영을 담당하고 있습니다.",
+            "skills": ["golang", "graphql", "aws"]
+          },
+          {
+            "title": "도우샘",
+            "url": "https://doughsam.com",
+            "description": "연세대 마일리지 수강신청 제도를 위한 과목별 마일리지 시뮬레이션 서비스입니다. 메인 개발 및 PM을 담당하였습니다.",
+            "skills": ["python", "django"]
+          },
+          {
+            "title": "Project VR",
+            "url": "https://poolc.org/project/8",
+            "thumbnail": "https://api.poolc.org/files/Project%20VR.png",
+            "description": "VR 비주얼 노벨 게임. 게임 기획을 담당하였습니다. (넥슨 게임제작 동아리 지원사업 출품작)",
+            "skills": ["unreal engine", "vr"]
+          }
+        ]
+      },
+      {
+        "title": "경남과학고등학교",
+        "subtitle": "조기졸업 (2012 ~ 2014)",
+        "description": "프로그래밍 동아리 informatica에서 활동하고, 온라인 저지 사이트 JudgeOn에 문제를 다수 출제하였습니다."
+      }
+    ]
+  },
+
+  {
+    "subject": "Awards",
+    "items": [
+      {
+        "title": "일본어능력시험",
+        "subtitle": "N1등급 (2018)",
+        "description": "일본어능력시험 N1등급(최고등급) 인증을 받았습니다."
+      },
+      {
+        "title": "정보처리산업기사",
+        "subtitle": "(2016)"
+      },
+      {
+        "title": "삼성휴먼테크 논문대상",
+        "subtitle": "수학/전산부문 1등상 (2013)",
+        "description": "'Apparatus and Method for Correcting Display' 논문을 제출하여 1등상을 수상하였으며, 해당 기술을 이용한 특허를 출원(1020140192784)하였습니다."
+      },
+      {
+        "title": "KOI 한국정보올림피아드",
+        "subtitle": "다회 수상 (2009 ~ 2013)",
+        "description": "전국대회 장려상, 지역대회 금/은/동상 등을 다수 수상하였으며 국제정보올림피아드 IOI 후보 교육생으로 참여하였습니다."
+      }
+    ]
+  },
+
+  {
+    "subject": "Projects",
+    "items": [
+      {
+        "title": "오픈 소스 프로젝트",
+        "projects": [
+          {
+            "title": "LYnLab",
+            "description": "여러분이 보고 계신 지금 이 사이트. 블로그, 위키, 스니펫 등의 서비스를 제공합니다.",
+            "url": "https://lynlab.co.kr",
+            "thumbnail": "https://storage.lynlab.co.kr/logo-black.png",
+            "github": "lynlab/lynlab-web",
+            "skills": ["javascript", "nodejs", "nuxtjs", "graphql"]
+          },
+          {
+            "title": "Open in Notion App",
+            "description": "Open notion documents with your desktop application directly \uD83D\uDE80",
+            "thumbnail": "https://addons.cdn.mozilla.net/user-media/addon_icons/2594/2594426-64.png?modified=728772b7",
+            "github": "hellodhlyn/notion-app-redirector",
+            "skills": ["javascript", "firefox"]
+          },
+          {
+            "title": "telegrambot-py",
+            "description": "Make your own telegram bot easily.",
+            "github": "hellodhlyn/telegrambot-py",
+            "skills": ["python"]
+          }
+        ]
+      }
+    ]
+  }
+]
