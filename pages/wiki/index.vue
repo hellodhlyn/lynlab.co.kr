@@ -8,10 +8,10 @@
         </p>
         <p>
           <button type="submit" class="px-8 py-2 bg-blue-500 hover:bg-blue-600 text-gray-000 font-bold rounded">
-            <icon-text icon="search" text="검색" />
+            검색
           </button>
           <button type="button" class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-gray-000 font-bold rounded" @click="onRandom()">
-            <icon-text icon="shuffle" text="무작위" />
+            무작위
           </button>
         </p>
       </form>

@@ -14,13 +14,13 @@
               <option v-for="cur in currencies" :key="cur.id">{{ cur.id }}</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <ion-icon name="arrow-dropdown" />
+              <ion-icon name="caret-down" />
             </div>
           </div>
         </div>
 
         <div class="w-full text-center text-xl">
-          <ion-icon name="arrow-round-down" />
+          <ion-icon name="arrow-down" />
         </div>
 
         <div class="flex py-4">
@@ -36,7 +36,7 @@
               <option v-for="cur in currencies" :key="cur.id">{{ cur.id }}</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <ion-icon name="arrow-dropdown" />
+              <ion-icon name="caret-down" />
             </div>
           </div>
         </div>

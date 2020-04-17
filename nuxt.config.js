@@ -30,7 +30,7 @@ module.exports = {
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js' },
-      { src: 'https://unpkg.com/ionicons@4.5.5/dist/ionicons.js' },
+      { src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js' },
     ],
   },
 

@@ -30,15 +30,9 @@
       <div class="markdown-body" v-html="$options.filters.marked(post.body)" />
     </div>
 
-    <div class="container max-w-4xl mx-auto px-4 py-8 text-center text-xs">
-      <img class="mx-auto" alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
-      <p class="py-2">이 저작물은 <a class="text-blue-600 hover:underline" href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
-      <p>© 2011 - {{ 1900 + new Date().getYear() }} Do Hoerin, LYnLab</p>
-    </div>
-
-    <div v-if="relatedPosts.length > 0" class="my-8 py-8 px-4 md:px-8 bg-gray-900 text-gray-000">
+    <div v-if="relatedPosts.length > 0" class="py-8 px-4 mt-8 md:px-8 bg-gray-900 text-gray-000">
       <div class="container max-w-4xl mx-auto">
-        <p class="text-2xl pb-4">관련 포스트</p>
+        <p class="pb-4 text-2xl font-bold">관련 포스트</p>
         <div
           v-for="relatedPost in relatedPosts"
           :key="relatedPost.id"
@@ -57,8 +51,14 @@
       </div>
     </div>
 
-    <div class="container max-w-4xl mx-auto mb-16 p-4 bg-white border border-gray-300 rounded">
+    <div class="container max-w-4xl mx-auto mt-16 p-4 bg-white border border-gray-300 rounded">
       <VueDisqus shortname="lynlab" :url="'https://lynlab.co.kr' + this.$route.fullPath" />
+    </div>
+
+    <div class="container max-w-4xl mx-auto px-4 py-16 text-center text-xs">
+      <img class="mx-auto" alt="크리에이티브 커먼즈 라이선스" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png">
+      <p class="py-2">이 저작물은 <a class="text-blue-600 hover:underline" href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다. </p>
+      <p>© 2011 - {{ 1900 + new Date().getYear() }} Do Hoerin, LYnLab</p>
     </div>
   </div>
 </template>
