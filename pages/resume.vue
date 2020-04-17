@@ -28,9 +28,9 @@
         <p v-if="item.description">{{ item.description }}</p>
         <div class="flex flex-wrap py-2">
           <div v-for="prj in item.projects" :key="prj.title" class="flex-none w-full xl:w-1/2 p-1 leading-normal">
-            <div class="md:h-40 flex flex-col md:flex-row rounded shadow-lg">
-              <img class="w-full h-40 md:h-full md:w-1/4 object-cover rounded-l" :src="prj.thumbnail || '/images/header.jpg'">
-              <div class="w-full md:w-3/4 p-3 bg-white">
+            <div class="md:h-40 flex flex-col md:flex-row shadow-lg rounded">
+              <img class="w-full h-40 md:h-full md:w-1/4 object-cover rounded-t md:rounded-none md:rounded-l" :src="prj.thumbnail || '/images/header.jpg'">
+              <div class="w-full md:w-3/4 p-3 bg-white rounded-b md:rounded-none md:rounded-r">
                 <p class="text-lg font-bold">{{ prj.title }}</p>
                 <p class="font-normal text-xs pb-1 text-blue-600">
                   <a v-if="prj.url" class="mr-1 hover:text-blue-900" :href="prj.url" target="_blank">
