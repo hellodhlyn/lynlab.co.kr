@@ -1,11 +1,11 @@
 <template>
   <div id="wiki-document">
     <form class="flex px-6 py-4 border-b border-gray-300" @submit.prevent="onSearch()">
-      <div class="flex-grow w-3/4">
-        <input v-model="searchTitle" type="search" placeholder="다른 문서 찾기...">
+      <div class="flex-grow">
+        <input v-model="searchTitle" class="w-full" type="search" placeholder="다른 문서 찾기...">
       </div>
-      <button class="mr-2 hover:underline">검색</button>
-      <button type="button" class="hover:underline" @click="onRandom()">무작위</button>
+      <button type="submit" class="w-20 sm:w-12 hover:underline mr-2">검색</button>
+      <button type="button" class="w-20 sm:w-12 hover:underline" @click="onRandom()">무작위</button>
     </form>
 
     <div class="container max-w-4xl mx-auto p-4 md:p-8">
