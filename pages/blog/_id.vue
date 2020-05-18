@@ -116,6 +116,10 @@ export default {
         { property: 'twitter:site', content: '@hellodhlyn' },
         { property: 'twitter:creator', content: '@hellodhlyn' },
       ],
+      htmlAttrs: { lang: this.post.language },
+      link: this.post.language_group && this.post.language_group.posts.map((p) => ({
+        rel: 'alternate', hreflang: p.language, href: `https://lynlab.co.kr/blog/${p.id}`,
+      })),
     };
   },
   async mounted() {
