@@ -16,6 +16,20 @@
     </div>
 
     <div class="container max-w-4xl mx-auto p-4 md:p-8">
+      <div v-if="post.language_group" class="text-sm md:text-base mb-8 p-2 md:p-4 border-t border-b border-gray-300 leading-loose">
+        <p v-for="langPost in post.language_group.posts.filter((p) => p.language !== post.language)" :key="langPost.id">
+          <span v-if="langPost.language === 'ko'">
+            이 포스트는 <nuxt-link :to="{ name: 'blog-id', params: { id: langPost.id } }" class="text-blue-600 hover:underline">한국어</nuxt-link>로도 읽을 수 있습니다.
+          </span>
+          <span v-if="langPost.language === 'en'">
+            You can read this post in <nuxt-link :to="{ name: 'blog-id', params: { id: langPost.id } }" class="text-blue-600 hover:underline">English</nuxt-link>.
+          </span>
+          <span v-if="langPost.language === 'ja'">
+            このポストは<nuxt-link :to="{ name: 'blog-id', params: { id: langPost.id } }" class="text-blue-600 hover:underline">日本語</nuxt-link>でも書いています。
+          </span>
+        </p>
+      </div>
+
       <div v-if="post.series" class="text-sm md:text-base mb-8 p-2 md:p-4 border-t border-b border-gray-300 leading-loose">
         <p class="pb-2 font-bold">"{{ post.series.name }}" 시리즈 글</p>
         <ul class="list-disc list-inside">
@@ -72,9 +86,10 @@ export default {
   },
   async asyncData({ params, error }) {
     const data = await queryCms(`post(id: ${params.id}) {
-      id thumbnail_url title description created_at body
+      id thumbnail_url title description created_at body language
       tags { id name }
       series { name posts { id title thumbnail_url } }
+      language_group { posts { id language } }
     }`);
 
     if (!data.post) {
