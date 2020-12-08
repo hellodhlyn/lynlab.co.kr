@@ -32,3 +32,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# relay
+__generated__/
+schema/schema.graphql
+
+.idea/
+.code/
