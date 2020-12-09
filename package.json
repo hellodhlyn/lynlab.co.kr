@@ -10,12 +10,17 @@
     "schema": "graphql get-schema -e dev"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.3.1",
+    "autoprefixer": "^10.1.0",
     "graphql": "^14.7.0",
     "next": "10.0.3",
+    "postcss": "^8.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-relay": "^9.1.0",
-    "relay-runtime": "^10.1.1"
+    "relay-runtime": "^10.1.1",
+    "tailwindcss": "^2.0.1",
+    "tailwindcss-line-clamp": "^1.0.5"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",

@@ -7,7 +7,7 @@ export default graphql`
       description
       thumbnailUrl
       tags { name }
-      blobs { content }
+      blobs { uuid content }
       createdAt
     }
   }

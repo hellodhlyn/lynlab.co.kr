@@ -4,12 +4,11 @@ import { initEnvironment } from '../../lib/relay';
 import query from '../../queries/blog/idPage';
 
 const BlogPost = ({ post }) => {
-  console.log(post);
   return (
     <div>
       <p>{post.title}</p>
       {post.blobs.map((blob) => (
-        <div>{blob.content}</div>
+        <div key={blob.uuid}>{blob.content}</div>
       ))}
     </div>
   );
