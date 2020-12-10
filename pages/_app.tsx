@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'tailwindcss/tailwind.css';
+import NavBar from '../components/navbar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -8,7 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>LYnLab</title>
       </Head>
-      <Component {...pageProps} />
+      <div className="transition-colors">
+        <NavBar />
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

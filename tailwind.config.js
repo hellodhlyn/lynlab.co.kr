@@ -64,12 +64,45 @@ module.exports = {
         },
       },
       height: {
-        'screen-35': '35vh',
+        'screen-30': '30vh',
         'screen-50': '50vh',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            img: {
+              'max-height': '30vh',
+              'max-width': '720px',
+              margin: '0 auto',
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.gray.300'),
+            a: { color: theme('colors.gray.100') },
+            strong: { color: theme('colors.gray.100') },
+            h1: { color: theme('colors.gray.100') },
+            h2: { color: theme('colors.gray.100') },
+            h3: { color: theme('colors.gray.100') },
+            h4: { color: theme('colors.gray.100') },
+            code: { color: theme('colors.gray.300') },
+            blockquote: { color: theme('colors.gray.600') },
+            img: {
+              'max-height': '30vh',
+              'max-width': '720px',
+              margin: '0 auto',
+            },
+          },
+        },
+      }),
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      typography: ['dark'],
+    },
+  },
   plugins: [
     require('@tailwindcss/typography'),
     require('tailwindcss-line-clamp'),
