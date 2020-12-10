@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>LYnLab</title>
       </Head>
-      <div className="transition-colors">
+      <div>
         <NavBar />
         <Component {...pageProps} />
       </div>

@@ -23,7 +23,7 @@ const BlogPost = ({ post }) => {
         <div className="md:h-screen-50 w-full md:absolute flex flex-wrap content-center">
           <div className="max-w-screen-lg mx-auto px-4 py-8 md:p-12 bg-gray-000 dark:bg-gray-900 bg-opacity-90">
             <p className="space-x-1 text-sm text-gray-700 dark:text-gray-500">
-              {post.tags.map((tag) => <span>#{tag.name}</span>)}
+              {post.tags.map((tag) => <span key={tag.name}>#{tag.name}</span>)}
             </p>
             <p className="py-2 text-xl md:text-4xl font-bold">{post.title}</p>
             <p className="py-4 md:text-lg">{post.description}</p>
