@@ -9,9 +9,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>LYnLab</title>
       </Head>
-      <div>
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 leading-relaxed">
         <NavBar />
-        <Component {...pageProps} />
+        <div className="pt-20">
+          <Component {...pageProps} />
+        </div>
       </div>
     </>
   );

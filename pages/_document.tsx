@@ -12,7 +12,7 @@ export default class MyDoucment extends Document {
     return (
       <Html>
         <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet" />
+          <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
         </Head>
         <body>
           <script type="text/javascript" src="/scripts/theme.js" />

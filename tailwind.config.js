@@ -9,7 +9,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      sans: ['"Noto Sans KR"', 'sans-serif'],
+      sans: ['"Spoqa Han Sans Neo"', 'sans-serif'],
     },
     extend: {
       colors: {
@@ -71,9 +71,15 @@ module.exports = {
         DEFAULT: {
           css: {
             img: {
+              margin: '0 auto',
+            },
+          },
+        },
+        md: {
+          css: {
+            img: {
               'max-height': '30vh',
               'max-width': '720px',
-              margin: '0 auto',
             },
           },
         },
@@ -91,7 +97,6 @@ module.exports = {
             img: {
               'max-height': '30vh',
               'max-width': '720px',
-              margin: '0 auto',
             },
           },
         },

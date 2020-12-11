@@ -19,7 +19,7 @@ const BlogPost = ({ post }) => {
       </Head>
 
       <div className="md:h-screen-50 w-full">
-        <img className="h-screen-30 md:h-screen-50 w-full object-cover md:absolute" src={post.thumbnailUrl} />
+        <img className="h-screen-30 md:h-screen-50 w-full object-cover md:absolute" src={post.thumbnailUrl || '/images/header.jpg'} />
         <div className="md:h-screen-50 w-full md:absolute flex flex-wrap content-center">
           <div className="max-w-screen-lg mx-auto px-4 py-8 md:p-12 bg-gray-000 dark:bg-gray-900 bg-opacity-90">
             <p className="space-x-1 text-sm text-gray-700 dark:text-gray-500">
