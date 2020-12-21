@@ -106,10 +106,12 @@ module.exports = {
   variants: {
     extend: {
       typography: ['dark'],
+      verticalAlign: ['before'],
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
     require('tailwindcss-line-clamp'),
+    require('tailwindcss-pseudo-elements'),
   ],
 };

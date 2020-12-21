@@ -12,7 +12,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^10.1.0",
-    "css.gg": "^2.0.0",
+    "bootstrap-icons": "^1.2.1",
     "dayjs": "^1.9.7",
     "disqus-react": "^1.0.10",
     "graphql": "^14.7.0",
@@ -24,7 +24,8 @@
     "react-relay": "^9.1.0",
     "relay-runtime": "^10.1.1",
     "tailwindcss": "^2.0.1",
-    "tailwindcss-line-clamp": "^1.0.5"
+    "tailwindcss-line-clamp": "^1.0.5",
+    "tailwindcss-pseudo-elements": "^1.5.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
