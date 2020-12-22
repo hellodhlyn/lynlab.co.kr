@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'tailwindcss/tailwind.css';
 import NavBar from '../components/navbar';
+import Footer from '../components/footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div className={isIndex ? '' : 'pt-20'}>
           <Component {...pageProps} />
         </div>
+        <Footer />
       </div>
     </>
   );

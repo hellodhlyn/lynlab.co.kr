@@ -48,7 +48,7 @@ const ResumeTwoColumnTable = (item) => (
 );
 
 const Resume = () => (
-  <div className="max-w-screen-xl mx-auto p-4 md:px-8">
+  <div className="max-w-screen-xl mx-auto p-4 md:px-8 pb-16">
     <p className="py-8 text-4xl text-gray-900 dark:text-gray-000 font-bold">About Me</p>
 
     <p className="py-4 text-2xl text-gray-900 dark:text-gray-000 font-bold">도회린 (Hoerin Doh)</p>
@@ -87,7 +87,7 @@ const Resume = () => (
     <div className="py-4">
       <a href="https://github.com/hellodhlyn" target="_blank">
         <span className="p-4 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 hover:underline">
-          <i className="bi-github before:align-middle" /> GitHub에서 더 많은 프로젝트 보기 &gt;
+          <i className="bi-github before:align-middle mr-1" /> GitHub에서 더 많은 프로젝트 보기 &gt;
         </span>
       </a>
     </div>

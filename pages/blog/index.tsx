@@ -9,26 +9,26 @@ const BlogIndex = ({ posts }) => {
   const firstPage = !posts.pageInfo.hasPreviousPage;
 
   return (
-    <div className="max-w-screen-xl mx-auto p-4">
+    <div className="max-w-screen-xl mx-auto p-4 md:px-8">
       <p className="py-8 text-4xl text-gray-900 dark:text-gray-000 font-bold">블로그</p>
       {
         firstPage ? <div>
           <p className="py-4 tracking-wider font-bold">FEATURED</p>
-          <div className="mb-8 md:mb-16 md:flex cursor-pointer group">
-            <img className="h-56 md:h-80 w-full md:w-3/5 object-cover" src={postNodes[0].thumbnailUrl} />
-            <div className="md:w-2/5 py-2 md:p-4">
-              <div className="pb-4 flex gap-x-1">
-                {postNodes[0].tags.map((tag) => (
-                  <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
-                ))}
+          <Link href={`/blog/${postNodes[0].postId}`}>
+            <div className="mb-8 md:mb-16 md:flex cursor-pointer group">
+              <img className="h-56 md:h-80 w-full md:w-3/5 object-cover" src={postNodes[0].thumbnailUrl} />
+              <div className="md:w-2/5 py-2 md:p-4">
+                <div className="pb-4 flex gap-x-1">
+                  {postNodes[0].tags.map((tag) => (
+                    <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
+                  ))}
+                </div>
+                <p className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-000">{postNodes[0].title}</p>
+                <p className="md:text-lg">{postNodes[0].description}</p>
+                <p className="pt-4 group-hover:underline">계속 읽기 &gt;</p>
               </div>
-              <p className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-000">{postNodes[0].title}</p>
-              <p className="md:text-lg">{postNodes[0].description}</p>
-              <p className="pt-4 group-hover:underline">
-                <Link href={`/blog/${postNodes[0].postId}`}>계속 읽기 &gt;</Link>
-              </p>
             </div>
-          </div>
+          </Link>
 
           <p className="py-4 tracking-wider font-bold">RECENT</p>
           <div className="grid md:grid-cols-2 gap-6">

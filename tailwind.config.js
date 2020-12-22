@@ -75,10 +75,10 @@ module.exports = {
             },
           },
         },
-        md: {
+        lg: {
           css: {
             img: {
-              'max-height': '30vh',
+              'max-height': '500px',
               'max-width': '720px',
             },
           },
@@ -94,10 +94,6 @@ module.exports = {
             h4: { color: theme('colors.gray.100') },
             code: { color: theme('colors.gray.300') },
             blockquote: { color: theme('colors.gray.600') },
-            img: {
-              'max-height': '30vh',
-              'max-width': '720px',
-            },
           },
         },
       }),

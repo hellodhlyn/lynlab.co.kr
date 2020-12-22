@@ -48,12 +48,6 @@ const BlogPost = ({ post }) => {
       <div className="max-w-screen-lg mx-auto px-4">
         <DiscussionEmbed shortname="lynlab" config={{ url: `https://lynlab.co.kr/blog/${id}` }}/>
       </div>
-
-      <div className="max-w-screen-lg mx-auto px-4 text-xs">
-        <img alt="크리에이티브 커먼즈 라이선스" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" />
-        <p className="py-2">이 저작물은 <a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0/">크리에이티브 커먼즈 저작자표시-동일조건변경허락 4.0</a> 국제 라이선스에 따라 이용할 수 있습니다.</p>
-        <p>© 2011 - {new Date().getFullYear()} Hoerin Doh, All rights reserved.</p>
-      </div>
     </div>
   );
 };
