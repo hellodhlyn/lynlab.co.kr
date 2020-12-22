@@ -54,7 +54,7 @@ const BlogPost = ({ post }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const environment = initEnvironment();
-  const queryProps = await fetchQuery(environment, query, { postId: parseInt(context.params.id as string, 10) });
+  const queryProps = await fetchQuery(environment, query, { postId: parseInt(context.params.id as string, 10) }) as object;
   const initialRecords = environment.getStore().getSource().toJSON();
   return {
     props: { ...queryProps, initialRecords },

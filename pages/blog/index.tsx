@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 
   const environment = initEnvironment();
-  const queryProps = await fetchQuery(environment, query, variables);
+  const queryProps = await fetchQuery(environment, query, variables) as object;
   const initialRecords = environment.getStore().getSource().toJSON();
   return {
     props: { ...queryProps, initialRecords },

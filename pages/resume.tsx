@@ -16,7 +16,7 @@ const ResumeProjectCard = (project) => (
         project.url
           ? <a href={project.url} target="_blank">
               <p className="text-sm text-blue-700 dark:text-blue-500 hover:underline cursor-pointer">
-                <i className="bi-link-45deg before:align-middle" /> {project.url.replaceAll('https://', '')}
+                <i className="bi-link-45deg before:align-middle" /> {project.url.replace(/https:\/\//g, '')}
               </p>
             </a> : null
       }
