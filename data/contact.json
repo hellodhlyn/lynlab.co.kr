@@ -1,0 +1,26 @@
+[
+  {
+    "name": "twitter",
+    "link": "https://twitter.com/hellodhlyn",
+    "icon": "twitter",
+    "color": "blue-500"
+  },
+  {
+    "name": "instagram",
+    "link": "https://instagram.com/hellodhlyn",
+    "icon": "instagram",
+    "color": "pink-500"
+  },
+  {
+    "name": "github",
+    "link": "https://github.com/hellodhlyn",
+    "icon": "github",
+    "color": "black"
+  },
+  {
+    "name": "email",
+    "link": "mailto:lyn@lynlab.co.kr",
+    "icon": "envelope-fill",
+    "color": "red-800"
+  }
+]

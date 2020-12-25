@@ -1,0 +1,105 @@
+{
+  "experiences": [
+    {
+      "title": "두나무",
+      "period": "2016 ~ 현재",
+      "description": "주요 백엔드 서버 개발 및 인프라 운영을 담당하고 있습니다.",
+      "projects": [
+        {
+          "title": "업비트",
+          "url": "https://upbit.com",
+          "thumbnail_url": "https://static.upbit.com/upbit-pc/seo/upbit_facebook.png",
+          "description": "주요 백엔드 서비스 개발 및 운영을 담당하고 있습니다. 또한 클라우드 인프라, CI/CD 등 개발 프로세스 구축을 담당하였습니다."
+        },
+        {
+          "title": "증권플러스 (구. 카카오스탁)",
+          "url": "https://stockplus.com",
+          "thumbnail_url": "https://stockplus.com/og_logo.png",
+          "description": "증권 정보 시세, 지표 및 퀀트 시스템 백엔드 API 개발 및 운영하였습니다."
+        },
+        {
+          "title": "다음 금융",
+          "url": "https://finance.daum.net",
+          "thumbnail_url": "https://storage.lynlab.co.kr/daum-finance.jpg",
+          "description": "증권 정보 시세 API 개발 및 운영을 담당하였습니다."
+        }
+      ]
+    },
+    {
+      "title": "SW마에스트로 과정",
+      "period": "2015",
+      "description": "SW마에스트로 과정 6기 연수생으로 참여하였습니다. 머신러닝과 딥러닝에 관련된 프로젝트를 진행했습니다."
+    },
+    {
+      "title": "안드로이드 1인 개발",
+      "period": "2010 ~ 2018",
+      "description": "안드로이드 애플리케이션 <결함 찾기>를 1인 개발 및 운영하여 전세계 24만 다운로드를 기록하였습니다.",
+      "projects": [
+        {
+          "title": "결함 찾기",
+          "thumbnail_url": "https://storage.lynlab.co.kr/checkmyandroid.png",
+          "description": "스마트폰 하드웨어의 불량을 점검하고 서비스 센터와 연계해주는 서비스입니다. 현재 서비스 종료."
+        }
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "title": "연세대학교 컴퓨터과학과",
+      "period": "2014 ~ 현재",
+      "description": "공과대학 프로그래밍 동아리 PoolC 회원 및 회장(2015)으로 활동하며 각종 기술 세미나 및 스터디를 주최하고, 넥슨/라인 게임동아리 지원 사업에 지속적으로 게임을 출품하였습니다.",
+      "projects": [
+        {
+          "title": "PoolC 홈페이지",
+          "url": "https://poolc.org",
+          "thumbnail_url": "https://storage.lynlab.co.kr/201812310001.png",
+          "github_repo": "poolc/nagase",
+          "description": "홈페이지 기획, 백엔드 개발 및 인프라 운영을 담당하고 있습니다."
+        },
+        {
+          "title": "도우샘 프로젝트",
+          "url": "https://doughsam.com",
+          "description": "연세대학교 수강신청 마일리지 분석 및 시뮬레이션 서비스입니다. 프로젝트 매니징 및 백엔드 개발을 담당하였습니다."
+        },
+        {
+          "title": "Project VR",
+          "url": "https://poolc.org/project/8",
+          "thumbnail_url": "https://api.poolc.org/files/Project%20VR.png",
+          "description": "넥슨 게임제작 동아리 지원사업 출품작. VR 비주얼 노벨 게임으로 기획을 담당하였습니다."
+        }
+      ]
+    },
+    {
+      "title": "경남과학고등학교",
+      "period": "2012 ~ 2014 (조기졸업)",
+      "description": "프로그래밍 동아리 informatica 에서 활동하고, 교내 알고리즘 문제풀이 사이트 JudgeOn에 문제를 다수 출제하였습니다."
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "LYnLab",
+      "url": "https://lynlab.co.kr",
+      "thumbnail_url": "https://avatars3.githubusercontent.com/u/31162143",
+      "github_repo": "hellodhlyn/lynlab-server",
+      "description": "여러분이 보고 계신 지금 이 사이트입니다. 블로그, 위키, 스니펫 등의 서비스를 제공합니다."
+    },
+    {
+      "title": "mirrorctl",
+      "github_repo": "hellodhlyn/mirrorctl",
+      "description": "PyPI, Pipenv, Bundler 등 레포지토리의 국가별 미러 URL을 자동으로 설정해주는 유틸리티입니다."
+    },
+    {
+      "title": "Open in Notion App",
+      "thumbnail_url": "https://addons.cdn.mozilla.net/user-media/addon_icons/2594/2594426-64.png?modified=728772b7",
+      "github_repo": "hellodhlyn/notion-app-redirector",
+      "description": "Open notion documents with your desktop application directly \uD83D\uDE80"
+    },
+    {
+      "title": "telegrambot-py",
+      "github_repo": "hellodhlyn/telegrambot-py",
+      "description": "Make your own telegram bot easily."
+    }
+  ]
+}

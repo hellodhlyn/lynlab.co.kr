@@ -5,7 +5,12 @@
 ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
 */
 module.exports = {
+  purge: ['./pages/**/*.tsx', './components/**/*.tsx'],
+  darkMode: 'class',
   theme: {
+    fontFamily: {
+      sans: ['"Spoqa Han Sans Neo"', 'sans-serif'],
+    },
     extend: {
       colors: {
         // Source: https://yeun.github.io/open-color/
@@ -59,11 +64,50 @@ module.exports = {
         },
       },
       height: {
-        'screen-35': '35vh',
-        'screen-half': '50vh',
+        'screen-30': '30vh',
+        'screen-50': '50vh',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            img: {
+              margin: '0 auto',
+            },
+          },
+        },
+        lg: {
+          css: {
+            img: {
+              'max-height': '500px',
+              'max-width': '720px',
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.gray.300'),
+            a: { color: theme('colors.gray.100') },
+            strong: { color: theme('colors.gray.100') },
+            h1: { color: theme('colors.gray.100') },
+            h2: { color: theme('colors.gray.100') },
+            h3: { color: theme('colors.gray.100') },
+            h4: { color: theme('colors.gray.100') },
+            code: { color: theme('colors.gray.300') },
+            blockquote: { color: theme('colors.gray.600') },
+          },
+        },
+      }),
     },
   },
-  variants: {},
-  plugins: [],
+  variants: {
+    extend: {
+      typography: ['dark'],
+      verticalAlign: ['before'],
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('tailwindcss-line-clamp'),
+    require('tailwindcss-pseudo-elements'),
+  ],
 };
