@@ -1,14 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import contact from '../data/contact.json';
 
 export default function NavBar() {
-  const router = useRouter();
-  if (router.pathname === '' || router.pathname === '/') {
-    return null;
-  }
-
   const [theme, setTheme] = useState(String);
 
   useEffect(() => {

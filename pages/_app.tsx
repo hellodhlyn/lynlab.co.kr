@@ -1,15 +1,17 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import NextProgress from 'nextjs-progressbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'tailwindcss/tailwind.css';
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  const isIndex = router.pathname === '' || router.pathname === '/';
+const pathsToHideNavBar = ['', '/'];
+const pathsToHideFooter = ['', '/', '/404'];
+
+function MyApp({ Component, pageProps, router }: AppProps) {
+  const hideNavBar = pathsToHideNavBar.includes(router.pathname);
+  const hideFooter = pathsToHideFooter.includes(router.pathname);
 
   return (
     <>
@@ -18,11 +20,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 leading-relaxed">
         <NextProgress color="#339af0" height={5} />
-        <NavBar />
-        <div className={isIndex ? '' : 'pt-20'}>
+        {hideNavBar ? null : <NavBar />}
+        <div className={hideFooter ? '' : 'pt-20'}>
           <Component {...pageProps} />
         </div>
-        <Footer />
+        {hideFooter ? null : <Footer />}
       </div>
     </>
   );
