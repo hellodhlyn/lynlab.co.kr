@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { fetchQuery, Variables } from 'react-relay';
 import { initEnvironment } from '../../lib/relay';
 import query from '../../queries/blog/indexPage';
+import { indexPage_indexQueryResponse as queryResponse } from '../../queries/blog/__generated__/indexPage_indexQuery.graphql';
 
-const BlogIndex = ({ posts }) => {
+const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
   const postNodes = posts.edges.map((edge) => edge.node);
   const firstPage = !posts.pageInfo.hasPreviousPage;
 
@@ -103,7 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 
   const environment = initEnvironment();
-  const queryProps = await fetchQuery(environment, query, variables) as object;
+  const queryProps = await fetchQuery(environment, query, variables) as queryResponse;
   const initialRecords = environment.getStore().getSource().toJSON();
   return {
     props: { ...queryProps, initialRecords },

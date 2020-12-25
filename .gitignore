@@ -33,8 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-# relay
-__generated__/
-
 .idea/
 .code/

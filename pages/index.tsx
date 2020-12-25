@@ -1,10 +1,12 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import contact from '../data/contact.json';
 
 const Index = () => (
   <div className="h-screen w-screen text-gray-300">
     <div className="absolute h-full w-full bg-black">
-      <img className="w-full h-full object-cover opacity-40" src="https://storage.lynlab.co.kr/20191103-bg-q50.jpg" />
+      <Image className="w-full h-full object-cover opacity-40"
+             src="https://storage.lynlab.co.kr/20191103-bg-q50.jpg" layout="fill" />
     </div>
 
     <div className="absolute h-full w-full px-4 flex items-center justify-center tracking-tight">

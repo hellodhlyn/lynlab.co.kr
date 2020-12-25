@@ -9,8 +9,9 @@ import ReactMarkdown from 'react-markdown';
 import { fetchQuery } from 'react-relay';
 import { initEnvironment } from '../../lib/relay';
 import query from '../../queries/blog/idPage';
+import { idPage_postQueryResponse as queryResponse } from '../../queries/blog/__generated__/idPage_postQuery.graphql';
 
-const BlogPost = ({ post }) => {
+const BlogPost = ({ post }: queryResponse): JSX.Element => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -45,7 +46,7 @@ const BlogPost = ({ post }) => {
             <p className="py-4 md:text-lg">{post.description}</p>
             <div className="flex items-center text-sm text-gray-700 dark:text-gray-500">
               <img className="w-6 h-6 rounded-full object-cover" src="https://avatars2.githubusercontent.com/u/8597749?s=460&u=c9c8c5915bca6f7897ec5f5b2cba26afca67345c&v=4" alt="profile picture" />
-              <p className="px-1">Hoerin Doh | {dayjs(post.createdAt).format('YYYY. MM. DD')}</p>
+              <p className="px-1">Hoerin Doh | {dayjs(post.createdAt as Date).format('YYYY. MM. DD')}</p>
             </div>
           </div>
         </div>
@@ -95,7 +96,9 @@ const BlogPost = ({ post }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const environment = initEnvironment();
-  const queryProps = await fetchQuery(environment, query, { postId: parseInt(context.params.id as string, 10) }) as object;
+  const queryProps = await fetchQuery(environment, query, {
+    postId: parseInt(context.params.id as string, 10),
+  }) as queryResponse;
   if (!queryProps.post) {
     return { notFound: true };
   }
