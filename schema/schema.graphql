@@ -1,0 +1,98 @@
+# source: https://api.lynlab.co.kr/graphql
+# timestamp: Fri Dec 25 2020 17:55:22 GMT+0900 (Korean Standard Time)
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+enum BlobType {
+  MARKDOWN
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+interface Node {
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Post implements Node {
+  """The ID of an object"""
+  id: ID!
+  postId: Int!
+  title: String!
+  description: String
+  thumbnailUrl: String
+  isPublic: Boolean!
+  series: PostSeries
+  tags: [PostTag!]
+  blobs: [PostBlob!]
+  relatedPosts(after: String, first: Int, before: String, last: Int): PostConnection
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PostBlob {
+  uuid: String!
+  order: Int!
+  content: String!
+  blobType: BlobType!
+  post: Post!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type PostConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PostEdge]
+}
+
+"""An edge in a connection."""
+type PostEdge {
+  """The item at the end of the edge"""
+  node: Post
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PostSeries {
+  name: String!
+  posts: [Post!]
+}
+
+type PostTag {
+  name: String!
+  posts: [Post!]
+}
+
+type Query {
+  node(id: ID!): Node
+  posts(after: String, first: Int, before: String, last: Int): PostConnection!
+  post(postId: Int!): Post
+}
