@@ -58,15 +58,26 @@ const Resume = () => (
         현재는 핀테크 업체 두나무에서 암호화폐 거래소 업비트의 메인 백엔드 시스템을 개발, 운영하고 있습니다.
       </p>
       <div className="py-4 flex gap-x-1">
-        {
-          contact.map((item) => (
-            <a href={item.link} target="_blank" key={`contact-${item.name}`}>
-              <div className={`flex h-10 w-10 bg-${item.color} rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity`}>
-                <i className={`text-xl bi-${item.icon} before:align-middle`} />
-              </div>
-            </a>
-          ))
-        }
+        <a href="https://twitter.com/hellodhlyn" target="_blank">
+          <div className="flex h-10 w-10 bg-blue-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+            <i className="text-xl bi-twitter before:align-middle" />
+          </div>
+        </a>
+        <a href="https://instagram.com/hellodhlyn" target="_blank">
+          <div className="flex h-10 w-10 bg-pink-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+            <i className="text-xl bi-instagram before:align-middle" />
+          </div>
+        </a>
+        <a href="https://github.com/hellodhlyn" target="_blank">
+          <div className="flex h-10 w-10 bg-gray-900 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+            <i className="text-xl bi-github before:align-middle" />
+          </div>
+        </a>
+        <a href="mailtio:lyn@lynlab.co.kr" target="_blank">
+          <div className="flex h-10 w-10 bg-red-800 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+            <i className="text-xl bi-envelope-fill before:align-middle" />
+          </div>
+        </a>
       </div>
     </div>
 
