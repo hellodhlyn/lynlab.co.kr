@@ -1,5 +1,6 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import { DiscussionEmbed } from 'disqus-react';
@@ -11,6 +12,8 @@ import query from '../../queries/blog/idPage';
 const BlogPost = ({ post }) => {
   const router = useRouter();
   const { id } = router.query;
+
+  const relatedPosts = post.relatedPosts?.edges?.map((edge) => edge.node) || [];
 
   return (
     <div className="pb-16 space-y-16 bg-gray-000 dark:bg-gray-900 text-gray-900 dark:text-gray-300">
@@ -44,6 +47,31 @@ const BlogPost = ({ post }) => {
           </div>
         ))}
       </div>
+
+      {
+        relatedPosts.length === 0 ? null : (
+          <div className="py-4 bg-gray-900 dark:bg-gray-800">
+            <div className="max-w-screen-lg mx-auto px-4 py-8">
+              <p className="mb-4 text-3xl text-gray-000">관련 포스트</p>
+              {
+                relatedPosts.map((relatedPost) => (
+                  <Link href={`/blog/${relatedPost.postId}`}>
+                    <div className="relative h-48 w-full my-3 bg-black cursor-pointer hover:opacity-80 text-gray-000"
+                         key={`related-${relatedPost.postId}`}>
+                      <img className="absolute h-full w-full object-cover opacity-30"
+                           src={relatedPost.thumbnailUrl || '/images/header.jpg'} alt={`${relatedPost.title} 썸네일`}/>
+                      <div className="absolute h-full w-full p-4 flex flex-col justify-center items-center text-center">
+                        <p className="mb-2 text-lg md:text-xl font-bold">{relatedPost.title}</p>
+                        <p className="text-sm md:text-base clamp-2">{relatedPost.description}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              }
+            </div>
+          </div>
+        )
+      }
 
       <div className="max-w-screen-lg mx-auto px-4">
         <DiscussionEmbed shortname="lynlab" config={{ url: `https://lynlab.co.kr/blog/${id}` }}/>

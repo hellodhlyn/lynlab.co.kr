@@ -8,6 +8,11 @@ export default graphql`
       thumbnailUrl
       tags { name }
       blobs { uuid content }
+      relatedPosts(first: 3) {
+        edges {
+          node { postId title thumbnailUrl description }
+        }
+      }
       createdAt
     }
   }

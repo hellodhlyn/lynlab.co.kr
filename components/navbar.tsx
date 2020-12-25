@@ -22,7 +22,7 @@ export default function NavBar() {
   return (
     <div className="w-full h-16 md:h-20 fixed px-4 md:px-8 flex flex-wrap bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300
                     bg-opacity-80 border-b border-gray-300 dark:border-gray-800 items-center content-center transition-color z-50">
-      <div className="flex flex-wrap items-center md:text-lg gap-x-3 tracking-tighter">
+      <div className="flex flex-wrap items-center md:text-lg gap-x-4 tracking-tighter">
         <Link href="/">
           <img className="h-10 md:h-12 w-10 md:w-12 cursor-pointer transition-opacity hover:opacity-50"
                src={`/images/logo-${theme !== 'dark' ? 'black' : 'white'}.png`} alt="lynlab logo" />
@@ -37,7 +37,7 @@ export default function NavBar() {
 
       <div className="flex-grow" />
 
-      <div className="hidden mx-4 sm:flex flex-wrap content-center gap-x-3">
+      <div className="hidden mx-4 sm:flex flex-wrap content-center gap-x-4">
         {
           contact.map((item) => (
             <a href={item.link} target="_blank" key={`contact-${item.name}`}
