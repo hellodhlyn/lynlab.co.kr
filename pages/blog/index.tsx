@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { fetchQuery, Variables } from 'react-relay';
 import { initEnvironment } from '../../lib/relay';
@@ -10,6 +11,10 @@ const BlogIndex = ({ posts }) => {
 
   return (
     <div className="max-w-screen-xl mx-auto p-4 md:px-8">
+      <Head>
+        <title>LYnLab Blog</title>
+      </Head>
+
       <p className="py-8 text-4xl text-gray-900 dark:text-gray-000 font-bold">블로그</p>
       {
         firstPage ? <div>

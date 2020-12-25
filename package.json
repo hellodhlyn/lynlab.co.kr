@@ -17,6 +17,7 @@
     "disqus-react": "^1.0.10",
     "graphql": "^14.7.0",
     "next": "10.0.3",
+    "next-seo": "^4.17.0",
     "nextjs-progressbar": "^0.0.7",
     "postcss": "^8.2.1",
     "react": "17.0.1",

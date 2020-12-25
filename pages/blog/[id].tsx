@@ -2,6 +2,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 import dayjs from 'dayjs';
 import { DiscussionEmbed } from 'disqus-react';
 import ReactMarkdown from 'react-markdown';
@@ -20,6 +21,18 @@ const BlogPost = ({ post }) => {
       <Head>
         <title>{post.title} | LYnLab</title>
       </Head>
+      <NextSeo title={post.title}
+               description={post.description}
+               canonical={`https://lynlab.co.kr/blog/${post.postId}`}
+               openGraph={{
+                 site_name: 'LYnLab',
+                 title: post.title,
+                 description: post.description,
+                 type: 'article',
+                 images: post.thumbnailUrl ? [{ url: post.thumbnailUrl }] : [],
+                 url: `https://lynlab.co.kr/blog/${post.postId}`,
+               }}
+               twitter={{ cardType: 'summary_large_image', site: '@hellodhlyn', handle: '@hellodhlyn' }} />
 
       <div className="md:h-screen-50 w-full">
         <img className="h-screen-30 md:h-screen-50 w-full object-cover md:absolute" src={post.thumbnailUrl || '/images/header.jpg'} />
