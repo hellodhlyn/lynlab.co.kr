@@ -1,6 +1,6 @@
 import { graphql } from 'react-relay';
 
-export default graphql`
+export const postQuery = graphql`
   query idPage_postQuery($postId: Int!) {
     post(postId: $postId) {
       postId
@@ -15,6 +15,16 @@ export default graphql`
         }
       }
       createdAt
+    }
+  }
+`;
+
+export const postIdsQuery = graphql`
+  query idPage_postIdsQuery {
+    posts(first: 9999) {
+      edges {
+        node { postId }
+      }
     }
   }
 `;
