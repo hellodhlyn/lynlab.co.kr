@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,10 +8,15 @@ import { DiscussionEmbed } from 'disqus-react';
 import ReactMarkdown from 'react-markdown';
 import { fetchQuery } from 'react-relay';
 import { initEnvironment } from '../../lib/relay';
-import query from '../../queries/blog/idPage';
-import { idPage_postQueryResponse as queryResponse } from '../../queries/blog/__generated__/idPage_postQuery.graphql';
+import { postQuery, postIdsQuery } from '../../queries/blog/idPage';
+import { idPage_postQueryResponse as PostResponse } from '../../queries/blog/__generated__/idPage_postQuery.graphql';
+import { idPage_postIdsQueryResponse as PostIdsResponse } from '../../queries/blog/__generated__/idPage_postIdsQuery.graphql';
 
-const BlogPost = ({ post }: queryResponse): JSX.Element => {
+const BlogPost = ({ post }: PostResponse): JSX.Element => {
+  if (!post) {
+    return null;
+  }
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -94,11 +99,20 @@ const BlogPost = ({ post }: queryResponse): JSX.Element => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const environment = initEnvironment();
-  const queryProps = await fetchQuery(environment, query, {
-    postId: parseInt(context.params.id as string, 10),
-  }) as queryResponse;
+  const props = await fetchQuery(environment, postIdsQuery, {}) as PostIdsResponse;
+  return {
+    paths: props.posts.edges.map((edge) => ({ params: { id: edge.node.postId.toString() } })),
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const environment = initEnvironment();
+  const queryProps = await fetchQuery(environment, postQuery, {
+    postId: parseInt(params.id as string, 10),
+  }) as PostResponse;
   if (!queryProps.post) {
     return { notFound: true };
   }
