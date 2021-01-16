@@ -1,8 +1,0 @@
-{
-  "schemaPath": "schema/schema.graphql",
-  "extensions": {
-    "endpoints": {
-      "dev": "https://api.lynlab.co.kr/graphql"
-    }
-  }
-}
