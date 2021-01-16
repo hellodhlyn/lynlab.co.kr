@@ -59,7 +59,7 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
       }
 
       <div className="grid md:grid-cols-3 gap-6">
-        {postNodes.slice(3).map((post) => (
+        {postNodes.slice(firstPage ? 3 : 0).map((post) => (
           <div key={post.id} className="mb-8 md:mb-16 cursor-pointer group">
             <Link href={`/blog/${post.postId}`}>
               <div>
