@@ -4,9 +4,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import dayjs from 'dayjs';
-import { DiscussionEmbed } from 'disqus-react';
 import ReactMarkdown from 'react-markdown';
 import { fetchQuery } from 'react-relay';
+import LazyLoad from 'react-lazy-load';
+import { DiscussionEmbed } from 'disqus-react';
 import { initEnvironment } from '../../lib/relay';
 import { postQuery, postIdsQuery } from '../../queries/blog/idPage';
 import { idPage_postQueryResponse as PostResponse } from '../../queries/blog/__generated__/idPage_postQuery.graphql';
@@ -93,7 +94,9 @@ const BlogPost = ({ post }: PostResponse): JSX.Element => {
       }
 
       <div className="max-w-screen-lg mx-auto px-4">
-        <DiscussionEmbed shortname="lynlab" config={{ url: `https://lynlab.co.kr/blog/${id}` }}/>
+        <LazyLoad offset={1000}>
+          <DiscussionEmbed shortname="lynlab" config={{ url: `https://lynlab.co.kr/blog/${id}` }}/>
+        </LazyLoad>
       </div>
     </div>
   );
