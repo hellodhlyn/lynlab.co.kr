@@ -2,6 +2,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { fetchQuery, Variables } from 'react-relay';
+import ImageWithLoader from '../../components/image-with-loader';
 import { initEnvironment } from '../../lib/relay';
 import query from '../../queries/blog/indexPage';
 import { indexPage_indexQueryResponse as queryResponse } from '../../queries/blog/__generated__/indexPage_indexQuery.graphql';
@@ -22,7 +23,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
           <p className="py-4 tracking-wider font-bold">FEATURED</p>
           <Link href={`/blog/${postNodes[0].postId}`}>
             <div className="mb-8 md:mb-16 md:flex cursor-pointer group">
-              <img className="h-56 md:h-80 w-full md:w-3/5 object-cover" src={postNodes[0].thumbnailUrl} />
+              <div className="h-56 md:h-80 w-full md:w-3/5">
+                <ImageWithLoader src={postNodes[0].thumbnailUrl || '/images/header.jpg'} />
+              </div>
               <div className="md:w-2/5 py-2 md:p-4">
                 <div className="pb-4 flex gap-x-1">
                   {postNodes[0].tags.map((tag) => (
@@ -42,7 +45,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
               <div key={post.id} className="mb-8 md:mb-24 cursor-pointer group">
                 <Link href={`/blog/${post.postId}`}>
                   <div>
-                    <img className="h-56 md:h-64 w-full object-cover" src={post.thumbnailUrl || '/images/header.jpg'} />
+                    <div className="h-56 md:h-64 w-full">
+                      <ImageWithLoader src={post.thumbnailUrl || '/images/header.jpg'} />
+                    </div>
                     <div className="py-2 flex gap-x-1">
                       {post.tags.map((tag) => (
                         <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
@@ -63,7 +68,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
           <div key={post.id} className="mb-8 md:mb-16 cursor-pointer group">
             <Link href={`/blog/${post.postId}`}>
               <div>
-                <img className="h-56 md:h-48 w-full object-cover" src={post.thumbnailUrl || 'https://lynlab.co.kr/images/header.jpg'} />
+                <div className="h-56 md:h-48 w-full">
+                  <ImageWithLoader src={post.thumbnailUrl || '/images/header.jpg'} />
+                </div>
                 <div className="py-2 flex gap-x-1">
                   {post.tags.map((tag) => (
                     <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>

@@ -1,12 +1,11 @@
-import contact from '../data/contact.json';
 import resume from '../data/resume.json';
+import ImageWithLoader from '../components/image-with-loader';
 
 const ResumeProjectCard = (project) => (
   <div className="border border-gray-300 dark:border-gray-800"
        key={`project-${project.title}`}>
-    <div>
-      <img className="w-full h-52 lg:h-40 object-cover"
-           src={project.thumbnail_url || '/images/header.jpg'} alt={`${project.title} 프로젝트 썸네일`} />
+    <div className="w-full h-52 lg:h-40">
+      <ImageWithLoader src={project.thumbnail_url || '/images/header.jpg'} alt={`${project.title} 프로젝트 썸네일`} />
     </div>
     <div className="p-4">
       <p className="font-bold">{project.title}</p>
