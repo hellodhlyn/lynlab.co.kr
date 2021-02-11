@@ -16,26 +16,26 @@ export default function NavBar() {
   return (
     <div className="w-full h-16 md:h-20 fixed px-4 md:px-8 flex flex-wrap bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300
                     bg-opacity-80 border-b border-gray-300 dark:border-gray-800 items-center content-center transition-color z-50">
-      <div className="flex flex-wrap items-center md:text-lg gap-x-4 tracking-tighter">
+      <div className="flex flex-wrap items-center md:text-lg tracking-tighter">
         <Link href="/">
           <img className="h-10 md:h-12 w-10 md:w-12 cursor-pointer transition-opacity hover:opacity-50"
                src={`/images/logo-${theme !== 'dark' ? 'black' : 'white'}.png`} alt="lynlab logo" />
         </Link>
         <Link href="/blog">
-          <p className="cursor-pointer transition-opacity hover:opacity-50">blog</p>
+          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">blog</p>
         </Link>
         <Link href="/resume">
-          <p className="cursor-pointer transition-opacity hover:opacity-50">resume</p>
+          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">resume</p>
         </Link>
       </div>
 
       <div className="flex-grow" />
 
-      <div className="hidden mx-4 sm:flex flex-wrap content-center gap-x-4">
+      <div className="hidden mx-1 sm:flex flex-wrap content-center">
         {
           contact.map((item) => (
             <a href={item.link} target="_blank" key={`contact-${item.name}`}
-               className="cursor-pointer hover:opacity-50 transition-opacity">
+               className="mr-3 cursor-pointer hover:opacity-50 transition-opacity">
               <i className={`text-xl bi-${item.icon} before:align-middle`} />
             </a>
           ))

@@ -33,8 +33,8 @@ const ResumeProjectCard = (project) => (
 
 const ResumeTwoColumnTable = (item) => (
   <div className="md:flex pb-8" key={`item-${item.title}`}>
-    <div className="mb-2 flex md:flex-col w-full md:w-1/4 gap-x-1 items-end md:items-baseline">
-      <p className="text-xl">{item.title}</p>
+    <div className="mb-2 flex md:flex-col w-full md:w-1/4 items-end md:items-baseline">
+      <p className="mr-1 text-xl">{item.title}</p>
       <p className="text-sm">{item.period}</p>
     </div>
     <div className="w-full md:w-3/4">
@@ -56,19 +56,19 @@ const Resume = () => (
         {(new Date().getFullYear()) - 2007}년 째 소프트웨어를 만들고 있는 개발 중독자입니다. 백엔드 개발, 클라우드, 데브옵스 등을 공부하고 있습니다.<br />
         현재는 핀테크 업체 두나무에서 암호화폐 거래소 업비트의 메인 백엔드 시스템을 개발, 운영하고 있습니다.
       </p>
-      <div className="py-4 flex gap-x-1">
+      <div className="py-4 flex">
         <a href="https://twitter.com/hellodhlyn" target="_blank">
-          <div className="flex h-10 w-10 bg-blue-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+          <div className="mr-1 flex h-10 w-10 bg-blue-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-twitter before:align-middle" />
           </div>
         </a>
         <a href="https://instagram.com/hellodhlyn" target="_blank">
-          <div className="flex h-10 w-10 bg-pink-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+          <div className="mr-1 flex h-10 w-10 bg-pink-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-instagram before:align-middle" />
           </div>
         </a>
         <a href="https://github.com/hellodhlyn" target="_blank">
-          <div className="flex h-10 w-10 bg-gray-900 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
+          <div className="mr-1 flex h-10 w-10 bg-gray-900 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-github before:align-middle" />
           </div>
         </a>
