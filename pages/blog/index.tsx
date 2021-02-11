@@ -27,9 +27,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
                 <ImageWithLoader src={postNodes[0].thumbnailUrl || '/images/header.jpg'} />
               </div>
               <div className="md:w-2/5 py-2 md:p-4">
-                <div className="pb-4 flex gap-x-1">
+                <div className="pb-4 flex">
                   {postNodes[0].tags.map((tag) => (
-                    <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
+                    <div key={tag.name} className="mr-1 px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
                   ))}
                 </div>
                 <p className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-000">{postNodes[0].title}</p>
@@ -48,9 +48,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
                     <div className="h-56 md:h-64 w-full">
                       <ImageWithLoader src={post.thumbnailUrl || '/images/header.jpg'} />
                     </div>
-                    <div className="py-2 flex gap-x-1">
+                    <div className="py-2 flex">
                       {post.tags.map((tag) => (
-                        <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
+                        <div key={tag.name} className="mr-1 px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
                       ))}
                     </div>
                     <p className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-000 group-hover:underline">{post.title}</p>
@@ -71,9 +71,9 @@ const BlogIndex = ({ posts }: queryResponse): JSX.Element => {
                 <div className="h-56 md:h-48 w-full">
                   <ImageWithLoader src={post.thumbnailUrl || '/images/header.jpg'} />
                 </div>
-                <div className="py-2 flex gap-x-1">
+                <div className="py-2 flex">
                   {post.tags.map((tag) => (
-                    <div key={tag.name} className="px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
+                    <div key={tag.name} className="mr-1 px-2 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 text-sm"><span>{tag.name}</span></div>
                   ))}
                 </div>
                 <p className="text-xl font-bold text-gray-900 dark:text-gray-000 group-hover:underline">{post.title}</p>
