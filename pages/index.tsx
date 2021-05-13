@@ -52,9 +52,9 @@ const Index = (): JSX.Element => {
             Blog
           </p>
         </Link>
-        <Link href="/resume">
+        <Link href="/about">
           <p className="cursor-pointer hover:underline hover:opacity-50 transition-opacity">
-            Resume
+            About
           </p>
         </Link>
       </div>

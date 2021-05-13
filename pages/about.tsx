@@ -46,7 +46,7 @@ const ResumeTwoColumnTable = (item) => (
   </div>
 );
 
-const Resume = () => (
+const About = () => (
   <div className="max-w-screen-xl mx-auto p-4 md:px-8 pb-16">
     <p className="py-8 text-4xl text-gray-900 dark:text-gray-000 font-bold">About Me</p>
 
@@ -54,7 +54,7 @@ const Resume = () => (
     <div className="mb-8">
       <p>
         {(new Date().getFullYear()) - 2007}년 째 소프트웨어를 만들고 있는 개발 중독자입니다. 백엔드 개발, 클라우드, 데브옵스 등을 공부하고 있습니다.<br />
-        현재는 핀테크 업체 두나무에서 암호화폐 거래소 업비트의 메인 백엔드 시스템을 개발, 운영하고 있습니다.
+        현재는 핀테크 업체 두나무에서 백엔드 시스템을 개발, 운영하고 있습니다.
       </p>
       <div className="py-4 flex">
         <a href="https://twitter.com/hellodhlyn" target="_blank">
@@ -104,4 +104,4 @@ const Resume = () => (
   </div>
 );
 
-export default Resume;
+export default About;

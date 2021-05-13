@@ -24,8 +24,8 @@ export default function NavBar() {
         <Link href="/blog">
           <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">blog</p>
         </Link>
-        <Link href="/resume">
-          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">resume</p>
+        <Link href="/about">
+          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">about</p>
         </Link>
       </div>
 

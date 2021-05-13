@@ -3,27 +3,7 @@
     {
       "title": "두나무",
       "period": "2016 ~ 현재",
-      "description": "주요 백엔드 서버 개발 및 인프라 운영을 담당하고 있습니다.",
-      "projects": [
-        {
-          "title": "업비트",
-          "url": "https://upbit.com",
-          "thumbnail_url": "https://static.upbit.com/upbit-pc/seo/upbit_facebook.png",
-          "description": "주요 백엔드 서비스 개발 및 운영을 담당하고 있습니다. 또한 클라우드 인프라, CI/CD 등 개발 프로세스 구축을 담당하였습니다."
-        },
-        {
-          "title": "증권플러스 (구. 카카오스탁)",
-          "url": "https://stockplus.com",
-          "thumbnail_url": "https://stockplus.com/og_logo.png",
-          "description": "증권 정보 시세, 지표 및 퀀트 시스템 백엔드 API 개발 및 운영하였습니다."
-        },
-        {
-          "title": "다음 금융",
-          "url": "https://finance.daum.net",
-          "thumbnail_url": "https://storage.lynlab.co.kr/daum-finance.jpg",
-          "description": "증권 정보 시세 API 개발 및 운영을 담당하였습니다."
-        }
-      ]
+      "description": "주요 백엔드 서버 개발 및 인프라 운영을 담당하고 있습니다. 또한 클라우드 인프라, CI/CD 등 개발 프로세스 구축을 담당하였습니다."
     },
     {
       "title": "SW마에스트로 과정",
@@ -37,8 +17,9 @@
       "projects": [
         {
           "title": "결함 찾기",
+          "url": "https://lynlab.co.kr/blog/43",
           "thumbnail_url": "https://storage.lynlab.co.kr/checkmyandroid.png",
-          "description": "스마트폰 하드웨어의 불량을 점검하고 서비스 센터와 연계해주는 서비스입니다. 현재 서비스 종료."
+          "description": "스마트폰 하드웨어의 불량을 점검하고 서비스 센터와 연계해주는 서비스입니다. 2011년에 출발하여 현재 서비스 종료."
         }
       ]
     }
