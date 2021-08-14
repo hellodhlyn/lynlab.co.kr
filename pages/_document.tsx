@@ -26,7 +26,7 @@ export default class MyDoucment extends Document {
               `,
             }}
           />
-          <link href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
         </Head>
         <body>
           <script type="text/javascript" src="/scripts/theme.js" />

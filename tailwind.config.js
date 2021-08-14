@@ -9,7 +9,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      sans: ['"Spoqa Han Sans Neo"', 'sans-serif'],
+      sans: [
+        'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', '"Helvetica Neue"', '"Segoe UI"',
+        '"Apple SD Gothic Neo"', '"Noto Sans KR"', '"Malgun Gothic"', 'sans-serif'
+      ],
     },
     extend: {
       colors: {
