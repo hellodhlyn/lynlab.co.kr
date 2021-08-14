@@ -11,7 +11,7 @@
     "schema": "graphql codegen"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.3.1",
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.1.0",
     "bootstrap-icons": "^1.2.1",
     "dayjs": "^1.9.7",
@@ -19,35 +19,31 @@
     "graphql": "^14.7.0",
     "next": "^11.1.0",
     "next-seo": "^4.17.0",
-    "nextjs-progressbar": "^0.0.7",
+    "nextjs-progressbar": "^0.0.11",
     "postcss": "^8.2.10",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-lazy-load": "^3.1.13",
-    "react-markdown": "^5.0.3",
+    "react-markdown": "^7.0.0",
     "react-relay": "^9.1.0",
     "relay-runtime": "^10.1.1",
-    "tailwindcss": "^2.0.1",
+    "tailwindcss": "^2.2.7",
     "tailwindcss-line-clamp": "^1.0.5",
-    "tailwindcss-pseudo-elements": "^1.5.1"
+    "tailwindcss-pseudo-elements": "^2.0.0"
   },
   "devDependencies": {
     "@graphql-cli/codegen": "^1.17.17",
     "@graphql-codegen/schema-ast": "^1.18.1",
     "@next/eslint-plugin-next": "^11.1.0",
     "@types/node": "^14.14.10",
-    "@types/react": "^17.0.0",
+    "@types/react": "^17.0.18",
     "@types/react-relay": "^7.0.17",
-    "@typescript-eslint/eslint-plugin": "^4.9.1",
-    "@typescript-eslint/parser": "^4.9.1",
     "babel-plugin-relay": "^10.1.1",
     "eslint": "^7.15.0",
-    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-next": "11.1.0",
-    "eslint-plugin-import": "^2.22.1",
     "graphql-cli": "^4.0.0",
     "relay-compiler": "^9.1.0",
     "relay-compiler-language-typescript": "^13.0.2",
-    "typescript": "^4.1.2"
+    "typescript": "^4.3.5"
   }
 }
