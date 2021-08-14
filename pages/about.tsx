@@ -13,7 +13,7 @@ const ResumeProjectCard = (project) => (
       <div className="mt-2" />
       {
         project.url
-          ? <a href={project.url} target="_blank">
+          ? <a href={project.url} target="_blank" rel="noreferrer">
               <p className="text-sm text-blue-700 dark:text-blue-500 hover:underline cursor-pointer">
                 <i className="bi-link-45deg before:align-middle" /> {project.url.replace(/https:\/\//g, '')}
               </p>
@@ -21,7 +21,7 @@ const ResumeProjectCard = (project) => (
       }
       {
         project.github_repo
-          ? <a href={`https://github.com/${project.github_repo}`} target="_blank">
+          ? <a href={`https://github.com/${project.github_repo}`} target="_blank" rel="noreferrer">
               <p className="text-sm text-blue-700 dark:text-blue-500 hover:underline cursor-pointer">
                 <i className="bi-github before:align-middle" /> {project.github_repo}
               </p>
@@ -57,22 +57,22 @@ const About = () => (
         현재는 핀테크 업체 두나무에서 백엔드 시스템을 개발, 운영하고 있습니다.
       </p>
       <div className="py-4 flex">
-        <a href="https://twitter.com/hellodhlyn" target="_blank">
+        <a href="https://twitter.com/hellodhlyn" target="_blank" rel="noreferrer">
           <div className="mr-1 flex h-10 w-10 bg-blue-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-twitter before:align-middle" />
           </div>
         </a>
-        <a href="https://instagram.com/hellodhlyn" target="_blank">
+        <a href="https://instagram.com/hellodhlyn" target="_blank" rel="noreferrer">
           <div className="mr-1 flex h-10 w-10 bg-pink-500 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-instagram before:align-middle" />
           </div>
         </a>
-        <a href="https://github.com/hellodhlyn" target="_blank">
+        <a href="https://github.com/hellodhlyn" target="_blank" rel="noreferrer">
           <div className="mr-1 flex h-10 w-10 bg-gray-900 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-github before:align-middle" />
           </div>
         </a>
-        <a href="mailtio:lyn@lynlab.co.kr" target="_blank">
+        <a href="mailtio:lyn@lynlab.co.kr" target="_blank" rel="noreferrer">
           <div className="flex h-10 w-10 bg-red-800 rounded-full text-white justify-center items-center hover:opacity-50 transition-opacity">
             <i className="text-xl bi-envelope-fill before:align-middle" />
           </div>
@@ -95,7 +95,7 @@ const About = () => (
       {resume.projects.map((project) => ResumeProjectCard(project))}
     </div>
     <div className="py-4">
-      <a href="https://github.com/hellodhlyn" target="_blank">
+      <a href="https://github.com/hellodhlyn" target="_blank" rel="noreferrer">
         <span className="p-4 bg-gray-900 dark:bg-gray-000 text-gray-000 dark:text-gray-900 hover:underline">
           <i className="bi-github before:align-middle mr-1" /> GitHub에서 더 많은 프로젝트 보기 &gt;
         </span>

@@ -27,7 +27,7 @@ const Index = (): JSX.Element => {
           <p className="py-2 text-4xl md:text-6xl">Hoerin Doh <span className="text-2xl md:text-4xl">(도회린)</span></p>
           <p className="py-2 md:text-lg">
             💻 Backend Developer at <a href="https://dunamu.com" target="_blank"
-                                    className="cursor-pointer underline hover:opacity-50 transition-opacity">Dunamu
+                                    className="cursor-pointer underline hover:opacity-50 transition-opacity" rel="noreferrer">Dunamu
             Inc.</a><br/>
             🎓 Dept. of Computer Science, Yonsei Univ.
           </p>
@@ -35,7 +35,7 @@ const Index = (): JSX.Element => {
           <div className="py-4 flex justify-center">
             {
               contact.map((item) => (
-                <a href={item.link} target="_blank" key={`contact-${item.name}`}>
+                <a href={item.link} target="_blank" key={`contact-${item.name}`} rel="noreferrer">
                   <div className="flex p-1 text-white justify-center items-center hover:opacity-50 transition-opacity">
                     <i className={`text-xl bi-${item.icon} before:align-middle`}/>
                   </div>

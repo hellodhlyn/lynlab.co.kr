@@ -14,12 +14,11 @@ import { idPage_postQueryResponse as PostResponse } from '../../queries/blog/__g
 import { idPage_postIdsQueryResponse as PostIdsResponse } from '../../queries/blog/__generated__/idPage_postIdsQuery.graphql';
 
 const BlogPost = ({ post }: PostResponse): JSX.Element => {
+  const router = useRouter();
+  const { id } = router.query;
   if (!post) {
     return null;
   }
-
-  const router = useRouter();
-  const { id } = router.query;
 
   const relatedPosts = post.relatedPosts?.edges?.map((edge) => edge.node) || [];
 
@@ -75,7 +74,7 @@ const BlogPost = ({ post }: PostResponse): JSX.Element => {
               <p className="mb-4 text-3xl text-gray-000">관련 포스트</p>
               {
                 relatedPosts.map((relatedPost) => (
-                  <Link href={`/blog/${relatedPost.postId}`}>
+                  <Link href={`/blog/${relatedPost.postId}`} key={`relatedPost-${relatedPost.postId}`}>
                     <div className="relative h-48 w-full my-3 bg-black cursor-pointer hover:opacity-80 text-gray-000"
                          key={`related-${relatedPost.postId}`}>
                       <img className="absolute h-full w-full object-cover opacity-30"

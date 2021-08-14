@@ -35,7 +35,7 @@ export default function NavBar() {
         {
           contact.map((item) => (
             <a href={item.link} target="_blank" key={`contact-${item.name}`}
-               className="mr-3 cursor-pointer hover:opacity-50 transition-opacity">
+               className="mr-3 cursor-pointer hover:opacity-50 transition-opacity" rel="noreferrer">
               <i className={`text-xl bi-${item.icon} before:align-middle`} />
             </a>
           ))
