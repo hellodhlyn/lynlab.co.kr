@@ -11,7 +11,7 @@ export default class MyDoucment extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="ko">
         <Head>
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`} />
           <script

@@ -16,11 +16,5 @@
     "link": "https://github.com/hellodhlyn",
     "icon": "github",
     "color": "black"
-  },
-  {
-    "name": "email",
-    "link": "mailto:lyn@lynlab.co.kr",
-    "icon": "envelope-fill",
-    "color": "red-800"
   }
 ]

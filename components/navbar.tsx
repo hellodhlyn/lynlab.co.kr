@@ -17,15 +17,12 @@ export default function NavBar() {
     <div className="w-full h-16 md:h-20 fixed px-4 md:px-8 flex flex-wrap bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300
                     bg-opacity-80 border-b border-gray-300 dark:border-gray-800 items-center content-center transition-color z-50">
       <div className="flex flex-wrap items-center md:text-lg tracking-tighter">
-        <Link href="/">
-          <img className="h-10 md:h-12 w-10 md:w-12 cursor-pointer transition-opacity hover:opacity-50"
+        <Link href="https://hello.dhlyn.me" passHref>
+          <img className="h-10 md:h-12 w-10 md:w-12 cursor-pointer transition-opacity hover:opacity-50 space-x-4"
                src={`/images/logo-${theme !== 'dark' ? 'black' : 'white'}.png`} alt="lynlab logo" />
         </Link>
         <Link href="/blog">
-          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">blog</p>
-        </Link>
-        <Link href="/about">
-          <p className="ml-3 cursor-pointer transition-opacity hover:opacity-50">about</p>
+          <p className="ml-4 cursor-pointer transition-opacity hover:opacity-50">블로그</p>
         </Link>
       </div>
 
