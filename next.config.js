@@ -6,8 +6,8 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: 'https://hello.dhlyn.me',
-        permanent: true,
+        destination: '/blog',
+        permanent: false,
         basePath: false,
       },
     ];
