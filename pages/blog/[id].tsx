@@ -43,7 +43,7 @@ const BlogPost = ({ post }: PostResponse): JSX.Element => {
       <div className="md:h-screen-50 w-full">
         <img className="h-screen-30 md:h-screen-50 w-full object-cover md:absolute" src={post.thumbnailUrl || '/images/header.jpg'} />
         <div className="md:h-screen-50 w-full md:absolute flex flex-wrap content-center">
-          <div className="max-w-screen-lg mx-auto px-4 py-8 md:p-12 bg-gray-000 dark:bg-gray-900 bg-opacity-90">
+          <div className="max-w-screen-lg mx-auto px-4 py-8 md:p-12 bg-gray-000 dark:bg-gray-900 bg-opacity-90 rounded-lg">
             <p className="space-x-1 text-sm text-gray-700 dark:text-gray-500">
               {post.tags.map((tag) => <span key={tag.name}>#{tag.name}</span>)}
             </p>
@@ -59,11 +59,16 @@ const BlogPost = ({ post }: PostResponse): JSX.Element => {
 
       <div className="h-0 w-24 mx-auto md:hidden border-b-2 border-gray-300 rounded-full" />
 
-      <div>
-        {post.blobs.map((blob) => (
-          <div className="max-w-screen-lg mx-auto" key={blob.uuid}>
-            <ReactMarkdown className="px-4 prose md:prose-lg dark:prose-dark max-w-none">{blob.content}</ReactMarkdown>
+      <div className="max-w-screen-lg mx-auto px-4">
+        {dayjs(post.createdAt as Date).isBefore(dayjs().subtract(1, 'year')) &&
+          <div className="mb-8 p-4 bg-gradient-to-r from-red-800 to-orange-700 text-gray-000 rounded-lg shadow-lg">
+            💡 이 포스트는 작성된지 1년 이상 지났습니다. 정보글의 경우 최신 내용이 아닐 수 있는 점에 유의해주세요.
           </div>
+        }
+        {post.blobs.map((blob) => (
+          <ReactMarkdown key={blob.uuid} className="prose md:prose-lg dark:prose-dark max-w-none">
+            {blob.content}
+          </ReactMarkdown>
         ))}
       </div>
 
