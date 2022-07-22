@@ -1,7 +1,0 @@
-schema: https://api.lynlab.co.kr/graphql
-extensions:
-  codegen:
-    generates:
-      ./schema/schema.graphql:
-        plugins:
-        - schema-ast
