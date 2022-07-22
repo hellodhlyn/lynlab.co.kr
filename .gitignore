@@ -9,3 +9,5 @@ node_modules
 
 /.idea
 /.code
+
+/app/styles/app.css
