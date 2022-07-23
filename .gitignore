@@ -11,3 +11,4 @@ node_modules
 /.code
 
 /app/styles/app.css
+yarn-error.log

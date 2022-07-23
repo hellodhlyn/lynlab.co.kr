@@ -17,7 +17,9 @@
     "@typescript-eslint/quotes": [
       "error",
       "double"
-    ]
+    ],
+    "@typescript-eslint/no-throw-literal": "off",
+    "react-hooks/rules-of-hooks": "off"
   },
   "ignorePatterns": [
     "build/",
