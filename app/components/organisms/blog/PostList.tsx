@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import PostListItem from "~/components/molecules/blog/PostListItem";
 import Header from "~/components/atoms/Header";
+import Container from "~/components/atoms/Container";
 
 type PostListProps = {
   posts: {
@@ -13,7 +14,7 @@ type PostListProps = {
 
 export default function PostList({ posts }: PostListProps) {
   return (
-    <div className="max-w-6xl px-4 md:px-8 mx-auto">
+    <Container>
       <Header text="최근 글" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {posts.map((post) => (
@@ -22,6 +23,6 @@ export default function PostList({ posts }: PostListProps) {
           </Link>
         ))}
       </div>
-    </div>
+   </Container>
   );
 }

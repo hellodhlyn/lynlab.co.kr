@@ -1,6 +1,8 @@
+import Container from "~/components/atoms/Container";
+
 export default function Footer() {
   return (
-    <div className="max-w-6xl px-4 md:px-8 py-16 mt-32 mx-auto text-sm">
+    <Container className="py-16 mt-32 text-sm">
       <p>
         <img className="h-6 w-6 mr-1 inline" src="/images/cc.svg" alt="크리에이티브 커먼즈 라이선스"/>
         <img className="h-6 w-6 mr-1 inline" src="/images/by.svg" alt="크리에이티브 커먼즈 저작자표시"/>
@@ -14,6 +16,6 @@ export default function Footer() {
         에 따라 이용할 수 있습니다.
       </p>
       <p>© 2011 - {(new Date()).getFullYear()} Hoerin Doh, All rights reserved.</p>
-    </div>
+    </Container>
   );
 }

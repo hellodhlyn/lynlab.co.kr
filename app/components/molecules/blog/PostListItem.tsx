@@ -6,7 +6,7 @@ type PostListItemProps = {
 
 export default function PostListItem({ title, description, thumbnailUrl }: PostListItemProps) {
   return (
-    <div className="rounded-xl bg-white hover:opacity-75 shadow-xl transition-opacity">
+    <div className="rounded-xl bg-white hover:opacity-75 shadow-xl shadow-gray-100 transition-opacity">
       <img className="h-48 w-full object-cover rounded-t-xl"
            src={thumbnailUrl || "https://storage.lynlab.co.kr/20191103-bg-q50.jpg"} alt={`${title} 게시물의 썸네일 이미지`}
       />

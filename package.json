@@ -18,7 +18,10 @@
     "@remix-run/react": "^1.6.5",
     "@urql/exchange-request-policy": "^0.1.5",
     "cross-env": "^7.0.3",
+    "dayjs": "^1.11.4",
     "graphql": "^16.5.0",
+    "highlight.js": "^11.6.0",
+    "marked": "^4.0.18",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "urql": "^2.2.3"
@@ -30,6 +33,7 @@
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.4",
+    "@types/marked": "^4.0.3",
     "@types/react": "^17.0.47",
     "@types/react-dom": "^17.0.17",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
