@@ -1,6 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
-import type { LoaderFunction } from "@remix-run/cloudflare";
+import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
 import { gql } from "urql";
 import Index from "~/components/templates/blog/Index";
 import { client } from "~/lib/graphql/client.server";
@@ -34,6 +34,10 @@ const query = gql<IndexData>`
     }
   }
 `;
+
+export const meta: MetaFunction = () => ({
+  title: "블로그 | LYnLab",
+});
 
 export const loader: LoaderFunction = async () => {
   const { data, error } = await client.query<IndexData>(query).toPromise();
