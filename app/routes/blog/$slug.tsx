@@ -17,16 +17,22 @@ type BlogPostData = {
       type: "markdown";
       content: string;
     }[];
+    tags: {
+      slug: string;
+      name: string;
+    }[];
   };
 };
 
 const query = gql<BlogPostData>`
   query($slug: String!) {
     post(site: "lynlab.co.kr", namespace: "blog", slug: $slug) {
-      title description thumbnailUrl createdAt
-      blobs {
-        uuid type content
-      }
+      title
+      description
+      thumbnailUrl
+      createdAt
+      blobs { uuid type content }
+      tags { slug name }
     }
   }
 `;
@@ -49,6 +55,7 @@ export default function BlogPost() {
       blobs={post.blobs}
       thumbnailUrl={post.thumbnailUrl}
       createdAt={dayjs(post.createdAt).toDate()}
+      tags={post.tags}
     />
   );
 }

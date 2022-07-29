@@ -9,6 +9,10 @@ type IndexProps = {
     title: string;
     description: string;
     thumbnailUrl: string | null;
+    tags: {
+      slug: string;
+      name: string;
+    }[];
   }[];
   pageInfo: {
     hasPreviousPage: boolean;

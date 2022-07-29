@@ -17,6 +17,10 @@ type IndexData = {
             description: string;
             thumbnailUrl: string | null;
             createdAt: string;
+            tags: {
+              slug: string;
+              name: string;
+            }[];
           };
         }[];
         pageInfo: {
@@ -38,7 +42,12 @@ const query = gql<IndexData>`
           edges {
             cursor
             node {
-              slug title description thumbnailUrl createdAt
+              slug
+              title
+              description
+              thumbnailUrl
+              createdAt
+              tags { slug name }
             }
           }
           pageInfo {

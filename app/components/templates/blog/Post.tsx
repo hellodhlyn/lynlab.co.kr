@@ -13,11 +13,15 @@ type PostProps = {
     type: "markdown";
     content: string;
   }[];
+  tags: {
+    slug: string;
+    name: string;
+  }[];
   createdAt: Date;
 };
 
 export default function Post(
-  { title, description, thumbnailUrl, blobs, createdAt }: PostProps,
+  { title, description, thumbnailUrl, blobs, createdAt, tags }: PostProps,
 ) {
   return (
     <>
@@ -28,6 +32,7 @@ export default function Post(
           description={description}
           thumbnailUrl={thumbnailUrl}
           createdAt={createdAt}
+          tags={tags}
         />
         <PostContent blobs={blobs} />
       </Container>

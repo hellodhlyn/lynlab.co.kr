@@ -9,6 +9,10 @@ type PostListProps = {
     title: string;
     description: string;
     thumbnailUrl: string | null;
+    tags: {
+      slug: string;
+      name: string;
+    }[];
   }[];
 };
 
@@ -19,7 +23,12 @@ export default function PostList({ posts }: PostListProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {posts.map((post) => (
           <Link key={`post-${post.slug}`} to={`/blog/${post.slug}`}>
-            <PostListItem title={post.title} description={post.description} thumbnailUrl={post.thumbnailUrl} />
+            <PostListItem
+              title={post.title}
+              description={post.description}
+              thumbnailUrl={post.thumbnailUrl}
+              tags={post.tags}
+            />
           </Link>
         ))}
       </div>
