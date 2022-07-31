@@ -1,5 +1,28 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
   "extends": [
-    "next"
+    "@remix-run/eslint-config",
+    "airbnb-typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/quotes": [
+      "error",
+      "double"
+    ],
+    "@typescript-eslint/no-throw-literal": "off",
+    "react-hooks/rules-of-hooks": "off"
+  },
+  "ignorePatterns": [
+    "build/",
+    "public/"
   ]
 }
