@@ -3,6 +3,7 @@ import Navigation from "~/components/organisms/Navigation";
 import Footer from "~/components/organisms/Footer";
 import PostContent from "~/components/organisms/blog/PostContent";
 import PostIntro from "~/components/organisms/blog/PostIntro";
+import PostComment from "~/components/organisms/blog/PostComment";
 
 type PostProps = {
   title: string;
@@ -35,6 +36,7 @@ export default function Post(
           tags={tags}
         />
         <PostContent blobs={blobs} />
+        <PostComment />
       </Container>
       <Footer />
     </>

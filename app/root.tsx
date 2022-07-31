@@ -8,17 +8,22 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./styles/app.css";
+import fonts from "./styles/font.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "LYnLab",
   viewport: "width=device-width,initial-scale=1",
+  "twitter:site": "@hellodhlyn",
+  "twitter:creator": "@hellodhlyn",
 });
 
 export function links() {
   return [
     { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: fonts },
     { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/static/pretendard.css" },
+    { rel: "stylesheet", href: "https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css" },
   ];
 }
 

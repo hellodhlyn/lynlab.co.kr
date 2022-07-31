@@ -1,10 +1,11 @@
-import type { LoaderFunction } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/cloudflare";
+import type { Params } from "@remix-run/react";
+import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import dayjs from "dayjs";
 import { gql } from "urql";
 import Post from "~/components/templates/blog/Post";
 import { client } from "~/lib/graphql/client.server";
-import { json } from "@remix-run/cloudflare";
-import dayjs from "dayjs";
 
 type BlogPostData = {
   post: {
@@ -44,6 +45,24 @@ export const loader: LoaderFunction = async ({ params }) => {
     throw json(error, { status: 500 });
   }
   return json(data);
+};
+
+export const meta: MetaFunction = ({ data, params } : { data: BlogPostData, params: Params<string> }) => {
+  if (!data) {
+    return {};
+  }
+
+  return {
+    title: `${data.post.title} | LYnLab`,
+    description: data.post.description,
+    "og:title": data.post.title,
+    "og:image": data.post.thumbnailUrl,
+    "og:description": data.post.description,
+    "og:url": `https://lynlab.co.kr/blog/${params.slug}`,
+    "twitter:title": data.post.title,
+    "twitter:description": data.post.description,
+    "twitter:card": "summary_large_image",
+  };
 };
 
 export default function BlogPost() {
