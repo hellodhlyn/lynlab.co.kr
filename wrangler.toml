@@ -1,6 +1,5 @@
-name = "remix-cloudflare-workers"
+name = "lynlab-co-kr"
 
-account_id = ""
 workers_dev = true
 main = "./build/index.js"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
@@ -10,4 +9,4 @@ compatibility_date = "2022-04-05"
   bucket = "./public"
 
 [build]
-  command = "npm run build"
+  command = "yarn build"
