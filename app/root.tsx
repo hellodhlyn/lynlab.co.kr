@@ -23,7 +23,6 @@ export function links() {
     { rel: "stylesheet", href: styles },
     { rel: "stylesheet", href: fonts },
     { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/static/pretendard.css" },
-    { rel: "stylesheet", href: "https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css" },
   ];
 }
 

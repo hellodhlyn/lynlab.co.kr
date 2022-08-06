@@ -32,7 +32,7 @@ export default function PostIntro(
       <div className="w-32 my-16 mx-auto border-t border-gray-300"></div>
       {isOldPost ? (
         <div className="my-4 p-4 bg-gradient-to-r from-red-500 to-orange-500 rounded text-gray-100 shadow-xl shadow-gray-100">
-          <p><span className="tossface">💡</span> 이 글은 작성된지 1년 이상 지났습니다. 정보글의 경우 최신 내용이 아닐 수 있음에 유의해주세요.</p>
+          <p>💡 이 글은 작성된지 1년 이상 지났습니다. 정보글의 경우 최신 내용이 아닐 수 있음에 유의해주세요.</p>
         </div>
       ) : null}
     </>
