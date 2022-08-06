@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { gql } from "urql";
 import Post from "~/components/templates/blog/Post";
 import { client } from "~/lib/graphql/client.server";
+import monokai from "highlight.js/styles/monokai.css";
 
 type BlogPostData = {
   post: {
@@ -37,6 +38,12 @@ const query = gql<BlogPostData>`
     }
   }
 `;
+
+export function links() {
+  return [
+    { rel: "stylesheet", href: monokai },
+  ];
+}
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { slug } = params;
