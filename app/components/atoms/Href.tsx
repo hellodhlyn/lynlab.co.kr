@@ -2,12 +2,13 @@ import type { ReactNode } from "react";
 
 type HrefProps = {
   link: string;
+  underline?: boolean;
   children: ReactNode[] | ReactNode;
 };
 
-export default function Href({ link, children }: HrefProps) {
+export default function Href({ link, children, underline }: HrefProps) {
   return (
-    <a className="underline hover:cursor-pointer hover:opacity-50 transition-opacity"
+    <a className={`${underline === false ? "" : "underline"} hover:cursor-pointer hover:opacity-50 transition-opacity`}
        href={link} target="_blank" rel="noreferrer"
     >
       {children}
