@@ -1,4 +1,4 @@
-import LinkButton from "~/components/atoms/TextButton";
+import LinkButton from "~/components/atoms/LinkButton";
 
 type PaginatorProps = {
   reversed?: boolean;

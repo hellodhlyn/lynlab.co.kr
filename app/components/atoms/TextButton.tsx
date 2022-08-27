@@ -1,14 +1,22 @@
-import { Link } from "@remix-run/react";
-
-type LinkButtonProps = {
-  link: string;
+type TextButtonProps = {
+  type: "submit" | "reset" | "button";
   text: string;
+  onClick?: Function;
 };
 
-export default function LinkButton({ link, text }: LinkButtonProps) {
+export default function TextButton({ type, text, onClick }: TextButtonProps) {
   return (
-    <Link className="px-4 py-2 text-xl hover:opacity-50 transition-opacity" to={link}>
-      {text}
-    </Link>
+    <button
+      className="w-full h-12 bg-blue-500 text-white rounded-lg shadow-lg shadow-gray-200 hover:bg-blue-700 transition-colors"
+      type={type || "submit"}
+      onClick={(e) => {
+        e.preventDefault();
+        if (onClick) {
+          onClick();
+        }
+      }}
+    >
+    {text}
+    </button>
   );
 }
