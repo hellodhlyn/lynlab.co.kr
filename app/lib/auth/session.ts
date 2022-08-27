@@ -3,8 +3,7 @@ import { createCloudflareKVSessionStorage, createCookie } from "@remix-run/cloud
 const accessKeyKey = "accessKey";
 
 const sessionCookie = createCookie("__session", {
-  httpOnly: true,
-  sameSite: "lax",
+  secure: true,
 });
 
 const { getSession, commitSession, destroySession } = createCloudflareKVSessionStorage({

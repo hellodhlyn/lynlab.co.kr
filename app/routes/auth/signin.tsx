@@ -1,6 +1,7 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { useSearchParams } from "@remix-run/react";
+import type { NavigateFunction } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { get } from "@github/webauthn-json/browser-ponyfill";
 import SignIn from "~/components/templates/auth/SignIn";
 import {
@@ -24,13 +25,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json({});
 };
 
-async function onSignIn(username: string) {
+async function onSignIn(navigate: NavigateFunction, username: string) {
   let challenge: CredentialRequestOptions;
   try {
     challenge = await getAssertionChallenge(username);
   } catch (e) {
     if (e instanceof AssertionError && e.userNotFound) {
-      window.location.replace(`/auth/register?username=${username}`);
+      navigate(`/auth/register?username=${username}`);
       return;
     }
     throw e;
@@ -38,12 +39,13 @@ async function onSignIn(username: string) {
 
   const credential = await get(challenge);
   const token = await assertCredential(username, credential);
-  window.location.replace(`?accessKey=${token.accessKey}`);
+  navigate(`?accessKey=${token.accessKey}`);
 }
 
 export default function SignInPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const registered = searchParams.get("registered") === "true";
 
-  return <SignIn registered={registered} onSignIn={onSignIn} />;
+  return <SignIn registered={registered} onSignIn={(username) => onSignIn(navigate, username)} />;
 }

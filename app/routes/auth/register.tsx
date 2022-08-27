@@ -1,4 +1,5 @@
-import { useSearchParams } from "@remix-run/react";
+import type { NavigateFunction } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { create } from "@github/webauthn-json/browser-ponyfill";
 import {
   getRegistrationChallenge,
@@ -6,21 +7,22 @@ import {
 } from "~/lib/auth/client";
 import Register from "~/components/templates/auth/Register";
 
-async function onRegister(username: string) {
+async function onRegister(navigate: NavigateFunction, username: string) {
   const challenge = await getRegistrationChallenge(username);
   const credential = await create(challenge);
   await registerCredential(username, credential);
-  window.location.replace("/auth/signin?registered=true");
+  navigate("/auth/signin?registered=true");
 }
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const defaultUsername = searchParams.get("username");
 
   return (
     <Register
       defaultUsername={defaultUsername || undefined}
-      onRegister={onRegister}
+      onRegister={(username) => onRegister(navigate, username)}
     />
   );
 }
