@@ -1,14 +1,24 @@
-import { Link } from "@remix-run/react";
-
-type LinkButtonProps = {
-  link: string;
+type TextButtonProps = {
+  type: "submit" | "reset" | "button";
+  fullWidth?: boolean;
   text: string;
+  onClick?: Function;
 };
 
-export default function LinkButton({ link, text }: LinkButtonProps) {
+export default function TextButton({ type, fullWidth, text, onClick }: TextButtonProps) {
   return (
-    <Link className="px-4 py-2 text-xl hover:opacity-50 transition-opacity" to={link}>
+    <button
+      className={`${fullWidth ? "w-full" : ""} mr-1 px-4 py-2 bg-blue-500 text-white text-center rounded-lg
+                 shadow-lg shadow-blue-200 hover:bg-blue-700 transition-colors`}
+      type={type}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       {text}
-    </Link>
+    </button>
   );
 }
