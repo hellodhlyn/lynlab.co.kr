@@ -1,17 +1,22 @@
 import Navigation from "~/components/organisms/Navigation";
-import { UserInfo } from "~/components/organisms/dashboard/UserInfo";
+import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
 import type { User } from "~/lib/auth/client";
+import Alert from "~/components/atoms/blobs/Alert";
+import Container from "~/components/atoms/Container";
 
 type IndexProps = {
   currentUser: User;
-  onSignOut: Function;
+  alertProfileUpdated?: boolean;
 };
 
-export function Index({ currentUser, onSignOut }: IndexProps) {
+export function Index({ currentUser, alertProfileUpdated }: IndexProps) {
   return (
     <>
       <Navigation />
-      <UserInfo currentUser={currentUser} onSignOut={onSignOut} />
+      <Container>
+        {alertProfileUpdated && <Alert color="green" icon="✅" content="계정 정보를 바꿨습니다." />}
+      </Container>
+      <ProfileInfo currentUser={currentUser} />
     </>
   );
 }

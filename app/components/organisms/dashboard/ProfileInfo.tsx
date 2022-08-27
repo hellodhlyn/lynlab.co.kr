@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import type { User } from "~/lib/auth/client";
 import Container from "~/components/atoms/Container";
 import Header from "~/components/atoms/Header";
@@ -5,10 +6,9 @@ import TextButton from "~/components/atoms/TextButton";
 
 type UserInfoProps = {
   currentUser: User;
-  onSignOut: Function;
 };
 
-export function UserInfo({ currentUser, onSignOut }: UserInfoProps) {
+export function ProfileInfo({ currentUser }: UserInfoProps) {
   return (
     <Container>
       <Header text="계정 정보" />
@@ -25,7 +25,12 @@ export function UserInfo({ currentUser, onSignOut }: UserInfoProps) {
           <p className="text-sm text-gray-700">@{currentUser.name}</p>
         </div>
         <div>
-          <TextButton type="button" text="로그아웃" onClick={onSignOut} />
+          <Link to="/dash/profile/update">
+            <TextButton type="button" display="inline" text="프로필 변경" />
+          </Link>
+          <Link to="/auth/signout">
+            <TextButton type="button" display="inline" text="로그아웃" />
+          </Link>
         </div>
       </div>
     </Container>

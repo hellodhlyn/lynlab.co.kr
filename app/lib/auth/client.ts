@@ -7,8 +7,7 @@ import {
   parseRequestOptionsFromJSON,
 } from "@github/webauthn-json/browser-ponyfill";
 
-// const host = "https://auth.lynlab.co.kr";
-const host = "http://127.0.0.1:8080";
+const host = "https://auth.lynlab.co.kr";
 
 export class AssertionError {
   public userNotFound: boolean = false;
@@ -75,6 +74,19 @@ export async function whoAmI(accessKey: string): Promise<User> {
     headers: {
       "Authorization": `Bearer ${accessKey}`,
     },
+  });
+  return res.json<User>();
+}
+
+export async function updateProfile(accessKey: string, profile: Partial<User>): Promise<User> {
+  const url = `${host}/whoami`;
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      "Authorization": `Bearer ${accessKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(profile),
   });
   return res.json<User>();
 }
