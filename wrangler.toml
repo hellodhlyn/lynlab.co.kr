@@ -5,6 +5,10 @@ main = "./build/index.js"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
 compatibility_date = "2022-04-05"
 
+[[kv_namespaces]]
+  binding = "__KV_SESSIONS"
+  id = "5a841e28615d4e978c6e8380cabb5aa7"
+
 [site]
   bucket = "./public"
 

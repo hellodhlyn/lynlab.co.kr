@@ -1,3 +1,5 @@
+import type { LoaderFunction } from "@remix-run/cloudflare";
+import { json, redirect } from "@remix-run/cloudflare";
 import { useSearchParams } from "@remix-run/react";
 import { get } from "@github/webauthn-json/browser-ponyfill";
 import SignIn from "~/components/templates/auth/SignIn";
@@ -6,6 +8,21 @@ import {
   AssertionError,
   getAssertionChallenge,
 } from "~/lib/auth/client";
+import { setAccessKey } from "~/lib/auth/session";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const urlParams = new URL(request.url).searchParams;
+  const accessKey = urlParams.get("accessKey");
+  if (accessKey) {
+    return redirect("/dash", {
+      headers: {
+        "Set-Cookie": await setAccessKey(request, accessKey),
+      },
+    });
+  }
+
+  return json({});
+};
 
 async function onSignIn(username: string) {
   let challenge: CredentialRequestOptions;
@@ -20,8 +37,8 @@ async function onSignIn(username: string) {
   }
 
   const credential = await get(challenge);
-  await assertCredential(username, credential);
-  window.location.replace("/admin");
+  const token = await assertCredential(username, credential);
+  window.location.replace(`?accessKey=${token.accessKey}`);
 }
 
 export default function SignInPage() {
