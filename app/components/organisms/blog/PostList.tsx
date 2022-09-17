@@ -9,6 +9,7 @@ type PostListProps = {
     title: string;
     description: string;
     thumbnailUrl: string | null;
+    thumbnailBlurhash: string | null;
     tags: {
       slug: string;
       name: string;
@@ -27,6 +28,7 @@ export default function PostList({ posts }: PostListProps) {
               title={post.title}
               description={post.description}
               thumbnailUrl={post.thumbnailUrl}
+              thumbnailBlurhash={post.thumbnailBlurhash}
               tags={post.tags}
             />
           </Link>

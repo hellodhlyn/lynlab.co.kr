@@ -16,6 +16,7 @@ type IndexData = {
             title: string;
             description: string;
             thumbnailUrl: string | null;
+            thumbnailBlurhash: string | null;
             createdAt: string;
             tags: {
               slug: string;
@@ -46,6 +47,7 @@ const query = gql<IndexData>`
               title
               description
               thumbnailUrl
+              thumbnailBlurhash
               createdAt
               tags { slug name }
             }

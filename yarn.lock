@@ -2084,6 +2084,11 @@ bl@^4.0.3, bl@^4.1.0:
     inherits "^2.0.4"
     readable-stream "^3.4.0"
 
+blurhash@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/blurhash/-/blurhash-2.0.0.tgz#c2e6392043d5355241cf9ddaec9359023ea57a40"
+  integrity sha512-fdEZnyJZ5E5s9neCfZUMSMkKfMtdKz1fG53t/iYvMjUFUsDnyZ1YnRRayKBK/B8cilNwe5gaIrPF8QlLrukEZQ==
+
 body-parser@1.20.0:
   version "1.20.0"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.0.tgz#3de69bd89011c11573d7bfee6a64f11b6bd27cc5"
@@ -5900,6 +5905,11 @@ raw-body@2.5.1:
     http-errors "2.0.0"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-blurhash@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-blurhash/-/react-blurhash-0.1.3.tgz#735f28f8f07fb358d7efe7e7e6dc65a7272bf89e"
+  integrity sha512-Q9lqbXg92NU6/2DoIl/cBM8YWL+Z4X66OiG4aT9ozOgjBwx104LHFCH5stf6aF+s0Q9Wf310Ul+dG+VXJltmPg==
 
 react-dom@^17.0.2:
   version "17.0.2"

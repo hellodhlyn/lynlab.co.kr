@@ -9,6 +9,7 @@ type IndexProps = {
     title: string;
     description: string;
     thumbnailUrl: string | null;
+    thumbnailBlurhash: string | null;
     tags: {
       slug: string;
       name: string;
