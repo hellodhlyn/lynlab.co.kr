@@ -88,8 +88,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function index() {
   const { edges, pageInfo } = useLoaderData<IndexData>().site.namespace.posts;
+  const posts = edges.map((edge) => edge.node).sort((a, b) => (Date.parse(b.createdAt) - Date.parse(a.createdAt)));
   return <Index
-    posts={edges.reverse().map((edge) => edge.node)}
+    posts={posts}
     pageInfo={pageInfo}
   />;
 }
