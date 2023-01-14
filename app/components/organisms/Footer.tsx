@@ -1,5 +1,4 @@
 import Container from "~/components/atoms/Container";
-import { Link } from "@remix-run/react";
 import Href from "~/components/atoms/Href";
 
 export default function Footer() {

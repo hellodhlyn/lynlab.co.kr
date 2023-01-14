@@ -10,7 +10,7 @@ type UpdateProfileProps = {
 };
 
 export function UpdateProfile({ currentUser }: UpdateProfileProps) {
-  const [_, setDisplayName] = useInput({
+  const [, setDisplayName] = useInput({
     name: "displayName",
     type: "text",
     placeholder: "닉네임",

@@ -6,7 +6,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useCatch,
 } from "@remix-run/react";
 import styles from "./styles/app.css";
 import fonts from "./styles/font.css";

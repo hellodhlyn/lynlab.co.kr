@@ -81,7 +81,7 @@ export function CatchBoundary() {
   if (status === 404) {
     message = "작성된 글을 찾을 수 없어요 :(";
   } else {
-    message = "알 수 없는 오류가 발생했어요 :("
+    message = "알 수 없는 오류가 발생했어요 :(";
   }
 
   return (
