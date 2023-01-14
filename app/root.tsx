@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from "@remix-run/react";
 import styles from "./styles/app.css";
 import fonts from "./styles/font.css";
@@ -24,6 +25,21 @@ export function links() {
     { rel: "stylesheet", href: fonts },
     { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/static/pretendard.css" },
   ];
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error);
+  return (
+    <html lang="ko">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Scripts />
+      </body>
+    </html>
+  );
 }
 
 export default function App() {
