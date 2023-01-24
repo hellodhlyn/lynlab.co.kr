@@ -5,14 +5,14 @@ import { useOutletContext } from "react-router";
 import { gql } from "urql";
 import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
-import Navigation from "~/components/organisms/Navigation";
 import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
+import { SiteInfo } from "~/components/organisms/dashboard/SiteInfo";
 import { client } from "~/lib/graphql/client.server";
 import type { User } from "~/lib/auth/client";
-import { SiteInfo } from "~/components/organisms/dashboard/SiteInfo";
 
 type Site = {
   site: {
+    slug: string;
     namespaces: {
       name: string;
       slug: string;
@@ -24,6 +24,7 @@ const siteSlug = "lynlab.co.kr";
 const query = gql<Site>`
   query($slug: String!) {
     site(slug: $slug) {
+      slug
       namespaces {
         name
         slug

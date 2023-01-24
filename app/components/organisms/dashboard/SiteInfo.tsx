@@ -13,7 +13,7 @@ type SiteInfoProps = {
 export function SiteInfo({ slug, namespaces }: SiteInfoProps) {
   return (
     <Container>
-      <Header text="게시물 목록" />
+      <Header text="글 목록" />
       {namespaces.map((namespace) => (
         <Link to={`/dash/posts/${slug}/${namespace.slug}`} key={namespace.slug}>
           <p className="py-1 underline cursor-pointer hover:opacity-50 transition-opacity">
