@@ -5,6 +5,7 @@ import type { User } from "~/lib/auth/client";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { gql } from "urql";
 import { client } from "~/lib/graphql/client.server";
+import Navigation from "~/components/organisms/Navigation";
 
 type Viewer = {
   viewer: User;
@@ -46,6 +47,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Dashboard() {
   const currentUser = useLoaderData<User>();
   return (
-    <Outlet context={currentUser} />
+    <>
+      <Navigation showDashboard={true} />
+      <Outlet context={currentUser} />
+    </>
   );
 }

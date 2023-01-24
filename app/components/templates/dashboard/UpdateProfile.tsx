@@ -20,7 +20,7 @@ export function UpdateProfile({ currentUser }: UpdateProfileProps) {
     name: "profileImage",
     type: "url",
     placeholder: "프로필 사진 URL",
-    defaultValue: currentUser.profileImage,
+    defaultValue: currentUser.profileImageUrl,
   });
 
   return (

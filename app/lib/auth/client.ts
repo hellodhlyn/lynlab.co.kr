@@ -66,16 +66,3 @@ export async function assertCredential(username: string, credential: Authenticat
   });
   return res.json<AssertionResult>();
 }
-
-export async function updateProfile(accessKey: string, profile: Partial<User>): Promise<User> {
-  const url = `${host}/whoami`;
-  const res = await fetch(url, {
-    method: "PATCH",
-    headers: {
-      "Authorization": `Bearer ${accessKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(profile),
-  });
-  return res.json<User>();
-}

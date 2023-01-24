@@ -26,10 +26,10 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
         </div>
         <div>
           <Link to="/dash/profile/update">
-            <TextButton type="button" display="inline" text="프로필 변경" />
+            <TextButton type="button" text="프로필 변경" />
           </Link>
           <Link to="/auth/signout">
-            <TextButton type="button" display="inline" text="로그아웃" />
+            <TextButton type="button" text="로그아웃" />
           </Link>
         </div>
       </div>

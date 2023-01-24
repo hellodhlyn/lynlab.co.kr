@@ -2,7 +2,11 @@ import { Link } from "@remix-run/react";
 import Container from "~/components/atoms/Container";
 import Href from "~/components/atoms/Href";
 
-export default function Navigation() {
+type NavigationProps = {
+  showDashboard?: boolean;
+};
+
+export default function Navigation({ showDashboard }: NavigationProps) {
   return (
     <Container className="pt-16 pb-8">
       <p className="text-5xl md:text-6xl font-black">LYnLab</p>
@@ -13,6 +17,11 @@ export default function Navigation() {
         <Link to="/blog">
           <span className="px-2 hover:opacity-50 transition-opacity">블로그</span>
         </Link>
+        {showDashboard && (
+          <Link to="/dash">
+            <span className="px-2 hover:opacity-50 transition-opacity">대시보드</span>
+          </Link>
+        )}
       </p>
     </Container>
   );
