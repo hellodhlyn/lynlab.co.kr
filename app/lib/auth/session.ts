@@ -1,6 +1,7 @@
 import { createCloudflareKVSessionStorage, createCookie } from "@remix-run/cloudflare";
 
 const accessKeyKey = "accessKey";
+const refreshKeyKey = "refreshKey";
 
 const sessionCookie = createCookie("__session", {
   secure: true,
@@ -19,9 +20,10 @@ export async function getAccessKey(request: Request): Promise<string | null> {
   return null;
 }
 
-export async function setAccessKey(request: Request, accessKey: string): Promise<string> {
+export async function setKeys(request: Request, accessKey: string, refreshKey: string): Promise<string> {
   const session = await getSession(request.headers.get("Cookie"));
   session.set(accessKeyKey, accessKey);
+  session.set(refreshKeyKey, refreshKey);
   return commitSession(session);
 }
 

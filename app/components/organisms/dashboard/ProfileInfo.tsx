@@ -16,7 +16,7 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
         <div className="px-2">
           <img
             className="h-12 w-12 rounded-full"
-            src={currentUser.profileImage}
+            src={currentUser.profileImageUrl}
             alt={`${currentUser.name}의 프로필 사진`}
           />
         </div>

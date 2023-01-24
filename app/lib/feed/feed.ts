@@ -37,7 +37,7 @@ const query = gql<FeedData>`
 `;
 
 export async function getFeed(): Promise<Feed | null> {
-  const { data } = await client.query<FeedData>(query).toPromise();
+  const { data } = await client.query<FeedData>(query, {}).toPromise();
   if (!data) {
     return null;
   }
