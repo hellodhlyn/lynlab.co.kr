@@ -5,6 +5,7 @@ import { gql } from "urql";
 import TextButton from "~/components/atoms/TextButton";
 import Container from "~/components/atoms/Container";
 import { runQuery } from "~/lib/graphql/client.server";
+import { LockClosedIcon, LockOpenIcon } from "@heroicons/react/24/outline";
 
 type Viewer = {
   viewer: {
@@ -57,11 +58,30 @@ export default function PostList() {
         </Link>
       </div>
       <div className="py-4">
-        {posts.map((post) => (
-          <Link to={`./${post.slug}`} key={post.slug} className="hover:underline hover:opacity-50 transition-opacity">
-            <p className="my-2">{post.title}</p>
-          </Link>
-        ))}
+        <table className="w-full table-auto border border-gray-300">
+          <thead>
+            <tr className="border-b-2 border-gray-300">
+              <th className="p-4 text-left">제목</th>
+              <th className="p-4">상태</th>
+            </tr>
+          </thead>
+          <tbody>
+          {posts.map((post) => (
+            <tr key={post.slug} className="border-b border-gray-200">
+              <td className="p-4">
+                <Link to={`./${post.slug}`} className="hover:underline hover:opacity-50 transition-opacity">
+                  {post.title}
+                </Link>
+              </td>
+              <td className="p-4">
+                {post.visibility === "public" ?
+                  <LockOpenIcon className="h-6 w-6 mx-auto" /> :
+                  <LockClosedIcon className="h-6 w-6 mx-auto" />}
+              </td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
       </div>
     </Container>
   );

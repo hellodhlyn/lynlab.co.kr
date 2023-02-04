@@ -20,6 +20,10 @@ type QueryData = {
         id: string;
         content: string;
       }[];
+      tags: {
+        slug: string;
+        name: string;
+      }[];
       thumbnailUrl: string;
     } | null;
   };
@@ -27,6 +31,10 @@ type QueryData = {
     slug: string;
     namespace: {
       slug: string;
+      tags: {
+        slug: string;
+        name: string;
+      }[];
     };
   };
 };
@@ -37,12 +45,14 @@ const query = gql<QueryData>`
       post(site: $site, namespace: $namespace, slug: $slug) {
         id slug title description thumbnailUrl
         blobs { id uuid content }
+        tags { slug name }
       }
     }
     site(slug: $site) {
       slug
       namespace(slug: $namespace) {
         slug
+        tags { slug name }
       }
     }
   }
@@ -75,6 +85,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<QueryData>(data);
 };
 
+function parseTags(tagInput: FormDataEntryValue | null): string[] {
+  if (!tagInput || typeof tagInput !== "string") {
+    return [];
+  }
+  return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
+}
+
 async function createPost(params: Params, body: FormData, request: Request): Promise<OperationResult> {
   const { site, namespace } = params;
   const input = {
@@ -86,6 +103,7 @@ async function createPost(params: Params, body: FormData, request: Request): Pro
     blobs: [
       { type: "markdown", content: body.get("content") },
     ],
+    tags: parseTags(body.get("tags")),
   };
 
   return runMutation(createPostMutation, { input }, request);
@@ -97,6 +115,7 @@ async function updatePost(params: Params, body: FormData, request: Request): Pro
     title: body.get("title") || null,
     description: body.get("description") || null,
     thumbnailUrl: body.get("thumbnailUrl") || null,
+    tags: parseTags(body.get("tags")),
   }).filter(([, value]) => value !== null));
 
   const blobInput = {

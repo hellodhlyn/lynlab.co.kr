@@ -10,13 +10,13 @@ type UpdateProfileProps = {
 };
 
 export function UpdateProfile({ currentUser }: UpdateProfileProps) {
-  const [, setDisplayName] = useInput({
+  const [, , setDisplayName] = useInput({
     name: "displayName",
     type: "text",
     placeholder: "닉네임",
     defaultValue: currentUser.displayName,
   });
-  const [profileImage, setProfileImage] = useInput({
+  const [profileImage, , setProfileImage] = useInput({
     name: "profileImage",
     type: "url",
     placeholder: "프로필 사진 URL",

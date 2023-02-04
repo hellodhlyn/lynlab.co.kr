@@ -12,9 +12,9 @@ type InputProps = {
 
 function inputElement(
   { name, type, placeholder, defaultValue, onEnter, label } : InputProps,
-  setValue?: Dispatch<SetStateAction<string>>,
-): JSX.Element {
-  return (
+): [string, Dispatch<SetStateAction<string>>, JSX.Element] {
+  const [value, setValue] = useState<string>(defaultValue || "");
+  return [value, setValue, (
     <>
       {label && <p className="py-4 font-bold">{label}</p>}
       <input
@@ -22,7 +22,7 @@ function inputElement(
         type={type}
         name={name}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        value={value}
         onChange={(e) => setValue && setValue(e.target.value)}
         onKeyUp={(e) => {
           if (onEnter && e.key === "Enter") {
@@ -31,14 +31,13 @@ function inputElement(
         }}
       />
     </>
-  );
+  )];
 }
 
 export function Input(props: InputProps): JSX.Element {
-  return inputElement(props);
+  return inputElement(props)[2];
 }
 
-export function useInput(props : InputProps): [string, JSX.Element] {
-  const [value, setValue] = useState<string>(props.defaultValue || "");
-  return [value, inputElement(props, setValue)];
+export function useInput(props : InputProps): [string, Dispatch<SetStateAction<string>>, JSX.Element] {
+  return inputElement(props);
 }

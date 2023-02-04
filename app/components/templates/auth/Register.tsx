@@ -8,7 +8,7 @@ type RegisterPageProps = {
 };
 
 export default function Register({ defaultUsername, onRegister }: RegisterPageProps) {
-  const [username, setUsername] = useInput({
+  const [username, , setUsername] = useInput({
     type: "text",
     placeholder: "아이디",
     defaultValue: defaultUsername,

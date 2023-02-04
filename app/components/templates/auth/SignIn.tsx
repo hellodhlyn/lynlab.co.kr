@@ -8,7 +8,7 @@ type SignInProps = {
 };
 
 export default function SignIn({ registered, onSignIn }: SignInProps) {
-  const [username, setUsername] = useInput({
+  const [username, , setUsername] = useInput({
     type: "text",
     placeholder: "아이디",
     onEnter: () => { onSignIn(username); },
