@@ -104,6 +104,7 @@ async function createPost(params: Params, body: FormData, request: Request): Pro
       { type: "markdown", content: body.get("content") },
     ],
     tags: parseTags(body.get("tags")),
+    visibility: body.get("visibility"),
   };
 
   return runMutation(createPostMutation, { input }, request);
@@ -116,6 +117,7 @@ async function updatePost(params: Params, body: FormData, request: Request): Pro
     description: body.get("description") || null,
     thumbnailUrl: body.get("thumbnailUrl") || null,
     tags: parseTags(body.get("tags")),
+    visibility: body.get("visibility"),
   }).filter(([, value]) => value !== null));
 
   const blobInput = {

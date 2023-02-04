@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Input, useInput } from "~/components/atoms/Input";
 import { Textarea } from "~/components/atoms/Textarea";
+import { Select } from "~/components/atoms/Select";
 
 type PostEditProps = {
   site: {
@@ -26,8 +27,14 @@ type PostEditProps = {
       slug: string;
       name: string;
     }[];
+    visibility: "public" | "private";
   };
 };
+
+const visibilityOptions = [
+  { value: "public", label: "공개" },
+  { value: "private", label: "비공개" },
+];
 
 export function PostEdit({ site, post }: PostEditProps) {
   const newPost = !post;
@@ -73,7 +80,14 @@ export function PostEdit({ site, post }: PostEditProps) {
         </>
       )}
 
-      <Input name="title" type="text" label="제목" defaultValue={post?.title} />
+      <div className="flex">
+        <div className="w-3/4 pr-2">
+          <Input name="title" type="text" label="제목" defaultValue={post?.title} />
+        </div>
+        <div className="w-1/4 pl-2">
+          <Select name="visibility" label="공개 범위" options={visibilityOptions} defaultValue={post?.visibility || "private"} />
+        </div>
+      </div>
       <Textarea name="description" label="요약" rows={3} defaultValue={post?.description} />
       <Input name="thumbnailUrl" type="url" label="미리보기" defaultValue={post?.thumbnailUrl || undefined} />
       <Textarea name="content" label="내용" rows={20} defaultValue={post ? post.blobs[0].content : undefined} />
