@@ -16,7 +16,7 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
         <div className="px-2">
           <img
             className="h-12 w-12 rounded-full"
-            src={currentUser.profileImage}
+            src={currentUser.profileImageUrl}
             alt={`${currentUser.name}의 프로필 사진`}
           />
         </div>
@@ -26,10 +26,10 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
         </div>
         <div>
           <Link to="/dash/profile/update">
-            <TextButton type="button" display="inline" text="프로필 변경" />
+            <TextButton type="button" text="프로필 변경" />
           </Link>
           <Link to="/auth/signout">
-            <TextButton type="button" display="inline" text="로그아웃" />
+            <TextButton type="button" text="로그아웃" />
           </Link>
         </div>
       </div>

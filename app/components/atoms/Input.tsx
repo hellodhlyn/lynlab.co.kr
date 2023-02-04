@@ -7,34 +7,37 @@ type InputProps = {
   placeholder?: string;
   defaultValue?: string;
   onEnter?: Function;
+  label?: string;
 };
 
 function inputElement(
-  { name, type, placeholder, defaultValue, onEnter } : InputProps,
-  setValue?: Dispatch<SetStateAction<string>>,
-): JSX.Element {
-  return (
-    <input
-      className="w-full h-12 border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      onChange={(e) => setValue && setValue(e.target.value)}
-      onKeyUp={(e) => {
-        if (onEnter && e.key === "Enter") {
-          onEnter();
-        }
-      }}
-    />
-  );
+  { name, type, placeholder, defaultValue, onEnter, label } : InputProps,
+): [string, Dispatch<SetStateAction<string>>, JSX.Element] {
+  const [value, setValue] = useState<string>(defaultValue || "");
+  return [value, setValue, (
+    <>
+      {label && <p className="py-4 font-bold">{label}</p>}
+      <input
+        className="w-full h-12 border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => setValue && setValue(e.target.value)}
+        onKeyUp={(e) => {
+          if (onEnter && e.key === "Enter") {
+            onEnter();
+          }
+        }}
+      />
+    </>
+  )];
 }
 
 export function Input(props: InputProps): JSX.Element {
-  return inputElement(props);
+  return inputElement(props)[2];
 }
 
-export function useInput(props : InputProps): [string, JSX.Element] {
-  const [value, setValue] = useState<string>(props.defaultValue || "");
-  return [value, inputElement(props, setValue)];
+export function useInput(props : InputProps): [string, Dispatch<SetStateAction<string>>, JSX.Element] {
+  return inputElement(props);
 }

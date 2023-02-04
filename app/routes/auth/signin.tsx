@@ -9,20 +9,49 @@ import {
   AssertionError,
   getAssertionChallenge,
 } from "~/lib/auth/client";
-import { setAccessKey } from "~/lib/auth/session";
+import { setKeys } from "~/lib/auth/session";
+import { client } from "~/lib/graphql/client.server";
+import { gql } from "urql";
+
+type CreateApiTokenData = {
+  createApiToken: {
+    accessKey: string;
+    refreshKey: string;
+  };
+};
+
+const createApiTokenMutation = gql<CreateApiTokenData>`
+  mutation CreateApiToken($input: CreateApiTokenInput!) {
+    createApiToken(input: $input) {
+      accessKey
+      refreshKey
+    }
+  }
+`;
 
 export const loader: LoaderFunction = async ({ request }) => {
   const urlParams = new URL(request.url).searchParams;
-  const accessKey = urlParams.get("accessKey");
-  if (accessKey) {
-    return redirect("/dash", {
-      headers: {
-        "Set-Cookie": await setAccessKey(request, accessKey),
-      },
-    });
+  const authAccessKey = urlParams.get("accessKey");
+  if (!authAccessKey) {
+    return json({});
   }
 
-  return json({});
+  const { data } = await client.mutation<CreateApiTokenData>(createApiTokenMutation, {
+    input: {
+      provider: "lynlab",
+      token: authAccessKey,
+    },
+  }).toPromise();
+  if (!data) {
+    return json({});
+  }
+
+  const { accessKey, refreshKey } = data.createApiToken;
+  return redirect("/dash", {
+    headers: {
+      "Set-Cookie": await setKeys(request, accessKey, refreshKey),
+    },
+  });
 };
 
 async function onSignIn(navigate: NavigateFunction, username: string) {

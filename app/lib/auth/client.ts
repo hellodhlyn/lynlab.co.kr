@@ -14,10 +14,9 @@ export class AssertionError {
 }
 
 export type User = {
-  id: string;
   name: string;
   displayName: string;
-  profileImage: string;
+  profileImageUrl: string;
 };
 
 type AssertionResult = {
@@ -66,27 +65,4 @@ export async function assertCredential(username: string, credential: Authenticat
     body: JSON.stringify(credential),
   });
   return res.json<AssertionResult>();
-}
-
-export async function whoAmI(accessKey: string): Promise<User> {
-  const url = `${host}/whoami`;
-  const res = await fetch(url, {
-    headers: {
-      "Authorization": `Bearer ${accessKey}`,
-    },
-  });
-  return res.json<User>();
-}
-
-export async function updateProfile(accessKey: string, profile: Partial<User>): Promise<User> {
-  const url = `${host}/whoami`;
-  const res = await fetch(url, {
-    method: "PATCH",
-    headers: {
-      "Authorization": `Bearer ${accessKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(profile),
-  });
-  return res.json<User>();
 }
