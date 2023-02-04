@@ -1,25 +1,25 @@
-import type { Dispatch, HTMLInputTypeAttribute, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 
-type InputProps = {
+type TextareaProps = {
   name?: string;
-  type?: HTMLInputTypeAttribute;
+  rows?: number;
   placeholder?: string;
   defaultValue?: string;
   onEnter?: Function;
   label?: string;
 };
 
-function inputElement(
-  { name, type, placeholder, defaultValue, onEnter, label } : InputProps,
+function textareaElement(
+  { name, rows, placeholder, defaultValue, onEnter, label } : TextareaProps,
   setValue?: Dispatch<SetStateAction<string>>,
 ): JSX.Element {
   return (
     <>
       {label && <p className="py-4 font-bold">{label}</p>}
-      <input
-        className="w-full h-12 border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
-        type={type}
+      <textarea
+        className="w-full border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
+        rows={rows}
         name={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
@@ -34,11 +34,11 @@ function inputElement(
   );
 }
 
-export function Input(props: InputProps): JSX.Element {
-  return inputElement(props);
+export function Textarea(props: TextareaProps): JSX.Element {
+  return textareaElement(props);
 }
 
-export function useInput(props : InputProps): [string, JSX.Element] {
+export function useTextarea(props : TextareaProps): [string, JSX.Element] {
   const [value, setValue] = useState<string>(props.defaultValue || "");
-  return [value, inputElement(props, setValue)];
+  return [value, textareaElement(props, setValue)];
 }

@@ -45,16 +45,15 @@ export default function DashboardIndex() {
   const { namespaces } = useLoaderData<Site>().site;
 
   const [searchParams] = useSearchParams();
-  const redirectedFrom = searchParams.get("from");
   const redirectedResult = searchParams.get("result");
-  const alertProfileUpdated = (redirectedFrom === "/dash/profile/update" && redirectedResult === "succeed");
+  const redirectedMessage = searchParams.get("message");
 
   const currentUser = useOutletContext<User>();
   return (
     <>
-      {alertProfileUpdated && (
+      {(redirectedResult === "succeed") && (
         <Container>
-          <Alert color="green" icon="✅" content="계정 정보를 바꿨습니다." />
+          <Alert color="green" icon="✅" content={redirectedMessage || "요청을 성공적으로 처리했어요."} />
         </Container>
       )}
       <ProfileInfo currentUser={currentUser} />
