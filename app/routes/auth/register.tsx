@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useFetcher } from "@remix-run/react";
-import type { ActionFunction } from "@remix-run/cloudflare";
+import { useFetcher, useLoaderData } from "@remix-run/react";
+import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { create, parseCreationOptionsFromJSON } from "@github/webauthn-json/browser-ponyfill";
 import { gql } from "urql";
+import { hasAccessKey } from "~/lib/auth/session";
 import { runMutation } from "~/lib/graphql/client.server";
 import RegisterInputs from "~/components/organisms/auth/RegisterInputs";
 import Header from "~/components/atoms/Header";
@@ -22,21 +23,37 @@ const registerMutation = gql<RegisterData>`
   }
 `;
 
-export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const username = formData.get("username");
-  const credential = formData.get("credential");
+export const loader: LoaderFunction = async ({ request }) => {
+  return json({ signedIn: await hasAccessKey(request) });
+};
 
-  const registerInput = { username, credential };
-  const { data } = await runMutation<RegisterData>(registerMutation, { input: registerInput });
+export const action: ActionFunction = async ({ request }) => {
+  const signedIn = await hasAccessKey(request);
+  const formData = await request.formData();
+  const registerInput = {
+    username: signedIn ? null : formData.get("username"),
+    credential: formData.get("credential"),
+  };
+
+  const { data } = await runMutation<RegisterData>(
+    registerMutation,
+    { input: registerInput },
+    signedIn ? request : undefined,
+  );
   if (!data) {
     return json({});
   }
 
-  return redirect("/auth/signin?registered=true");
+  return redirect(encodeURI(
+    signedIn ?
+      "/dash?result=succeed&message=새로운 인증키를 등록했어요." :
+      "/auth/signin?registered=true",
+  ));
 };
 
 export default function Register() {
+  const { signedIn } = useLoaderData<{ signedIn: boolean }>();
+
   const challenge = useFetcher();
   const register = useFetcher();
 
@@ -56,9 +73,9 @@ export default function Register() {
   return (
     <div className="h-screen flex justify-center items-center">
       <div>
-        <Header text="LYnLab 계정 만들기" />
+        <Header text={signedIn ? "인증키 등록" : "LYnLab 계정 만들기"} />
         <challenge.Form method="post" action="/auth/webauthn/register_challenge">
-          <RegisterInputs />
+          <RegisterInputs showInputs={!signedIn} />
         </challenge.Form>
       </div>
     </div>

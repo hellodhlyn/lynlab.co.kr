@@ -12,9 +12,14 @@ const { getSession, commitSession, destroySession } = createCloudflareKVSessionS
   cookie: sessionCookie,
 });
 
+export async function hasAccessKey(request: Request): Promise<boolean> {
+  const session = await getSession(request.headers.get("Cookie"));
+  return session.has(accessKeyKey);
+}
+
 export async function getAccessKey(request: Request): Promise<string | null> {
   const session = await getSession(request.headers.get("Cookie"));
-  if (session.has(accessKeyKey)) {
+  if (await hasAccessKey(request)) {
     return session.get(accessKeyKey) as string;
   }
   return null;
