@@ -1,17 +1,13 @@
-import type { LoaderFunction } from "@remix-run/cloudflare";
-import { json, redirect } from "@remix-run/cloudflare";
-import type { NavigateFunction } from "@remix-run/react";
-import { useNavigate, useSearchParams } from "@remix-run/react";
-import { get } from "@github/webauthn-json/browser-ponyfill";
-import SignIn from "~/components/templates/auth/SignIn";
-import {
-  assertCredential,
-  AssertionError,
-  getAssertionChallenge,
-} from "~/lib/auth/client";
-import { setKeys } from "~/lib/auth/session";
-import { client } from "~/lib/graphql/client.server";
+import { useEffect } from "react";
 import { gql } from "urql";
+import type { ActionFunction } from "@remix-run/cloudflare";
+import { json, redirect } from "@remix-run/cloudflare";
+import { useFetcher, useSearchParams } from "@remix-run/react";
+import { get, parseRequestOptionsFromJSON } from "@github/webauthn-json/browser-ponyfill";
+import Header from "~/components/atoms/Header";
+import SignInInputs from "~/components/organisms/auth/SignInInputs";
+import { runMutation } from "~/lib/graphql/client.server";
+import { setKeys } from "~/lib/auth/session";
 
 type CreateApiTokenData = {
   createApiToken: {
@@ -21,7 +17,7 @@ type CreateApiTokenData = {
 };
 
 const createApiTokenMutation = gql<CreateApiTokenData>`
-  mutation CreateApiToken($input: CreateApiTokenInput!) {
+  mutation($input: CreateApiTokenInput!) {
     createApiToken(input: $input) {
       accessKey
       refreshKey
@@ -29,19 +25,13 @@ const createApiTokenMutation = gql<CreateApiTokenData>`
   }
 `;
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const urlParams = new URL(request.url).searchParams;
-  const authAccessKey = urlParams.get("accessKey");
-  if (!authAccessKey) {
-    return json({});
-  }
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const username = formData.get("username");
+  const credential = formData.get("credential");
 
-  const { data } = await client.mutation<CreateApiTokenData>(createApiTokenMutation, {
-    input: {
-      provider: "lynlab",
-      token: authAccessKey,
-    },
-  }).toPromise();
+  const signInInput = { webAuthn: { username, credential } };
+  const { data } = await runMutation<CreateApiTokenData>(createApiTokenMutation, { input: signInInput });
   if (!data) {
     return json({});
   }
@@ -54,27 +44,34 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-async function onSignIn(navigate: NavigateFunction, username: string) {
-  let challenge: CredentialRequestOptions;
-  try {
-    challenge = await getAssertionChallenge(username);
-  } catch (e) {
-    if (e instanceof AssertionError && e.userNotFound) {
-      navigate(`/auth/register?username=${username}`);
-      return;
+export default function SignIn() {
+  const challenge = useFetcher();
+  const signIn = useFetcher();
+
+  const registered = useSearchParams()[0].get("registered") === "true";
+
+  useEffect(() => {
+    if (challenge.type === "done" && signIn.state === "idle" && challenge.data.options) {
+      const { username, options } = challenge.data;
+      const registerOptions = parseRequestOptionsFromJSON({ publicKey: JSON.parse(options) });
+      get(registerOptions).then((credential) => {
+        signIn.submit(
+          { username, credential: JSON.stringify(credential) },
+          { method: "post" },
+        );
+      });
     }
-    throw e;
-  }
+  }, [challenge]);
 
-  const credential = await get(challenge);
-  const token = await assertCredential(username, credential);
-  navigate(`?accessKey=${token.accessKey}`);
-}
-
-export default function SignInPage() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const registered = searchParams.get("registered") === "true";
-
-  return <SignIn registered={registered} onSignIn={(username) => onSignIn(navigate, username)} />;
+  return (
+    <div className="h-screen flex justify-center items-center">
+      <div>
+        <Header text="LYnLab에 로그인" />
+        {registered && <p>등록에 성공했습니다. 등록한 계정으로 로그인해주세요.</p>}
+        <challenge.Form method="post" action="/auth/webauthn/signin_challenge">
+          <SignInInputs />
+        </challenge.Form>
+      </div>
+    </div>
+  );
 }

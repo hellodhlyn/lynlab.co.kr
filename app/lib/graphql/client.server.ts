@@ -13,8 +13,10 @@ import { requestPolicyExchange } from "@urql/exchange-request-policy";
 import type { DocumentNode } from "graphql/language";
 import { getAccessKey } from "~/lib/auth/session";
 
+const URL = "https://cms.lynlab.co.kr/graphql";
+
 export const client = createClient({
-  url: "https://cms.lynlab.co.kr/graphql",
+  url: URL,
   exchanges: [
     debugExchange,
     dedupExchange,
@@ -25,7 +27,7 @@ export const client = createClient({
 });
 
 export const noCacheClient = createClient({
-  url: "https://cms.lynlab.co.kr/graphql",
+  url: URL,
   exchanges: [
     debugExchange,
     fetchExchange,
