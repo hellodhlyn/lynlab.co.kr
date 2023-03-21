@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import dayjs from "dayjs";
 
 type PostIntroProps = {
@@ -26,7 +27,9 @@ export default function PostIntro(
       <p className="mt-4 text-sm text-gray-500">
         <span className="pr-2 border-r border-gray-300">{dayjs(createdAt).format("YYYY-MM-DD")}</span>
         {tags.map((tag) => (
-          <span key={`tag-${tag.slug}`} className="ml-2">#{tag.name}</span>
+          <Link to={`/blog?tag=${tag.slug}`} key={`tag-${tag.slug}`} className="ml-2">
+            <span className="text-gray-700 cursor-pointer hover:underline">#{tag.name}</span>
+          </Link>
         ))}
       </p>
       <div className="w-32 my-16 mx-auto border-t border-gray-300"></div>

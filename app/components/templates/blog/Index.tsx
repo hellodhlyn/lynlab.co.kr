@@ -20,14 +20,20 @@ type IndexProps = {
     hasNextPage: boolean;
     startCursor: string | null;
     endCursor: string | null;
-  }
+  };
+  filter?: {
+    tags?: {
+      slug: string;
+      name: string;
+    }[];
+  };
 };
 
-export default function Index({ posts, pageInfo }: IndexProps) {
+export default function Index({ posts, filter, pageInfo }: IndexProps) {
   return (
     <>
       <Navigation/>
-      <PostList posts={posts} />
+      <PostList posts={posts} filter={filter} />
       <Paginator pageInfo={pageInfo} reversed={true} />
       <Footer />
     </>
