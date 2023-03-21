@@ -7,7 +7,6 @@ type PageButton = {
 
 function PageButton({ text, cursor }: PageButton) {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.getAll("tag"));
   return (
     <span
       className="px-4 py-2 text-xl hover:opacity-75 transition-opacity cursor-pointer"

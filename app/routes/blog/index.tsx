@@ -56,7 +56,6 @@ export default function index() {
   const pageData = useLoaderData<LoaderData>();
   const { edges, pageInfo } = pageData.site.namespace.posts;
   const posts = edges.map((edge) => edge.node).sort((a, b) => (Date.parse(b.createdAt) - Date.parse(a.createdAt)));
-  console.log(pageData)
   return (
     <Index
       posts={posts}

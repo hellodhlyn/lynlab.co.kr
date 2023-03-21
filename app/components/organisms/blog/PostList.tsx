@@ -1,8 +1,9 @@
-import { Link, useSearchParams } from "@remix-run/react";
+import { useSearchParams } from "@remix-run/react";
 import { AdjustmentsHorizontalIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import PostListItem from "~/components/molecules/blog/PostListItem";
 import Header from "~/components/atoms/Header";
 import Container from "~/components/atoms/Container";
+import { useNavigate } from "react-router";
 
 type PostListProps = {
   posts: {
@@ -54,7 +55,7 @@ export default function PostList({ posts, filter }: PostListProps) {
       )}
       <div className="py-4 grid grid-cols-1 md:grid-cols-3 gap-4">
         {posts.map((post) => (
-          <Link key={`post-${post.slug}`} to={`/blog/${post.slug}`}>
+          <div key={`post-${post.slug}`} onClick={() => { useNavigate()(`/blog/${post.slug}`); }}>
             <PostListItem
               title={post.title}
               description={post.description}
@@ -62,7 +63,7 @@ export default function PostList({ posts, filter }: PostListProps) {
               thumbnailBlurhash={post.thumbnailBlurhash}
               tags={post.tags}
             />
-          </Link>
+          </div>
         ))}
       </div>
    </Container>
