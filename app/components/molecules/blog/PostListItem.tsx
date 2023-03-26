@@ -1,4 +1,3 @@
-import { Link } from "@remix-run/react";
 import { BlurHashImage } from "~/components/atoms/BlurHashImage";
 
 const defaultThumbnailUrl = "https://imagedelivery.net/ow37D_OHIRrKbNlwamdRUg/4dffcf46-5563-4b04-5a93-6cfaf368ca00/thumbnail";
@@ -13,14 +12,17 @@ type PostListItemProps = {
     slug: string;
     name: string;
   }[];
+
+  onPostClick: () => void;
+  onTagClick: (slug: string) => void;
 };
 
 export default function PostListItem(
-  { title, description, thumbnailUrl, thumbnailBlurhash, tags }: PostListItemProps,
+  { title, description, thumbnailUrl, thumbnailBlurhash, tags, onPostClick, onTagClick }: PostListItemProps,
 ) {
   return (
     <div className="rounded-xl bg-white shadow-xl shadow-gray-200">
-      <div className="hover:opacity-75 transition">
+      <div className="hover:opacity-75 transition cursor-pointer" onClick={onPostClick}>
         <BlurHashImage
           className="h-48 w-full object-cover rounded-t-xl"
           src={thumbnailUrl || defaultThumbnailUrl}
@@ -35,11 +37,13 @@ export default function PostListItem(
 
       <div className="p-4 flex flex-wrap text-sm text-gray-500 z-10">
         {tags.map((tag) => (
-          <Link to={`?tag=${tag.slug}`} key={tag.slug}>
-            <div className="mt-1 mr-1 py-1 px-2 w-content border rounded-lg hover:bg-gray-200 transition">
-              #{tag.name}
-            </div>
-          </Link>
+          <div
+            key={`tag-${tag.slug}`}
+            className="mt-1 mr-1 py-1 px-2 w-content border rounded-lg hover:bg-gray-200 transition cursor-pointer"
+            onClick={() =>{ onTagClick(tag.slug); }}
+          >
+            #{tag.name}
+          </div>
         ))}
       </div>
     </div>
