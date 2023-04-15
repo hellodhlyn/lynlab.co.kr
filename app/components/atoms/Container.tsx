@@ -6,8 +6,12 @@ type ContainerProps = {
 };
 
 export default function Container({ className, children }: ContainerProps) {
+  if (!className?.includes("max-w-")) {
+    className = `max-w-6xl ${className || ""}`;
+  }
+
   return (
-    <div className={`max-w-6xl px-3 md:px-8 mx-auto ${className || ""}`}>
+    <div className={`px-3 md:px-8 mx-auto ${className || ""}`}>
       {children}
     </div>
   );
