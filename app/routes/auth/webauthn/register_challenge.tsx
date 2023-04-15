@@ -2,7 +2,7 @@ import type { ActionFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import { gql } from "urql";
 import { runMutation } from "~/lib/graphql/client.server";
-import { hasAccessKey } from "~/lib/auth/session";
+import { hasAccessKey } from "~/lib/auth/session.server";
 
 type ChallengeData = {
   challengeWebAuthnRegister: {

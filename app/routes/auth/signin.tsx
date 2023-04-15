@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import type { ActionFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { useFetcher, useSearchParams } from "@remix-run/react";
+import { Form, useFetcher, useSearchParams } from "@remix-run/react";
 import { get, parseRequestOptionsFromJSON } from "@github/webauthn-json/browser-ponyfill";
 import Header from "~/components/atoms/Header";
-import SignInInputs from "~/components/organisms/auth/SignInInputs";
 import { runMutation } from "~/lib/graphql/client.server";
-import { setKeys } from "~/lib/auth/session";
-import type { CreateApiTokenData, CreateApiTokenVariables } from "./signin.graphql";
+import { setKeys } from "~/lib/auth/session.server";
 import { createApiTokenMutation } from "./signin.graphql";
 
 export const action: ActionFunction = async ({ request }) => {
@@ -16,7 +14,7 @@ export const action: ActionFunction = async ({ request }) => {
   const credential = formData.get("credential")!.toString();
 
   const input = { webAuthn: { username, credential } };
-  const { data } = await runMutation<CreateApiTokenData, CreateApiTokenVariables>(createApiTokenMutation, { input });
+  const { data } = await runMutation(createApiTokenMutation, { input });
   if (!data) {
     return json({});
   }
@@ -50,12 +48,14 @@ export default function SignIn() {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div>
+      <div className="w-96">
         <Header text="LYnLab에 로그인" />
         {registered && <p>등록에 성공했습니다. 등록한 계정으로 로그인해주세요.</p>}
-        <challenge.Form method="post" action="/auth/webauthn/signin_challenge">
-          <SignInInputs />
-        </challenge.Form>
+        <Form action="/auth/github" method="post">
+          <button className="w-full my-1 p-4 bg-gray-900 hover:bg-gray-800 text-gray-50 rounded-xl transition">
+            GitHub 계정으로 로그인
+          </button>
+        </Form>
       </div>
     </div>
   );

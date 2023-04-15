@@ -4,7 +4,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { create, parseCreationOptionsFromJSON } from "@github/webauthn-json/browser-ponyfill";
 import { gql } from "urql";
-import { hasAccessKey } from "~/lib/auth/session";
+import { hasAccessKey } from "~/lib/auth/session.server";
 import { runMutation } from "~/lib/graphql/client.server";
 import RegisterInputs from "~/components/organisms/auth/RegisterInputs";
 import Header from "~/components/atoms/Header";

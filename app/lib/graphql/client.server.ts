@@ -11,7 +11,7 @@ import {
 } from "urql";
 import { requestPolicyExchange } from "@urql/exchange-request-policy";
 import type { DocumentNode } from "graphql/language";
-import { getAccessKey } from "~/lib/auth/session";
+import { User } from "../auth/user";
 
 const URL = "https://cms.lynlab.co.kr/graphql";
 
@@ -34,12 +34,12 @@ export const noCacheClient = createClient({
   ],
 });
 
-async function prepareContext(request?: Request): Promise<Partial<OperationContext>> {
+async function prepareContext(user?: User): Promise<Partial<OperationContext>> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
-  if (request) {
-    headers.Authorization = `Bearer ${await getAccessKey(request)}`;
+  if (user) {
+    headers.Authorization = `Bearer ${user.apiToken.accessKey}`;
   }
 
   return {
@@ -50,17 +50,17 @@ async function prepareContext(request?: Request): Promise<Partial<OperationConte
 export async function runQuery<Data = any, Variables extends AnyVariables = AnyVariables>(
   query: DocumentNode | TypedDocumentNode<Data, Variables> | string,
   variables: Variables,
-  request?: Request,
+  user: User,
 ): Promise<OperationResult<Data, Variables>> {
-  const useClient = request ? noCacheClient : client;
-  return useClient.query<Data, Variables>(query, variables, await prepareContext(request)).toPromise();
+  const useClient = user ? noCacheClient : client;
+  return useClient.query<Data, Variables>(query, variables, await prepareContext(user)).toPromise();
 }
 
 export async function runMutation<Data = any, Variables extends AnyVariables = AnyVariables>(
   query: DocumentNode | TypedDocumentNode<Data, Variables> | string,
   variables: Variables,
-  request?: Request,
+  user?: User,
 ): Promise<OperationResult<Data, Variables>> {
-  const useClient = request ? noCacheClient : client;
-  return useClient.mutation<Data, Variables>(query, variables, await prepareContext(request)).toPromise();
+  const useClient = user ? noCacheClient : client;
+  return useClient.mutation<Data, Variables>(query, variables, await prepareContext(user)).toPromise();
 }

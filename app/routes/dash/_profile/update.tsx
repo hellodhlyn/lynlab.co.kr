@@ -1,9 +1,8 @@
-import { Form } from "@remix-run/react";
+import { Form, useOutletContext } from "@remix-run/react";
 import type { ActionFunction } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
-import { useOutletContext } from "react-router";
 import { UpdateProfile } from "~/components/templates/dashboard/UpdateProfile";
-import type { User } from "~/lib/auth/client";
+import type { User } from "~/lib/auth/user";
 
 export const action: ActionFunction = async ({ request }) => {
   // TODO - implement

@@ -2,7 +2,7 @@ import Header from "~/components/atoms/Header";
 import Navigation from "~/components/organisms/Navigation";
 import Container from "~/components/atoms/Container";
 import { useInput } from "~/components/atoms/Input";
-import type { User } from "~/lib/auth/client";
+import type { User } from "~/lib/auth/user";
 import TextButton from "~/components/atoms/TextButton";
 
 type UpdateProfileProps = {
@@ -20,7 +20,7 @@ export function UpdateProfile({ currentUser }: UpdateProfileProps) {
     name: "profileImage",
     type: "url",
     placeholder: "프로필 사진 URL",
-    defaultValue: currentUser.profileImageUrl,
+    defaultValue: currentUser.profileImageUrl || "",
   });
 
   return (

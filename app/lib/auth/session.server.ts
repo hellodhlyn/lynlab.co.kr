@@ -1,16 +1,18 @@
-import { createCloudflareKVSessionStorage, createCookie } from "@remix-run/cloudflare";
+import { createCookie, createWorkersKVSessionStorage } from "@remix-run/cloudflare";
 
 const accessKeyKey = "accessKey";
 const refreshKeyKey = "refreshKey";
 
 const sessionCookie = createCookie("__session", {
-  secure: true,
+  secure: SITE_HOST?.startsWith("https://") === true,
 });
 
-const { getSession, commitSession, destroySession } = createCloudflareKVSessionStorage({
+export const sessionStorage = createWorkersKVSessionStorage({
   kv: __KV_SESSIONS,
   cookie: sessionCookie,
 });
+
+const { getSession, commitSession, destroySession } = sessionStorage;
 
 export async function hasAccessKey(request: Request): Promise<boolean> {
   const session = await getSession(request.headers.get("Cookie"));

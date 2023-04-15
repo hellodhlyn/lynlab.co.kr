@@ -1,48 +1,31 @@
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import { Link, useLoaderData, useOutletContext, useSearchParams } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
-import { useOutletContext } from "react-router";
-import { gql } from "urql";
 import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
 import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
-import { SiteInfo } from "~/components/organisms/dashboard/SiteInfo";
-import { client } from "~/lib/graphql/client.server";
-import type { User } from "~/lib/auth/client";
+import { runQuery } from "~/lib/graphql/client.server";
+import type { User } from "~/lib/auth/user";
+import { IndexData, indexQuery } from "./index.graphql";
+import { authenticator } from "~/lib/auth/authenticator.server";
+import { PostList } from "~/components/organisms/dashboard/PostList";
+import Header from "~/components/atoms/Header";
 
-type Site = {
-  site: {
-    slug: string;
-    namespaces: {
-      name: string;
-      slug: string;
-    }[];
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await authenticator.isAuthenticated(request);
+  const { data, error } = await runQuery(indexQuery, undefined, user!);
+  if (!data || error) {
+    throw new Error(`Failed to get data: ${error}`);
   }
-};
 
-const siteSlug = "lynlab.co.kr";
-const query = gql<Site>`
-  query($slug: String!) {
-    site(slug: $slug) {
-      slug
-      namespaces {
-        name
-        slug
-      }
-    }
-  }
-`;
+  data.viewer.posts.nodes = data.viewer.posts.nodes
+    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
 
-export const loader: LoaderFunction = async () => {
-  const { data } = await client.query<Site>(query, { slug: siteSlug }).toPromise();
-  if (!data) {
-    throw new Error("Failed to get site");
-  }
-  return json<Site>(data);
+  return json<IndexData>(data);
 };
 
 export default function DashboardIndex() {
-  const { namespaces } = useLoaderData<Site>().site;
+  const { viewer } = useLoaderData<IndexData>();
 
   const [searchParams] = useSearchParams();
   const redirectedResult = searchParams.get("result");
@@ -58,7 +41,10 @@ export default function DashboardIndex() {
       )}
       <ProfileInfo currentUser={currentUser} />
       <div className="py-8" />
-      <SiteInfo slug={siteSlug} namespaces={namespaces} />
+      <Container className="mb-16">
+        <Header text="게시글 관리" />
+        <PostList posts={viewer.posts.nodes} />
+      </Container>
     </>
   );
 }

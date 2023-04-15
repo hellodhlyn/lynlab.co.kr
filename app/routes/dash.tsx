@@ -1,47 +1,16 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { getAccessKey } from "~/lib/auth/session";
-import type { User } from "~/lib/auth/client";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { gql } from "urql";
-import { client } from "~/lib/graphql/client.server";
 import Navigation from "~/components/organisms/Navigation";
-
-type Viewer = {
-  viewer: User;
-};
-
-const query = gql<Viewer>`
-  query {
-    viewer {
-      name
-      displayName
-      profileImageUrl
-    }
-  }
-`;
-
-async function getViewer(accessKey: string): Promise<User> {
-  const fetchOptions = { headers: { Authorization: `Bearer ${accessKey}` } };
-  const { data } = await client.query<Viewer>(query, {}, { fetchOptions }).toPromise();
-  if (!data) {
-    throw new Error("Failed to get viewer");
-  }
-  return data.viewer;
-}
+import { authenticator } from "~/lib/auth/authenticator.server";
+import { User } from "~/lib/auth/user";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const accessKey = await getAccessKey(request);
-  if (!accessKey) {
+  const user = await authenticator.isAuthenticated(request);
+  if (!user) {
     return redirect("/auth/signin");
   }
-
-  try {
-    const viewer = await getViewer(accessKey);
-    return json(viewer);
-  } catch (e) {
-    return redirect("/auth/signout");
-  }
+  return json<User>(user);
 };
 
 export default function Dashboard() {

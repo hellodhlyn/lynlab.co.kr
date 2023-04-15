@@ -34,6 +34,8 @@
     "react-blurhash": "^0.3.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.10.0",
+    "remix-auth": "^3.4.0",
+    "remix-auth-github": "^1.3.0",
     "urql": "^4.0.0"
   },
   "devDependencies": {

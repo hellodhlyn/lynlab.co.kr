@@ -1,6 +1,6 @@
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
-import { deleteAccessKey } from "~/lib/auth/session";
+import { deleteAccessKey } from "~/lib/auth/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   return redirect("/dash", {

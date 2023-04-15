@@ -1,13 +1,11 @@
-import { useParams } from "react-router";
+import { Outlet, useLoaderData, useParams } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import { gql } from "urql";
 import { SiteSelector } from "~/components/organisms/dashboard/SiteSelector";
 import { client } from "~/lib/graphql/client.server";
-import { Outlet, useLoaderData } from "@remix-run/react";
 import Header from "~/components/atoms/Header";
 import Container from "~/components/atoms/Container";
-import TextButton from "~/components/atoms/TextButton";
 
 type Site = {
   site: {

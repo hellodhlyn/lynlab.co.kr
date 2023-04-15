@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import type { User } from "~/lib/auth/client";
+import type { User } from "~/lib/auth/user";
 import Container from "~/components/atoms/Container";
 import Header from "~/components/atoms/Header";
 import TextButton from "~/components/atoms/TextButton";
@@ -14,11 +14,11 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
       <Header text="계정 정보" />
       <div className="flex">
         <div className="px-2">
-          <img
+          {currentUser.profileImageUrl && <img
             className="h-12 w-12 rounded-full"
             src={currentUser.profileImageUrl}
             alt={`${currentUser.name}의 프로필 사진`}
-          />
+          />}
         </div>
         <div className="flex-grow">
           <p className="text-xl font-bold">{currentUser.displayName}</p>
