@@ -36,7 +36,10 @@ async function createPost(params: Params, body: FormData, user: User): Promise<O
     description: body.get("description"),
     thumbnailUrl: body.get("thumbnailUrl") || null,
     blobs: [
-      { type: "markdown", content: body.get("content") },
+      {
+        type: "markdown",
+        markdown: { text: body.get("content") },
+      },
     ],
     tags: parseTags(body.get("tags")),
     visibility: body.get("visibility"),
