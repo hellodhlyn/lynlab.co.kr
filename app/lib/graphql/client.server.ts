@@ -4,7 +4,6 @@ import type {
 } from "urql";
 import {
   createClient,
-  dedupExchange,
   cacheExchange,
   fetchExchange,
   debugExchange,
@@ -19,7 +18,6 @@ export const client = createClient({
   url: URL,
   exchanges: [
     debugExchange,
-    dedupExchange,
     requestPolicyExchange({ ttl: 60_000, shouldUpgrade: () => true }),
     cacheExchange,
     fetchExchange,

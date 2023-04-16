@@ -12,5 +12,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (error || !data) {
     return json([]);
   }
-  return json(data.site.namespace.posts.nodes);
+  return json(data.site.namespace.posts.nodes, {
+    headers: {
+      "Cache-Control": "public, max-age=600, s-maxage=600",
+    },
+  });
 };
