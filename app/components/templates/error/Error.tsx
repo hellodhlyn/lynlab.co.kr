@@ -11,7 +11,6 @@ type ErrorProps = {
 export default function Error({ emoji, message }: ErrorProps) {
   return (
     <>
-      <Navigation />
       <Container className="max-w-4xl py-8">
         <ErrorMessage emoji={emoji} message={message} />
       </Container>

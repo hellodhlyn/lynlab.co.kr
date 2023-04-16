@@ -1,4 +1,5 @@
 import { Outlet } from "@remix-run/react";
+import Footer from "~/components/organisms/Footer";
 import Navigation from "~/components/organisms/Navigation";
 
 export default function Dict() {
@@ -6,6 +7,7 @@ export default function Dict() {
     <>
       <Navigation />
       <Outlet />
+      <Footer />
     </>
   )
 }

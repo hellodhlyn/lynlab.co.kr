@@ -4,7 +4,7 @@ import { recommendationQuery } from "./_recommends.graphql";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const titleQuery = new URL(request.url).searchParams.get("title");
-  if (titleQuery === null || titleQuery.length < 2) {
+  if (titleQuery === null || titleQuery.length === 0) {
     return json([]);
   }
 
