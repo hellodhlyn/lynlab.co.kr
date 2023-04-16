@@ -50,7 +50,7 @@ async function prepareContext(user?: User): Promise<Partial<OperationContext>> {
 export async function runQuery<Data = any, Variables extends AnyVariables = AnyVariables>(
   query: DocumentNode | TypedDocumentNode<Data, Variables> | string,
   variables: Variables,
-  user: User,
+  user?: User,
 ): Promise<OperationResult<Data, Variables>> {
   const useClient = user ? noCacheClient : client;
   return useClient.query<Data, Variables>(query, variables, await prepareContext(user)).toPromise();

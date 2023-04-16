@@ -1,0 +1,11 @@
+import { Outlet } from "@remix-run/react";
+import Navigation from "~/components/organisms/Navigation";
+
+export default function Dict() {
+  return (
+    <>
+      <Navigation />
+      <Outlet />
+    </>
+  )
+}
