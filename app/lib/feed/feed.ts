@@ -1,6 +1,6 @@
 import { gql } from "urql";
 import { Feed } from "feed";
-import { client } from "~/lib/graphql/client.server";
+import { client, runQuery } from "~/lib/graphql/client.server";
 
 type FeedData = {
   site: {
@@ -18,10 +18,14 @@ type FeedData = {
   };
 };
 
-const query = gql<FeedData>`
-  query {
+type FeedVariables = {
+  namespace: string;
+};
+
+const query = gql<FeedData, FeedVariables>`
+  query($namespace: String!) {
     site(slug: "lynlab.co.kr") {
-      namespace(slug: "blog") {
+      namespace(slug: $namespace) {
         posts(last: 1000) {
           nodes {
             title
@@ -37,8 +41,11 @@ const query = gql<FeedData>`
 `;
 
 export async function getFeed(): Promise<Feed | null> {
-  const { data } = await client.query<FeedData>(query, {}).toPromise();
-  if (!data) {
+  const fetches = await Promise.all(["blog", "dict"].map((namespace) => runQuery(query, { namespace })));
+  const posts = fetches
+    .filter((fetch) => fetch.data !== undefined)
+    .flatMap((fetch) => fetch.data!.site.namespace.posts.nodes);
+  if (!posts) {
     return null;
   }
 
@@ -59,7 +66,7 @@ export async function getFeed(): Promise<Feed | null> {
     author: me,
   });
 
-  data.site.namespace.posts.nodes.reverse().forEach((post) => {
+  posts.reverse().forEach((post) => {
     feed.addItem({
       title: post.title,
       id: `https://lynlab.co.kr/blog/${post.slug}`,
