@@ -4,6 +4,7 @@ module.exports = {
   server: "./server.js",
   devServerBroadcastDelay: 1000,
   ignoredRouteFiles: ["**/.*"],
+  serverMinify: true,
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",

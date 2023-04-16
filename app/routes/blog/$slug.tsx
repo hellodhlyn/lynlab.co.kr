@@ -7,7 +7,6 @@ import { gql } from "urql";
 import Post from "~/components/templates/blog/Post";
 import Error from "~/components/templates/error/Error";
 import { client } from "~/lib/graphql/client.server";
-import monokai from "highlight.js/styles/monokai.css";
 
 type BlogPostData = {
   post: {
@@ -18,7 +17,7 @@ type BlogPostData = {
     blobs: {
       uuid: string;
       type: "markdown";
-      content: string;
+      text: string;
     }[];
     tags: {
       slug: string;
@@ -34,7 +33,11 @@ const query = gql<BlogPostData>`
       description
       thumbnailUrl
       createdAt
-      blobs { uuid type content }
+      blobs {
+        uuid
+        type
+        ... on MarkdownBlob { text }
+      }
       tags { slug name }
     }
   }
@@ -42,7 +45,7 @@ const query = gql<BlogPostData>`
 
 export function links() {
   return [
-    { rel: "stylesheet", href: monokai },
+    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css" },
   ];
 }
 

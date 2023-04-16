@@ -36,6 +36,12 @@ export const meta: MetaFunction = ({ data }: { data: DictViewData }) => {
   };
 };
 
+export function links() {
+  return [
+    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css" },
+  ];
+}
+
 export function CatchBoundary() {
   const { status } = useCatch();
   let message: string;

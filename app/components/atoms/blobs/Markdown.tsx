@@ -1,5 +1,4 @@
 import { marked } from "marked";
-import hljs from "highlight.js";
 
 type MarkdownProps = {
   text: string;
@@ -8,6 +7,7 @@ type MarkdownProps = {
 export default function Markdown({ text }: MarkdownProps) {
   marked.setOptions({
     highlight: (code, markedLang) => {
+      const hljs = require("highlight.js/lib/common");
       const language = hljs.getLanguage(markedLang) ? markedLang : "plaintext";
       return hljs.highlight(code, { language }).value;
     },

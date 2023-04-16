@@ -12,7 +12,7 @@ type PostProps = {
   blobs: {
     uuid: string;
     type: "markdown";
-    content: string;
+    text: string;
   }[];
   tags: {
     slug: string;
