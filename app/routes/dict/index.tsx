@@ -15,9 +15,9 @@ export default function DictIndex() {
 
   return (
     <Container>
-      <h1 className="my-16 text-center">
+      <h1 className="mt-20 mb-16 text-center">
         <span className="text-5xl font-bold mr-2">개발자 사전</span>
-        <span className="text-2xl">베타</span>
+        <span className="text-xl md:text-2xl">베타</span>
       </h1>
       <div className="w-96 h-96 max-w-full mx-auto my-16">
         <input

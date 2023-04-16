@@ -8,9 +8,9 @@ type NavigationProps = {
 
 export default function Navigation({ showDashboard }: NavigationProps) {
   return (
-    <Container className="pt-16 pb-8">
+    <Container className="my-8 md:my-16">
       <p className="text-5xl md:text-6xl font-black">LYnLab</p>
-      <p className="py-8 text-xl font-bold">
+      <p className="my-4 md:my-8 text-xl font-bold">
         <Href link="https://hello.dhlyn.me" underline={false}>
           <span className="pr-2 hover:opacity-50 transition-opacity">소개</span>
         </Href>

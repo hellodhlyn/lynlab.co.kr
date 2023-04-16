@@ -63,8 +63,8 @@ export default function DictView() {
   }, [titleQuery]);
 
   return (
-    <Container className="mx-2 mb-32 max-w-4xl">
-      <h1 className="my-2 text-5xl font-bold">{post.title}</h1>
+    <Container className="mx-2 my-16 max-w-4xl">
+      <h1 className="my-2 text-4xl md:text-5xl font-bold">{post.title}</h1>
       <p className="text-gray-500">{post.description}</p>
       <div className="w-32 my-16 mx-auto border-t border-gray-300"></div>
       <Markdown text={post.blobs[0].text} />
