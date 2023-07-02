@@ -1,5 +1,4 @@
 import Container from "~/components/atoms/Container";
-import Navigation from "~/components/organisms/Navigation";
 import Footer from "~/components/organisms/Footer";
 import PostContent from "~/components/organisms/blog/PostContent";
 import PostIntro from "~/components/organisms/blog/PostIntro";
@@ -26,7 +25,6 @@ export default function Post(
 ) {
   return (
     <>
-      <Navigation />
       <Container className="max-w-4xl py-8">
         <PostIntro
           title={title}

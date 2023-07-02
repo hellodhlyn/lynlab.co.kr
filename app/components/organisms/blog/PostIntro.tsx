@@ -22,7 +22,7 @@ export default function PostIntro(
         <img className="h-48 md:h-96 w-full object-cover" src={thumbnailUrl} alt="게시물의 썸네일 이미지" /> :
         null
       }
-      <p className="my-8 text-3xl md:text-5xl font-black" style={{ wordBreak: "keep-all" }}>{title}</p>
+      <p className="my-8 text-3xl md:text-5xl md:leading-tight font-black" style={{ wordBreak: "keep-all" }}>{title}</p>
       <p className="text-lg">{description}</p>
       <p className="mt-4 text-sm text-gray-500">
         <span className="pr-2 border-r border-gray-300">{dayjs(createdAt).format("YYYY-MM-DD")}</span>

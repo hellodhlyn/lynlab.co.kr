@@ -1,12 +1,16 @@
-import { useCatch, useLoaderData } from "@remix-run/react";
+import { useLoaderData, useRouteError } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import type { Params } from "@remix-run/react";
-import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
 import dayjs from "dayjs";
 import { gql } from "urql";
 import Post from "~/components/templates/blog/Post";
 import Error from "~/components/templates/error/Error";
 import { client } from "~/lib/graphql/client.server";
+import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+
+const errorInternal = "internal_error";
+const errorPostNotFound = "post_not_found";
 
 type BlogPostData = {
   post: {
@@ -53,44 +57,42 @@ export const loader: LoaderFunction = async ({ params }) => {
   const { slug } = params;
   const { data, error } = await client.query<BlogPostData>(query, { slug }).toPromise();
   if (error) {
-    throw json(error, { status: 500 });
+    throw json({ error: errorInternal }, { status: 500 });
   } else if (!data?.post) {
-    throw json({}, { status: 404 });
+    throw json({ error: errorPostNotFound }, { status: 404 });
   }
   return json(data);
 };
 
-export const meta: MetaFunction = ({ data, params } : { data: BlogPostData, params: Params<string> }) => {
+export const meta: V2_MetaFunction = ({ data, params } : { data: BlogPostData, params: Params<string> }) => {
   if (!data) {
-    return {};
+    return [];
   }
 
-  return {
-    title: `${data.post.title} | LYnLab`,
-    description: data.post.description,
-    "og:title": data.post.title,
-    "og:image": data.post.thumbnailUrl,
-    "og:description": data.post.description,
-    "og:url": `https://lynlab.co.kr/blog/${params.slug}`,
-    "twitter:title": data.post.title,
-    "twitter:description": data.post.description,
-    "twitter:card": "summary_large_image",
-  };
+  return [
+    { title: `${data.post.title} | LYnLab` },
+    { name: "description", content: data.post.description },
+    { name: "og:title", content: data.post.title },
+    { name: "og:image", content: data.post.thumbnailUrl },
+    { name: "og:description", content: data.post.description },
+    { name: "og:url", content: `https://lynlab.co.kr/blog/${params.slug}` },
+    { name: "twitter:title", content: data.post.title },
+    { name: "twitter:description", content: data.post.description },
+    { name: "twitter:card", content: "summary_large_image" },
+  ];
 };
 
-export function CatchBoundary() {
-  const { status } = useCatch();
-  let message: string;
-  if (status === 404) {
-    message = "작성된 글을 찾을 수 없어요 :(";
+export const ErrorBoundary: V2_ErrorBoundaryComponent = () => {
+  const error: { data: any } = useRouteError() as any;
+  let errorMessage = "";
+  if (error?.data?.error === errorPostNotFound) {
+    errorMessage = "작성된 글을 찾을 수 없어요 :(";
   } else {
-    message = "알 수 없는 오류가 발생했어요 :(";
+    errorMessage = "알 수 없는 문제가 발생했어요 :(";
   }
 
-  return (
-    <Error message={message} />
-  );
-}
+  return <Error message={errorMessage} />;
+};
 
 export default function BlogPost() {
   const { post } = useLoaderData<BlogPostData>();

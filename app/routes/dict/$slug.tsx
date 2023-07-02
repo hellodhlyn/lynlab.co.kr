@@ -1,39 +1,43 @@
 import { useEffect, useState } from "react";
-import { LoaderFunction, MetaFunction, json } from "@remix-run/cloudflare";
-import { useCatch, useFetcher, useLoaderData } from "@remix-run/react";
+import { LoaderFunction, V2_MetaFunction, json } from "@remix-run/cloudflare";
+import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react";
 import { runQuery } from "~/lib/graphql/client.server";
 import Error from "~/components/templates/error/Error";
 import { DictViewData, dictViewQuery } from "./$slug.graphql";
 import Container from "~/components/atoms/Container";
 import Markdown from "~/components/atoms/blobs/Markdown";
 import { DictRecommends, Recommend } from "~/components/organisms/dict/DictRecommends";
+import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+
+const errorInternal = "internal_error";
+const errorPostNotFound = "post_not_found";
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params.slug as string;
   const vars = { site: "lynlab.co.kr", namespace: "dict", slug };
   const { data, error } = await runQuery(dictViewQuery, vars);
   if (error || !data) {
-    throw json({}, { status: 500 });
+    throw json({ error: errorInternal }, { status: 500 });
   } else if (data.post === null) {
-    throw json({}, { status: 404 });
+    throw json({ error: errorPostNotFound }, { status: 404 });
   }
   return json(data);
 };
 
-export const meta: MetaFunction = ({ data }: { data: DictViewData }) => {
+export const meta: V2_MetaFunction = ({ data }: { data: DictViewData }) => {
   if (!data || !data.post) {
-    return {};
+    return [];
   }
 
   const { title, description } = data.post;
-  return {
-    title: `${title} | LYnLab 개발자 사전`,
-    description: description,
-    "og:title": title,
-    "og:description": description,
-    "twitter:title": title,
-    "twitter:description": description,
-  };
+  return [
+    { title: `${title} | LYnLab 개발자 사전` },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+  ];
 };
 
 export function links() {
@@ -42,19 +46,17 @@ export function links() {
   ];
 }
 
-export function CatchBoundary() {
-  const { status } = useCatch();
-  let message: string;
-  if (status === 404) {
-    message = "해당하는 글을 찾을 수 없어요 :(";
+export const ErrorBoundary: V2_ErrorBoundaryComponent = () => {
+  const error: { data: any } = useRouteError() as any;
+  let errorMessage = "";
+  if (error?.data?.error === errorPostNotFound) {
+    errorMessage = "작성된 글을 찾을 수 없어요 :(";
   } else {
-    message = "알 수 없는 오류가 발생했어요 :(";
+    errorMessage = "알 수 없는 문제가 발생했어요 :(";
   }
 
-  return (
-    <Error message={message} />
-  );
-}
+  return <Error message={errorMessage} />;
+};
 
 export default function DictView() {
   const post = useLoaderData<DictViewData>().post!;

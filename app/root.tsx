@@ -1,4 +1,3 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
 import {
   Links,
   LiveReload,
@@ -8,14 +7,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./styles/app.css";
+import type { V2_MetaFunction } from "@remix-run/cloudflare";
 
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "LYnLab",
-  viewport: "width=device-width,initial-scale=1",
-  "twitter:site": "@hellodhlyn",
-  "twitter:creator": "@hellodhlyn",
-});
+export const meta: V2_MetaFunction = () => [
+  { title: "LYnLab" },
+];
 
 export function links() {
   return [
@@ -29,6 +25,10 @@ export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <html lang="ko">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="twitter:site" content="@hellodhlyn" />
+        <meta name="twitter:creator" content="@hellodhlyn" />
         <Meta />
         <Links />
       </head>
@@ -43,6 +43,10 @@ export default function App() {
   return (
     <html lang="ko">
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="twitter:site" content="@hellodhlyn" />
+        <meta name="twitter:creator" content="@hellodhlyn" />
         <Meta />
         <Links />
       </head>

@@ -1,6 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
-import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
 import Index from "~/components/templates/blog/Index";
 import { client } from "~/lib/graphql/client.server";
 import { BlogIndexData, blogIndexQuery, BlogIndexVariables } from "./index.graphql";
@@ -14,9 +14,9 @@ type LoaderData = BlogIndexData & {
   };
 };
 
-export const meta: MetaFunction = () => ({
-  title: "블로그 | LYnLab",
-});
+export const meta: V2_MetaFunction = () => ([
+  { title: "블로그 | LYnLab" },
+]);
 
 export const loader: LoaderFunction = async ({ request }) => {
   const variables: BlogIndexVariables = {};
