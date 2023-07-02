@@ -6,7 +6,36 @@ import { get, parseRequestOptionsFromJSON } from "@github/webauthn-json/browser-
 import Header from "~/components/atoms/Header";
 import { runMutation } from "~/lib/graphql/client.server";
 import { setKeys } from "~/lib/auth/session.server";
-import { createApiTokenMutation } from "./signin.graphql";
+import { gql } from "urql";
+
+type CreateApiTokenData = {
+  createApiToken: {
+    apiToken: {
+      accessKey: string;
+      refreshKey: string;
+    };
+  };
+};
+
+type CreateApiTokenVariables = {
+  input: {
+    webAuthn: {
+      username: string;
+      credential: string;
+    };
+  };
+};
+
+const createApiTokenMutation = gql<CreateApiTokenData, CreateApiTokenVariables>`
+  mutation($input: CreateApiTokenInput!) {
+    createApiToken(input: $input) {
+      apiToken {
+        accessKey
+        refreshKey
+      }
+    }
+  }
+`;
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();

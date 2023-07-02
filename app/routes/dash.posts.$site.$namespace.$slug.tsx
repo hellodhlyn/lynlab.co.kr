@@ -1,14 +1,88 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { Form, Params, useLoaderData } from "@remix-run/react";
-import type { OperationResult } from "urql";
+import { gql, type OperationResult } from "urql";
 import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { PostEdit } from "~/components/organisms/blog/PostEdit";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
-import { PostEditData, createPostMutation, postEditQuery, updatePostMutation } from "./$slug.graphql";
+
+type PostEditData = {
+  viewer: {
+    post: {
+      id: string;
+      slug: string;
+      title: string;
+      description: string;
+      blobs: {
+        id: string;
+        content: string;
+      }[];
+      tags: {
+        slug: string;
+        name: string;
+      }[];
+      thumbnailUrl: string;
+      visibility: "public" | "private";
+    } | null;
+  };
+  site: {
+    slug: string;
+    namespace: {
+      slug: string;
+      tags: {
+        slug: string;
+        name: string;
+      }[];
+    };
+  };
+};
+
+type PostEditVariables = {
+  site: string;
+  namespace: string;
+  slug: string;
+};
+
+const postEditQuery = gql<PostEditData, PostEditVariables>`
+  query($site: String!, $namespace: String!, $slug: String!) {
+    viewer {
+      post(site: $site, namespace: $namespace, slug: $slug) {
+        id slug title description thumbnailUrl visibility
+        blobs { id uuid content }
+        tags { slug name }
+      }
+    }
+    site(slug: $site) {
+      slug
+      namespace(slug: $namespace) {
+        slug
+        tags { slug name }
+      }
+    }
+  }
+`;
+
+const createPostMutation = gql`
+  mutation($input: CreatePostInput!) {
+    createPost(input: $input) {
+      post { slug }
+    }
+  }
+`;
+
+const updatePostMutation = gql`
+  mutation($postInput: UpdatePostInput!, $blobInput: UpdateBlobInput!) {
+    updatePost(input: $postInput) {
+      clientMutationId
+    }
+    updateBlob(input: $blobInput) {
+      clientMutationId
+    }
+  }
+`;
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const user = await authenticator.isAuthenticated(request);

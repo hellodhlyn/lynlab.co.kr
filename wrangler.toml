@@ -11,7 +11,7 @@ compatibility_date = "2022-04-05"
   preview_id = "86e7e3b948cc4c8eaf4535a40265ccae"
 
 [vars]
-SITE_HOST = "http://127.0.0.1:8787"
+SITE_HOST = "https://lynlab.co.kr"
 # Secrets (see .dev.vars)
 #   - GITHUB_CLIENT_ID
 #   - GITHUB_CLIENT_SECRET

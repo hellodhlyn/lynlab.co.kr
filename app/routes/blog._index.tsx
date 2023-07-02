@@ -3,7 +3,73 @@ import { json } from "@remix-run/cloudflare";
 import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
 import Index from "~/components/templates/blog/Index";
 import { client } from "~/lib/graphql/client.server";
-import { BlogIndexData, blogIndexQuery, BlogIndexVariables } from "./index.graphql";
+import { gql } from "urql";
+
+type BlogIndexData = {
+  site: {
+    namespace: {
+      posts: {
+        edges: {
+          cursor: string;
+          node: {
+            slug: string;
+            title: string;
+            description: string;
+            thumbnailUrl: string | null;
+            thumbnailBlurhash: string | null;
+            createdAt: string;
+            tags: {
+              slug: string;
+              name: string;
+            }[];
+          };
+        }[];
+        pageInfo: {
+          hasPreviousPage: boolean;
+          hasNextPage: boolean;
+          startCursor: string | null;
+          endCursor: string | null;
+        };
+      };
+    };
+  };
+};
+
+type BlogIndexVariables = {
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
+  filter?: {
+    tags?: string[];
+  };
+};
+
+const blogIndexQuery = gql<BlogIndexData, BlogIndexVariables>`
+  query($before: String, $after: String, $first: Int, $last: Int, $filter: PostFilter) {
+    site(slug: "lynlab.co.kr") {
+      namespace(slug: "blog") {
+        posts(before: $before, after: $after, first: $first, last: $last, filter: $filter) {
+          edges {
+            cursor
+            node {
+              slug
+              title
+              description
+              thumbnailUrl
+              thumbnailBlurhash
+              createdAt
+              tags { slug name }
+            }
+          }
+          pageInfo {
+            hasPreviousPage hasNextPage startCursor endCursor
+          }
+        }
+      }
+    }
+  }
+`;
 
 type LoaderData = BlogIndexData & {
   filter?: {

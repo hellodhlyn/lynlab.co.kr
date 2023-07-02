@@ -3,11 +3,41 @@ import { LoaderFunction, V2_MetaFunction, json } from "@remix-run/cloudflare";
 import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react";
 import { runQuery } from "~/lib/graphql/client.server";
 import Error from "~/components/templates/error/Error";
-import { DictViewData, dictViewQuery } from "./$slug.graphql";
 import Container from "~/components/atoms/Container";
 import Markdown from "~/components/atoms/blobs/Markdown";
 import { DictRecommends, Recommend } from "~/components/organisms/dict/DictRecommends";
 import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+import { gql } from "urql";
+
+type DictViewData = {
+  post: {
+    title: string;
+    description: string;
+    blobs: {
+      type: "markdown";
+      text: string;
+    }[];
+  } | null;
+};
+
+type DictViewVariables = {
+  site: string;
+  namespace: string;
+  slug: string;
+};
+
+const dictViewQuery = gql<DictViewData, DictViewVariables>`
+  query ($site: String!, $namespace: String!, $slug: String!) {
+    post(site: $site, namespace: $namespace, slug: $slug) {
+      title
+      description
+      blobs {
+        type
+        ... on MarkdownBlob { text }
+      }
+    }
+  }
+`;
 
 const errorInternal = "internal_error";
 const errorPostNotFound = "post_not_found";
@@ -66,7 +96,7 @@ export default function DictView() {
 
   useEffect(() => {
     if (fetcher.state === "idle" && titleQuery.length > 0) {
-      fetcher.load(`/dict/_recommends?title=${titleQuery}`)
+      fetcher.load(`/apis/dict/recommends?title=${titleQuery}`)
     }
   }, [titleQuery]);
 

@@ -6,10 +6,39 @@ import Container from "~/components/atoms/Container";
 import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
 import { runQuery } from "~/lib/graphql/client.server";
 import type { User } from "~/lib/auth/user";
-import { IndexData, indexQuery } from "./index.graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { PostList } from "~/components/organisms/dashboard/PostList";
 import Header from "~/components/atoms/Header";
+import { gql } from "urql";
+
+type IndexData = {
+  viewer: {
+    posts: {
+      nodes: {
+        site: { slug: string };
+        namespace: { slug: string };
+        title: string;
+        slug: string;
+        visibility: "public" | "private";
+        createdAt: string;
+      }[];
+    };
+  };
+};
+
+const indexQuery = gql<IndexData>`
+  query {
+    viewer {
+      posts(last: 9999) {
+        nodes {
+          site { slug }
+          namespace { slug }
+          title slug visibility createdAt
+        }
+      }
+    }
+  }
+`;
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request);

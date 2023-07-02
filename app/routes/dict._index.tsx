@@ -9,7 +9,7 @@ export default function DictIndex() {
 
   useEffect(() => {
     if (fetcher.state === "idle" && titleQuery.length > 0) {
-      fetcher.load(`/dict/_recommends?title=${titleQuery}`)
+      fetcher.load(`/apis/dict/recommends?title=${titleQuery}`)
     }
   }, [titleQuery]);
 
