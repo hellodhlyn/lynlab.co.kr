@@ -5,7 +5,6 @@ type SiteSelectorProps = {
   sites: {
     slug: string;
     namespaces: {
-      name: string;
       slug: string;
     }[];
   }[];
@@ -20,7 +19,7 @@ export function SiteSelector(
   const [site] = useState<string>(currentSite || sites[0].slug);
   const [namespace] = useState<string>(currentNamespace || sites[0].namespaces[0].slug);
   return (
-    <div className="flex text-lg gap-x-2 font-light">
+    <div className="my-4 flex text-lg gap-x-2 font-light">
       <DocumentTextIcon className="h-5 w-5 self-center" />
       <span>{site}</span>
       <span className="text-gray-300">/</span>

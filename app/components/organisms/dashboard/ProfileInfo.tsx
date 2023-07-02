@@ -25,9 +25,6 @@ export function ProfileInfo({ currentUser }: UserInfoProps) {
           <p className="text-sm text-gray-700">@{currentUser.name}</p>
         </div>
         <div>
-          <Link to="/dash/profile">
-            <TextButton type="button" text="프로필 변경" />
-          </Link>
           <Link to="/auth/signout">
             <TextButton type="button" text="로그아웃" />
           </Link>

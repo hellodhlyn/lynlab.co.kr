@@ -1,60 +1,40 @@
 import { Link, useLoaderData, useOutletContext, useSearchParams } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
+import Header from "~/components/atoms/Header";
 import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
 import { runQuery } from "~/lib/graphql/client.server";
 import type { User } from "~/lib/auth/user";
-import { authenticator } from "~/lib/auth/authenticator.server";
-import { PostList } from "~/components/organisms/dashboard/PostList";
-import Header from "~/components/atoms/Header";
-import { gql } from "urql";
+import { graphql } from "~/graphql";
+import { DashboardIndexQuery } from "~/graphql/graphql";
+import { DocumentTextIcon } from "@heroicons/react/24/outline";
 
-type IndexData = {
-  viewer: {
-    posts: {
-      nodes: {
-        site: { slug: string };
-        namespace: { slug: string };
-        title: string;
-        slug: string;
-        visibility: "public" | "private";
-        createdAt: string;
-      }[];
-    };
-  };
-};
-
-const indexQuery = gql<IndexData>`
-  query {
-    viewer {
-      posts(last: 9999) {
-        nodes {
-          site { slug }
-          namespace { slug }
-          title slug visibility createdAt
-        }
+const query = graphql(`
+  query DashboardIndex {
+    sites {
+      slug
+      namespaces {
+        site { slug }
+        slug
       }
     }
   }
-`;
+`);
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request);
-  const { data, error } = await runQuery(indexQuery, undefined, user!);
-  if (!data || error) {
-    throw new Error(`Failed to get data: ${error}`);
+export const loader = async () => {
+  const { data, error } = await runQuery(query, {});
+  if (error || !data) {
+    console.error("Failed to load data:", error);
+    throw new Error();
   }
 
-  data.viewer.posts.nodes = data.viewer.posts.nodes
-    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
-
-  return json<IndexData>(data);
+  return json(data);
 };
 
 export default function DashboardIndex() {
-  const { viewer } = useLoaderData<IndexData>();
+  const loaderData = useLoaderData() as DashboardIndexQuery;
+  const namespaces = loaderData.sites!.flatMap(site => site.namespaces);
 
   const [searchParams] = useSearchParams();
   const redirectedResult = searchParams.get("result");
@@ -72,7 +52,20 @@ export default function DashboardIndex() {
       <div className="py-8" />
       <Container className="mb-16">
         <Header text="게시글 관리" />
-        <PostList posts={viewer.posts.nodes} />
+        <ul>
+          {namespaces.map((namespace) => (
+            <li key={`${namespace.site.slug}/${namespace.slug}`} className="hover:opacity-50 transition-opacity">
+              <Link to={`/dash/posts/${namespace.site.slug}/${namespace.slug}`}>
+                <p className="my-2 flex text-lg gap-x-2 font-light">
+                  <DocumentTextIcon className="h-5 w-5 self-center" />
+                  <span>{namespace.site.slug}</span>
+                  <span className="text-gray-300">/</span>
+                  <span>{namespace.slug}</span>
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Container>
     </>
   );

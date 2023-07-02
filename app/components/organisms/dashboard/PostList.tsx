@@ -40,7 +40,7 @@ export function PostList({ posts }: PostListProps) {
                 <LockClosedIcon className="h-4 w-4 mx-auto" />}
             </td>
             <td className="px-4 py-2 text-center">
-              <Link to={`./posts/${post.site.slug}/${post.namespace.slug}/${post.slug}`}>
+              <Link to={`./${post.slug}`}>
                 <span className="text-blue-500 hover:underline">편집</span>
               </Link>
             </td>
