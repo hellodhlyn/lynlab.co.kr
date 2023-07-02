@@ -8,6 +8,13 @@ compatibility_date = "2022-04-05"
 [[kv_namespaces]]
   binding = "__KV_SESSIONS"
   id = "5a841e28615d4e978c6e8380cabb5aa7"
+  preview_id = "86e7e3b948cc4c8eaf4535a40265ccae"
+
+[vars]
+SITE_HOST = "http://127.0.0.1:8787"
+# Secrets (see .dev.vars)
+#   - GITHUB_CLIENT_ID
+#   - GITHUB_CLIENT_SECRET
 
 [site]
   bucket = "./public"

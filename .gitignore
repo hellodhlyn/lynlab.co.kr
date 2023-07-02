@@ -6,6 +6,8 @@ node_modules
 /public/build
 /.mf
 .env
+.dev.vars
+.wrangler
 
 /.idea
 /.code
