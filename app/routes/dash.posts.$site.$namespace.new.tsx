@@ -1,0 +1,101 @@
+import type { ActionFunction, LoaderArgs } from "@remix-run/cloudflare";
+import { redirect } from "@remix-run/cloudflare";
+import { Form, Params, useLoaderData } from "@remix-run/react";
+import { type OperationResult } from "urql";
+import Container from "~/components/atoms/Container";
+import TextButton from "~/components/atoms/TextButton";
+import { PostEdit } from "~/components/organisms/blog/PostEdit";
+import { graphql } from "~/graphql";
+import { BlobTypeEnum, CreatePostDataQuery, PostVisibility } from "~/graphql/graphql";
+import { authenticator } from "~/lib/auth/authenticator.server";
+import { User } from "~/lib/auth/user";
+import { runMutation, runQuery } from "~/lib/graphql/client.server";
+
+const createPostQuery = graphql(`
+  query CreatePostData($site: String!, $namespace: String!) {
+    site(slug: $site) {
+      slug
+      namespace(slug: $namespace) {
+        slug
+        tags { slug name }
+      }
+    }
+  }
+`);
+
+const createPostMutation = graphql(`
+  mutation CreatePost($input: CreatePostInput!) {
+    createPost(input: $input) {
+      post { slug }
+    }
+  }
+`);
+
+function parseTags(tagInput: FormDataEntryValue | null): string[] {
+  if (!tagInput || typeof tagInput !== "string") {
+    return [];
+  }
+  return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
+}
+
+async function createPost(params: Params, body: FormData, user: User): Promise<OperationResult> {
+  const getStringOrNull = (key: string) => {
+    const value = body.get(key);
+    if (value === null || typeof value !== "string") {
+      return null;
+    }
+    return value;
+  };
+
+  const { site, namespace } = params;
+  const input = {
+    site: site!,
+    namespace: namespace!,
+    slug: getStringOrNull("slug")!,
+    title: getStringOrNull("title")!,
+    description: getStringOrNull("description"),
+    thumbnailUrl: getStringOrNull("thumbnailUrl"),
+    blobs: [
+      {
+        type: BlobTypeEnum.Markdown,
+        markdown: { text: getStringOrNull("content")! },
+      },
+    ],
+    tags: parseTags(getStringOrNull("tags")),
+    visibility: getStringOrNull("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
+  };
+
+  return runMutation(createPostMutation, { input }, user);
+}
+
+export const loader = async ({ params }: LoaderArgs) => {
+  const { site, namespace } = params;
+  const { data } = await runQuery(createPostQuery, { site: site!, namespace: namespace! });
+  return data;
+};
+
+export const action: ActionFunction = async ({ params, request }) => {
+  const user = await authenticator.isAuthenticated(request);
+  const body = await request.formData();
+  const { error } = await createPost(params, body, user!);
+  if (error) {
+    console.error(error);
+    return new Response(null, { status: 400 });
+  } else {
+    return redirect(encodeURI("/dash?result=succeed&message=새로운 글을 작성했어요."));
+  }
+};
+
+export default function NewPost() {
+  const { site } = useLoaderData() as CreatePostDataQuery;
+  return (
+    <Container className="mb-16">
+      <Form method="post">
+        <PostEdit site={site} />
+        <div className="py-4">
+          <TextButton type="submit" text="작성 완료" />
+        </div>
+      </Form>
+    </Container>
+  );
+}

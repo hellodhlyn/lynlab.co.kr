@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData, useParams } from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import Header from "~/components/atoms/Header";
@@ -9,6 +9,7 @@ import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { DashboardSiteQuery } from "~/graphql/graphql";
+import TextButton from "~/components/atoms/TextButton";
 
 const query = graphql(`
   query DashboardSite($site: String!, $namespace: String!) {
@@ -60,7 +61,11 @@ export default function PostNamespace() {
           currentNamespace={namespace}
           currentPost={slug}
         />
-
+        <div className="my-4">
+          <Link to="./new">
+            <TextButton type="button" text="새 글 쓰기" />
+          </Link>
+        </div>
         <PostList posts={posts} />
       </Container>
       <Outlet />

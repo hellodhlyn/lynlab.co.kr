@@ -14,10 +14,7 @@ export default function Markdown({ text }: MarkdownProps) {
   });
 
   return (
-    <div className="prose md:prose-lg max-w-none prose-a:text-blue-500 break-words prose-li:m-0">
-    {/* <div className="max-w-none prose md:prose-lg prose-img:w-full prose-img:object-cover
-                    prose-headings:text-gray-700 prose-headings:mb-2
-                    prose-p:my-1 prose-p:text-gray-700 prose-a:text-blue-500 break-words"> */}
+    <div className="prose md:prose-lg max-w-none prose-a:text-blue-500 break-words prose-li:m-0 prose-img:mx-auto">
       <div dangerouslySetInnerHTML={{ __html: marked(text) }} />
     </div>
   );
