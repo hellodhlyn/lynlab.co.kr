@@ -1,33 +1,13 @@
-import { useEffect } from "react";
 import type { ActionFunction } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
-import { Form, useFetcher, useSearchParams } from "@remix-run/react";
-import { get, parseRequestOptionsFromJSON } from "@github/webauthn-json/browser-ponyfill";
+import { Form, useSearchParams } from "@remix-run/react";
 import Header from "~/components/atoms/Header";
 import { runMutation } from "~/lib/graphql/client.server";
 import { setKeys } from "~/lib/auth/session.server";
-import { gql } from "urql";
+import { graphql } from "~/graphql";
 
-type CreateApiTokenData = {
-  createApiToken: {
-    apiToken: {
-      accessKey: string;
-      refreshKey: string;
-    };
-  };
-};
-
-type CreateApiTokenVariables = {
-  input: {
-    webAuthn: {
-      username: string;
-      credential: string;
-    };
-  };
-};
-
-const createApiTokenMutation = gql<CreateApiTokenData, CreateApiTokenVariables>`
-  mutation($input: CreateApiTokenInput!) {
+const createApiTokenMutation = graphql(`
+  mutation CreateApiToken($input: CreateApiTokenInput!) {
     createApiToken(input: $input) {
       apiToken {
         accessKey
@@ -35,7 +15,7 @@ const createApiTokenMutation = gql<CreateApiTokenData, CreateApiTokenVariables>`
       }
     }
   }
-`;
+`);
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -48,7 +28,7 @@ export const action: ActionFunction = async ({ request }) => {
     return json({});
   }
 
-  const { accessKey, refreshKey } = data.createApiToken.apiToken;
+  const { accessKey, refreshKey } = data.createApiToken!.apiToken;
   return redirect("/dash", {
     headers: {
       "Set-Cookie": await setKeys(request, accessKey, refreshKey),
@@ -57,24 +37,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function SignIn() {
-  const challenge = useFetcher();
-  const signIn = useFetcher();
-
   const registered = useSearchParams()[0].get("registered") === "true";
-
-  useEffect(() => {
-    if (challenge.type === "done" && signIn.state === "idle" && challenge.data.options) {
-      const { username, options } = challenge.data;
-      const registerOptions = parseRequestOptionsFromJSON({ publicKey: JSON.parse(options) });
-      get(registerOptions).then((credential) => {
-        signIn.submit(
-          { username, credential: JSON.stringify(credential) },
-          { method: "post" },
-        );
-      });
-    }
-  }, [challenge]);
-
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-96">
