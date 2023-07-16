@@ -18,11 +18,11 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
       <Header text="관련된 글" />
       {posts.map((post) => (
         <Link to={`/blog/${post.slug}`}>
-          <div className="flex my-4 h-32 bg-white rounded-xl shadow-lg shadow-gray-200 hover:opacity-50 cursor-pointer transition-opacity">
-            <img className="h-32 w-48 rounded-l-xl object-cover" src={post.thumbnailUrl || defaultThumbnailUrl} />
+          <div className="flex my-4 h-24 md:h-32 bg-white rounded-xl shadow-lg shadow-gray-200 hover:opacity-50 cursor-pointer transition-opacity">
+            <img className="h-full w-24 md:w-48 rounded-l-xl object-cover" src={post.thumbnailUrl || defaultThumbnailUrl} />
             <div className="p-4">
-              <p className="text-xl font-bold">{post.title}</p>
-              <p className="my-2 line-clamp-2">{post.description}</p>
+              <p className="text-sm md:text-xl font-bold line-clamp-1">{post.title}</p>
+              <p className="my-1 md:my-2 text-sm md:text-base line-clamp-2">{post.description}</p>
             </div>
           </div>
         </Link>
