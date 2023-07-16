@@ -4,10 +4,10 @@ import { useFetcher, useLoaderData, useRouteError } from "@remix-run/react";
 import { runQuery } from "~/lib/graphql/client.server";
 import Error from "~/components/templates/error/Error";
 import Container from "~/components/atoms/Container";
-import Markdown from "~/components/atoms/blobs/Markdown";
 import { DictRecommends, Recommend } from "~/components/organisms/dict/DictRecommends";
 import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
 import { gql } from "urql";
+import { MarkdownBlob } from "~/components/molecules/blobviews";
 
 type DictViewData = {
   post: {
@@ -105,7 +105,7 @@ export default function DictView() {
       <h1 className="my-2 text-4xl md:text-5xl font-bold">{post.title}</h1>
       <p className="text-gray-500">{post.description}</p>
       <div className="w-32 my-16 mx-auto border-t border-gray-300"></div>
-      <Markdown text={post.blobs[0].text} />
+      <MarkdownBlob text={post.blobs[0].text} />
 
       <div className="w-32 my-16 mx-auto border-t border-gray-300"></div>
       <div className="mt-16">

@@ -14,6 +14,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  */
 const documents = {
     "\n  mutation CreateApiToken($input: CreateApiTokenInput!) {\n    createApiToken(input: $input) {\n      apiToken {\n        accessKey\n        refreshKey\n      }\n    }\n  }\n": types.CreateApiTokenDocument,
+    "\n  query PostView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"blog\", slug: $slug) {\n      title\n      description\n      thumbnailUrl\n      createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n        ... on ImageBlob { url previewUrl caption }\n      }\n      tags { slug name }\n    }\n  }\n": types.PostViewDocument,
     "\n  query DashboardIndex {\n    sites {\n      slug\n      namespaces {\n        site { slug }\n        slug\n      }\n    }\n  }\n": types.DashboardIndexDocument,
     "\n  query UpdatePostData($site: String!, $namespace: String!, $slug: String!) {\n    site(slug: $site) {\n      slug\n      namespace(slug: $namespace) {\n        slug\n        tags { slug name }\n      }\n    }\n    viewer {\n      post(site: $site, namespace: $namespace, slug: $slug) {\n        id slug title description thumbnailUrl visibility\n        blobs {\n          id uuid type\n          ... on MarkdownBlob { text }\n          ... on ImageBlob { url previewUrl caption blurhash }\n        }\n        tags { slug name }\n      }\n    }\n  }\n": types.UpdatePostDataDocument,
     "\n  mutation UpdatePost($postInput: UpdatePostInput!) {\n    updatePost(input: $postInput) {\n      clientMutationId\n    }\n  }\n": types.UpdatePostDocument,
@@ -40,6 +41,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation CreateApiToken($input: CreateApiTokenInput!) {\n    createApiToken(input: $input) {\n      apiToken {\n        accessKey\n        refreshKey\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateApiToken($input: CreateApiTokenInput!) {\n    createApiToken(input: $input) {\n      apiToken {\n        accessKey\n        refreshKey\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query PostView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"blog\", slug: $slug) {\n      title\n      description\n      thumbnailUrl\n      createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n        ... on ImageBlob { url previewUrl caption }\n      }\n      tags { slug name }\n    }\n  }\n"): (typeof documents)["\n  query PostView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"blog\", slug: $slug) {\n      title\n      description\n      thumbnailUrl\n      createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n        ... on ImageBlob { url previewUrl caption }\n      }\n      tags { slug name }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
