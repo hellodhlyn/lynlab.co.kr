@@ -1,14 +1,16 @@
 import { useLoaderData, useRouteError } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import type { Params } from "@remix-run/react";
-import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
-import Error from "~/components/templates/error/Error";
-import { client } from "~/lib/graphql/client.server";
 import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
+import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { PostViewQuery } from "~/graphql/graphql";
 import Container from "~/components/atoms/Container";
+import { Divider } from "~/components/atoms/Divider";
 import { PostComment, PostContent, PostIntro } from "~/components/organisms/postview";
+import Error from "~/components/templates/error/Error";
+import { RelatedPosts } from "~/components/organisms/postview/RelatedPosts";
 
 const errorInternal = "internal_error";
 const errorPostNotFound = "post_not_found";
@@ -16,16 +18,20 @@ const errorPostNotFound = "post_not_found";
 const query = graphql(`
   query PostView($slug: String!) {
     post(site: "lynlab.co.kr", namespace: "blog", slug: $slug) {
-      title
-      description
-      thumbnailUrl
-      createdAt
+      title slug description thumbnailUrl createdAt
       blobs {
         uuid type
         ... on MarkdownBlob { text }
         ... on ImageBlob { url previewUrl caption }
       }
-      tags { slug name }
+      tags {
+        slug name
+        posts(first: 4, sort: CREATED_DESC) {
+          nodes {
+            title slug description thumbnailUrl createdAt
+          }
+        }
+      }
     }
   }
 `);
@@ -78,9 +84,25 @@ export const ErrorBoundary: V2_ErrorBoundaryComponent = () => {
   return <Error message={errorMessage} />;
 };
 
+const uniquePostFilter = (post: { slug: string }, index: number, array: { slug: string }[]): boolean => {
+  return array.findIndex((p) => p.slug === post.slug) === index;
+}
+
 export default function BlogPost() {
   const data = useLoaderData() as PostViewQuery;
   const post = data.post!;
+
+  const relatedPosts = post.tags.flatMap((tag) => tag.posts.nodes)
+    .filter((relatedPost) => post.slug !== relatedPost.slug)
+    .filter(uniquePostFilter)
+    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    .map((post) => ({
+      title: post.title,
+      slug: post.slug,
+      description: post.description || null,
+      thumbnailUrl: post.thumbnailUrl || null,
+    }))
+    .slice(0, 3);
 
   return (
     <Container className="max-w-4xl py-8">
@@ -92,6 +114,13 @@ export default function BlogPost() {
         tags={post.tags}
       />
       <PostContent blobs={post.blobs} />
+      {(relatedPosts.length > 0) && (
+        <>
+          <Divider />
+          <RelatedPosts posts={relatedPosts} />
+        </>
+      )}
+      <Divider />
       <PostComment />
     </Container>
   );

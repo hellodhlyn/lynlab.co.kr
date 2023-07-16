@@ -1,5 +1,4 @@
 import PostList from "~/components/organisms/blog/PostList";
-import Footer from "~/components/organisms/Footer";
 import Paginator from "~/components/organisms/Paginator";
 
 type IndexProps = {
@@ -33,7 +32,6 @@ export default function Index({ posts, filter, pageInfo }: IndexProps) {
     <>
       <PostList posts={posts} filter={filter} />
       <Paginator pageInfo={pageInfo} reversed={true} />
-      <Footer />
     </>
   );
 }
