@@ -6,7 +6,7 @@ import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { PostEdit } from "~/components/organisms/blog/PostEdit";
 import { graphql } from "~/graphql";
-import { UpdatePostDataQuery } from "~/graphql/graphql";
+import { BlobInput, BlobTypeEnum, PostVisibility, UpdatePostDataQuery, UpdatePostInput } from "~/graphql/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
@@ -23,7 +23,11 @@ const updatePostQuery = graphql(`
     viewer {
       post(site: $site, namespace: $namespace, slug: $slug) {
         id slug title description thumbnailUrl visibility
-        blobs { id uuid content }
+        blobs {
+          id uuid type
+          ... on MarkdownBlob { text }
+          ... on ImageBlob { url previewUrl caption blurhash }
+        }
         tags { slug name }
       }
     }
@@ -31,11 +35,8 @@ const updatePostQuery = graphql(`
 `);
 
 const updatePostMutation = gql`
-  mutation UpdatePost($postInput: UpdatePostInput!, $blobInput: UpdateBlobInput!) {
+  mutation UpdatePost($postInput: UpdatePostInput!) {
     updatePost(input: $postInput) {
-      clientMutationId
-    }
-    updateBlob(input: $blobInput) {
       clientMutationId
     }
   }
@@ -51,32 +52,65 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json(data);
 };
 
-function parseTags(tagInput: FormDataEntryValue | null): string[] {
-  if (!tagInput || typeof tagInput !== "string") {
-    return [];
-  }
-  return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
-}
-
 async function updatePost(body: FormData, user: User): Promise<OperationResult> {
-  const postInput = Object.fromEntries(Object.entries({
-    id: body.get("postId")!,
-    title: body.get("title") || null,
-    description: body.get("description") || null,
-    thumbnailUrl: body.get("thumbnailUrl") || null,
-    tags: parseTags(body.get("tags")),
-    visibility: body.get("visibility"),
-  }).filter(([, value]) => value !== null));
-
-  const blobInput = {
-    id: body.get("blobId")!,
-    blob: {
-      type: "markdown",
-      markdown: { text: body.get("content") },
+  const stringOrUndefined = (key: string): string | undefined => {
+    const value = body.get(key);
+    if (!value || typeof value !== "string") {
+      return undefined;
     }
+    return value;
+  }
+
+  function parseTags(key: string): string[] {
+    const tagInput = stringOrUndefined(key);
+    if (!tagInput || typeof tagInput !== "string") {
+      return [];
+    }
+    return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
+  }
+
+  const postInput: UpdatePostInput = {
+    id: stringOrUndefined("postId")!,
+    title: stringOrUndefined("title"),
+    description: stringOrUndefined("description"),
+    thumbnailUrl: stringOrUndefined("thumbnailUrl"),
+    tags: parseTags("tags"),
+    visibility: stringOrUndefined("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
   };
 
-  return runMutation(updatePostMutation, { postInput, blobInput }, user);
+  const blobs: BlobInput[] = [];
+  let blobIndex = 0;
+  while (body.has(`blobs.${blobIndex}.type`)) {
+    const blob: BlobInput = {
+      id: stringOrUndefined(`blobs.${blobIndex}.id`),
+      type: BlobTypeEnum.Markdown,
+    };
+
+    const blobTypeString = stringOrUndefined(`blobs.${blobIndex}.type`);
+    if (blobTypeString === "markdown") {
+      blob.type = BlobTypeEnum.Markdown;
+      blob.markdown = { text: stringOrUndefined(`blobs.${blobIndex}.text`) || "" };
+    } else if (blobTypeString === "image") {
+      blob.type = BlobTypeEnum.Image;
+      blob.image = {
+        url: stringOrUndefined(`blobs.${blobIndex}.url`) || "",
+        previewUrl: stringOrUndefined(`blobs.${blobIndex}.previewUrl`),
+        caption: stringOrUndefined(`blobs.${blobIndex}.caption`),
+        blurhash: stringOrUndefined(`blobs.${blobIndex}.blurhash`),
+      };
+    } else {
+      throw new Error(`Unexpected blob type: ${blobTypeString}`);
+    }
+
+    blobs.push(blob);
+    blobIndex += 1;
+  }
+
+  if (blobs.length > 0) {
+    postInput.blobs = blobs;
+  }
+
+  return runMutation(updatePostMutation, { postInput }, user);
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -96,7 +130,7 @@ export default function NewPost() {
   return (
     <Container className="mb-16">
       <Form method="post">
-        <PostEdit site={site} post={viewer.post} />
+        <PostEdit site={site!} post={viewer.post} />
         <div className="py-4">
           <TextButton type="submit" text="작성 완료" />
         </div>

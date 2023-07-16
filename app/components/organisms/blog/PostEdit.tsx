@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
-import { Input, useInput } from "~/components/atoms/Input";
-import { Textarea } from "~/components/atoms/Textarea";
-import { Select } from "~/components/atoms/Select";
+import { Input, useInput, Textarea, Select } from "~/components/atoms/inputs";
+import { Blob, PostContentEditor } from "~/components/molecules/editors/PostContentEditor";
+import { BlobTypeEnum } from "~/graphql/graphql";
 
 type PostEditProps = {
   site: {
     slug: string;
-    namespace: {
+    namespace?: {
       slug: string;
       tags: {
         slug: string;
         name: string;
       }[];
-    };
+    } | null;
   };
   post?: {
     id: string;
     title: string;
-    description: string;
-    thumbnailUrl: string | null;
+    description?: string | null;
+    thumbnailUrl?: string | null;
     blobs: {
       id: string;
-      content: string;
+      uuid: string;
+      type: BlobTypeEnum;
+      text?: string;
+      url?: string;
+      previewUrl?: string | null;
+      caption?: string | null;
+      blurhash?: string | null;
     }[];
     tags: {
       slug: string;
       name: string;
     }[];
     visibility: "public" | "private";
-  };
+  } | null;
 };
 
 const visibilityOptions = [
@@ -57,8 +63,26 @@ export function PostEdit({ site, post }: PostEditProps) {
       return;
     }
 
-    setTagRecommends(site.namespace.tags.filter((tag) => tag.slug.includes(last)).map((tag) => tag.slug));
-  }, [site.namespace.tags, tags]);
+    setTagRecommends(site.namespace!.tags.filter((tag) => tag.slug.includes(last)).map((tag) => tag.slug));
+  }, [site.namespace!.tags, tags]);
+
+  const [blobs] = useState<Blob[]>(post ? post.blobs.map((blobInput) => {
+    const blob: Blob = { id: blobInput.id, type: blobInput.type };
+    if (blobInput.type === BlobTypeEnum.Markdown) {
+      blob.markdown = { text: blobInput.text! };
+    } else if (blobInput.type === BlobTypeEnum.Image) {
+      blob.image = {
+        url: blobInput.url!,
+        previewUrl: blobInput.previewUrl || null,
+        caption: blobInput.caption || null,
+        blurhash: blobInput.blurhash || null,
+      };
+    } else {
+      throw new Error(`Unexpected blob type: ${blobInput.type}`);
+    }
+
+    return blob;
+  }) : []);
 
   return (
     <div className="py-4">
@@ -67,7 +91,7 @@ export function PostEdit({ site, post }: PostEditProps) {
           <p className="py-4 font-bold">글 주소</p>
           <div className="w-full flex items-center">
             <p className="whitespace-nowrap mr-2 text-lg font-light flex-grow">
-              {`${site.slug} / ${site.namespace.slug} /`}
+              {`${site.slug} / ${site.namespace!.slug} /`}
             </p>
             <Input name="slug" type="text" />
           </div>
@@ -88,9 +112,8 @@ export function PostEdit({ site, post }: PostEditProps) {
           <Select name="visibility" label="공개 범위" options={visibilityOptions} defaultValue={post?.visibility || "private"} />
         </div>
       </div>
-      <Textarea name="description" label="요약" rows={3} defaultValue={post?.description} />
-      <Input name="thumbnailUrl" type="url" label="미리보기" defaultValue={post?.thumbnailUrl || undefined} />
-      <Textarea name="content" label="내용" rows={20} defaultValue={post ? post.blobs[0].content : undefined} />
+      <Textarea name="description" label="요약" rows={3} defaultValue={post?.description || undefined} />
+      <Input name="thumbnailUrl" type="url" label="썸네일 주소" defaultValue={post?.thumbnailUrl || undefined} />
 
       {tagInput}
       <p className="py-2 text-sm">
@@ -117,6 +140,8 @@ export function PostEdit({ site, post }: PostEditProps) {
           )
         }
       </p>
+
+      <PostContentEditor initialBlobs={blobs} />
     </div>
   );
 }

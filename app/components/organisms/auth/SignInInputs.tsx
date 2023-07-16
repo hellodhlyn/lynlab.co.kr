@@ -1,4 +1,4 @@
-import { Input } from "~/components/atoms/Input";
+import { Input } from "~/components/atoms/inputs";
 import TextButton from "~/components/atoms/TextButton";
 
 export default function SignInInputs() {

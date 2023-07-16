@@ -1,7 +1,7 @@
 import Header from "~/components/atoms/Header";
 import Navigation from "~/components/organisms/Navigation";
 import Container from "~/components/atoms/Container";
-import { useInput } from "~/components/atoms/Input";
+import { useInput } from "~/components/atoms/inputs";
 import type { User } from "~/lib/auth/user";
 import TextButton from "~/components/atoms/TextButton";
 

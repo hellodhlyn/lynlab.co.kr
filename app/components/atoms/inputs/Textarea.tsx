@@ -16,9 +16,9 @@ function textareaElement(
 ): JSX.Element {
   return (
     <>
-      {label && <p className="py-4 font-bold">{label}</p>}
+      {label && <p className="my-2 font-bold">{label}</p>}
       <textarea
-        className="w-full border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
+        className="my-2 w-full border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
         rows={rows}
         name={name}
         placeholder={placeholder}

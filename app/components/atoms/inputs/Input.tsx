@@ -16,9 +16,9 @@ function inputElement(
   const [value, setValue] = useState<string>(defaultValue || "");
   return [value, setValue, (
     <>
-      {label && <p className="py-4 font-bold">{label}</p>}
+      {label && <p className="my-2 font-bold">{label}</p>}
       <input
-        className="w-full h-12 border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
+        className="my-2 px-4 w-full h-12 border-0 bg-white rounded-lg shadow-lg shadow-gray-200"
         type={type}
         name={name}
         placeholder={placeholder}

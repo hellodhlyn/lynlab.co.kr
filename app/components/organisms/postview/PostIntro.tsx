@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 type PostIntroProps = {
   title: string;
-  description: string;
+  description: string | null;
   thumbnailUrl: string | null;
   createdAt: Date;
   tags: {
@@ -12,7 +12,7 @@ type PostIntroProps = {
   }[];
 };
 
-export default function PostIntro(
+export function PostIntro(
   { title, description, thumbnailUrl, createdAt, tags }: PostIntroProps,
 ) {
   const isOldPost = dayjs(createdAt).isBefore(dayjs().subtract(1, "year"));

@@ -4,7 +4,7 @@ type MarkdownProps = {
   text: string;
 };
 
-export default function Markdown({ text }: MarkdownProps) {
+export function MarkdownBlob({ text }: MarkdownProps) {
   marked.setOptions({
     highlight: (code, markedLang) => {
       const hljs = require("highlight.js/lib/common");

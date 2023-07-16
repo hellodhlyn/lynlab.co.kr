@@ -2,50 +2,33 @@ import { useLoaderData, useRouteError } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import type { Params } from "@remix-run/react";
 import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
-import dayjs from "dayjs";
-import { gql } from "urql";
-import Post from "~/components/templates/blog/Post";
 import Error from "~/components/templates/error/Error";
 import { client } from "~/lib/graphql/client.server";
 import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+import { graphql } from "~/graphql";
+import { PostViewQuery } from "~/graphql/graphql";
+import Container from "~/components/atoms/Container";
+import { PostComment, PostContent, PostIntro } from "~/components/organisms/postview";
 
 const errorInternal = "internal_error";
 const errorPostNotFound = "post_not_found";
 
-type BlogPostData = {
-  post: {
-    title: string;
-    description: string;
-    thumbnailUrl: string | null;
-    createdAt: string;
-    blobs: {
-      uuid: string;
-      type: "markdown";
-      text: string;
-    }[];
-    tags: {
-      slug: string;
-      name: string;
-    }[];
-  };
-};
-
-const query = gql<BlogPostData>`
-  query($slug: String!) {
+const query = graphql(`
+  query PostView($slug: String!) {
     post(site: "lynlab.co.kr", namespace: "blog", slug: $slug) {
       title
       description
       thumbnailUrl
       createdAt
       blobs {
-        uuid
-        type
+        uuid type
         ... on MarkdownBlob { text }
+        ... on ImageBlob { url previewUrl caption }
       }
       tags { slug name }
     }
   }
-`;
+`);
 
 export function links() {
   return [
@@ -54,8 +37,8 @@ export function links() {
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const { slug } = params;
-  const { data, error } = await client.query<BlogPostData>(query, { slug }).toPromise();
+  const slug = params.slug!;
+  const { data, error } = await client.query(query, { slug }).toPromise();
   if (error) {
     throw json({ error: errorInternal }, { status: 500 });
   } else if (!data?.post) {
@@ -64,20 +47,21 @@ export const loader: LoaderFunction = async ({ params }) => {
   return json(data);
 };
 
-export const meta: V2_MetaFunction = ({ data, params } : { data: BlogPostData, params: Params<string> }) => {
-  if (!data) {
+export const meta: V2_MetaFunction = ({ data, params } : { data: PostViewQuery, params: Params<string> }) => {
+  if (!data?.post) {
     return [];
   }
 
+  const { post } = data;
   return [
-    { title: `${data.post.title} | LYnLab` },
-    { name: "description", content: data.post.description },
-    { name: "og:title", content: data.post.title },
-    { name: "og:image", content: data.post.thumbnailUrl },
-    { name: "og:description", content: data.post.description },
+    { title: `${post.title} | LYnLab` },
+    { name: "description", content: post.description },
+    { name: "og:title", content: post.title },
+    { name: "og:image", content: post.thumbnailUrl },
+    { name: "og:description", content: post.description },
     { name: "og:url", content: `https://lynlab.co.kr/blog/${params.slug}` },
-    { name: "twitter:title", content: data.post.title },
-    { name: "twitter:description", content: data.post.description },
+    { name: "twitter:title", content: post.title },
+    { name: "twitter:description", content: post.description },
     { name: "twitter:card", content: "summary_large_image" },
   ];
 };
@@ -95,15 +79,20 @@ export const ErrorBoundary: V2_ErrorBoundaryComponent = () => {
 };
 
 export default function BlogPost() {
-  const { post } = useLoaderData<BlogPostData>();
+  const data = useLoaderData() as PostViewQuery;
+  const post = data.post!;
+
   return (
-    <Post
-      title={post.title}
-      description={post.description}
-      blobs={post.blobs}
-      thumbnailUrl={post.thumbnailUrl}
-      createdAt={dayjs(post.createdAt).toDate()}
-      tags={post.tags}
-    />
+    <Container className="max-w-4xl py-8">
+      <PostIntro
+        title={post.title}
+        description={post.description || null}
+        thumbnailUrl={post.thumbnailUrl || null}
+        createdAt={post.createdAt}
+        tags={post.tags}
+      />
+      <PostContent blobs={post.blobs} />
+      <PostComment />
+    </Container>
   );
 }
