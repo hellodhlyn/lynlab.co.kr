@@ -8,9 +8,8 @@ import { graphql } from "~/graphql";
 import { PostViewQuery } from "~/graphql/graphql";
 import Container from "~/components/atoms/Container";
 import { Divider } from "~/components/atoms/Divider";
-import { PostComment, PostContent, PostIntro } from "~/components/organisms/postview";
+import { ActivityButtons, PostComment, PostContent, PostIntro, RelatedPosts } from "~/components/organisms/postview";
 import Error from "~/components/templates/error/Error";
-import { RelatedPosts } from "~/components/organisms/postview/RelatedPosts";
 
 const errorInternal = "internal_error";
 const errorPostNotFound = "post_not_found";
@@ -105,23 +104,26 @@ export default function BlogPost() {
     .slice(0, 3);
 
   return (
-    <Container className="max-w-4xl py-8">
-      <PostIntro
-        title={post.title}
-        description={post.description || null}
-        thumbnailUrl={post.thumbnailUrl || null}
-        createdAt={post.createdAt}
-        tags={post.tags}
-      />
-      <PostContent blobs={post.blobs} />
-      {(relatedPosts.length > 0) && (
-        <>
-          <Divider />
-          <RelatedPosts posts={relatedPosts} />
-        </>
-      )}
-      <Divider />
-      <PostComment />
-    </Container>
+    <>
+      <Container className="max-w-4xl py-8">
+        <PostIntro
+          title={post.title}
+          description={post.description || null}
+          thumbnailUrl={post.thumbnailUrl || null}
+          createdAt={post.createdAt}
+          tags={post.tags}
+        />
+        <PostContent blobs={post.blobs} />
+        {(relatedPosts.length > 0) && (
+          <>
+            <Divider />
+            <RelatedPosts posts={relatedPosts} />
+          </>
+        )}
+        <Divider />
+        <PostComment />
+      </Container>
+      <ActivityButtons />
+    </>
   );
 }
