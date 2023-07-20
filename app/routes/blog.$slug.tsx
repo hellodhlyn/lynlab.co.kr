@@ -123,7 +123,7 @@ export default function BlogPost() {
         <Divider />
         <PostComment />
       </Container>
-      <ActivityButtons />
+      <ActivityButtons url={`https://lynlab.co.kr/blog/${post.slug}`} title={post.title} />
     </>
   );
 }
