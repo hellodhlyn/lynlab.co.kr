@@ -1,11 +1,9 @@
-import { Link, useLoaderData, useOutletContext, useSearchParams } from "@remix-run/react";
+import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
 import Header from "~/components/atoms/Header";
-import { ProfileInfo } from "~/components/organisms/dashboard/ProfileInfo";
 import { runQuery } from "~/lib/graphql/client.server";
-import type { User } from "~/lib/auth/user";
 import { graphql } from "~/graphql";
 import { DashboardIndexQuery } from "~/graphql/graphql";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
@@ -40,7 +38,6 @@ export default function DashboardIndex() {
   const redirectedResult = searchParams.get("result");
   const redirectedMessage = searchParams.get("message");
 
-  const currentUser = useOutletContext<User>();
   return (
     <>
       {(redirectedResult === "succeed") && (
@@ -48,10 +45,8 @@ export default function DashboardIndex() {
           <Alert color="green" icon="✅" content={redirectedMessage || "요청을 성공적으로 처리했어요."} />
         </Container>
       )}
-      <ProfileInfo currentUser={currentUser} />
-      <div className="py-8" />
       <Container className="mb-16">
-        <Header text="게시글 관리" />
+        <Header text="글 관리" />
         <ul>
           {namespaces.map((namespace) => (
             <li key={`${namespace.site.slug}/${namespace.slug}`} className="hover:opacity-50 transition-opacity">
