@@ -6,10 +6,11 @@ import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { PostEdit } from "~/components/organisms/blog/PostEdit";
 import { graphql } from "~/graphql";
-import { BlobInput, BlobTypeEnum, PostVisibility, UpdatePostDataQuery, UpdatePostInput } from "~/graphql/graphql";
+import { PostVisibility, UpdatePostDataQuery, UpdatePostInput } from "~/graphql/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
+import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 
 const updatePostQuery = graphql(`
   query UpdatePostData($site: String!, $namespace: String!, $slug: String!) {
@@ -53,59 +54,18 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 async function updatePost(body: FormData, user: User): Promise<OperationResult> {
-  const stringOrUndefined = (key: string): string | undefined => {
-    const value = body.get(key);
-    if (!value || typeof value !== "string") {
-      return undefined;
-    }
-    return value;
-  }
-
-  function parseTags(key: string): string[] {
-    const tagInput = stringOrUndefined(key);
-    if (!tagInput || typeof tagInput !== "string") {
-      return [];
-    }
-    return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
-  }
+  const stringOrUndefined = stringOrUndefinedFunc(body);
 
   const postInput: UpdatePostInput = {
     id: stringOrUndefined("postId")!,
     title: stringOrUndefined("title"),
     description: stringOrUndefined("description"),
     thumbnailUrl: stringOrUndefined("thumbnailUrl"),
-    tags: parseTags("tags"),
+    tags: parseTags(body),
     visibility: stringOrUndefined("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
   };
 
-  const blobs: BlobInput[] = [];
-  let blobIndex = 0;
-  while (body.has(`blobs.${blobIndex}.type`)) {
-    const blob: BlobInput = {
-      id: stringOrUndefined(`blobs.${blobIndex}.id`),
-      type: BlobTypeEnum.Markdown,
-    };
-
-    const blobTypeString = stringOrUndefined(`blobs.${blobIndex}.type`);
-    if (blobTypeString === "markdown") {
-      blob.type = BlobTypeEnum.Markdown;
-      blob.markdown = { text: stringOrUndefined(`blobs.${blobIndex}.text`) || "" };
-    } else if (blobTypeString === "image") {
-      blob.type = BlobTypeEnum.Image;
-      blob.image = {
-        url: stringOrUndefined(`blobs.${blobIndex}.url`) || "",
-        previewUrl: stringOrUndefined(`blobs.${blobIndex}.previewUrl`),
-        caption: stringOrUndefined(`blobs.${blobIndex}.caption`),
-        blurhash: stringOrUndefined(`blobs.${blobIndex}.blurhash`),
-      };
-    } else {
-      throw new Error(`Unexpected blob type: ${blobTypeString}`);
-    }
-
-    blobs.push(blob);
-    blobIndex += 1;
-  }
-
+  const blobs = getBlobsFromInput(body);
   if (blobs.length > 0) {
     postInput.blobs = blobs;
   }

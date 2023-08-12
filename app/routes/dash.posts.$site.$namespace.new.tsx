@@ -6,10 +6,11 @@ import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { PostEdit } from "~/components/organisms/blog/PostEdit";
 import { graphql } from "~/graphql";
-import { BlobTypeEnum, CreatePostDataQuery, PostVisibility } from "~/graphql/graphql";
+import { CreatePostDataQuery, CreatePostInput, PostVisibility } from "~/graphql/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
+import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 
 const createPostQuery = graphql(`
   query CreatePostData($site: String!, $namespace: String!) {
@@ -31,39 +32,21 @@ const createPostMutation = graphql(`
   }
 `);
 
-function parseTags(tagInput: FormDataEntryValue | null): string[] {
-  if (!tagInput || typeof tagInput !== "string") {
-    return [];
-  }
-  return tagInput.split(" ").map((tag) => tag.replace("#", "")).filter((tag) => tag.length > 0);
-}
-
 async function createPost(params: Params, body: FormData, user: User): Promise<OperationResult> {
-  const getStringOrNull = (key: string) => {
-    const value = body.get(key);
-    if (value === null || typeof value !== "string") {
-      return null;
-    }
-    return value;
-  };
+  const stringOrUndefined = stringOrUndefinedFunc(body);
 
   const { site, namespace } = params;
-  const input = {
+  const input: CreatePostInput = {
     site: site!,
     namespace: namespace!,
-    slug: getStringOrNull("slug")!,
-    title: getStringOrNull("title")!,
-    description: getStringOrNull("description"),
-    thumbnailUrl: getStringOrNull("thumbnailUrl"),
-    blobs: [
-      {
-        type: BlobTypeEnum.Markdown,
-        markdown: { text: getStringOrNull("content")! },
-      },
-    ],
-    tags: parseTags(getStringOrNull("tags")),
-    visibility: getStringOrNull("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
-  };
+    title: stringOrUndefined("title")!,
+    slug: stringOrUndefined("slug")!,
+    description: stringOrUndefined("description"),
+    thumbnailUrl: stringOrUndefined("thumbnailUrl"),
+    tags: parseTags(body),
+    visibility: stringOrUndefined("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
+    blobs: getBlobsFromInput(body),
+  }
 
   return runMutation(createPostMutation, { input }, user);
 }
@@ -91,7 +74,7 @@ export default function NewPost() {
   return (
     <Container className="mb-16">
       <Form method="post">
-        <PostEdit site={site} />
+        <PostEdit site={site!} />
         <div className="py-4">
           <TextButton type="submit" text="작성 완료" />
         </div>
