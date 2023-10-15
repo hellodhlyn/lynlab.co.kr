@@ -3,7 +3,7 @@ name = "lynlab-co-kr"
 workers_dev = true
 main = "./build/index.js"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
-compatibility_date = "2022-04-05"
+compatibility_date = "2023-08-15"
 
 [[kv_namespaces]]
   binding = "__KV_SESSIONS"
@@ -13,6 +13,7 @@ compatibility_date = "2022-04-05"
 [vars]
 SITE_HOST = "https://lynlab.co.kr"
 # Secrets (see .dev.vars)
+#   - SESSION_SECRET
 #   - GITHUB_CLIENT_ID
 #   - GITHUB_CLIENT_SECRET
 
@@ -21,3 +22,6 @@ SITE_HOST = "https://lynlab.co.kr"
 
 [build]
   command = "yarn build"
+
+[placement]
+  mode = "smart"

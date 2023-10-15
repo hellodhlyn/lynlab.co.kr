@@ -11,6 +11,7 @@ import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
+import { Env } from "~/env";
 
 const updatePostQuery = graphql(`
   query UpdatePostData($site: String!, $namespace: String!, $slug: String!) {
@@ -43,8 +44,8 @@ const updatePostMutation = gql`
   }
 `;
 
-export const loader: LoaderFunction = async ({ request, params }) => {
-  const user = await authenticator.isAuthenticated(request);
+export const loader: LoaderFunction = async ({ request, params, context }) => {
+  const user = await authenticator(context.env as Env).isAuthenticated(request);
   const variables = { site: params.site!, namespace: params.namespace!, slug: params.slug! };
   const { data } = await runQuery(updatePostQuery, variables, user!);
   if (!data) {
@@ -73,8 +74,8 @@ async function updatePost(body: FormData, user: User): Promise<OperationResult> 
   return runMutation(updatePostMutation, { postInput }, user);
 }
 
-export const action: ActionFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request);
+export const action: ActionFunction = async ({ request, context }) => {
+  const user = await authenticator(context.env as Env).isAuthenticated(request);
   const body = await request.formData();
   const { error } = await updatePost(body, user!);
   if (error) {

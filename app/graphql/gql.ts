@@ -13,6 +13,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  mutation SignInWithGitHub ($github: GithubAuthentication!) {\n    createApiToken(input: { github: $github }) {\n      apiToken { accessKey refreshKey }\n      user { name displayName profileImageUrl }\n    }\n  }\n": types.SignInWithGitHubDocument,
     "\n  mutation CreateApiToken($input: CreateApiTokenInput!) {\n    createApiToken(input: $input) {\n      apiToken {\n        accessKey\n        refreshKey\n      }\n    }\n  }\n": types.CreateApiTokenDocument,
     "\n  query PostView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"blog\", slug: $slug) {\n      title slug description thumbnailUrl createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n        ... on ImageBlob { url previewUrl caption }\n      }\n      tags {\n        slug name\n        posts(first: 4, sort: CREATED_DESC) {\n          nodes {\n            title slug description thumbnailUrl createdAt\n          }\n        }\n      }\n    }\n  }\n": types.PostViewDocument,
     "\n  query DashboardIndex {\n    sites {\n      slug\n      namespaces {\n        site { slug }\n        slug\n      }\n    }\n  }\n": types.DashboardIndexDocument,
@@ -37,6 +38,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation SignInWithGitHub ($github: GithubAuthentication!) {\n    createApiToken(input: { github: $github }) {\n      apiToken { accessKey refreshKey }\n      user { name displayName profileImageUrl }\n    }\n  }\n"): (typeof documents)["\n  mutation SignInWithGitHub ($github: GithubAuthentication!) {\n    createApiToken(input: { github: $github }) {\n      apiToken { accessKey refreshKey }\n      user { name displayName profileImageUrl }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

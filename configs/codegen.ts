@@ -2,7 +2,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "https://cms.lynlab.co.kr/graphql",
-  documents: ["app/routes/*.tsx"],
+  documents: ["app/**/*.{ts,tsx}"],
   ignoreNoDocuments: true,
   generates: {
     "./app/graphql/": {

@@ -1,7 +1,7 @@
-import type { ActionFunction, LoaderArgs } from "@remix-run/cloudflare";
+import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
 import { Form, Params, useLoaderData } from "@remix-run/react";
-import { type OperationResult } from "urql";
+import type { OperationResult } from "urql";
 import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { PostEdit } from "~/components/organisms/blog/PostEdit";
@@ -11,6 +11,7 @@ import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
+import { Env } from "~/env";
 
 const createPostQuery = graphql(`
   query CreatePostData($site: String!, $namespace: String!) {
@@ -51,14 +52,14 @@ async function createPost(params: Params, body: FormData, user: User): Promise<O
   return runMutation(createPostMutation, { input }, user);
 }
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader: LoaderFunction = async ({ params }) => {
   const { site, namespace } = params;
   const { data } = await runQuery(createPostQuery, { site: site!, namespace: namespace! });
   return data;
 };
 
-export const action: ActionFunction = async ({ params, request }) => {
-  const user = await authenticator.isAuthenticated(request);
+export const action: ActionFunction = async ({ params, request, context }) => {
+  const user = await authenticator(context.env as Env).isAuthenticated(request);
   const body = await request.formData();
   const { error } = await createPost(params, body, user!);
   if (error) {
