@@ -30,7 +30,7 @@ export type AddReactionInput = {
 export type AddReactionPayload = {
   __typename?: 'AddReactionPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   reaction: Reaction;
 };
 
@@ -43,7 +43,7 @@ export type ApiToken = {
 /** An object with an ID. */
 export type Blob = {
   /** @deprecated should use interface implementation fields instead of common `content` field */
-  content?: Maybe<Scalars['String']['output']>;
+  content: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
   type: BlobTypeEnum;
@@ -75,7 +75,7 @@ export type ChallengeWebAuthnAuthenticationInput = {
 export type ChallengeWebAuthnAuthenticationPayload = {
   __typename?: 'ChallengeWebAuthnAuthenticationPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   options: Scalars['String']['output'];
 };
 
@@ -92,7 +92,7 @@ export type ChallengeWebAuthnRegisterInput = {
 export type ChallengeWebAuthnRegisterPayload = {
   __typename?: 'ChallengeWebAuthnRegisterPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   options: Scalars['String']['output'];
 };
 
@@ -109,7 +109,7 @@ export type CreateApiTokenPayload = {
   __typename?: 'CreateApiTokenPayload';
   apiToken: ApiToken;
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   user: User;
 };
 
@@ -132,7 +132,7 @@ export type CreatePostInput = {
 export type CreatePostPayload = {
   __typename?: 'CreatePostPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   post: Post;
 };
 
@@ -150,7 +150,7 @@ export type CreateTagInput = {
 export type CreateTagPayload = {
   __typename?: 'CreateTagPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   tag: Tag;
 };
 
@@ -166,7 +166,7 @@ export type CreateWebAuthnAuthenticationInput = {
 export type CreateWebAuthnAuthenticationPayload = {
   __typename?: 'CreateWebAuthnAuthenticationPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
 
@@ -176,13 +176,13 @@ export type GithubAuthentication = {
 
 export type ImageBlob = Blob & Node & {
   __typename?: 'ImageBlob';
-  blurhash?: Maybe<Scalars['String']['output']>;
-  caption?: Maybe<Scalars['String']['output']>;
+  blurhash: Maybe<Scalars['String']['output']>;
+  caption: Maybe<Scalars['String']['output']>;
   /** @deprecated should use interface implementation fields instead of common `content` field */
-  content?: Maybe<Scalars['String']['output']>;
+  content: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
-  previewUrl?: Maybe<Scalars['String']['output']>;
+  previewUrl: Maybe<Scalars['String']['output']>;
   type: BlobTypeEnum;
   url: Scalars['String']['output'];
   uuid: Scalars['String']['output'];
@@ -198,7 +198,7 @@ export type ImageInput = {
 export type MarkdownBlob = Blob & Node & {
   __typename?: 'MarkdownBlob';
   /** @deprecated should use interface implementation fields instead of common `content` field */
-  content?: Maybe<Scalars['String']['output']>;
+  content: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
   text: Scalars['String']['output'];
@@ -209,18 +209,18 @@ export type MarkdownBlob = Blob & Node & {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addReaction?: Maybe<AddReactionPayload>;
-  challengeWebAuthnAuthentication?: Maybe<ChallengeWebAuthnAuthenticationPayload>;
-  challengeWebAuthnRegister?: Maybe<ChallengeWebAuthnRegisterPayload>;
-  createApiToken?: Maybe<CreateApiTokenPayload>;
-  createPost?: Maybe<CreatePostPayload>;
-  createTag?: Maybe<CreateTagPayload>;
-  createWebAuthnAuthentication?: Maybe<CreateWebAuthnAuthenticationPayload>;
-  refreshApiToken?: Maybe<RefreshApiTokenPayload>;
-  removeReaction?: Maybe<RemoveReactionPayload>;
-  updateBlob?: Maybe<UpdateBlobPayload>;
-  updatePost?: Maybe<UpdatePostPayload>;
-  updateUser?: Maybe<UpdateUserPayload>;
+  addReaction: Maybe<AddReactionPayload>;
+  challengeWebAuthnAuthentication: Maybe<ChallengeWebAuthnAuthenticationPayload>;
+  challengeWebAuthnRegister: Maybe<ChallengeWebAuthnRegisterPayload>;
+  createApiToken: Maybe<CreateApiTokenPayload>;
+  createPost: Maybe<CreatePostPayload>;
+  createTag: Maybe<CreateTagPayload>;
+  createWebAuthnAuthentication: Maybe<CreateWebAuthnAuthenticationPayload>;
+  refreshApiToken: Maybe<RefreshApiTokenPayload>;
+  removeReaction: Maybe<RemoveReactionPayload>;
+  updateBlob: Maybe<UpdateBlobPayload>;
+  updatePost: Maybe<UpdatePostPayload>;
+  updateUser: Maybe<UpdateUserPayload>;
 };
 
 
@@ -312,19 +312,19 @@ export type Node = {
 export type PageInfo = {
   __typename?: 'PageInfo';
   /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
+  endCursor: Maybe<Scalars['String']['output']>;
   /** When paginating forwards, are there more items? */
   hasNextPage: Scalars['Boolean']['output'];
   /** When paginating backwards, are there more items? */
   hasPreviousPage: Scalars['Boolean']['output'];
   /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
+  startCursor: Maybe<Scalars['String']['output']>;
 };
 
 export type PlaintextBlob = Blob & Node & {
   __typename?: 'PlaintextBlob';
   /** @deprecated should use interface implementation fields instead of common `content` field */
-  content?: Maybe<Scalars['String']['output']>;
+  content: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
   text: Scalars['String']['output'];
@@ -337,7 +337,7 @@ export type Post = Node & {
   author: User;
   blobs: Array<Blob>;
   createdAt: Scalars['ISO8601DateTime']['output'];
-  description?: Maybe<Scalars['String']['output']>;
+  description: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
   namespace: Namespace;
@@ -345,8 +345,8 @@ export type Post = Node & {
   site: Site;
   slug: Scalars['String']['output'];
   tags: Array<Tag>;
-  thumbnailBlurhash?: Maybe<Scalars['String']['output']>;
-  thumbnailUrl?: Maybe<Scalars['String']['output']>;
+  thumbnailBlurhash: Maybe<Scalars['String']['output']>;
+  thumbnailUrl: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
   updatedAt: Scalars['ISO8601DateTime']['output'];
   uuid: Scalars['String']['output'];
@@ -370,7 +370,7 @@ export type PostEdge = {
   /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge. */
-  node?: Maybe<Post>;
+  node: Maybe<Post>;
 };
 
 export type PostFilter = {
@@ -388,13 +388,13 @@ export enum PostVisibility {
 export type Query = {
   __typename?: 'Query';
   /** Fetches an object given its ID. */
-  node?: Maybe<Node>;
+  node: Maybe<Node>;
   /** Fetches a list of objects given a list of IDs. */
   nodes: Array<Maybe<Node>>;
-  post?: Maybe<Post>;
-  site?: Maybe<Site>;
+  post: Maybe<Post>;
+  site: Maybe<Site>;
   sites: Array<Site>;
-  user?: Maybe<User>;
+  user: Maybe<User>;
   viewer: Viewer;
 };
 
@@ -456,7 +456,7 @@ export type ReactionEdge = {
   /** A cursor for use in pagination. */
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge. */
-  node?: Maybe<Reaction>;
+  node: Maybe<Reaction>;
 };
 
 export type ReactionSummary = {
@@ -478,7 +478,7 @@ export type RefreshApiTokenPayload = {
   __typename?: 'RefreshApiTokenPayload';
   accessKey: Scalars['String']['output'];
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   refreshKey: Scalars['String']['output'];
 };
 
@@ -494,14 +494,14 @@ export type RemoveReactionInput = {
 export type RemoveReactionPayload = {
   __typename?: 'RemoveReactionPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
-  reaction?: Maybe<Reaction>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
+  reaction: Maybe<Reaction>;
 };
 
 export type Site = {
   __typename?: 'Site';
   name: Scalars['String']['output'];
-  namespace?: Maybe<Namespace>;
+  namespace: Maybe<Namespace>;
   namespaces: Array<Namespace>;
   slug: Scalars['String']['output'];
 };
@@ -556,7 +556,7 @@ export type UpdateBlobPayload = {
   __typename?: 'UpdateBlobPayload';
   blob: Blob;
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
 };
 
 /** Autogenerated input type of UpdatePost */
@@ -576,7 +576,7 @@ export type UpdatePostInput = {
 export type UpdatePostPayload = {
   __typename?: 'UpdatePostPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   post: Post;
 };
 
@@ -594,19 +594,19 @@ export type UpdateUserInput = {
 export type UpdateUserPayload = {
   __typename?: 'UpdateUserPayload';
   /** A unique identifier for the client performing the mutation. */
-  clientMutationId?: Maybe<Scalars['String']['output']>;
+  clientMutationId: Maybe<Scalars['String']['output']>;
   user: User;
 };
 
 export type User = {
   __typename?: 'User';
-  description?: Maybe<Scalars['String']['output']>;
+  description: Maybe<Scalars['String']['output']>;
   displayName: Scalars['String']['output'];
   email: Scalars['String']['output'];
   name: Scalars['String']['output'];
   posts: PostConnection;
-  profileImageUrl?: Maybe<Scalars['String']['output']>;
-  websiteUrl?: Maybe<Scalars['String']['output']>;
+  profileImageUrl: Maybe<Scalars['String']['output']>;
+  websiteUrl: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -621,15 +621,15 @@ export type UserPostsArgs = {
 
 export type Viewer = {
   __typename?: 'Viewer';
-  description?: Maybe<Scalars['String']['output']>;
+  description: Maybe<Scalars['String']['output']>;
   displayName: Scalars['String']['output'];
-  email?: Maybe<Scalars['String']['output']>;
+  email: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
-  post?: Maybe<Post>;
+  post: Maybe<Post>;
   posts: PostConnection;
-  profileImageUrl?: Maybe<Scalars['String']['output']>;
-  reactions?: Maybe<ReactionConnection>;
-  websiteUrl?: Maybe<Scalars['String']['output']>;
+  profileImageUrl: Maybe<Scalars['String']['output']>;
+  reactions: Maybe<ReactionConnection>;
+  websiteUrl: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -669,21 +669,39 @@ export type SignInWithGitHubMutationVariables = Exact<{
 }>;
 
 
-export type SignInWithGitHubMutation = { __typename?: 'Mutation', createApiToken?: { __typename?: 'CreateApiTokenPayload', apiToken: { __typename?: 'ApiToken', accessKey: string, refreshKey: string }, user: { __typename?: 'User', name: string, displayName: string, profileImageUrl?: string | null } } | null };
+export type SignInWithGitHubMutation = { __typename?: 'Mutation', createApiToken: { __typename?: 'CreateApiTokenPayload', apiToken: { __typename?: 'ApiToken', accessKey: string, refreshKey: string }, user: { __typename?: 'User', name: string, displayName: string, profileImageUrl: string | null } } | null };
 
-export type CreateApiTokenMutationVariables = Exact<{
-  input: CreateApiTokenInput;
+export type FeedQueryVariables = Exact<{
+  namespace: Scalars['String']['input'];
 }>;
 
 
-export type CreateApiTokenMutation = { __typename?: 'Mutation', createApiToken?: { __typename?: 'CreateApiTokenPayload', apiToken: { __typename?: 'ApiToken', accessKey: string, refreshKey: string } } | null };
+export type FeedQuery = { __typename?: 'Query', site: { __typename?: 'Site', namespace: { __typename?: 'Namespace', posts: { __typename?: 'PostConnection', nodes: Array<{ __typename?: 'Post', title: string, slug: string, description: string | null, updatedAt: any, thumbnailUrl: string | null }> } } | null } | null };
+
+export type DictRecommendsQueryVariables = Exact<{
+  titleQuery: Scalars['String']['input'];
+}>;
+
+
+export type DictRecommendsQuery = { __typename?: 'Query', site: { __typename?: 'Site', namespace: { __typename?: 'Namespace', posts: { __typename?: 'PostConnection', nodes: Array<{ __typename?: 'Post', slug: string, title: string, description: string | null }> } } | null } | null };
 
 export type PostViewQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type PostViewQuery = { __typename?: 'Query', post?: { __typename?: 'Post', title: string, slug: string, description?: string | null, thumbnailUrl?: string | null, createdAt: any, blobs: Array<{ __typename?: 'ImageBlob', url: string, previewUrl?: string | null, caption?: string | null, uuid: string, type: BlobTypeEnum } | { __typename?: 'MarkdownBlob', text: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'PlaintextBlob', uuid: string, type: BlobTypeEnum }>, tags: Array<{ __typename?: 'Tag', slug: string, name: string, posts: { __typename?: 'PostConnection', nodes: Array<{ __typename?: 'Post', title: string, slug: string, description?: string | null, thumbnailUrl?: string | null, createdAt: any }> } }> } | null };
+export type PostViewQuery = { __typename?: 'Query', post: { __typename?: 'Post', title: string, slug: string, description: string | null, thumbnailUrl: string | null, createdAt: any, blobs: Array<{ __typename?: 'ImageBlob', url: string, previewUrl: string | null, caption: string | null, uuid: string, type: BlobTypeEnum } | { __typename?: 'MarkdownBlob', text: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'PlaintextBlob', uuid: string, type: BlobTypeEnum }>, tags: Array<{ __typename?: 'Tag', slug: string, name: string, posts: { __typename?: 'PostConnection', nodes: Array<{ __typename?: 'Post', title: string, slug: string, description: string | null, thumbnailUrl: string | null, createdAt: any }> } }> } | null };
+
+export type BlogIndexQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<PostFilter>;
+}>;
+
+
+export type BlogIndexQuery = { __typename?: 'Query', site: { __typename?: 'Site', namespace: { __typename?: 'Namespace', posts: { __typename?: 'PostConnection', edges: Array<{ __typename?: 'PostEdge', cursor: string, node: { __typename?: 'Post', slug: string, title: string, description: string | null, thumbnailUrl: string | null, thumbnailBlurhash: string | null, createdAt: any, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null }>, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string | null, endCursor: string | null } } } | null } | null };
 
 export type DashboardIndexQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -697,14 +715,14 @@ export type UpdatePostDataQueryVariables = Exact<{
 }>;
 
 
-export type UpdatePostDataQuery = { __typename?: 'Query', site?: { __typename?: 'Site', slug: string, namespace?: { __typename?: 'Namespace', slug: string, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } | null, viewer: { __typename?: 'Viewer', post?: { __typename?: 'Post', id: string, slug: string, title: string, description?: string | null, thumbnailUrl?: string | null, visibility: PostVisibility, blobs: Array<{ __typename?: 'ImageBlob', url: string, previewUrl?: string | null, caption?: string | null, blurhash?: string | null, id: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'MarkdownBlob', text: string, id: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'PlaintextBlob', id: string, uuid: string, type: BlobTypeEnum }>, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } };
+export type UpdatePostDataQuery = { __typename?: 'Query', site: { __typename?: 'Site', slug: string, namespace: { __typename?: 'Namespace', slug: string, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } | null, viewer: { __typename?: 'Viewer', post: { __typename?: 'Post', id: string, slug: string, title: string, description: string | null, thumbnailUrl: string | null, visibility: PostVisibility, blobs: Array<{ __typename?: 'ImageBlob', url: string, previewUrl: string | null, caption: string | null, blurhash: string | null, id: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'MarkdownBlob', text: string, id: string, uuid: string, type: BlobTypeEnum } | { __typename?: 'PlaintextBlob', id: string, uuid: string, type: BlobTypeEnum }>, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } };
 
 export type UpdatePostMutationVariables = Exact<{
   postInput: UpdatePostInput;
 }>;
 
 
-export type UpdatePostMutation = { __typename?: 'Mutation', updatePost?: { __typename?: 'UpdatePostPayload', clientMutationId?: string | null } | null };
+export type UpdatePostMutation = { __typename?: 'Mutation', updatePost: { __typename?: 'UpdatePostPayload', clientMutationId: string | null } | null };
 
 export type DashboardSiteQueryVariables = Exact<{
   site: Scalars['String']['input'];
@@ -720,22 +738,34 @@ export type CreatePostDataQueryVariables = Exact<{
 }>;
 
 
-export type CreatePostDataQuery = { __typename?: 'Query', site?: { __typename?: 'Site', slug: string, namespace?: { __typename?: 'Namespace', slug: string, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } | null };
+export type CreatePostDataQuery = { __typename?: 'Query', site: { __typename?: 'Site', slug: string, namespace: { __typename?: 'Namespace', slug: string, tags: Array<{ __typename?: 'Tag', slug: string, name: string }> } | null } | null };
 
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
 }>;
 
 
-export type CreatePostMutation = { __typename?: 'Mutation', createPost?: { __typename?: 'CreatePostPayload', post: { __typename?: 'Post', slug: string } } | null };
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'CreatePostPayload', post: { __typename?: 'Post', slug: string } } | null };
+
+export type DictViewQueryVariables = Exact<{
+  site: Scalars['String']['input'];
+  namespace: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type DictViewQuery = { __typename?: 'Query', post: { __typename?: 'Post', title: string, description: string | null, blobs: Array<{ __typename?: 'ImageBlob', type: BlobTypeEnum } | { __typename?: 'MarkdownBlob', text: string, type: BlobTypeEnum } | { __typename?: 'PlaintextBlob', type: BlobTypeEnum }> } | null };
 
 
 export const SignInWithGitHubDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SignInWithGitHub"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"github"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GithubAuthentication"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createApiToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"github"},"value":{"kind":"Variable","name":{"kind":"Name","value":"github"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"apiToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessKey"}},{"kind":"Field","name":{"kind":"Name","value":"refreshKey"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImageUrl"}}]}}]}}]}}]} as unknown as DocumentNode<SignInWithGitHubMutation, SignInWithGitHubMutationVariables>;
-export const CreateApiTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateApiToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateApiTokenInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createApiToken"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"apiToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessKey"}},{"kind":"Field","name":{"kind":"Name","value":"refreshKey"}}]}}]}}]}}]} as unknown as DocumentNode<CreateApiTokenMutation, CreateApiTokenMutationVariables>;
+export const FeedDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Feed"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"lynlab.co.kr","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"namespace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"IntValue","value":"1000"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailUrl"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FeedQuery, FeedQueryVariables>;
+export const DictRecommendsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DictRecommends"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"titleQuery"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"lynlab.co.kr","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"namespace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"dict","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"10"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"title"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"startWith"},"value":{"kind":"Variable","name":{"kind":"Name","value":"titleQuery"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DictRecommendsQuery, DictRecommendsQueryVariables>;
 export const PostViewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostView"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"site"},"value":{"kind":"StringValue","value":"lynlab.co.kr","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"namespace"},"value":{"kind":"StringValue","value":"blog","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"blobs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MarkdownBlob"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ImageBlob"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"previewUrl"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"4"}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"EnumValue","value":"CREATED_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailUrl"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PostViewQuery, PostViewQueryVariables>;
+export const BlogIndexDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlogIndex"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PostFilter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"lynlab.co.kr","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"namespace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"StringValue","value":"blog","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailUrl"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailBlurhash"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}},{"kind":"Field","name":{"kind":"Name","value":"endCursor"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BlogIndexQuery, BlogIndexQueryVariables>;
 export const DashboardIndexDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DashboardIndex"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"namespaces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<DashboardIndexQuery, DashboardIndexQueryVariables>;
 export const UpdatePostDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"UpdatePostData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"site"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"site"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"namespace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"site"},"value":{"kind":"Variable","name":{"kind":"Name","value":"site"}}},{"kind":"Argument","name":{"kind":"Name","value":"namespace"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}},{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnailUrl"}},{"kind":"Field","name":{"kind":"Name","value":"visibility"}},{"kind":"Field","name":{"kind":"Name","value":"blobs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MarkdownBlob"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ImageBlob"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"previewUrl"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"blurhash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<UpdatePostDataQuery, UpdatePostDataQueryVariables>;
 export const UpdatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postInput"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clientMutationId"}}]}}]}}]} as unknown as DocumentNode<UpdatePostMutation, UpdatePostMutationVariables>;
 export const DashboardSiteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DashboardSite"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"site"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"namespaces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"IntValue","value":"999"}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"EnumValue","value":"CREATED_DESC"}},{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"site"},"value":{"kind":"Variable","name":{"kind":"Name","value":"site"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"namespace"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"namespace"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"visibility"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DashboardSiteQuery, DashboardSiteQueryVariables>;
 export const CreatePostDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CreatePostData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"site"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"site"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"namespace"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<CreatePostDataQuery, CreatePostDataQueryVariables>;
 export const CreatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
+export const DictViewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DictView"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"site"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"site"},"value":{"kind":"Variable","name":{"kind":"Name","value":"site"}}},{"kind":"Argument","name":{"kind":"Name","value":"namespace"},"value":{"kind":"Variable","name":{"kind":"Name","value":"namespace"}}},{"kind":"Argument","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"blobs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MarkdownBlob"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DictViewQuery, DictViewQueryVariables>;

@@ -8,9 +8,14 @@ const config: CodegenConfig = {
     "./app/graphql/": {
       preset: "client",
       config: {
-        useTypeImports: true
+        useTypeImports: true,
+        avoidOptionals: {
+          field: true,
+          object: false,
+          inputValue: false,
+          defaultValue: false,
+        },
       },
-      plugins: [],
     },
   },
 };

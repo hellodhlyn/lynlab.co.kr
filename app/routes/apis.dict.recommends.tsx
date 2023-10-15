@@ -21,7 +21,7 @@ type DictRecommendationVariables = {
 };
 
 const recommendationQuery = gql<DictRecommendationData, DictRecommendationVariables>`
-  query($titleQuery: String!) {
+  query DictRecommends ($titleQuery: String!) {
     site(slug: "lynlab.co.kr") {
       namespace(slug: "dict") {
         posts(first: 10, filter: { title: { startWith: $titleQuery } }) {

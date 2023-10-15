@@ -1,29 +1,9 @@
-import { gql } from "urql";
 import { Feed } from "feed";
-import { client, runQuery } from "~/lib/graphql/client.server";
+import { runQuery } from "~/lib/graphql/client.server";
+import { graphql } from "~/graphql";
 
-type FeedData = {
-  site: {
-    namespace: {
-      posts: {
-        nodes: {
-          title: string;
-          slug: string;
-          description: string;
-          updatedAt: string;
-          thumbnailUrl: string | null;
-        }[];
-      };
-    };
-  };
-};
-
-type FeedVariables = {
-  namespace: string;
-};
-
-const query = gql<FeedData, FeedVariables>`
-  query($namespace: String!) {
+const feedQuery = graphql(`
+  query Feed ($namespace: String!) {
     site(slug: "lynlab.co.kr") {
       namespace(slug: $namespace) {
         posts(last: 1000) {
@@ -38,13 +18,13 @@ const query = gql<FeedData, FeedVariables>`
       }
     }
   }
-`;
+`);
 
 export async function getFeed(): Promise<Feed | null> {
-  const fetches = await Promise.all(["blog", "dict"].map((namespace) => runQuery(query, { namespace })));
+  const fetches = await Promise.all(["blog", "dict"].map((namespace) => runQuery(feedQuery, { namespace })));
   const posts = fetches
-    .filter((fetch) => fetch.data !== undefined)
-    .flatMap((fetch) => fetch.data!.site.namespace.posts.nodes);
+    .filter((fetch) => fetch.data?.site?.namespace?.posts !== undefined)
+    .flatMap((fetch) => fetch.data!.site!.namespace!.posts.nodes);
   if (!posts) {
     return null;
   }
@@ -71,7 +51,7 @@ export async function getFeed(): Promise<Feed | null> {
       title: post.title,
       id: `https://lynlab.co.kr/blog/${post.slug}`,
       link: `https://lynlab.co.kr/blog/${post.slug}`,
-      description: post.description,
+      description: post.description ?? undefined,
       date: new Date(post.updatedAt),
       author: [me],
       contributor: [me],

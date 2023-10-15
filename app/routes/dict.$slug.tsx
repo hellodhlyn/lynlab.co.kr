@@ -27,7 +27,7 @@ type DictViewVariables = {
 };
 
 const dictViewQuery = gql<DictViewData, DictViewVariables>`
-  query ($site: String!, $namespace: String!, $slug: String!) {
+  query DictView ($site: String!, $namespace: String!, $slug: String!) {
     post(site: $site, namespace: $namespace, slug: $slug) {
       title
       description

@@ -7,16 +7,16 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./styles/app.css";
-import type { V2_MetaFunction } from "@remix-run/cloudflare";
+import type { MetaFunction } from "@remix-run/cloudflare";
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   { title: "LYnLab" },
 ];
 
 export function links() {
   return [
     { rel: "stylesheet", href: styles },
-    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.5/static/pretendard.css" },
+    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.8/static/pretendard.css" },
   ];
 }
 

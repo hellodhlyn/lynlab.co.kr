@@ -8,7 +8,7 @@ type PostListProps = {
   posts: {
     slug: string;
     title: string;
-    description: string;
+    description: string | null;
     thumbnailUrl: string | null;
     thumbnailBlurhash: string | null;
     tags: {
