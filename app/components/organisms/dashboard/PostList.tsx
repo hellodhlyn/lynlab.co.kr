@@ -12,7 +12,7 @@ type PostListProps = {
   }[];
 };
 
-export function PostList({ posts }: PostListProps) {
+export default function PostList({ posts }: PostListProps) {
  return (
   <div className="w-full border border-gray-300 rounded-xl shadow">
     <table className="w-full table-auto divide-y divide-gray-200">

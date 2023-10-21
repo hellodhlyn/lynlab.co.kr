@@ -1,10 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
-import Index from "~/components/templates/blog/Index";
 import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { BlogIndexQuery, BlogIndexQueryVariables } from "~/graphql/graphql";
+import Paginator from "~/components/organisms/Paginator";
+import { PostList } from "~/components/organisms/blog";
 
 const blogIndexQuery = graphql(`
   query BlogIndex ($before: String, $after: String, $first: Int, $last: Int, $filter: PostFilter) {
@@ -87,10 +88,9 @@ export default function index() {
   const { edges, pageInfo } = postPage;
   const posts = edges.map((edge) => edge.node!).sort((a, b) => (Date.parse(b.createdAt) - Date.parse(a.createdAt)));
   return (
-    <Index
-      posts={posts}
-      pageInfo={pageInfo}
-      filter={filter}
-    />
+    <>
+      <PostList posts={posts} filter={filter} />
+      <Paginator pageInfo={pageInfo} reversed={true} />
+    </>
   );
 }

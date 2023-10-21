@@ -1,15 +1,14 @@
 import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
 import { LoaderFunction, json } from "@remix-run/cloudflare";
-import Header from "~/components/atoms/Header";
 import Container from "~/components/atoms/Container";
-import { SiteSelector } from "~/components/organisms/dashboard/SiteSelector";
-import { PostList } from "~/components/organisms/dashboard/PostList";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { DashboardSiteQuery } from "~/graphql/graphql";
 import TextButton from "~/components/atoms/TextButton";
 import { Env } from "~/env";
+import { Title } from "~/components/atoms/typography";
+import { PostList, SiteSelector } from "~/components/organisms/dashboard";
 
 const query = graphql(`
   query DashboardSite($site: String!, $namespace: String!) {
@@ -54,7 +53,7 @@ export default function PostNamespace() {
   return (
     <>
       <Container>
-        <Header text="글 관리" />
+        <Title text="글 관리" />
         <SiteSelector
           sites={sites!}
           currentSite={site}

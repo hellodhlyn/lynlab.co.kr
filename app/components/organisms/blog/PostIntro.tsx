@@ -13,7 +13,7 @@ type PostIntroProps = {
   }[];
 };
 
-export function PostIntro(
+export default function PostIntro(
   { title, description, thumbnailUrl, createdAt, tags }: PostIntroProps,
 ) {
   const isOldPost = dayjs(createdAt).isBefore(dayjs().subtract(1, "year"));

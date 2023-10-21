@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import Header from "~/components/atoms/Header";
+import { Title } from "~/components/atoms/typography";
 
 type RelatedPostsProps = {
   posts: {
@@ -12,10 +12,10 @@ type RelatedPostsProps = {
 
 const defaultThumbnailUrl = "https://imagedelivery.net/ow37D_OHIRrKbNlwamdRUg/4dffcf46-5563-4b04-5a93-6cfaf368ca00/thumbnail";
 
-export function RelatedPosts({ posts }: RelatedPostsProps) {
+export default function RelatedPosts({ posts }: RelatedPostsProps) {
   return (
     <>
-      <Header text="관련된 글" />
+      <Title text="관련된 글" />
       {posts.map((post) => (
         <Link to={`/blog/${post.slug}`}>
           <div className="flex my-4 h-24 md:h-32 bg-white rounded-xl shadow-lg shadow-gray-200 hover:opacity-50 cursor-pointer transition-opacity">

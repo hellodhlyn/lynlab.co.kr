@@ -2,11 +2,11 @@ import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
 import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
-import Header from "~/components/atoms/Header";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { DashboardIndexQuery } from "~/graphql/graphql";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { Title } from "~/components/atoms/typography";
 
 const query = graphql(`
   query DashboardIndex {
@@ -46,7 +46,7 @@ export default function DashboardIndex() {
         </Container>
       )}
       <Container className="mb-16">
-        <Header text="글 관리" />
+        <Title text="글 관리" />
         <ul>
           {namespaces.map((namespace) => (
             <li key={`${namespace.site.slug}/${namespace.slug}`} className="hover:opacity-50 transition-opacity">

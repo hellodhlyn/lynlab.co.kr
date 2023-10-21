@@ -15,7 +15,7 @@ type PostContentProps = {
   blobs: PostContentBlob[];
 };
 
-export function PostContent({ blobs }: PostContentProps) {
+export default function PostContent({ blobs }: PostContentProps) {
   return (
     <>
       {blobs.map((blob) => {

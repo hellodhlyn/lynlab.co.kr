@@ -4,7 +4,6 @@ import { Form, useLoaderData } from "@remix-run/react";
 import { gql, type OperationResult } from "urql";
 import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
-import { PostEdit } from "~/components/organisms/blog/PostEdit";
 import { graphql } from "~/graphql";
 import { PostVisibility, UpdatePostDataQuery, UpdatePostInput } from "~/graphql/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
@@ -12,6 +11,7 @@ import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 import { Env } from "~/env";
+import { PostEdit } from "~/components/organisms/dashboard";
 
 const updatePostQuery = graphql(`
   query UpdatePostData($site: String!, $namespace: String!, $slug: String!) {

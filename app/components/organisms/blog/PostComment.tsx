@@ -1,7 +1,7 @@
 import Giscus from "~/lib/components/giscus/Giscus";
 import Href from "~/components/atoms/Href";
 
-export function PostComment() {
+export default function PostComment() {
   return (
     <div id="comments">
       <Giscus

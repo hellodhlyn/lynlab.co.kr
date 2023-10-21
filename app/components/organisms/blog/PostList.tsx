@@ -1,8 +1,8 @@
 import { useNavigate, useSearchParams } from "@remix-run/react";
 import { AdjustmentsHorizontalIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import PostListItem from "~/components/molecules/blog/PostListItem";
-import Header from "~/components/atoms/Header";
 import Container from "~/components/atoms/Container";
+import { Title } from "~/components/atoms/typography";
 
 type PostListProps = {
   posts: {
@@ -38,7 +38,7 @@ export default function PostList({ posts, filter }: PostListProps) {
 
   return (
     <Container>
-      <Header text="최근 글" />
+      <Title text="최근 글" />
       {filter && filter.tags && (
         <div className="py-4 flex items-center">
           <AdjustmentsHorizontalIcon className="h-6 w-6 mr-2 text-gray-700" />

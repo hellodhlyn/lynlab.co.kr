@@ -17,8 +17,8 @@ export default function Navigation({ showDashboard }: NavigationProps) {
         <Link to="/blog">
           <span className="px-2 hover:opacity-50 transition-opacity">블로그</span>
         </Link>
-        <Link to="/dict">
-          <span className="px-2 hover:opacity-50 transition-opacity">개발자사전</span>
+        <Link to="/hobby">
+          <span className="px-2 hover:opacity-50 transition-opacity">취미로그</span>
         </Link>
         {showDashboard && (
           <Link to="/dash">

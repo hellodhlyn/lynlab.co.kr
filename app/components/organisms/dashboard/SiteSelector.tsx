@@ -13,7 +13,7 @@ type SiteSelectorProps = {
   currentPost?: string;
 };
 
-export function SiteSelector(
+export default function SiteSelector(
   { sites, currentSite, currentNamespace, currentPost }: SiteSelectorProps,
 ) {
   const [site] = useState<string>(currentSite || sites[0].slug);

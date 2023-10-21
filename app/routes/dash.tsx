@@ -1,6 +1,6 @@
 import { LoaderFunction, json, redirect } from "@remix-run/cloudflare";
 import { Outlet } from "@remix-run/react";
-import Navigation from "~/components/organisms/Navigation";
+import { Navigation } from "~/components/organisms/layout";
 import { Env } from "~/env";
 import { authenticator } from "~/lib/auth/authenticator.server";
 

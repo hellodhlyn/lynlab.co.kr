@@ -1,14 +1,12 @@
 import { useLoaderData, useRouteError } from "@remix-run/react";
-import { json } from "@remix-run/cloudflare";
-import type { Params } from "@remix-run/react";
-import { V2_ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
-import type { LoaderFunction, V2_MetaFunction } from "@remix-run/cloudflare";
+import { ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+import { json, type LoaderFunction, type MetaFunction } from "@remix-run/cloudflare";
 import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { PostViewQuery } from "~/graphql/graphql";
 import Container from "~/components/atoms/Container";
 import { Divider } from "~/components/atoms/Divider";
-import { ActivityButtons, PostComment, PostContent, PostIntro, RelatedPosts } from "~/components/organisms/postview";
+import { ActivityButtons, PostComment, PostContent, PostIntro, RelatedPosts } from "~/components/organisms/blog";
 import Error from "~/components/templates/error/Error";
 
 const errorInternal = "internal_error";
@@ -35,11 +33,9 @@ const query = graphql(`
   }
 `);
 
-export function links() {
-  return [
-    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css" },
-  ];
-}
+type LoaderData = {
+  post: Exclude<PostViewQuery["post"], null>;
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const slug = params.slug!;
@@ -49,12 +45,14 @@ export const loader: LoaderFunction = async ({ params }) => {
   } else if (!data?.post) {
     throw json({ error: errorPostNotFound }, { status: 404 });
   }
-  return json(data);
+  return json<LoaderData>({ post: data.post! });
 };
 
-export const meta: V2_MetaFunction = ({ data, params } : { data: PostViewQuery, params: Params<string> }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data?.post) {
-    return [];
+    return [
+      { title: "블로그 | LYnLab" },
+    ];
   }
 
   const { post } = data;
@@ -64,14 +62,20 @@ export const meta: V2_MetaFunction = ({ data, params } : { data: PostViewQuery, 
     { name: "og:title", content: post.title },
     { name: "og:image", content: post.thumbnailUrl },
     { name: "og:description", content: post.description },
-    { name: "og:url", content: `https://lynlab.co.kr/blog/${params.slug}` },
+    { name: "og:url", content: `https://lynlab.co.kr/blog/${post.slug}` },
     { name: "twitter:title", content: post.title },
     { name: "twitter:description", content: post.description },
     { name: "twitter:card", content: "summary_large_image" },
   ];
 };
 
-export const ErrorBoundary: V2_ErrorBoundaryComponent = () => {
+export function links() {
+  return [
+    { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css" },
+  ];
+}
+
+export const ErrorBoundary: ErrorBoundaryComponent = () => {
   const error: { data: any } = useRouteError() as any;
   let errorMessage = "";
   if (error?.data?.error === errorPostNotFound) {
@@ -88,8 +92,7 @@ const uniquePostFilter = (post: { slug: string }, index: number, array: { slug: 
 }
 
 export default function BlogPost() {
-  const data = useLoaderData() as PostViewQuery;
-  const post = data.post!;
+  const { post } = useLoaderData<LoaderData>();
 
   const relatedPosts = post.tags.flatMap((tag) => tag.posts.nodes)
     .filter((relatedPost) => post.slug !== relatedPost.slug)

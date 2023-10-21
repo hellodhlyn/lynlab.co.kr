@@ -42,7 +42,7 @@ const visibilityOptions = [
   { value: "private", label: "비공개" },
 ];
 
-export function PostEdit({ site, post }: PostEditProps) {
+export default function PostEdit({ site, post }: PostEditProps) {
   const newPost = !post;
   const [tags, setTags, tagInput] = useInput({
     name: "tags", type: "text", label: "태그",

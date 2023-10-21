@@ -1,6 +1,5 @@
 import { Outlet } from "react-router";
-import Footer from "~/components/organisms/Footer";
-import Navigation from "~/components/organisms/Navigation";
+import { Footer, Navigation } from "~/components/organisms/layout";
 
 export default function Blog() {
   return (

@@ -10,7 +10,7 @@ function scrollTo(element: string) {
   document.querySelector(element)?.scrollIntoView({ behavior: "smooth" });
 };
 
-export function ActivityButtons({ url, title }: ActivityButtonsProps) {
+export default function ActivityButtons({ url, title }: ActivityButtonsProps) {
   const sharingText = `${title} | LYnLab`;
   const share = async () => {
     await navigator.share({ url, title: "LYnLab", text: sharingText });
