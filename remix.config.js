@@ -9,6 +9,10 @@ module.exports = {
   serverPlatform: "neutral",
   serverMinify: true,
   server: "./server.ts",
+  tailwind: true,
 
   devServerBroadcastDelay: 1000,
+  dev: {
+    port: 8002,
+  },
 };

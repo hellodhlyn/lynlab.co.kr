@@ -40,7 +40,7 @@ export default function PostList({ posts, filter }: PostListProps) {
     <Container>
       <Title text="최근 글" />
       {filter && filter.tags && (
-        <div className="py-4 flex items-center">
+        <div className="my-4 flex items-center">
           <AdjustmentsHorizontalIcon className="h-6 w-6 mr-2 text-gray-700" />
           {filter.tags.map((tag) => (
             <div
@@ -54,7 +54,7 @@ export default function PostList({ posts, filter }: PostListProps) {
           ))}
         </div>
       )}
-      <div className="py-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="my-4 grid grid-cols-1 md:grid-cols-3 gap-4">
         {posts.map((post) => (
           <PostListItem
             key={`post-${post.slug}`}
