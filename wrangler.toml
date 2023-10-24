@@ -8,7 +8,10 @@ compatibility_date = "2023-08-15"
 [[kv_namespaces]]
   binding = "__KV_SESSIONS"
   id = "5a841e28615d4e978c6e8380cabb5aa7"
-  preview_id = "86e7e3b948cc4c8eaf4535a40265ccae"
+
+[[kv_namespaces]]
+  binding = "SITE_CONFIGS"
+  id = "1d296decaab544b99cb71b3d7cf904c4"
 
 [vars]
 SITE_HOST = "https://lynlab.co.kr"

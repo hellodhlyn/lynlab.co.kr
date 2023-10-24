@@ -50,7 +50,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="m-0 bg-neutral-100 text-neutral-700 leading-relaxed">
+      <body className="m-0 bg-neutral-100 text-neutral-800 leading-relaxed">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

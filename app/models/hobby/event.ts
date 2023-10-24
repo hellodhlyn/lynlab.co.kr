@@ -1,3 +1,5 @@
+import { Env } from "~/env";
+
 export type Event = {
   id: string;
   title: string;
@@ -9,6 +11,6 @@ export type Event = {
   imageUrl: string;
 };
 
-export async function getAllEvents(): Promise<Event[]> {
-  return [];
+export async function getAllEvents(env: Env): Promise<Event[]> {
+  return JSON.parse((await env.SITE_CONFIGS.get("hobby-events.json")) || "[]");
 }
