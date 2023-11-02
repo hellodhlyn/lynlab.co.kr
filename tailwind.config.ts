@@ -1,6 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import type { Config } from "tailwindcss";
 
-module.exports = {
+export default {
   mode: "jit",
   content: ["./app/**/*.{ts,tsx}"],
   theme: {
@@ -16,6 +16,5 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
   ],
-};
+} satisfies Config;

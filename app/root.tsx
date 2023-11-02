@@ -6,7 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import styles from "./styles/app.css";
+import styles from "./tailwind.css";
 import type { MetaFunction } from "@remix-run/cloudflare";
 
 export const meta: MetaFunction = () => [
@@ -53,8 +53,8 @@ export default function App() {
       <body className="m-0 bg-neutral-100 text-neutral-800 leading-relaxed">
         <Outlet />
         <ScrollRestoration />
-        <Scripts />
         <LiveReload />
+        <Scripts />
       </body>
     </html>
   );
