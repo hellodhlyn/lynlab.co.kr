@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /apis/*
+Disallow: /auth/*
+Disallow: /dash/*
+
+Sitemap: https://lynlab.co.kr/sitemap.xml
