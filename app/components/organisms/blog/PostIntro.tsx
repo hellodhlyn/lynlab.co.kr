@@ -19,10 +19,11 @@ export default function PostIntro(
   const isOldPost = dayjs(createdAt).isBefore(dayjs().subtract(1, "year"));
   return (
     <>
-      {thumbnailUrl ?
-        <img className="h-48 md:h-96 w-full object-cover" src={thumbnailUrl} alt="게시물의 썸네일 이미지" /> :
-        null
-      }
+      {thumbnailUrl && (
+        <div className="mb-16 w-screen md:w-full -mx-4 md:mx-0 aspect-video">
+          <img className="h-full w-full object-cover md:rounded-xl md:shadow-xl" src={thumbnailUrl} alt="게시물의 썸네일 이미지" />
+        </div>
+      )}
       <p className="my-8 text-3xl md:text-5xl md:leading-tight font-black" style={{ wordBreak: "keep-all" }}>{title}</p>
       <p className="text-lg">{description}</p>
       <p className="mt-4 text-sm text-gray-500">
