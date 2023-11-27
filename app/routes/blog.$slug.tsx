@@ -112,8 +112,14 @@ export default function BlogPost() {
   return (
     <>
       <Container className="max-w-5xl py-8">
-        <div className="flex">
-          <div className="flex-grow">
+        <div className="w-full flex flex-row-reverse">
+          <div className="hidden md:block w-64 shrink-0">
+            <div className="h-full w-full">
+              <PostTableOfContents toc={toc} />
+            </div>
+          </div>
+
+          <div className="min-w-0">
             <PostIntro
               title={post.title}
               description={post.description || null}
@@ -122,11 +128,6 @@ export default function BlogPost() {
               tags={post.tags}
             />
             <PostContent blobs={post.blobs} onTocReady={setToc} />
-          </div>
-          <div className="hidden md:block w-64">
-            <div className="w-64 h-full">
-              <PostTableOfContents toc={toc} />
-            </div>
           </div>
         </div>
 

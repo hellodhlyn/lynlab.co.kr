@@ -17,7 +17,7 @@ export default function PostTableOfContents({ toc }: PostTableOfContentsProps) {
   };
 
   return (
-    <div className="p-4 m-4 sticky top-0 border-l ">
+    <div className="p-4 m-4 sticky top-0 border-l border-neutral-200">
       <p className="mb-4 font-bold">목차</p>
       {toc.map((tocItem) => {
         return (

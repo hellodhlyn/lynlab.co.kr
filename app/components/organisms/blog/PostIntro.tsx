@@ -20,7 +20,7 @@ export default function PostIntro(
   return (
     <>
       {thumbnailUrl && (
-        <div className="mb-16 h-48 md:h-96 w-screen md:w-full -mx-4 md:mx-0">
+        <div className="mb-16 w-screen md:w-full -mx-4 md:mx-0 aspect-video">
           <img className="h-full w-full object-cover md:rounded-xl md:shadow-xl" src={thumbnailUrl} alt="게시물의 썸네일 이미지" />
         </div>
       )}
