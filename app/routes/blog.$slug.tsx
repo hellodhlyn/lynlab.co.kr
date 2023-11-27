@@ -6,8 +6,9 @@ import { graphql } from "~/graphql";
 import { PostViewQuery } from "~/graphql/graphql";
 import Container from "~/components/atoms/Container";
 import { Divider } from "~/components/atoms/Divider";
-import { ActivityButtons, PostComment, PostContent, PostIntro, RelatedPosts } from "~/components/organisms/blog";
+import { ActivityButtons, PostComment, PostContent, PostIntro, PostTableOfContents, RelatedPosts, TableOfContents } from "~/components/organisms/blog";
 import Error from "~/components/templates/error/Error";
+import { useState } from "react";
 
 const errorInternal = "internal_error";
 const errorPostNotFound = "post_not_found";
@@ -94,6 +95,8 @@ const uniquePostFilter = (post: { slug: string }, index: number, array: { slug: 
 export default function BlogPost() {
   const { post } = useLoaderData<LoaderData>();
 
+  const [toc, setToc] = useState<TableOfContents>([]);
+
   const relatedPosts = post.tags.flatMap((tag) => tag.posts.nodes)
     .filter((relatedPost) => post.slug !== relatedPost.slug)
     .filter(uniquePostFilter)
@@ -108,15 +111,25 @@ export default function BlogPost() {
 
   return (
     <>
-      <Container className="max-w-4xl py-8">
-        <PostIntro
-          title={post.title}
-          description={post.description || null}
-          thumbnailUrl={post.thumbnailUrl || null}
-          createdAt={post.createdAt}
-          tags={post.tags}
-        />
-        <PostContent blobs={post.blobs} />
+      <Container className="max-w-5xl py-8">
+        <div className="flex">
+          <div className="flex-grow">
+            <PostIntro
+              title={post.title}
+              description={post.description || null}
+              thumbnailUrl={post.thumbnailUrl || null}
+              createdAt={post.createdAt}
+              tags={post.tags}
+            />
+            <PostContent blobs={post.blobs} onTocReady={setToc} />
+          </div>
+          <div className="hidden md:block w-64">
+            <div className="w-64 h-full">
+              <PostTableOfContents toc={toc} />
+            </div>
+          </div>
+        </div>
+
         {(relatedPosts.length > 0) && (
           <>
             <Divider />
