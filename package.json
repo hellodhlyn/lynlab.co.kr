@@ -7,7 +7,8 @@
     "lint": "eslint app/",
     "dev": "remix vite:dev",
     "build": "remix vite:build",
-    "start": "wrangler pages dev ./build/client"
+    "start": "wrangler pages dev ./build/client",
+    "deploy": "wrangler pages deploy ./build/client"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.2",
