@@ -24,7 +24,7 @@ SITE_HOST = "https://lynlab.co.kr"
   bucket = "./public"
 
 [build]
-  command = "yarn build"
+  command = "pnpm run build"
 
 [placement]
   mode = "smart"
