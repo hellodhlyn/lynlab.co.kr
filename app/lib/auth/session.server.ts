@@ -13,7 +13,7 @@ export function sessionStorage(env: Env): SessionStorage {
       name: "__session",
       path: "/",
       httpOnly: true,
-      secure: true,
+      secure: env.SITE_HOST.startsWith("https://"),
       secrets: [env.SESSION_SECRET],
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60,
