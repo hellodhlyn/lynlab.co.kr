@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { json, redirect } from "@remix-run/cloudflare";
 import { Form, useLoaderData } from "@remix-run/react";
 import { gql, type OperationResult } from "urql";
@@ -10,7 +10,6 @@ import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
-import { Env } from "~/env";
 import { PostEdit } from "~/components/organisms/dashboard";
 
 const updatePostQuery = graphql(`
@@ -44,10 +43,11 @@ const updatePostMutation = gql`
   }
 `;
 
-export const loader: LoaderFunction = async ({ request, params, context }) => {
-  const user = await authenticator(context.env as Env).isAuthenticated(request);
+export const loader = async ({ request, params, context }: LoaderFunctionArgs) => {
+  const { env } = context.cloudflare;
+  const user = await authenticator(env).isAuthenticated(request);
   const variables = { site: params.site!, namespace: params.namespace!, slug: params.slug! };
-  const { data } = await runQuery(updatePostQuery, variables, user!);
+  const { data } = await runQuery<UpdatePostDataQuery>(updatePostQuery, variables, user!);
   if (!data) {
     throw new Error("Failed to fetch data");
   }
@@ -74,8 +74,9 @@ async function updatePost(body: FormData, user: User): Promise<OperationResult> 
   return runMutation(updatePostMutation, { postInput }, user);
 }
 
-export const action: ActionFunction = async ({ request, context }) => {
-  const user = await authenticator(context.env as Env).isAuthenticated(request);
+export const action = async ({ request, context }: ActionFunctionArgs) => {
+  const { env } = context.cloudflare;
+  const user = await authenticator(env).isAuthenticated(request);
   const body = await request.formData();
   const { error } = await updatePost(body, user!);
   if (error) {
@@ -87,7 +88,7 @@ export const action: ActionFunction = async ({ request, context }) => {
 };
 
 export default function NewPost() {
-  const { site, viewer } = useLoaderData() as UpdatePostDataQuery;
+  const { site, viewer } = useLoaderData<typeof loader>();
   return (
     <Container className="mb-16">
       <Form method="post">

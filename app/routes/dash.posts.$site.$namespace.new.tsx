@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/cloudflare";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
 import { Form, Params, useLoaderData } from "@remix-run/react";
 import type { OperationResult } from "urql";
@@ -10,7 +10,6 @@ import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
-import { Env } from "~/env";
 import { PostEdit } from "~/components/organisms/dashboard";
 
 const createPostQuery = graphql(`
@@ -52,14 +51,15 @@ async function createPost(params: Params, body: FormData, user: User): Promise<O
   return runMutation(createPostMutation, { input }, user);
 }
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { site, namespace } = params;
-  const { data } = await runQuery(createPostQuery, { site: site!, namespace: namespace! });
+  const { data } = await runQuery<CreatePostDataQuery>(createPostQuery, { site: site!, namespace: namespace! });
   return data;
 };
 
-export const action: ActionFunction = async ({ params, request, context }) => {
-  const user = await authenticator(context.env as Env).isAuthenticated(request);
+export const action = async ({ params, request, context }: ActionFunctionArgs) => {
+  const { env } = context.cloudflare;
+  const user = await authenticator(env).isAuthenticated(request);
   const body = await request.formData();
   const { error } = await createPost(params, body, user!);
   if (error) {
@@ -71,7 +71,7 @@ export const action: ActionFunction = async ({ params, request, context }) => {
 };
 
 export default function NewPost() {
-  const { site } = useLoaderData() as CreatePostDataQuery;
+  const { site } = useLoaderData<typeof loader>();
   return (
     <Container className="mb-16">
       <Form method="post">

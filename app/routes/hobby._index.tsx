@@ -1,10 +1,8 @@
-import { MetaFunction, json } from "@remix-run/cloudflare";
+import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
-import { LoaderFunctionArgs } from "react-router";
 import Container from "~/components/atoms/Container";
 import { Title } from "~/components/atoms/typography";
 import { PostList } from "~/components/organisms/hobby";
-import { Env } from "~/env";
 import { graphql } from "~/graphql";
 import { HobbyIndexQuery } from "~/graphql/graphql";
 import { runQuery } from "~/lib/graphql/client.server";
@@ -31,7 +29,7 @@ const query = graphql(`
 `);
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
-  const env = context.env as Env;
+  const { env } = context.cloudflare;
   const featuredSlugs = (await env.SITE_CONFIGS.get("hobby-featured-slugs.txt"))?.split(",") ?? [];
 
   const { data } = await runQuery<HobbyIndexQuery>(query, { featuredContentSlugs: featuredSlugs });

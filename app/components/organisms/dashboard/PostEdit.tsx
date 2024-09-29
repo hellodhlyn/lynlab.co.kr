@@ -33,7 +33,7 @@ type PostEditProps = {
       slug: string;
       name: string;
     }[];
-    visibility: "public" | "private";
+    visibility: "public" | "private" | "unlisted";
   } | null;
 };
 

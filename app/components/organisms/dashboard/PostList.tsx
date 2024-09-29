@@ -7,7 +7,7 @@ type PostListProps = {
     namespace: { slug: string };
     title: string;
     slug: string;
-    visibility: "public" | "private";
+    visibility: "public" | "private" | "unlisted";
     createdAt: string;
   }[];
 };

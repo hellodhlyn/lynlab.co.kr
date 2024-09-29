@@ -1,12 +1,11 @@
 import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
-import { LoaderFunction, json } from "@remix-run/cloudflare";
+import { LoaderFunction, LoaderFunctionArgs, json } from "@remix-run/cloudflare";
 import Container from "~/components/atoms/Container";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { authenticator } from "~/lib/auth/authenticator.server";
 import { DashboardSiteQuery } from "~/graphql/graphql";
 import TextButton from "~/components/atoms/TextButton";
-import { Env } from "~/env";
 import { Title } from "~/components/atoms/typography";
 import { PostList, SiteSelector } from "~/components/organisms/dashboard";
 
@@ -31,11 +30,12 @@ const query = graphql(`
   }
 `);
 
-export const loader: LoaderFunction = async ({ request, params, context }) => {
-  const user = await authenticator(context.env as Env).isAuthenticated(request);
+export const loader = async ({ request, params, context }: LoaderFunctionArgs) => {
+  const { env } = context.cloudflare;
+  const user = await authenticator(env).isAuthenticated(request);
   const { site, namespace } = params;
   
-  const { data, error } = await runQuery(query, { site: site!, namespace: namespace! }, user!);
+  const { data, error } = await runQuery<DashboardSiteQuery>(query, { site: site!, namespace: namespace! }, user!);
   if (error || !data) {
     console.error("Failed to load data:", error);
     throw new Error();
@@ -45,7 +45,7 @@ export const loader: LoaderFunction = async ({ request, params, context }) => {
 };
 
 export default function PostNamespace() {
-  const loaderData = useLoaderData() as DashboardSiteQuery;
+  const loaderData = useLoaderData<typeof loader>();
   const sites = loaderData.sites;
   const posts = loaderData.viewer.posts.nodes;
 

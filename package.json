@@ -8,6 +8,7 @@
     "dev": "remix vite:dev",
     "build": "remix vite:build",
     "start": "wrangler pages dev ./build/client",
+    "predeploy": "pnpm run build",
     "deploy": "wrangler pages deploy ./build/client"
   },
   "dependencies": {
