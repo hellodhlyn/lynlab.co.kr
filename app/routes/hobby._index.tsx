@@ -1,23 +1,13 @@
-import { LoaderFunction, MetaFunction, json } from "@remix-run/cloudflare";
+import { MetaFunction, json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs } from "react-router";
 import Container from "~/components/atoms/Container";
 import { Title } from "~/components/atoms/typography";
-import { EventTimeline, PostList } from "~/components/organisms/hobby";
+import { PostList } from "~/components/organisms/hobby";
 import { Env } from "~/env";
 import { graphql } from "~/graphql";
 import { HobbyIndexQuery } from "~/graphql/graphql";
 import { runQuery } from "~/lib/graphql/client.server";
-import { Event, getAllEvents } from "~/models/hobby/event";
-
-type LoaderData = {
-  featuredContents: {
-    slug: string;
-    title: string;
-    description: string | null;
-    posts: HobbyIndexQuery["featuredContents"][0]["posts"]["nodes"];
-  }[];
-  events: Event[];
-};
 
 const query = graphql(`
   query HobbyIndex ($featuredContentSlugs: [String!]) {
@@ -40,12 +30,12 @@ const query = graphql(`
   }
 `);
 
-export const loader: LoaderFunction = async ({ context }) => {
+export const loader = async ({ context }: LoaderFunctionArgs) => {
   const env = context.env as Env;
   const featuredSlugs = (await env.SITE_CONFIGS.get("hobby-featured-slugs.txt"))?.split(",") ?? [];
 
-  const { data } = await runQuery(query, { featuredContentSlugs: featuredSlugs });
-  const featuredContents: LoaderData["featuredContents"] = [];
+  const { data } = await runQuery<HobbyIndexQuery>(query, { featuredContentSlugs: featuredSlugs });
+  const featuredContents = [];
   if (data) {
     featuredContents.push(...data.featuredContents.map((each) => ({
       slug: each.slug,
@@ -55,11 +45,7 @@ export const loader: LoaderFunction = async ({ context }) => {
     })));
   }
 
-  const loaderData = {
-    featuredContents: featuredContents,
-    events: await getAllEvents(env),
-  };
-  return json<LoaderData>(loaderData);
+  return json({ featuredContents });
 };
 
 export const meta: MetaFunction = () => {
@@ -70,7 +56,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function HobbyIndex() {
-  const { featuredContents, events } = useLoaderData<LoaderData>();
+  const { featuredContents } = useLoaderData<typeof loader>();
 
   return (
     <Container>
@@ -87,11 +73,6 @@ export default function HobbyIndex() {
           />
         </div>
       ))}
-
-      <Title text="참여 예정 행사" />
-      <div className="mb-16">
-        <EventTimeline events={events} />
-      </div>
     </Container>
   );
 }

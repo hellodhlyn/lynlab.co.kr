@@ -20,9 +20,6 @@ export default function Footer() {
 
       <div className="mt-8 flex items-center text-base">
         <img className="h-12 w-12 mr-1" src="/images/logo-black.png" alt="LYnLab 로고" />
-        <Href link="https://hello.dhlyn.me" underline={false}>
-          <span className="mx-2">About Me</span>
-        </Href>
         <Href link="https://github.com/hellodhlyn" underline={false}>
           <span className="mx-2">GitHub</span>
         </Href>
