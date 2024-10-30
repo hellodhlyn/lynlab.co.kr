@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { MessageText, NavArrowLeft, ShareAndroid } from "iconoir-react";
+import { useEffect, useState } from "react";
 
 type ActivityButtonsProps = {
   url: string;
@@ -11,6 +12,11 @@ function scrollTo(element: string) {
 };
 
 export default function ActivityButtons({ url, title }: ActivityButtonsProps) {
+  const [canShare, setCanShare] = useState(false);
+  useEffect(() => {
+    setCanShare(navigator.share !== undefined);
+  });
+
   const sharingText = `${title} | LYnLab`;
   const share = async () => {
     await navigator.share({ url, title: "LYnLab", text: sharingText });
@@ -31,7 +37,7 @@ export default function ActivityButtons({ url, title }: ActivityButtonsProps) {
             <MessageText className="w-6 h-6" strokeWidth="2.0" />
           </div>
         }
-        {navigator.share && (
+        {canShare && (
           <div className="px-4 py-2 md:py-4 hover:opacity-50 transition cursor-pointer border-l border-gray-200" onClick={share}>
             <ShareAndroid className="w-6 h-6" strokeWidth="2.0" />
           </div>
