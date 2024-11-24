@@ -39,9 +39,9 @@ export default function PostList({ posts }: PostListProps) {
 
   return (
     <div className="h-fit w-full relative">
-      <div className="w-full px-4 md:px-8 pt-4 pb-8 flex gap-2 overflow-auto no-scrollbar" ref={positionRef}>
+      <div className="w-full px-4 md:px-8 pt-4 pb-8 flex gap-4 overflow-auto no-scrollbar" ref={positionRef}>
         {posts.map((post) => (
-          <div key={`post-${post.slug}`} className="flex-none w-80 bg-white rounded-lg shadow-xl shadow-neutral-200">
+          <div key={`post-${post.slug}`} className="flex-none w-80 rounded-lg">
             <Link to={post.link}>
               <PostListItem {...post} />
             </Link>

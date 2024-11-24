@@ -23,9 +23,6 @@ export default function Footer() {
         <Href link="https://github.com/hellodhlyn" underline={false}>
           <span className="mx-2">GitHub</span>
         </Href>
-        <Href link="https://twitter.com/hellodhlyn" underline={false}>
-          <span className="mx-2">Twitter</span>
-        </Href>
         <Href link="https://instagram.com/hellodhlyn" underline={false}>
           <span className="mx-2">Instagram</span>
         </Href>
