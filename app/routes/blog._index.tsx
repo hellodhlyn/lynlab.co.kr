@@ -1,6 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/cloudflare";
-import type { LoaderFunction, MetaFunction } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
 import { BlogIndexQuery, BlogIndexQueryVariables } from "~/graphql/graphql";
@@ -33,21 +33,11 @@ const blogIndexQuery = graphql(`
   }
 `);
 
-type LoaderData = {
-  postPage: Exclude<Exclude<Exclude<BlogIndexQuery["site"], null>["namespace"], null>["posts"], null>;
-  filter?: {
-    tags: {
-      slug: string;
-      name: string;
-    }[];
-  };
-};
-
 export const meta: MetaFunction = () => ([
   { title: "블로그 | LYnLab" },
 ]);
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const variables: BlogIndexQueryVariables = {};
 
   // Filters
@@ -68,13 +58,13 @@ export const loader: LoaderFunction = async ({ request }) => {
     variables.last = pageSize;
   }
 
-  const { data, error } = await client.query(blogIndexQuery, variables).toPromise();
+  const { data, error } = await client.query<BlogIndexQuery>(blogIndexQuery, variables).toPromise();
   if (error || !data?.site?.namespace?.posts) {
     throw json(null, { status: 500 });
   }
 
   const postPage = data.site.namespace.posts;
-  const loaderData: LoaderData = { postPage };
+  const loaderData: { postPage: typeof postPage, filter?: { tags: { slug: string, name: string }[] } } = { postPage };
   if (urlParams.has("tag") && postPage.edges.length > 0) {
     const filteredTag = postPage.edges[0].node!.tags.filter((tag) => tag.slug === urlParams.get("tag"));
     loaderData.filter = { tags: filteredTag };
@@ -83,7 +73,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function index() {
-  const { postPage, filter } = useLoaderData<LoaderData>();
+  const { postPage, filter } = useLoaderData<typeof loader>();
 
   const { edges, pageInfo } = postPage;
   const posts = edges.map((edge) => edge.node!).sort((a, b) => (Date.parse(b.createdAt) - Date.parse(a.createdAt)));
