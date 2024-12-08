@@ -18,7 +18,7 @@ export type Blob = {
     caption: string | null;
     blurhash: string | null;
   };
-}
+};
 
 function inputName(index: number, field: string) {
   return `blobs.${index}.${field}`;
@@ -28,7 +28,7 @@ type BlobEditorCommonProps = {
   onUp: () => void;
   onDown: () => void;
   onRemove: () => void;
-}
+};
 
 function MarkdownBlob({ index, blob, onUp, onDown, onRemove }: { index: number, blob?: Blob } & BlobEditorCommonProps) {
   return (

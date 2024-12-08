@@ -1,7 +1,8 @@
 import { Link } from "@remix-run/react";
 import { FastArrowLeft, FastArrowRight } from "iconoir-react";
 import { useRef, useState } from "react";
-import { PostListItem, PostListItemProps } from "~/components/molecules/blog";
+import type { PostListItemProps } from "~/components/molecules/blog";
+import { PostListItem } from "~/components/molecules/blog";
 
 type PostListProps = {
   posts: (PostListItemProps & {

@@ -4,7 +4,7 @@ import Alert from "~/components/atoms/blobs/Alert";
 import Container from "~/components/atoms/Container";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
-import { DashboardIndexQuery } from "~/graphql/graphql";
+import type { DashboardIndexQuery } from "~/graphql/graphql";
 import { DocumentTextIcon } from "@heroicons/react/24/outline";
 import { Title } from "~/components/atoms/typography";
 

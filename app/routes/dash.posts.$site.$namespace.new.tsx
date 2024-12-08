@@ -1,12 +1,14 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { redirect } from "@remix-run/cloudflare";
-import { Form, Params, useLoaderData } from "@remix-run/react";
+import type { Params } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import type { OperationResult } from "urql";
 import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { graphql } from "~/graphql";
-import { CreatePostDataQuery, CreatePostInput, PostVisibility } from "~/graphql/graphql";
-import { User } from "~/lib/auth/user";
+import type { CreatePostDataQuery, CreatePostInput } from "~/graphql/graphql";
+import { PostVisibility } from "~/graphql/graphql";
+import type { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 import { PostEdit } from "~/components/organisms/dashboard";
@@ -46,7 +48,7 @@ async function createPost(params: Params, body: FormData, user: User): Promise<O
     tags: parseTags(body),
     visibility: stringOrUndefined("visibility") === "public" ? PostVisibility.Public : PostVisibility.Private,
     blobs: getBlobsFromInput(body),
-  }
+  };
 
   return runMutation(createPostMutation, { input }, user);
 }

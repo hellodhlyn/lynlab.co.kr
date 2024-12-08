@@ -3,7 +3,7 @@ import { type LoaderFunctionArgs, json } from "@remix-run/cloudflare";
 import Container from "~/components/atoms/Container";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
-import { DashboardSiteQuery } from "~/graphql/graphql";
+import type { DashboardSiteQuery } from "~/graphql/graphql";
 import TextButton from "~/components/atoms/TextButton";
 import { Title } from "~/components/atoms/typography";
 import { PostList, SiteSelector } from "~/components/organisms/dashboard";

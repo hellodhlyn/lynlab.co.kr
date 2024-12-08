@@ -10,7 +10,7 @@ import {
 } from "urql";
 import { requestPolicyExchange } from "@urql/exchange-request-policy";
 import type { DocumentNode } from "graphql/language";
-import { User } from "../auth/user";
+import type { User } from "../auth/user";
 
 const URL = "https://cms.lynlab.co.kr/graphql";
 

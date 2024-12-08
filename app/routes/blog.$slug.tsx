@@ -1,12 +1,13 @@
 import { useLoaderData, useRouteError } from "@remix-run/react";
-import { ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
+import type { ErrorBoundaryComponent } from "@remix-run/react/dist/routeModules";
 import { json, type LoaderFunction, type MetaFunction } from "@remix-run/cloudflare";
 import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
-import { PostViewQuery } from "~/graphql/graphql";
+import type { PostViewQuery } from "~/graphql/graphql";
 import Container from "~/components/atoms/Container";
 import { Divider } from "~/components/atoms/Divider";
-import { ActivityButtons, PostComment, PostContent, PostIntro, PostTableOfContents, RelatedPosts, TableOfContents } from "~/components/organisms/blog";
+import type { TableOfContents } from "~/components/organisms/blog";
+import { ActivityButtons, PostComment, PostContent, PostIntro, PostTableOfContents, RelatedPosts } from "~/components/organisms/blog";
 import Error from "~/components/templates/error/Error";
 import { useState } from "react";
 
@@ -90,7 +91,7 @@ export const ErrorBoundary: ErrorBoundaryComponent = () => {
 
 const uniquePostFilter = (post: { slug: string }, index: number, array: { slug: string }[]): boolean => {
   return array.findIndex((p) => p.slug === post.slug) === index;
-}
+};
 
 export default function BlogPost() {
   const { post } = useLoaderData<LoaderData>();

@@ -1,5 +1,6 @@
-import { ArrowDown, ArrowUp, Iconoir, Trash } from "iconoir-react";
-import { MouseEventHandler } from "react";
+import type { Iconoir } from "iconoir-react";
+import { ArrowDown, ArrowUp, Trash } from "iconoir-react";
+import type { MouseEventHandler } from "react";
 
 type BlobEditorProps = {
   label: string;
@@ -7,7 +8,7 @@ type BlobEditorProps = {
   onDown: () => void;
   onRemove: () => void;
   children?: React.ReactNode | React.ReactNode[];
-}
+};
 
 function ActionIcon({ Icon, onClick }: { Icon: typeof Iconoir, onClick?: MouseEventHandler }) {
   return (
@@ -32,4 +33,4 @@ export function BlobEditor({ label, onUp, onDown, onRemove, children }: BlobEdit
       {children}
     </>
   );
-};
+}

@@ -1,4 +1,5 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { json, redirect } from "@remix-run/cloudflare";
 import { Outlet } from "@remix-run/react";
 import { Navigation } from "~/components/organisms/layout";
 import { getSessionUser } from "~/lib/auth/session.server";

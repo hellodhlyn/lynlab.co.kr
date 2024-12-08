@@ -1,6 +1,6 @@
 import { Authenticator } from "remix-auth";
 import type { User } from "./user";
-import { Env } from "~/env";
+import type { Env } from "~/env";
 import { graphql } from "~/graphql";
 import { runMutation } from "../graphql/client.server";
 import { GitHubStrategy } from "remix-auth-github";

@@ -3,7 +3,7 @@ import { json } from "@remix-run/cloudflare";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 import { client } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
-import { BlogIndexQuery, BlogIndexQueryVariables } from "~/graphql/graphql";
+import type { BlogIndexQuery, BlogIndexQueryVariables } from "~/graphql/graphql";
 import Paginator from "~/components/organisms/Paginator";
 import { PostList } from "~/components/organisms/blog";
 

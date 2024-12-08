@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Input, useInput, Textarea, Select } from "~/components/atoms/inputs";
-import { Blob, PostContentEditor } from "~/components/molecules/editors/PostContentEditor";
+import type { Blob } from "~/components/molecules/editors/PostContentEditor";
+import { PostContentEditor } from "~/components/molecules/editors/PostContentEditor";
 import { BlobTypeEnum } from "~/graphql/graphql";
 
 type PostEditProps = {
@@ -99,8 +100,8 @@ export default function PostEdit({ site, post }: PostEditProps) {
       )}
       {newPost || (
         <>
-          <input name="postId" type="hidden" value={post!!.id} />
-          <input name="blobId" type="hidden" value={post!!.blobs[0].id} />
+          <input name="postId" type="hidden" value={post!.id} />
+          <input name="blobId" type="hidden" value={post!.blobs[0].id} />
         </>
       )}
 

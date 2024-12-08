@@ -3,20 +3,22 @@ import { useSearchParams } from "@remix-run/react";
 type PageButton = {
   text: string;
   cursor: Record<string, string>;
-}
+};
 
 function PageButton({ text, cursor }: PageButton) {
   const [searchParams, setSearchParams] = useSearchParams();
   return (
     <span
       className="px-4 py-2 text-xl hover:opacity-75 transition-opacity cursor-pointer"
-      onClick={() => { setSearchParams((prev) => {
-        const newParams = new URLSearchParams(prev);
-        Object.entries(cursor).forEach(([key, value]) => {
-          newParams.set(key, value);
-        });
-        return newParams;
-      }); }}
+      onClick={() => {
+        setSearchParams((prev) => {
+          const newParams = new URLSearchParams(prev);
+          Object.entries(cursor).forEach(([key, value]) => {
+            newParams.set(key, value);
+          });
+          return newParams;
+        }); 
+      }}
     >
       {text}
     </span>

@@ -13,7 +13,7 @@ type PostListProps = {
 };
 
 export default function PostList({ posts }: PostListProps) {
- return (
+  return (
   <div className="w-full border border-gray-300 rounded-xl shadow">
     <table className="w-full table-auto divide-y divide-gray-200">
       <thead>
@@ -29,7 +29,7 @@ export default function PostList({ posts }: PostListProps) {
             <td className="px-4 py-2">
               <p className="text-xs text-gray-500">{post.namespace.slug} / {post.slug}</p>
               <p className="hover:underline">
-                <a href={`https://${post.site.slug}/${post.namespace.slug}/${post.slug}`} target="_blank">
+                <a href={`https://${post.site.slug}/${post.namespace.slug}/${post.slug}`} target="_blank" rel="noreferrer">
                   {post.title}
                 </a>
               </p>
@@ -49,5 +49,5 @@ export default function PostList({ posts }: PostListProps) {
       </tbody>
     </table>
   </div>
- );
+  );
 }

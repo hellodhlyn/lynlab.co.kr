@@ -16,5 +16,5 @@ export const loader = async ({ request, context }: LoaderFunctionArgs) => {
     headers: {
       "Set-Cookie": await sessionStorage.commitSession(session),
     },
-  })
+  });
 };

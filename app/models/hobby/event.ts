@@ -1,4 +1,4 @@
-import { Env } from "~/env";
+import type { Env } from "~/env";
 
 export type Event = {
   id: string;

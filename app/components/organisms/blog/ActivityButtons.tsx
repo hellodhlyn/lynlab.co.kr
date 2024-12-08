@@ -9,7 +9,7 @@ type ActivityButtonsProps = {
 
 function scrollTo(element: string) {
   document.querySelector(element)?.scrollIntoView({ behavior: "smooth" });
-};
+}
 
 export default function ActivityButtons({ url, title }: ActivityButtonsProps) {
   const [canShare, setCanShare] = useState(false);

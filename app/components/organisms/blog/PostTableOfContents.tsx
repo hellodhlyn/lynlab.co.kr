@@ -24,11 +24,11 @@ export default function PostTableOfContents({ toc }: PostTableOfContentsProps) {
           <p
             key={tocItem.slug}
             className={`${indentClassNames[tocItem.level - minumumLevel + 1] ?? "ml-8"} my-2 text-neutral-500 text-sm hover:underline cursor-pointer`}
-            onClick={() => { document.getElementById(tocItem.slug)?.scrollIntoView({ behavior: "smooth" }) }}
+            onClick={() => { document.getElementById(tocItem.slug)?.scrollIntoView({ behavior: "smooth" }); }}
           >
             {tocItem.text}
           </p>
-        )
+        );
       })}
     </div>
   );

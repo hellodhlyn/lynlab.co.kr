@@ -1,6 +1,7 @@
-import { SessionStorage, createCookieSessionStorage } from "@remix-run/cloudflare";
-import { Env } from "~/env";
-import { User } from "./user";
+import type { SessionStorage } from "@remix-run/cloudflare";
+import { createCookieSessionStorage } from "@remix-run/cloudflare";
+import type { Env } from "~/env";
+import type { User } from "./user";
 
 let _sessionStorage: SessionStorage;
 

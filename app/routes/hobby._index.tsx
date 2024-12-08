@@ -1,10 +1,11 @@
-import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
+import { json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import Container from "~/components/atoms/Container";
 import { Title } from "~/components/atoms/typography";
 import { PostList } from "~/components/organisms/hobby";
 import { graphql } from "~/graphql";
-import { HobbyIndexQuery } from "~/graphql/graphql";
+import type { HobbyIndexQuery } from "~/graphql/graphql";
 import { runQuery } from "~/lib/graphql/client.server";
 
 const query = graphql(`

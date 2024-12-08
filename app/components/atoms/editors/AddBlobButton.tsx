@@ -1,5 +1,5 @@
 import { Plus } from "iconoir-react";
-import { MouseEventHandler } from "react";
+import type { MouseEventHandler } from "react";
 
 export function AddBlobButton({ text, onClick }: { text: string, onClick: MouseEventHandler }) {
   return (

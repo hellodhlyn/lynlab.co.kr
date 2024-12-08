@@ -1,4 +1,5 @@
-import { BlobInput, BlobTypeEnum } from "~/graphql/graphql";
+import type { BlobInput } from "~/graphql/graphql";
+import { BlobTypeEnum } from "~/graphql/graphql";
 
 export function stringOrUndefinedFunc(body: FormData) {
   return (key: string): string | undefined => {

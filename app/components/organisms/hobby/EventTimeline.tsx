@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Event } from "~/models/hobby/event";
+import type { Event } from "~/models/hobby/event";
 
 export default function EventTimeline({ events }: { events: Event[] }) {
   const now = dayjs();

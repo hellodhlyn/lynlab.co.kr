@@ -1,10 +1,11 @@
 import { SiGithub, SiBluesky, SiInstagram, SiLinkedin } from "@icons-pack/react-simple-icons";
-import { json, MetaFunction } from "@remix-run/cloudflare";
+import type { MetaFunction } from "@remix-run/cloudflare";
+import { json } from "@remix-run/cloudflare";
 import { Link, useLoaderData } from "@remix-run/react";
 import { PostList } from "~/components/organisms/hobby";
 import { Footer } from "~/components/organisms/layout";
 import { graphql } from "~/graphql";
-import { HomePostsQuery } from "~/graphql/graphql";
+import type { HomePostsQuery } from "~/graphql/graphql";
 import { client } from "~/lib/graphql/client.server";
 
 const query = graphql(`
@@ -33,7 +34,7 @@ export const loader = async () => {
     return json({ posts: [] });
   }
   return json({ posts: data.site.namespace.posts.edges.map(({ node }) => node!) });
-}
+};
 
 export default function Home() {
   const { posts } = useLoaderData<typeof loader>();
