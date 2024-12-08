@@ -3,7 +3,7 @@ import type { MetaFunction } from "@remix-run/cloudflare";
 import { json } from "@remix-run/cloudflare";
 import { Link, useLoaderData } from "@remix-run/react";
 import { PostList } from "~/components/organisms/hobby";
-import { Footer } from "~/components/organisms/layout";
+import { Footer, Navigation } from "~/components/organisms/layout";
 import { graphql } from "~/graphql";
 import type { HomePostsQuery } from "~/graphql/graphql";
 import { client } from "~/lib/graphql/client.server";
@@ -41,9 +41,8 @@ export default function Home() {
 
   return (
     <>
+      <Navigation />
       <div className="w-full max-w-6xl mx-auto">
-        <img className="my-12 mx-auto md:mx-0 size-16 md:size-32" src="/images/logo-black.png" alt="LYnLab 로고" />
-
         <p className="mt-16 md:mt-32 p-4 font-bold text-neutral-800 tracking-widest">ABOUT ME</p>
         <div className="p-8 md:p-16 w-full bg-neutral-800 text-neutral-100 relative shadow-lg">
           <p className="text-4xl md:text-6xl font-black">Hoerin Do</p>

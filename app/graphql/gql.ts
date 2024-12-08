@@ -26,6 +26,7 @@ const documents = {
     "\n  query CreatePostData($site: String!, $namespace: String!) {\n    site(slug: $site) {\n      slug\n      namespace(slug: $namespace) {\n        slug\n        tags { slug name }\n      }\n    }\n  }\n": types.CreatePostDataDocument,
     "\n  mutation CreatePost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      post { slug }\n    }\n  }\n": types.CreatePostDocument,
     "\n  query HobbyIndex ($featuredContentSlugs: [String!]) {\n    featuredContents(slugs: $featuredContentSlugs) {\n      slug\n      title\n      description\n      posts(sort: CREATED_DESC) {\n        nodes {\n          site { slug }\n          namespace { slug }\n          slug\n          title\n          description\n          thumbnailBlurhash\n          thumbnailUrl\n        }\n      }\n    }\n  }\n": types.HobbyIndexDocument,
+    "\n  query OpinionView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"opinion\", slug: $slug) {\n      slug title createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n      }\n    }\n  }\n": types.OpinionViewDocument,
 };
 
 /**
@@ -90,6 +91,10 @@ export function graphql(source: "\n  mutation CreatePost($input: CreatePostInput
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query HobbyIndex ($featuredContentSlugs: [String!]) {\n    featuredContents(slugs: $featuredContentSlugs) {\n      slug\n      title\n      description\n      posts(sort: CREATED_DESC) {\n        nodes {\n          site { slug }\n          namespace { slug }\n          slug\n          title\n          description\n          thumbnailBlurhash\n          thumbnailUrl\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query HobbyIndex ($featuredContentSlugs: [String!]) {\n    featuredContents(slugs: $featuredContentSlugs) {\n      slug\n      title\n      description\n      posts(sort: CREATED_DESC) {\n        nodes {\n          site { slug }\n          namespace { slug }\n          slug\n          title\n          description\n          thumbnailBlurhash\n          thumbnailUrl\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query OpinionView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"opinion\", slug: $slug) {\n      slug title createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n      }\n    }\n  }\n"): (typeof documents)["\n  query OpinionView($slug: String!) {\n    post(site: \"lynlab.co.kr\", namespace: \"opinion\", slug: $slug) {\n      slug title createdAt\n      blobs {\n        uuid type\n        ... on MarkdownBlob { text }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

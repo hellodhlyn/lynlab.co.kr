@@ -1,5 +1,4 @@
 import Container from "~/components/atoms/Container";
-import Href from "~/components/atoms/Href";
 
 export default function Footer() {
   return (
@@ -16,17 +15,7 @@ export default function Footer() {
         </a>
         에 따라 이용할 수 있습니다.
       </p>
-      <p>© 2011 - {(new Date()).getFullYear()} Hoerin Doh, All rights reserved.</p>
-
-      <div className="mt-8 flex items-center text-base">
-        <img className="h-12 w-12 mr-1" src="/images/logo-black.png" alt="LYnLab 로고" />
-        <Href link="https://github.com/hellodhlyn" underline={false}>
-          <span className="mx-2">GitHub</span>
-        </Href>
-        <Href link="https://instagram.com/hellodhlyn" underline={false}>
-          <span className="mx-2">Instagram</span>
-        </Href>
-      </div>
+      <p>LYnLab, 2011 - {(new Date()).getFullYear()}.</p>
     </Container>
   );
 }

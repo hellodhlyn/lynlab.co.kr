@@ -5,7 +5,7 @@
   "scripts": {
     "codegen": "graphql-codegen --config configs/codegen.ts",
     "lint": "eslint --fix app/",
-    "dev": "remix vite:dev",
+    "dev": "remix vite:dev --host",
     "build": "remix vite:build",
     "start": "wrangler pages dev ./build/client",
     "predeploy": "pnpm run build",
