@@ -1,9 +1,10 @@
 import { SessionStorage, createCookieSessionStorage } from "@remix-run/cloudflare";
 import { Env } from "~/env";
+import { User } from "./user";
 
 let _sessionStorage: SessionStorage;
 
-export function sessionStorage(env: Env): SessionStorage {
+export function getSessionStorage(env: Env): SessionStorage {
   if (_sessionStorage) {
     return _sessionStorage;
   }
@@ -20,4 +21,9 @@ export function sessionStorage(env: Env): SessionStorage {
     },
   });
   return _sessionStorage;
+}
+
+export async function getSessionUser(env: Env, request: Request): Promise<User | null> {
+  const session = await getSessionStorage(env).getSession(request.headers.get("Cookie"));
+  return session.get("user") ?? null;
 }

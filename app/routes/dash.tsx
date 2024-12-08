@@ -1,11 +1,11 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/cloudflare";
 import { Outlet } from "@remix-run/react";
 import { Navigation } from "~/components/organisms/layout";
-import { authenticator } from "~/lib/auth/authenticator.server";
+import { getSessionUser } from "~/lib/auth/session.server";
 
 export const loader = async ({ request, context }: LoaderFunctionArgs) => {
   const { env } = context.cloudflare;
-  const user = await authenticator(env).isAuthenticated(request);
+  const user = await getSessionUser(env, request);
   if (!user) {
     return redirect("/auth/signin");
   }

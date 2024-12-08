@@ -1,8 +1,12 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-import { authenticator } from "~/lib/auth/authenticator.server";
+import { redirect, type LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { getSessionStorage } from "~/lib/auth/session.server";
 
 export const loader = async ({ request, context }: LoaderFunctionArgs) => {
-  return await authenticator(context.cloudflare.env).logout(request, {
-    redirectTo: "/auth/signin",
+  const sessionStorage = getSessionStorage(context.cloudflare.env);
+  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  return redirect("/auth/signin", {
+    headers: {
+      "Set-Cookie": await sessionStorage.destroySession(session),
+    },
   });
 };

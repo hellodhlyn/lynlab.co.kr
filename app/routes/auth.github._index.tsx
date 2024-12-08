@@ -7,8 +7,5 @@ export const loader = async () => {
 };
 
 export const action = async ({ request, context }: ActionFunctionArgs) => {
-  return authenticator(context.cloudflare.env).authenticate("github", request, {
-    successRedirect: "/dash",
-    failureRedirect: "/auth/signin?state=signin_failed",
-  });
+  return authenticator(context.cloudflare.env).authenticate("github", request);
 };

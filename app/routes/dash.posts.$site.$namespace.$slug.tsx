@@ -6,11 +6,11 @@ import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { graphql } from "~/graphql";
 import { PostVisibility, UpdatePostDataQuery, UpdatePostInput } from "~/graphql/graphql";
-import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 import { PostEdit } from "~/components/organisms/dashboard";
+import { getSessionUser } from "~/lib/auth/session.server";
 
 const updatePostQuery = graphql(`
   query UpdatePostData($site: String!, $namespace: String!, $slug: String!) {
@@ -45,7 +45,7 @@ const updatePostMutation = gql`
 
 export const loader = async ({ request, params, context }: LoaderFunctionArgs) => {
   const { env } = context.cloudflare;
-  const user = await authenticator(env).isAuthenticated(request);
+  const user = await getSessionUser(env, request);
   const variables = { site: params.site!, namespace: params.namespace!, slug: params.slug! };
   const { data } = await runQuery<UpdatePostDataQuery>(updatePostQuery, variables, user!);
   if (!data) {
@@ -76,7 +76,7 @@ async function updatePost(body: FormData, user: User): Promise<OperationResult> 
 
 export const action = async ({ request, context }: ActionFunctionArgs) => {
   const { env } = context.cloudflare;
-  const user = await authenticator(env).isAuthenticated(request);
+  const user = await getSessionUser(env, request);
   const body = await request.formData();
   const { error } = await updatePost(body, user!);
   if (error) {

@@ -6,11 +6,11 @@ import Container from "~/components/atoms/Container";
 import TextButton from "~/components/atoms/TextButton";
 import { graphql } from "~/graphql";
 import { CreatePostDataQuery, CreatePostInput, PostVisibility } from "~/graphql/graphql";
-import { authenticator } from "~/lib/auth/authenticator.server";
 import { User } from "~/lib/auth/user";
 import { runMutation, runQuery } from "~/lib/graphql/client.server";
 import { getBlobsFromInput, parseTags, stringOrUndefinedFunc } from "~/lib/dash/posts";
 import { PostEdit } from "~/components/organisms/dashboard";
+import { getSessionUser } from "~/lib/auth/session.server";
 
 const createPostQuery = graphql(`
   query CreatePostData($site: String!, $namespace: String!) {
@@ -59,7 +59,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export const action = async ({ params, request, context }: ActionFunctionArgs) => {
   const { env } = context.cloudflare;
-  const user = await authenticator(env).isAuthenticated(request);
+  const user = await getSessionUser(env, request);
   const body = await request.formData();
   const { error } = await createPost(params, body, user!);
   if (error) {

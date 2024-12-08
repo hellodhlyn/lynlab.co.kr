@@ -1,10 +1,9 @@
-import { GitHubStrategy } from "remix-auth-github";
 import { Authenticator } from "remix-auth";
 import type { User } from "./user";
 import { Env } from "~/env";
-import { sessionStorage } from "./session.server";
 import { graphql } from "~/graphql";
 import { runMutation } from "../graphql/client.server";
+import { GitHubStrategy } from "remix-auth-github";
 
 let _authenticator: Authenticator<User>;
 
@@ -22,13 +21,13 @@ export function authenticator(env: Env): Authenticator<User> {
     return _authenticator;
   }
 
-  const authenticator = new Authenticator<User>(sessionStorage(env));
-  authenticator.use(new GitHubStrategy<User>({
-    clientID: env.GITHUB_CLIENT_ID,
+  const authenticator = new Authenticator<User>();
+  authenticator.use(new GitHubStrategy({
+    clientId: env.GITHUB_CLIENT_ID,
     clientSecret: env.GITHUB_CLIENT_SECRET,
-    callbackURL: `${env.SITE_HOST || "https://lynlab.co.kr"}/auth/github/callback`,
-  }, async ({ accessToken }) => {
-    const { data, error } = await runMutation(signInWithGitHubMutation, { github: { accessToken } });
+    redirectURI: `${env.SITE_HOST || "https://lynlab.co.kr"}/auth/github/callback`,
+  }, async ({ tokens }) => {
+    const { data, error } = await runMutation(signInWithGitHubMutation, { github: { accessToken: tokens.data.access_token } });
     if (!data?.createApiToken || error) {
       console.error(error || `Authentication failed: ${data}`);
       throw new Error("Authentication failed");

@@ -1,13 +1,13 @@
 import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
-import { LoaderFunction, LoaderFunctionArgs, json } from "@remix-run/cloudflare";
+import { type LoaderFunctionArgs, json } from "@remix-run/cloudflare";
 import Container from "~/components/atoms/Container";
 import { runQuery } from "~/lib/graphql/client.server";
 import { graphql } from "~/graphql";
-import { authenticator } from "~/lib/auth/authenticator.server";
 import { DashboardSiteQuery } from "~/graphql/graphql";
 import TextButton from "~/components/atoms/TextButton";
 import { Title } from "~/components/atoms/typography";
 import { PostList, SiteSelector } from "~/components/organisms/dashboard";
+import { getSessionUser } from "~/lib/auth/session.server";
 
 const query = graphql(`
   query DashboardSite($site: String!, $namespace: String!) {
@@ -32,7 +32,7 @@ const query = graphql(`
 
 export const loader = async ({ request, params, context }: LoaderFunctionArgs) => {
   const { env } = context.cloudflare;
-  const user = await authenticator(env).isAuthenticated(request);
+  const user = await getSessionUser(env, request);
   const { site, namespace } = params;
   
   const { data, error } = await runQuery<DashboardSiteQuery>(query, { site: site!, namespace: namespace! }, user!);
