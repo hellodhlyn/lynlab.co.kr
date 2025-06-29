@@ -10,7 +10,7 @@ type RelatedPostsProps = {
   }[];
 };
 
-const defaultThumbnailUrl = "https://imagedelivery.net/ow37D_OHIRrKbNlwamdRUg/4dffcf46-5563-4b04-5a93-6cfaf368ca00/thumbnail";
+const defaultThumbnailUrl = "https://storage.lynlab.co.kr/default-thumbnail.jpg";
 
 export default function RelatedPosts({ posts }: RelatedPostsProps) {
   return (

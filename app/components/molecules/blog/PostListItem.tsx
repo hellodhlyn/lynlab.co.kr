@@ -1,6 +1,6 @@
 import { BlurHashImage } from "~/components/atoms/BlurHashImage";
 
-const defaultThumbnailUrl = "https://imagedelivery.net/ow37D_OHIRrKbNlwamdRUg/4dffcf46-5563-4b04-5a93-6cfaf368ca00/thumbnail";
+const defaultThumbnailUrl = "https://storage.lynlab.co.kr/default-thumbnail.jpg";
 const defaultThumbnailHash = "VSEfA_IU0KkDxZ~WIUIoWBjsxtM{%3oIIoxuM|jsxtRj";
 
 export type PostListItemProps = {
